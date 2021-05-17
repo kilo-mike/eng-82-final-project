@@ -7,4 +7,10 @@ public interface ProfilePage extends NavPage {
 
     ChangePasswordPage changePassword();
 
+    boolean checkNameMatches();
+
+    boolean checkEmailMatches();
+
+    boolean checkPasswordLengthMatches();
+
 }
