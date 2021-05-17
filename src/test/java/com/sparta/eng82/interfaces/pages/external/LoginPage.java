@@ -8,5 +8,9 @@ public interface LoginPage extends Page {
 
     LoginPage enterPassword();
 
+    LoginPage enterIncorrectEmail();
+
+    LoginPage enterIncorrectPassword();
+
     Page login();
 }
