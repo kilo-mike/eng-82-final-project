@@ -7,9 +7,9 @@ import org.openqa.selenium.WebDriver;
 
 public interface TrainerHomePage extends Page {
 
-    public ManageGroupPageImpl manageGroupButton();
+    public ManageGroupPage manageGroupButton();
 
-    public TrainerFeedbackFormPageImpl selectTraineeName();
+    public TrainerFeedbackFormPage selectTraineeName();
 
     public boolean menuDropdownDisplays();
 }
