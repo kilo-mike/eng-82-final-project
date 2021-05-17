@@ -1,3 +1,6 @@
+src/test/resources/chromedriver.exe
+src/test/resources/login.properties
+
 # Compiled class file
 *.class
 
