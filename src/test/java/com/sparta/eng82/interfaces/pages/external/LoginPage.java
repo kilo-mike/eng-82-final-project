@@ -4,13 +4,13 @@ import com.sparta.eng82.interfaces.Page;
 
 public interface LoginPage extends Page {
 
-    LoginPage enterEmail();
+    LoginPage enterEmail(String email);
 
-    LoginPage enterPassword();
-
-    LoginPage enterIncorrectEmail();
-
-    LoginPage enterIncorrectPassword();
+    LoginPage enterPassword(String password);
 
     Page login();
+
+    boolean loginAttempt(String email, String password);
+
+    boolean isLogoutMessageShowing();
 }
