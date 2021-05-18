@@ -5,11 +5,12 @@ import com.sparta.eng82.interfaces.pages.navpages.ProfilePage;
 
 public interface TraineeProfilePage extends NavPage, ProfilePage {
 
-boolean isTechnicalGradeValid();
-boolean isConsultantGradeValid();
-boolean areBothGradesValid();
-boolean isSubmissionDateCorrect();
+    boolean isTechnicalGradeValid();
 
+    boolean isConsultantGradeValid();
 
+    boolean areBothGradesValid();
+
+    boolean isSubmissionDateCorrect();
 
 }

@@ -10,7 +10,4 @@ public interface ProfilePage extends NavPage {
     boolean checkNameMatches();
 
     boolean checkEmailMatches();
-//TODO IS this possible?
-    boolean checkPasswordLengthMatches();
-
 }
