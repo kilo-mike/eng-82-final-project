@@ -1,9 +1,11 @@
 package com.sparta.eng82.components.pages.navpages.admin;
 
+import com.sparta.eng82.interfaces.pages.accesspages.ChangePasswordPage;
+import com.sparta.eng82.interfaces.pages.navpages.ProfilePage;
 import com.sparta.eng82.interfaces.pages.navpages.admin.AdminHomePage;
 import org.openqa.selenium.WebDriver;
 
-public class AdminProfilePageImpl implements AdminHomePage {
+public class AdminProfilePageImpl implements ProfilePage {
 
     WebDriver driver;
 
@@ -12,17 +14,27 @@ public class AdminProfilePageImpl implements AdminHomePage {
     }
 
     @Override
-    public AdminHomePage addTrainer() {
+    public ChangePasswordPage changePassword() {
         return null;
     }
 
     @Override
-    public boolean isTrainerAdded(String firstName, String lastName, String group) {
+    public String getName() {
+        return null;
+    }
+
+    @Override
+    public boolean checkNameMatches() {
         return false;
     }
 
     @Override
-    public String[] getAllTrainersAvailable() {
-        return new String[0];
+    public String getEmail() {
+        return null;
+    }
+
+    @Override
+    public boolean checkEmailMatches() {
+        return false;
     }
 }
