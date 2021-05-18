@@ -11,6 +11,8 @@ public interface TraineeProfilePage extends NavPage, ProfilePage {
 
     boolean areBothGradesValid();
 
+    boolean isAverageGradeCorrect();
+
     boolean isSubmissionDateCorrect();
 
 }

@@ -18,4 +18,8 @@ public interface FeedbackFormPage extends NavPage {
     TrainerHomePage saveForm();
 
     TrainerHomePage submitForm();
+
+    String getName();
+
+    String getWeek();
 }

@@ -8,15 +8,15 @@ public interface TraineeHomePage extends NavPage {
 
     TraineeFeedbackFormPage clickFeedbackFormForWeek(int week);
 
-    String getCurrentTrafficLight();
-
-    String getTrafficLightForWeek(int week);
-
     int getCurrentWeek();
 
     boolean areAllPreviousWeeksShown();
 
     boolean areAllWeeksPriorToCurrentWeek();
+
+    String getCurrentTrafficLight();
+
+    String getTrafficLightForWeek(int week);
 
     String getName();
 
