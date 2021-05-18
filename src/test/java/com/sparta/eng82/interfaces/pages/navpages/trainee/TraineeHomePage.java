@@ -8,7 +8,6 @@ public interface TraineeHomePage extends NavPage {
 
     TraineeFeedbackFormPage clickFeedbackFormForWeek(int week);
 
-    //TODO Set up traffic light enum?
     String getCurrentTrafficLight();
 
     String getTrafficLightForWeek(int week);
@@ -20,11 +19,10 @@ public interface TraineeHomePage extends NavPage {
     boolean areAllWeeksPriorToCurrentWeek();
 
     String getName();
+
     String getStream();
+
     String getGroup();
+
     String getTrainer();
-
-
-
-
 }
