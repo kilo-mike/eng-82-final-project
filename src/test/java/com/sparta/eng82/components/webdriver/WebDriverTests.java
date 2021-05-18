@@ -1,4 +1,4 @@
-package com.sparta.eng82.webdriver;
+package com.sparta.eng82.components.webdriver;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
