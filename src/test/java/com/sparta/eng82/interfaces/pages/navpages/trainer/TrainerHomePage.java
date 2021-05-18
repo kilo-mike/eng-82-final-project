@@ -10,4 +10,9 @@ public interface TrainerHomePage extends NavPage {
     TrainerTraineeFeedbackFormPage selectTraineeName(int week, String traineeName);
 
     boolean menuDropdownDisplays();
+
+    boolean isUserDisplayNameCorrect();
+
+    boolean mainNavigationMenuAppears();
+
 }

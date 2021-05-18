@@ -12,4 +12,18 @@ public interface TrainerTraineeFeedbackFormPage extends TrainerFeedbackFormPage,
     TrainerTraineeFeedbackFormPage clickOnCont();
 
     TrainerTraineeFeedbackFormPage clickOnTrainer();
+
+    boolean isTrainerCommentsEditable();
+
+    boolean isTraineeCommentsEditable();
+
+    boolean isTechnicalGradeValid();
+
+    boolean isConsultantGradeValid();
+
+    boolean isSaveButtonPresent();
+
+    boolean isSubmitButtonPresent();
+
+
 }

@@ -6,10 +6,12 @@ public interface ManageGroupPage extends NavPage {
 
     ManageGroupPage removeTrainee(String traineeName);
 
-    ManageGroupPage addTrainee();
+    AddTraineePage addTrainee();
 
-    ManageGroupPage addGroup();
+    AddGroupPage addGroup();
 
-    ManageGroupPage addStream();
+    AddStreamPage addStream();
+
+    boolean isTraineeRemoved(String traineeName);
 
 }

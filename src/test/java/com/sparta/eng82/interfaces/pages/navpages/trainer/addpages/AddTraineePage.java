@@ -11,4 +11,6 @@ public interface AddTraineePage {
     AddTraineePage enterSecondName(String secondName);
 
     ManageGroupPage createNewTrainee();
+
+    boolean isTraineeCreated();
 }
