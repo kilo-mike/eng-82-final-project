@@ -1,7 +1,9 @@
 package com.sparta.eng82.components.webdriver;
 
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 
 public class WebDriverFactory {
@@ -21,11 +23,17 @@ public class WebDriverFactory {
             case EDGE:
                 driver = new EdgeDriver();
                 break;
+            case CHROME_HEADLESS:
+                ChromeOptions options = new ChromeOptions();
+                options.addArguments("headless");
+                driver = new ChromeDriver(options);
+                break;
             default:
                 driver = null;
                 break;
 
         }
+        driver.manage().window().setSize(new Dimension(375,812));
         return driver;
     }
 }
