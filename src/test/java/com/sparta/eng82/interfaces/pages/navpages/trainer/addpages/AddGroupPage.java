@@ -4,19 +4,19 @@ import com.sparta.eng82.interfaces.pages.navpages.trainer.ManageGroupPage;
 
 public interface AddGroupPage {
 
-    AddGroupPage selectStream(String streamName);
+    void selectStream(String streamName);
 
-    AddGroupPage enterGroupName(String groupName);
+    void enterGroupName(String groupName);
 
     /**
      * @param startDate string in format dd/mm/yyyy
      */
 
-    AddGroupPage enterGroupStartDate(String startDate);
+    void enterGroupStartDate(String startDate);
 
     ManageGroupPage createNewGroup();
 
-    boolean isGroupCreated();
+    boolean isGroupCreated(String groupName);
 
     boolean isDuplicateGroupNameAllowed();
 

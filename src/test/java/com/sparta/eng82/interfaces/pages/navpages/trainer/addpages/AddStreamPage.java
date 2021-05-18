@@ -14,3 +14,5 @@ public interface AddStreamPage {
 
     boolean isStreamCreated();
 }
+
+
