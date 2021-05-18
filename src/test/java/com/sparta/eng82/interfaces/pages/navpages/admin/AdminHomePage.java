@@ -9,5 +9,6 @@ public interface AdminHomePage extends NavPage {
     AdminHomePage addTrainer();
 
     boolean isTrainerAdded(String firstName, String lastName, String group);
-    String[] allTrainersAvailable();
+    
+    String[] getAllTrainersAvailable();
 }
