@@ -11,4 +11,6 @@ public interface AddStreamPage {
     AddStreamPage enterStreamDuration(int weeks);
 
     ManageGroupPage createNewStream();
+
+    boolean isStreamCreated();
 }

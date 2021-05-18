@@ -12,4 +12,6 @@ public interface ManageGroupPage extends NavPage {
 
     ManageGroupPage addStream();
 
+    boolean isTraineeRemoved();
+
 }

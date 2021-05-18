@@ -15,4 +15,16 @@ public interface AddGroupPage {
     AddGroupPage enterGroupStartDate(String startDate);
 
     ManageGroupPage createNewGroup();
+
+    boolean isGroupCreated();
+
+    boolean isDuplicateGroupNameAllowed();
+
+    boolean isPastStartingDateAllowed();
+
+    boolean isEmptyStreamNameAllowed();
+
+    boolean isEmptyGroupNameAllowed();
+
+    boolean isGroupNameCharacterLimited();
 }
