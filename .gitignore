@@ -1,4 +1,4 @@
-src/test/resources/chromedriver.exe
+src/test/resources/*.exe
 src/test/resources/login.properties
 target/
 .idea/
@@ -24,6 +24,6 @@ eng-82-final-project.iml
 *.zip
 *.tar.gz
 *.rar
-*.exe
+
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*

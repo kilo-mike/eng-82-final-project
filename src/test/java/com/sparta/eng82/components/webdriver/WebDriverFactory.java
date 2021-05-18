@@ -1,4 +1,4 @@
-package com.sparta.eng82.webdriver;
+package com.sparta.eng82.components.webdriver;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
