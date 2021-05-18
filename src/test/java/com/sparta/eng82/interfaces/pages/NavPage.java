@@ -1,7 +1,7 @@
 package com.sparta.eng82.interfaces.pages;
 
 import com.sparta.eng82.interfaces.Page;
-import com.sparta.eng82.interfaces.pages.external.LoginPage;
+import com.sparta.eng82.interfaces.pages.accesspages.LoginPage;
 import com.sparta.eng82.interfaces.pages.navpages.CompetenciesPage;
 import com.sparta.eng82.interfaces.pages.navpages.ProfilePage;
 

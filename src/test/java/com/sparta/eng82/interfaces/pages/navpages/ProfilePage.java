@@ -1,7 +1,7 @@
 package com.sparta.eng82.interfaces.pages.navpages;
 
 import com.sparta.eng82.interfaces.pages.NavPage;
-import com.sparta.eng82.interfaces.pages.external.ChangePasswordPage;
+import com.sparta.eng82.interfaces.pages.accesspages.ChangePasswordPage;
 
 public interface ProfilePage extends NavPage {
 

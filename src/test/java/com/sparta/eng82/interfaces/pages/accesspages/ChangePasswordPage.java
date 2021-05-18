@@ -1,4 +1,4 @@
-package com.sparta.eng82.interfaces.pages.external;
+package com.sparta.eng82.interfaces.pages.accesspages;
 
 import com.sparta.eng82.interfaces.Page;
 
