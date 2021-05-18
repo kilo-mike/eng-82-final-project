@@ -13,5 +13,18 @@ public interface TraineeHomePage extends NavPage {
 
     String getTrafficLightForWeek(int week);
 
+    int getCurrentWeek();
+
+    boolean areAllPreviousWeeksShown();
+
+    boolean areAllWeeksPriorToCurrentWeek();
+
+    String getName();
+    String getStream();
+    String getGroup();
+    String getTrainer();
+
+
+
 
 }
