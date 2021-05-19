@@ -25,13 +25,13 @@ public class TraineeHomePageImpl implements TraineeHomePage {
     @Override
     public TraineeFeedbackFormPage clickCurrentWeek() {
         driver.findElement(By.linkText(getCurrentWeek())).click();
-        return new TraineeTraineeFeedbackFormPageImpl(driver);
+        return new TraineeTraineeFeedbackFormPageImpl(driver, this.getClass().getSimpleName());
     }
 
     @Override
     public TraineeFeedbackFormPage clickFeedbackFormForWeek(int week) {
         driver.findElement(By.linkText(feedbackList.get(week).toString())).click();
-        return new TraineeTraineeFeedbackFormPageImpl(driver);
+        return new TraineeTraineeFeedbackFormPageImpl(driver, this.getClass().getSimpleName());
     }
 
     @Override

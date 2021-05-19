@@ -18,9 +18,11 @@ public class TraineeTraineeFeedbackFormPageImpl implements TraineeTraineeFeedbac
 
     WebDriver driver;
 
-    public TraineeTraineeFeedbackFormPageImpl(WebDriver driver) {
-        this.driver = driver;
+    private String simpleName;
 
+    public TraineeTraineeFeedbackFormPageImpl(WebDriver driver, String simpleName) {
+        this.driver = driver;
+        this.simpleName = simpleName;
     }
 
 
@@ -101,42 +103,46 @@ public class TraineeTraineeFeedbackFormPageImpl implements TraineeTraineeFeedbac
     @Override
     public TraineeTraineeFeedbackFormPage clickOnStop() {
         driver.findElement(stopButton).click();
-        return new TraineeTraineeFeedbackFormPageImpl(driver);
+        return new TraineeTraineeFeedbackFormPageImpl(driver, this.getClass().getSimpleName());
     }
 
     @Override
     public TraineeTraineeFeedbackFormPage enterStopComments(String comments) {
         driver.findElement(stopTextBox).sendKeys(comments);
-        return new TraineeTraineeFeedbackFormPageImpl(driver);
+        return new TraineeTraineeFeedbackFormPageImpl(driver, this.getClass().getSimpleName());
     }
 
     @Override
     public TraineeTraineeFeedbackFormPage clickOnStart() {
         driver.findElement(startButton).click();
-        return new TraineeTraineeFeedbackFormPageImpl(driver);
+        return new TraineeTraineeFeedbackFormPageImpl(driver, this.getClass().getSimpleName());
     }
 
     @Override
     public TraineeTraineeFeedbackFormPage enterStartComments(String comments) {
         driver.findElement(startTextBox).sendKeys(comments);
-        return new TraineeTraineeFeedbackFormPageImpl(driver);
+        return new TraineeTraineeFeedbackFormPageImpl(driver, this.getClass().getSimpleName());
     }
 
     @Override
     public TraineeTraineeFeedbackFormPage clickOnCont() {
         driver.findElement(continueButton).click();
-        return new TraineeTraineeFeedbackFormPageImpl(driver);
+        return new TraineeTraineeFeedbackFormPageImpl(driver, this.getClass().getSimpleName());
     }
 
     @Override
     public TraineeTraineeFeedbackFormPage enterContComments(String comments) {
         driver.findElement(continueTextBox).sendKeys(comments);
-        return new TraineeTraineeFeedbackFormPageImpl(driver);
+        return new TraineeTraineeFeedbackFormPageImpl(driver, this.getClass().getSimpleName());
     }
 
     @Override
     public TraineeTrainerFeedbackFormPage clickOnTrainer() {
         driver.findElement(trainerButton).click();
         return new TraineeTrainerFeedbackFormPageImpl(driver);
+    }
+
+    public String getSimpleName() {
+        return simpleName;
     }
 }

@@ -15,14 +15,20 @@ import java.util.Properties;
 public class LoginPageImpl implements LoginPage {
 
     private final By emailTextBox = new By.ById("username");
-    private final By passwordTextBox = new By.ById("password");
-    private final By loginButton = new By.ById("loginBtn");
-    private final By container = new By.ByClassName("container");
-    private final String adminName = "admin_name";
-    private final String trainerName = "trainer_name";
-    private final String traineeName = "trainee_name";
-    WebDriver driver;
 
+    private final By passwordTextBox = new By.ById("password");
+
+    private final By loginButton = new By.ById("loginBtn");
+
+    private final By container = new By.ByClassName("container");
+
+    private final String adminName = "admin_name";
+
+    private final String trainerName = "trainer_name";
+
+    private final String traineeName = "trainee_name";
+
+    WebDriver driver;
 
     public LoginPageImpl(WebDriver driver) {
         this.driver = driver;

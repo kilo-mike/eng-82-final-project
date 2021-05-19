@@ -34,7 +34,7 @@ public class TrainerHomePageImpl implements NavPage, TrainerHomePage {
 
         driver.findElement(weekListName).findElement(weekName);
         driver.findElement(traineeNameLink).click();
-        return new TrainerTraineeFeedbackFormPageImpl(driver);
+        return new TrainerTraineeFeedbackFormPageImpl(driver, this.getClass().getSimpleName());
     }
 
     @Override

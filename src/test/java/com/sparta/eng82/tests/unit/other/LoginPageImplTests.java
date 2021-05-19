@@ -2,6 +2,7 @@ package com.sparta.eng82.tests.unit.other;
 
 
 import com.sparta.eng82.components.pages.accesspages.LoginPageImpl;
+import com.sparta.eng82.components.pages.navpages.admin.AdminHomePageImpl;
 import com.sparta.eng82.components.webdriver.WebDriverFactory;
 import com.sparta.eng82.components.webdriver.WebDriverTypes;
 import com.sparta.eng82.tests.unit.utility.Utility;
@@ -16,6 +17,7 @@ public class LoginPageImplTests {
     private WebDriver driver;
     private WebDriverFactory webDriverFactory;
     private LoginPageImpl loginPage;
+    private AdminHomePageImpl adminHomePage;
 
     private final String adminPropertyUsername = "admin_username";
     private final String adminPropertyPassword = "admin_password";
@@ -34,37 +36,59 @@ public class LoginPageImplTests {
         webDriverFactory = new WebDriverFactory();
         driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
         loginPage = new LoginPageImpl(driver);
+        adminHomePage = new AdminHomePageImpl(driver);
     }
 
     @Test
-    @DisplayName("enterEmailTest")
+    @DisplayName("Enter email test")
     void enterEmailTest() {
         loginPage.enterEmail(adminPropertyUsername, properties);
-        Assertions.assertEquals(driver.findElement(new By.ById("username")).getAttribute("value"), properties.getProperty(adminPropertyUsername));
+        Assertions.assertEquals(properties.getProperty(adminPropertyUsername), driver.findElement(new By.ById("username")).getAttribute("value"));
     }
 
     @Test
-    @DisplayName("enterPasswordTest")
+    @DisplayName("Enter password test")
     void enterPasswordTest() {
         loginPage.enterPassword(adminPropertyPassword, properties);
-        Assertions.assertEquals(driver.findElement(new By.ById("password")).getAttribute("value"), properties.getProperty(adminPropertyPassword));
+        Assertions.assertEquals(properties.getProperty(adminPropertyPassword), driver.findElement(new By.ById("password")).getAttribute("value"));
         
     }
 
     @Test
-    @DisplayName("loginTest")
+    @DisplayName("Login test")
     void loginTest() {
         Assertions.assertNull(loginPage.login(properties.getProperty(adminPropertyName)));
     }
 
     @Test
-    @DisplayName("loginAttemptTest")
+    @DisplayName("Login test with entered email and password")
+    void loginTestWithEnteredEmailAndPassword() {
+        loginPage.enterEmail(adminPropertyUsername, properties);
+        loginPage.enterPassword(adminPropertyPassword, properties);
+        loginPage.login(properties.getProperty(adminPropertyName));
+        Assertions.assertFalse(driver.getCurrentUrl().endsWith("/login"));
+    }
+
+    @Test
+    @DisplayName("Login attempt test")
     void loginAttemptTest() {
         Assertions.assertTrue(loginPage.loginAttempt(adminPropertyName, adminPropertyUsername, adminPropertyPassword, properties));
     }
 
-    @AfterEach
-    void tearDown() {
-        driver.quit();
+    @Test
+    @DisplayName("Logout check message")
+    void logoutCheckMessage() {
+        loginPage.enterEmail(adminPropertyUsername, properties)
+                .enterPassword(adminPropertyPassword, properties)
+                .login(properties.getProperty(adminPropertyName));
+
+        loginPage = (LoginPageImpl) adminHomePage.logOut(driver);
+
+        Assertions.assertTrue(loginPage.isLogoutMessageShowing());
     }
+
+//    @AfterEach
+//    void tearDown() {
+//        driver.quit();
+//    }
 }

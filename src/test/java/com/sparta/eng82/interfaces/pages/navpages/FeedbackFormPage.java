@@ -1,6 +1,7 @@
 package com.sparta.eng82.interfaces.pages.navpages;
 
 import com.sparta.eng82.components.pages.navpages.CompetenciesPageImpl;
+import com.sparta.eng82.components.pages.navpages.admin.AdminHomePageImpl;
 import com.sparta.eng82.components.pages.navpages.trainee.TraineeHomePageImpl;
 import com.sparta.eng82.components.pages.navpages.trainer.TrainerHomePageImpl;
 import com.sparta.eng82.interfaces.pages.NavPage;
@@ -29,7 +30,6 @@ public interface FeedbackFormPage extends NavPage {
         return this;
     }
 
-
     default CompetenciesPage clickConsultantGrade(WebDriver driver) {
         driver.findElement(new By.ByLinkText("Consultant Grade")).click();
         return new CompetenciesPageImpl(driver);
@@ -41,17 +41,16 @@ public interface FeedbackFormPage extends NavPage {
         return this;
     }
 
-
-    default NavPage submitForm(WebDriver driver) {
+    default NavPage submitForm(WebDriver driver, String simpleName) {
         driver.findElement(new By.ById("submitBtn")).click();
-        if (TrainerHomePageImpl.class.equals(this.getClass())) {
-            return new TrainerHomePageImpl(driver);
-        } else if (TraineeHomePageImpl.class.equals(this.getClass())) {
-            return new TraineeHomePageImpl(driver);
+        switch (simpleName) {
+            case "TrainerHomePageImpl":
+                return new TraineeHomePageImpl(driver);
+            case "TraineeHomePageImpl":
+                return new TrainerHomePageImpl(driver);
         }
         return null;
     }
-
 
     default String getName(WebDriver driver, String name) {
         String extractedName = driver.findElement(new By.ByClassName("mt-5 fw-bold text-center")).getText();
