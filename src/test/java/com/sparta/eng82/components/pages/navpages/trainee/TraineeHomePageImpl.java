@@ -20,6 +20,16 @@ public class TraineeHomePageImpl implements TraineeHomePage {
         this.driver = driver;
     }
 
+    private By feedbackBys = new By.ByClassName("list-group-item list-group-item-action fw-bold");
+    private List<WebElement> feedbackList = driver.findElements(feedbackBys);
+
+    private By nameBy = new By.ByCssSelector("h1");
+    private By currentWeekTrafficLightBy = new By.ByXPath("//*[@id=\"main-content\"]/div/div/div/div[2]/div/ul/li[1]/span");
+
+
+
+
+
     @Override
     public TraineeFeedbackFormPage clickCurrentWeek() {
         driver.findElement(By.linkText(getCurrentWeek())).click();
@@ -75,14 +85,19 @@ public class TraineeHomePageImpl implements TraineeHomePage {
 
     @Override
     public String getCurrentTrafficLight() {
-        //TODO currently unable to complete
-        return null;
+        String elementClass =  driver.findElement(currentWeekTrafficLightBy).getAttribute("class");
+        if (elementClass.contains("green")) return "Green";
+        else if (elementClass.contains("amber")) return "Amber";
+        else  return "Red";
     }
 
     @Override
     public String getTrafficLightForWeek(int week) {
-        //TODO currently unable to complete
-        return null;
+        String newXPath = String.format("//*[@id=\"main-content\"]/div/div/div/div[2]/div/ul/li[%2d]/span", week+1);
+        String elementClass =  driver.findElement(new By.ByXPath(newXPath)).getAttribute("class");
+        if (elementClass.contains("green")) return "Green";
+        else if (elementClass.contains("amber")) return "Amber";
+        else  return "Red";
     }
 
     @Override
