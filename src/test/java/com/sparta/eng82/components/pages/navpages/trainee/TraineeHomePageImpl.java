@@ -77,11 +77,13 @@ public class TraineeHomePageImpl implements TraineeHomePage {
 
     @Override
     public String getCurrentTrafficLight() {
+        //TODO currently unable to complete
         return null;
     }
 
     @Override
     public String getTrafficLightForWeek(int week) {
+        //TODO currently unable to complete
         return null;
     }
 
