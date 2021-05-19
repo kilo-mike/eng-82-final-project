@@ -1,36 +1,41 @@
 package com.sparta.eng82.tests.unit.other;
 
 
+import com.sparta.eng82.components.pages.accesspages.LoginPageImpl;
 import com.sparta.eng82.components.webdriver.WebDriverFactory;
 import com.sparta.eng82.components.webdriver.WebDriverTypes;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 
 import java.util.EnumSet;
-import java.util.Set;
 
 public class LoginPageImplTests {
 
-    private static final EnumSet<WebDriverTypes> normalTypes = EnumSet.of(WebDriverTypes.CHROME, WebDriverTypes.EDGE);
-    static WebDriver driver;
-    static WebDriverFactory webDriverFactory;
+    WebDriver driver = null;
+    WebDriverFactory webDriverFactory = null;
+    LoginPageImpl loginPage = null;
 
-    @BeforeAll
-    static void setupAll() {
+    @BeforeEach
+    void setup() {
         webDriverFactory = new WebDriverFactory();
+        driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
+        loginPage = new LoginPageImpl(driver);
     }
 
-    private static Set<WebDriverTypes> normalTypesTest() {
+    @Test
+    @DisplayName("enterEmailTest")
+    void enterEmailTest() {
+
+    }
+
+    private static EnumSet<WebDriverTypes> getNormalTypes() {
         return normalTypes;
     }
 
-    @ParameterizedTest
-    @MethodSource("normalTypesTest")
-    @DisplayName("Test all normal types")
-    void testAllDriverTypes(WebDriverTypes webDriverType) {
-        driver = webDriverFactory.getWebDriver(webDriverType);
+    private static EnumSet<WebDriverTypes> getHeadlessTypes() {
+        return headlessTypes;
     }
+
 }
