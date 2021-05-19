@@ -11,7 +11,7 @@ public interface TrainerTraineeFeedbackFormPage extends TrainerFeedbackFormPage,
 
     TrainerTraineeFeedbackFormPage clickOnCont();
 
-    TrainerTraineeFeedbackFormPage clickOnTrainer();
+    TrainerTrainerFeedbackFormPage clickOnTrainer();
 
     boolean isTrainerCommentsEditable();
 
