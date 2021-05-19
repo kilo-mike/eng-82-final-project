@@ -5,15 +5,15 @@ import com.sparta.eng82.interfaces.pages.navpages.trainer.ManageGroupPage;
 
 public interface AddGroupPage {
 
-    AddGroupPageImpl selectStream(String streamName);
+    AddGroupPage selectStream(String streamName);
 
-    AddGroupPageImpl enterGroupName(String groupName);
+    AddGroupPage enterGroupName(String groupName);
 
     /**
      * @param startDate string in format dd/mm/yyyy
      */
 
-    AddGroupPageImpl enterGroupStartDate(String startDate);
+    AddGroupPage enterGroupStartDate(String startDate);
 
     ManageGroupPage createNewGroup();
 
