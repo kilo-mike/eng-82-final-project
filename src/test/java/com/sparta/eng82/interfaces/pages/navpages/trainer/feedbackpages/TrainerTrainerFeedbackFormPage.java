@@ -17,5 +17,5 @@ public interface TrainerTrainerFeedbackFormPage extends TrainerFeedbackFormPage,
 
     TrainerTrainerFeedbackFormPage enterContComments(String comments);
 
-    TrainerTrainerFeedbackFormPage clickOnTrainee();
+    TrainerTraineeFeedbackFormPage clickOnTrainee();
 }
