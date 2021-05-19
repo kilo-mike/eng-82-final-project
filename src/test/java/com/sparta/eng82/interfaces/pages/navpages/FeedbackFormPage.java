@@ -53,7 +53,7 @@ public interface FeedbackFormPage extends NavPage {
     }
 
 
-    default String getName(WebDriver driver, String name) {
+    default String getName(WebDriver driver) {
         String extractedName = driver.findElement(new By.ByClassName("mt-5 fw-bold text-center")).getText();
         Pattern pattern = Pattern.compile("(.*?)/");
         Matcher matcher = pattern.matcher(extractedName);
@@ -63,7 +63,7 @@ public interface FeedbackFormPage extends NavPage {
         return null;
     }
 
-    default String getWeek(WebDriver driver, int week) {
+    default String getWeek(WebDriver driver) {
         String extractedWeek = driver.findElement(new By.ByClassName("mt-5 fw-bold text-center")).getText();
         Pattern pattern = Pattern.compile("/ (.*?)");
         Matcher matcher = pattern.matcher(extractedWeek);
