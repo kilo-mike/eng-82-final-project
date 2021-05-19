@@ -13,7 +13,6 @@ public class WebDriverFactory {
         System.setProperty("webdriver.edge.driver", "src/test/resources/msedgedriver.exe");
     }
 
-
     public WebDriver getWebDriver(WebDriverTypes driverType) {
         WebDriver driver;
         switch (driverType) {
@@ -33,7 +32,8 @@ public class WebDriverFactory {
                 break;
 
         }
-        driver.manage().window().setSize(new Dimension(375,812));
+        driver.manage().window().setSize(new Dimension(375, 812));
         return driver;
     }
+
 }

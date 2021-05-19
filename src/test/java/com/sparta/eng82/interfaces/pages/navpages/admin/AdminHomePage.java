@@ -8,6 +8,6 @@ public interface AdminHomePage extends NavPage {
     AddTrainerPage addTrainer();
 
     boolean isTrainerAdded(String firstName, String lastName, String group);
-    
+
     String[][] getAllTrainersAvailable();
 }

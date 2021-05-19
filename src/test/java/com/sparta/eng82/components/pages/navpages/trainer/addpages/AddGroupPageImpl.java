@@ -10,11 +10,11 @@ public class AddGroupPageImpl implements AddGroupPage {
 
     WebDriver driver;
 
-    private By streamNameField = new By.ById("streamName");
-    private By groupNameField = new By.ById("groupName");
-    private By groupStartDateField = new By.ById("groupStartDate");
-    private By createNewGroupButton = new By.ByLinkText("Create New Group");
-    private By groupField = new By.ById("traineeGroup");
+    private final By streamNameField = new By.ById("streamName");
+    private final By groupNameField = new By.ById("groupName");
+    private final By groupStartDateField = new By.ById("groupStartDate");
+    private final By createNewGroupButton = new By.ByLinkText("Create New Group");
+    private final By groupField = new By.ById("traineeGroup");
 
     //private By addTraineeButton = new By.ByLinkText("Add Trainee");
 

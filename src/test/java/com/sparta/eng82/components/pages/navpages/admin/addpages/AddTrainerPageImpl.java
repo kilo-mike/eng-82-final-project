@@ -8,19 +8,19 @@ import org.openqa.selenium.WebDriver;
 
 public class AddTrainerPageImpl implements AddTrainerPage {
 
-    WebDriver driver;
     private final By addTrainerButton = new By.ByLinkText("Add Trainer");
     private final By firstNameTextBox = new By.ById("addtrainerFirstName");
-    private  final By lastNameTextBox = new By.ById("addtrainerLastName");
+    private final By lastNameTextBox = new By.ById("addtrainerLastName");
     private final By selectGroupDropDownBox = new By.ById("addTrainerGroup");
     private final By addNewTrainerButton = new By.ByLinkText("Add New Trainer");
+    WebDriver driver;
 
     public AddTrainerPageImpl(WebDriver driver) {
         this.driver = driver;
     }
 
     @Override
-    public AddTrainerPage addTrainer(){
+    public AddTrainerPage addTrainer() {
         driver.findElement(addTrainerButton).click();
         return new AddTrainerPageImpl(driver);
     }
