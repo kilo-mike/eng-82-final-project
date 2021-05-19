@@ -54,24 +54,22 @@ public interface FeedbackFormPage extends NavPage {
 
 
     default String getName(WebDriver driver, String name) {
-        String fullName = null;
         String extractedName = driver.findElement(new By.ByClassName("mt-5 fw-bold text-center")).getText();
         Pattern pattern = Pattern.compile("(.*?)/");
         Matcher matcher = pattern.matcher(extractedName);
         if (matcher.find()) {
             return matcher.group(1);
         }
-        return fullName;
+        return null;
     }
 
     default String getWeek(WebDriver driver, int week) {
-        String fullWeek = null;
         String extractedWeek = driver.findElement(new By.ByClassName("mt-5 fw-bold text-center")).getText();
         Pattern pattern = Pattern.compile("/ (.*?)");
         Matcher matcher = pattern.matcher(extractedWeek);
         if (matcher.find()) {
             return matcher.group(1);
         }
-        return fullWeek;
+        return null;
     }
 }

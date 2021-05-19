@@ -1,32 +1,15 @@
 package com.sparta.eng82.components.pages.navpages.trainee;
 
-import com.sparta.eng82.interfaces.Page;
-import com.sparta.eng82.interfaces.pages.external.LoginPage;
-import com.sparta.eng82.interfaces.pages.navpages.CompetenciesPage;
-import com.sparta.eng82.interfaces.pages.navpages.ProfilePage;
 import com.sparta.eng82.interfaces.pages.navpages.trainee.TraineeFeedbackFormPage;
 import com.sparta.eng82.interfaces.pages.navpages.trainee.TraineeHomePage;
+import org.openqa.selenium.WebDriver;
 
 public class TraineeHomePageImpl implements TraineeHomePage {
 
-    @Override
-    public Page goToHomePage() {
-        return null;
-    }
+    WebDriver driver;
 
-    @Override
-    public ProfilePage goToProfilePage() {
-        return null;
-    }
-
-    @Override
-    public CompetenciesPage goToCompetenciesPage() {
-        return null;
-    }
-
-    @Override
-    public LoginPage logOut() {
-        return null;
+    public TraineeHomePageImpl(WebDriver driver) {
+        this.driver = driver;
     }
 
     @Override
