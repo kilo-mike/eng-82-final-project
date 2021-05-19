@@ -13,7 +13,7 @@ public interface FeedbackFormPage extends NavPage {
 
     TrainerFeedbackFormPage setConsultantGrade(char grade);
 
-    CompetenciesPage clickConsultantGrade();
+    CompetenciesPage clickConsultantGradeTitle();
 
     TrainerHomePage saveForm();
 

@@ -9,13 +9,13 @@ public interface TrainerTrainerFeedbackFormPage extends TrainerFeedbackFormPage,
 
     TrainerTrainerFeedbackFormPage enterStopComments(String comments);
 
-    TrainerTraineeFeedbackFormPage clickOnStart();
+    TrainerTrainerFeedbackFormPage clickOnStart();
 
     TrainerTrainerFeedbackFormPage enterStartComments(String comments);
 
-    TrainerTraineeFeedbackFormPage clickOnCont();
+    TrainerTrainerFeedbackFormPage clickOnCont();
 
     TrainerTrainerFeedbackFormPage enterContComments(String comments);
 
-    TrainerTraineeFeedbackFormPage clickOnTrainee();
+    TrainerTrainerFeedbackFormPage clickOnTrainee();
 }
