@@ -8,6 +8,7 @@ import com.sparta.eng82.interfaces.pages.navpages.ProfilePage;
 import com.sparta.eng82.interfaces.pages.navpages.trainer.TrainerFeedbackFormPage;
 import com.sparta.eng82.interfaces.pages.navpages.trainer.TrainerHomePage;
 import com.sparta.eng82.interfaces.pages.navpages.trainer.feedbackpages.TrainerTraineeFeedbackFormPage;
+import com.sparta.eng82.interfaces.pages.navpages.trainer.feedbackpages.TrainerTrainerFeedbackFormPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -108,7 +109,7 @@ public class TrainerTraineeFeedbackFormPageImpl implements TrainerTraineeFeedbac
     @Override
     public TrainerTrainerFeedbackFormPage clickOnTrainer() {
         driver.findElement(trainerButton).click();
-        return new TrainerTrainerFeedbackFormPage(driver);
+        return new TrainerTrainerFeedbackFormPageImpl(driver);
     }
 
     @Override

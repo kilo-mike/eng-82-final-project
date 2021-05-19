@@ -130,6 +130,6 @@ public class TrainerTrainerFeedbackFormPageImpl implements TrainerTrainerFeedbac
     @Override
     public TrainerTraineeFeedbackFormPage clickOnTrainee() {
         driver.findElement(traineeButton).click();
-        return new TrainerTraineeFeedbackFormPage(driver);
+        return new TrainerTraineeFeedbackFormPageImpl(driver);
     }
 }
