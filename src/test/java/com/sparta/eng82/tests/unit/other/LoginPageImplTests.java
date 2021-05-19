@@ -19,6 +19,7 @@ public class LoginPageImplTests {
 
     private final String adminPropertyUsername = "admin_username";
     private final String adminPropertyPassword = "admin_password";
+    private final String adminPropertyName = "admin_name";
 
     private static Properties properties;
 
@@ -40,6 +41,26 @@ public class LoginPageImplTests {
     void enterEmailTest() {
         loginPage.enterEmail(adminPropertyUsername, properties);
         Assertions.assertEquals(driver.findElement(new By.ById("username")).getAttribute("value"), properties.getProperty(adminPropertyUsername));
+    }
+
+    @Test
+    @DisplayName("enterPasswordTest")
+    void enterPasswordTest() {
+        loginPage.enterPassword(adminPropertyPassword, properties);
+        Assertions.assertEquals(driver.findElement(new By.ById("password")).getAttribute("value"), properties.getProperty(adminPropertyPassword));
+        
+    }
+
+    @Test
+    @DisplayName("loginTest")
+    void loginTest() {
+        Assertions.assertNull(loginPage.login(properties.getProperty(adminPropertyName)));
+    }
+
+    @Test
+    @DisplayName("loginAttemptTest")
+    void loginAttemptTest() {
+        Assertions.assertTrue(loginPage.loginAttempt(adminPropertyName, adminPropertyUsername, adminPropertyPassword, properties));
     }
 
     @AfterEach
