@@ -7,8 +7,15 @@ import com.sparta.eng82.interfaces.pages.navpages.CompetenciesPage;
 import com.sparta.eng82.interfaces.pages.navpages.ProfilePage;
 import com.sparta.eng82.interfaces.pages.navpages.trainee.feedbackpages.TraineeTraineeFeedbackFormPage;
 import com.sparta.eng82.interfaces.pages.navpages.trainee.feedbackpages.TraineeTrainerFeedbackFormPage;
+import org.openqa.selenium.WebDriver;
 
 public class TraineeTraineeFeedbackFormPageImpl implements TraineeTraineeFeedbackFormPage {
+
+    WebDriver driver;
+    public TraineeTraineeFeedbackFormPageImpl(WebDriver driver) {
+        this.driver = driver;
+
+    }
 
     @Override
     public Page goToHomePage() {
