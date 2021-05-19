@@ -12,18 +12,13 @@ import java.util.List;
 
 public class TraineeHomePageImpl implements TraineeHomePage {
     private WebDriver driver;
-
+    private final By feedbackBys = new By.ByClassName("list-group-item list-group-item-action fw-bold");
+    private final List<WebElement> feedbackList = driver.findElements(feedbackBys);
+    private final By nameBy = new By.ByCssSelector("h1");
 
     public TraineeHomePageImpl(WebDriver driver) {
         this.driver = driver;
     }
-
-    private By feedbackBys = new By.ByClassName("list-group-item list-group-item-action fw-bold");
-    private List<WebElement> feedbackList = driver.findElements(feedbackBys);
-
-    private By nameBy = new By.ByCssSelector("h1");
-
-
 
     @Override
     public TraineeFeedbackFormPage clickCurrentWeek() {
@@ -94,16 +89,19 @@ public class TraineeHomePageImpl implements TraineeHomePage {
     public String getName() {
         return driver.findElement(nameBy).getText();
     }
+
     @Override
     public String getStream() {
         String[] course = driver.findElement(By.tagName("h5")).getText().split("-");
         return course[1];
     }
+
     @Override
     public String getGroup() {
         String[] course = driver.findElement(By.tagName("h5")).getText().split("-");
         return course[0];
     }
+
     @Override
     public String getTrainer() {
         List<WebElement> trainer = driver.findElements(By.tagName("label"));

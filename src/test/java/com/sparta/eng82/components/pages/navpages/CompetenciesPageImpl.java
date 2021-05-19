@@ -6,18 +6,15 @@ import org.openqa.selenium.WebDriver;
 
 public class CompetenciesPageImpl implements CompetenciesPage {
 
-    WebDriver driver;
-
     private final By competenciesContainer = new By.ById("competency-container");
-
     private final By analytic = new By.ById("Analytic");
     private final By independent = new By.ById("Independent");
     private final By determined = new By.ById("Determined");
     private final By professional = new By.ById("Professional");
     private final By studious = new By.ById("Studious");
     private final By imaginative = new By.ById("Imaginative");
-
     private final By fwBold = new By.ByClassName("fw-bold");
+    WebDriver driver;
 
     public CompetenciesPageImpl(WebDriver driver) {
         this.driver = driver;
