@@ -4,9 +4,9 @@ import com.sparta.eng82.interfaces.pages.navpages.trainer.ManageGroupPage;
 
 public interface AddStreamPage {
 
-    AddStreamPage enterStreamName();
+    AddStreamPage enterStreamName(String streamName);
 
-    AddStreamPage enterStreamDescription();
+    AddStreamPage enterStreamDescription(String streamDescription);
 
     AddStreamPage enterStreamDuration(int weeks);
 
@@ -14,3 +14,5 @@ public interface AddStreamPage {
 
     boolean isStreamCreated();
 }
+
+

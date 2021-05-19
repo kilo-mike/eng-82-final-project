@@ -38,7 +38,6 @@ public interface FeedbackFormPage extends NavPage {
         return this;
     }
 
-
     default NavPage submitForm(WebDriver driver) {
         driver.findElement(new By.ById("submitBtn")).click();
         if (TrainerHomePageImpl.class.equals(this.getClass())) {

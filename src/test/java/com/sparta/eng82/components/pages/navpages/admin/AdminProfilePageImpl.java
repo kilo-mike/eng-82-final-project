@@ -12,29 +12,4 @@ public class AdminProfilePageImpl implements ProfilePage {
     public AdminProfilePageImpl(WebDriver driver) {
         this.driver = driver;
     }
-
-    @Override
-    public ChangePasswordPage changePassword() {
-        return null;
-    }
-
-    @Override
-    public String getName() {
-        return null;
-    }
-
-    @Override
-    public boolean checkNameMatches() {
-        return false;
-    }
-
-    @Override
-    public String getEmail() {
-        return null;
-    }
-
-    @Override
-    public boolean checkEmailMatches() {
-        return false;
-    }
 }
