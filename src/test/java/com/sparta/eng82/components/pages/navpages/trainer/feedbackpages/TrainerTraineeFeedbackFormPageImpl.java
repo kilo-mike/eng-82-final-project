@@ -1,5 +1,6 @@
 package com.sparta.eng82.components.pages.navpages.trainer.feedbackpages;
 
+import com.sparta.eng82.components.pages.navpages.CompetenciesPageImpl;
 import com.sparta.eng82.components.pages.navpages.trainer.TrainerHomePageImpl;
 import com.sparta.eng82.interfaces.Page;
 import com.sparta.eng82.interfaces.pages.accesspages.LoginPage;
@@ -33,54 +34,6 @@ public class TrainerTraineeFeedbackFormPageImpl implements TrainerTraineeFeedbac
     private By startButton = new By.ByLinkText("Start");
     private By continueButton = new By.ByLinkText("Cont.");
     private By trainerButton = new By.ByLinkText("Trainer");
-
-    @Override
-    public TrainerFeedbackFormPage setTechnicalGrade(char grade) {
-        technicalGrades = new By.ByLinkText(Character.toString(grade));
-
-        driver.findElement(technicalGradeField).click();
-        driver.findElement(technicalGrades).click();
-        return this;
-    }
-
-    @Override
-    public TrainerFeedbackFormPage setConsultantGrade(char grade) {
-        consultantGrades = new By.ByLinkText(Character.toString(grade));
-
-        driver.findElement(consultantGradeField).click();
-        driver.findElement(consultantGrades).click();
-        return this;
-    }
-
-    @Override
-    public CompetenciesPage clickConsultantGradeTitle() {
-        driver.findElement(consultantGradeTitle).click();
-        return new CometenciesPageImpl(driver);
-    }
-
-    @Override
-    public TrainerHomePage saveForm() {
-        driver.findElement(saveButton).click();
-        return new TrainerHomePageImpl(driver);
-    }
-
-    @Override
-    public TrainerHomePage submitForm() {
-        driver.findElement(submitButton).click();
-        return new TrainerHomePageImpl(driver);
-    }
-
-    @Override
-    public String getName() {
-        String[] pageHeadingParts = driver.findElement(pageHeading).getText().split(" / ");
-        return pageHeadingParts[0];
-    }
-
-    @Override
-    public String getWeek() {
-        String[] pageHeadingParts = driver.findElement(pageHeading).getText().split(" / ");
-        return pageHeadingParts[1];
-    }
 
     @Override
     public TrainerFeedbackFormPage enterTrainerComments(String comments) {
