@@ -6,6 +6,11 @@ import com.sparta.eng82.components.pages.navpages.admin.AdminHomePageImpl;
 import com.sparta.eng82.components.pages.navpages.admin.AdminProfilePageImpl;
 import com.sparta.eng82.components.pages.navpages.trainee.TraineeHomePageImpl;
 import com.sparta.eng82.components.pages.navpages.trainee.TraineeProfilePageImpl;
+import com.sparta.eng82.components.pages.navpages.trainee.TraineeHomePageImpl;
+import com.sparta.eng82.components.pages.navpages.ProfilePageImpl;
+import com.sparta.eng82.components.pages.navpages.CompetenciesPageImpl;
+import com.sparta.eng82.components.pages.accesspages.LoginPageImpl;
+
 import com.sparta.eng82.components.pages.navpages.trainer.TrainerHomePageImpl;
 import com.sparta.eng82.components.pages.navpages.trainer.TrainerProfilePageImpl;
 import com.sparta.eng82.interfaces.Page;

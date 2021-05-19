@@ -1,10 +1,18 @@
 package com.sparta.eng82.components.pages.navpages.trainee.feedbackpages;
 
+import com.sparta.eng82.interfaces.pages.NavPage;
+import com.sparta.eng82.interfaces.pages.navpages.CompetenciesPage;
+
 import com.sparta.eng82.interfaces.pages.navpages.trainee.feedbackpages.TraineeTraineeFeedbackFormPage;
 import com.sparta.eng82.interfaces.pages.navpages.trainee.feedbackpages.TraineeTrainerFeedbackFormPage;
+import org.openqa.selenium.WebDriver;
 
 public class TraineeTrainerFeedbackFormPageImpl implements TraineeTrainerFeedbackFormPage {
+    WebDriver driver;
 
+    public TraineeTrainerFeedbackFormPageImpl(WebDriver driver) {
+        this.driver = driver;
+    }
 
     @Override
     public boolean checkBoxesCanBeEditedBeforeSubmitting() {
