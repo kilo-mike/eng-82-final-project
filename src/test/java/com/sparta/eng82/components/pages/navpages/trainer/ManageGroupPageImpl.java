@@ -7,10 +7,7 @@ import com.sparta.eng82.interfaces.Page;
 import com.sparta.eng82.interfaces.pages.accesspages.LoginPage;
 import com.sparta.eng82.interfaces.pages.navpages.CompetenciesPage;
 import com.sparta.eng82.interfaces.pages.navpages.ProfilePage;
-import com.sparta.eng82.interfaces.pages.navpages.trainer.ManageGroupPage;
-import com.sparta.eng82.interfaces.pages.navpages.trainer.addpages.AddGroupPage;
-import com.sparta.eng82.interfaces.pages.navpages.trainer.addpages.AddStreamPage;
-import com.sparta.eng82.interfaces.pages.navpages.trainer.addpages.AddTraineePage;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -28,7 +25,7 @@ public class ManageGroupPageImpl implements ManageGroupPage {
 
     public ManageGroupPageImpl(WebDriver driver) {
         this.driver = driver;
-    }
+
 
     @Override
     public ManageGroupPage removeTrainee(String traineeName) {
@@ -42,24 +39,28 @@ public class ManageGroupPageImpl implements ManageGroupPage {
             driver.findElement(deleteTrainerButton).click();
         }
         return this;
+
     }
 
     @Override
     public AddTraineePage addTrainee() {
         driver.findElement(addTraineeButton).click();
         return new AddTraineePageImpl(driver);
+
     }
 
     @Override
     public AddGroupPage addGroup() {
         driver.findElement(addGroupButton).click();
         return new AddGroupPageImpl(driver);
+
     }
 
     @Override
     public AddStreamPage addStream() {
         driver.findElement(addStreamButton).click();
         return new AddStreamPageImpl(driver);
+
     }
 
     @Override

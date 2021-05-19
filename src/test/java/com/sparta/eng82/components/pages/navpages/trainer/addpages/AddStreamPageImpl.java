@@ -10,7 +10,7 @@ public class AddStreamPageImpl implements AddStreamPage {
 
     WebDriver driver;
 
-    private By createNewStreamButton = new By.ByLinkText("Create New Stream");
+    private final By createNewStreamButton = new By.ByLinkText("Create New Stream");
 
     public AddStreamPageImpl(WebDriver driver) {
         this.driver = driver;

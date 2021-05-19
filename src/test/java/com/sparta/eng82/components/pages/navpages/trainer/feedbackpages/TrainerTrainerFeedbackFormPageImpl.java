@@ -8,12 +8,6 @@ import org.openqa.selenium.WebDriver;
 
 public class TrainerTrainerFeedbackFormPageImpl implements TrainerTrainerFeedbackFormPage {
 
-    WebDriver driver;
-
-    public TrainerTrainerFeedbackFormPageImpl(WebDriver driver) {
-        this.driver = driver;
-    }
-
     private final By trainerCommentsTextField = new By.ById("trainerComments");
     private final By stopButton = new By.ByLinkText("Stop");
     private final By startButton = new By.ByLinkText("Start");
@@ -22,6 +16,10 @@ public class TrainerTrainerFeedbackFormPageImpl implements TrainerTrainerFeedbac
     private final By stopTrainerTextField = new By.ById("stopTrainer");
     private final By startTrainerTextField = new By.ById("startTrainer");
     private final By continueTrainerTextField = new By.ById("continueTrainer");
+    WebDriver driver;
+    public TrainerTrainerFeedbackFormPageImpl(WebDriver driver) {
+        this.driver = driver;
+    }
 
     @Override
     public TrainerFeedbackFormPage enterTrainerComments(String comments) {

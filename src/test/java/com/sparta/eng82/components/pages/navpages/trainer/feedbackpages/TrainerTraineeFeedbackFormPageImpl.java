@@ -6,8 +6,8 @@ import com.sparta.eng82.interfaces.Page;
 import com.sparta.eng82.interfaces.pages.accesspages.LoginPage;
 import com.sparta.eng82.interfaces.pages.navpages.CompetenciesPage;
 import com.sparta.eng82.interfaces.pages.navpages.ProfilePage;
+
 import com.sparta.eng82.interfaces.pages.navpages.trainer.TrainerFeedbackFormPage;
-import com.sparta.eng82.interfaces.pages.navpages.trainer.TrainerHomePage;
 import com.sparta.eng82.interfaces.pages.navpages.trainer.feedbackpages.TrainerTraineeFeedbackFormPage;
 import com.sparta.eng82.interfaces.pages.navpages.trainer.feedbackpages.TrainerTrainerFeedbackFormPage;
 import org.openqa.selenium.By;
@@ -16,24 +16,26 @@ import org.openqa.selenium.WebDriver;
 public class TrainerTraineeFeedbackFormPageImpl implements TrainerTraineeFeedbackFormPage {
 
     WebDriver driver;
+  
+    private final By technicalGradeField = new By.ById("techGrade");
+    private final By consultantGradeField = new By.ById("consultGrade");
+    private By technicalGrades;
+    private By consultantGrades;
 
+    private final By consultantGradeTitle = new By.ByLinkText("Consultant Grade");
+    private final By saveButton = new By.ById("saveBtn");
+    private final By submitButton = new By.ById("submitBtn");
+    private final By pageHeading = new By.ByClassName("mt-5 fw-bold text-center");
+    private final By trainerCommentsTextField = new By.ById("trainerComments");
+    private final By stopButton = new By.ByLinkText("Stop");
+    private final By startButton = new By.ByLinkText("Start");
+    private final By continueButton = new By.ByLinkText("Cont.");
+    private final By trainerButton = new By.ByLinkText("Trainer");
+  
+  
     public TrainerTraineeFeedbackFormPageImpl(WebDriver driver) {
         this.driver = driver;
     }
-
-    private By technicalGradeField = new By.ById("techGrade");
-    private By consultantGradeField = new By.ById("consultGrade");
-    private By technicalGrades;
-    private By consultantGrades;
-    private By consultantGradeTitle = new By.ByLinkText("Consultant Grade");
-    private By saveButton = new By.ById("saveBtn");
-    private By submitButton = new By.ById("submitBtn");
-    private By pageHeading = new By.ByClassName("mt-5 fw-bold text-center");
-    private By trainerCommentsTextField = new By.ById("trainerComments");
-    private By stopButton = new By.ByLinkText("Stop");
-    private By startButton = new By.ByLinkText("Start");
-    private By continueButton = new By.ByLinkText("Cont.");
-    private By trainerButton = new By.ByLinkText("Trainer");
 
     @Override
     public TrainerFeedbackFormPage enterTrainerComments(String comments) {

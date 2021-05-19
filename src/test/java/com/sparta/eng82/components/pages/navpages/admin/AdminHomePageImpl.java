@@ -12,12 +12,11 @@ import java.util.List;
 
 public class AdminHomePageImpl implements AdminHomePage {
 
-    WebDriver driver;
-
     private final By mainContent = new By.ById("main-content");
     private final By redButton = new By.ByClassName("btn bg-color-red");
     private final By trainersTable = new By.ById("trainersTable");
     private final By trainersTableBody = new By.ByTagName("tbody");
+    WebDriver driver;
 
     public AdminHomePageImpl(WebDriver driver) {
         this.driver = driver;

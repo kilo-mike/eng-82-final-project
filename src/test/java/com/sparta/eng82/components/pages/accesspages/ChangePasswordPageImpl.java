@@ -10,17 +10,15 @@ import org.openqa.selenium.WebDriver;
 
 public class ChangePasswordPageImpl implements ChangePasswordPage {
 
-    WebDriver driver;
-
     private final By currentPassword = new By.ByName("currentPassword");
     private final By newPassword = new By.ByName("newPassword");
     private final By confirmPassword = new By.ByName("confirmPassword");
     private final By changePasswordButton = new By.ByName("loginBtn");
-
-    private String simpleName;
     private final String adminProfileClassName = "AdminProfilePageImpl";
     private final String traineeProfileClassName = "TraineeProfilePageImpl";
     private final String trainerProfileClassName = "TrainerProfilePageImpl";
+    WebDriver driver;
+    private final String simpleName;
 
 
     public ChangePasswordPageImpl(WebDriver driver, String simpleName) {

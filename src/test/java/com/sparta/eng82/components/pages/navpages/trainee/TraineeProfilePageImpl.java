@@ -1,11 +1,16 @@
 package com.sparta.eng82.components.pages.navpages.trainee;
 
 import com.sparta.eng82.interfaces.pages.navpages.trainee.TraineeProfilePage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+
+import java.util.Arrays;
 
 public class TraineeProfilePageImpl implements TraineeProfilePage {
 
     WebDriver driver;
+    private By technicalGrade = new By.ByXPath("//*[@id=\"main-content\"]/div/div[4]/table/tbody/tr/td[1]");
+    private By consultantGrade = new By.ByXPath("//*[@id=\"main-content\"]/div/div[4]/table/tbody/tr/td[2]");
 
     public TraineeProfilePageImpl(WebDriver driver) {
         this.driver = driver;
@@ -13,31 +18,33 @@ public class TraineeProfilePageImpl implements TraineeProfilePage {
 
     @Override
     public boolean isTechnicalGradeValid() {
-        // TODO
-        return false;
+        String[] acceptableGrades = {"A","B","C","D"};
+        String grade = driver.findElement(technicalGrade).toString();
+        return Arrays.stream(acceptableGrades).anyMatch(s -> s.contains(grade));
+
     }
 
     @Override
     public boolean isConsultantGradeValid() {
-        // TODO
-        return false;
+        String[] acceptableGrades = {"A","B","C","D"};
+        String grade = driver.findElement(consultantGrade).toString();
+        return Arrays.stream(acceptableGrades).anyMatch(s -> s.contains(grade));
     }
 
     @Override
     public boolean areBothGradesValid() {
-        // TODO
-        return false;
+        return (isAverageGradeCorrect() && isConsultantGradeValid());
     }
 
     @Override
     public boolean isAverageGradeCorrect() {
-        // TODO
+        // TODO possible JDBC integration if we have time later
         return false;
     }
 
     @Override
     public boolean isSubmissionDateCorrect() {
-        // TODO
+        // TODO see above
         return false;
     }
 }
