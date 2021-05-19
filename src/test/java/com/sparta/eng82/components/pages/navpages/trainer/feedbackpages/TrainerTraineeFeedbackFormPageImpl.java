@@ -1,5 +1,12 @@
 package com.sparta.eng82.components.pages.navpages.trainer.feedbackpages;
 
+import com.sparta.eng82.components.pages.navpages.CompetenciesPageImpl;
+import com.sparta.eng82.components.pages.navpages.trainer.TrainerHomePageImpl;
+import com.sparta.eng82.interfaces.Page;
+import com.sparta.eng82.interfaces.pages.accesspages.LoginPage;
+import com.sparta.eng82.interfaces.pages.navpages.CompetenciesPage;
+import com.sparta.eng82.interfaces.pages.navpages.ProfilePage;
+
 import com.sparta.eng82.interfaces.pages.navpages.trainer.TrainerFeedbackFormPage;
 import com.sparta.eng82.interfaces.pages.navpages.trainer.feedbackpages.TrainerTraineeFeedbackFormPage;
 import com.sparta.eng82.interfaces.pages.navpages.trainer.feedbackpages.TrainerTrainerFeedbackFormPage;
@@ -9,10 +16,12 @@ import org.openqa.selenium.WebDriver;
 public class TrainerTraineeFeedbackFormPageImpl implements TrainerTraineeFeedbackFormPage {
 
     WebDriver driver;
+  
     private final By technicalGradeField = new By.ById("techGrade");
     private final By consultantGradeField = new By.ById("consultGrade");
     private By technicalGrades;
     private By consultantGrades;
+
     private final By consultantGradeTitle = new By.ByLinkText("Consultant Grade");
     private final By saveButton = new By.ById("saveBtn");
     private final By submitButton = new By.ById("submitBtn");
@@ -22,6 +31,8 @@ public class TrainerTraineeFeedbackFormPageImpl implements TrainerTraineeFeedbac
     private final By startButton = new By.ByLinkText("Start");
     private final By continueButton = new By.ByLinkText("Cont.");
     private final By trainerButton = new By.ByLinkText("Trainer");
+  
+  
     public TrainerTraineeFeedbackFormPageImpl(WebDriver driver) {
         this.driver = driver;
     }
