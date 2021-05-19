@@ -1,5 +1,8 @@
 package com.sparta.eng82.interfaces.pages.navpages;
 
+import com.sparta.eng82.components.pages.navpages.CompetenciesPageImpl;
+import com.sparta.eng82.components.pages.navpages.trainee.TraineeHomePageImpl;
+import com.sparta.eng82.components.pages.navpages.trainer.TrainerHomePageImpl;
 import com.sparta.eng82.interfaces.pages.NavPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
