@@ -1,5 +1,6 @@
 package com.sparta.eng82.interfaces.pages.navpages;
 
+import com.sparta.eng82.components.pages.accesspages.ChangePasswordPageImpl;
 import com.sparta.eng82.interfaces.pages.NavPage;
 import com.sparta.eng82.interfaces.pages.accesspages.ChangePasswordPage;
 import org.openqa.selenium.By;
@@ -9,8 +10,8 @@ import java.util.Properties;
 
 public interface ProfilePage extends NavPage {
 
-    default ChangePasswordPage changePassword(WebDriver driver) {
-        return new ChangePasswordPageImpl(driver);
+    default ChangePasswordPage changePassword(WebDriver driver, ProfilePage profilePage) {
+        return new ChangePasswordPageImpl(driver, profilePage.getClass().getSimpleName());
     }
 
     default String getName(WebDriver driver) {
