@@ -44,13 +44,21 @@ public class WebDriverTests {
     @MethodSource("headlessTypesTest")
     @DisplayName("Testing headless")
     void testingHeadless(WebDriverTypes webDriverType) {
-       driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME_HEADLESS);
+       driver = webDriverFactory.getWebDriver(webDriverType);
        driver.get("http://localhost:8080");
         Assertions.assertEquals("http://localhost:8080/login", driver.getCurrentUrl());
     }
 
     private static Set<WebDriverTypes> headlessTypesTest(){
         return headlessTypes;
+    }
+
+    @Test
+    @DisplayName("Testing with one browser")
+    void testingWithOneBrowser() {
+        driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
+        driver.get("http://localhost:8080");
+        Assertions.assertEquals("http://localhost:8080/login", driver.getCurrentUrl());
     }
 
     @AfterEach
