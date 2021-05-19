@@ -8,7 +8,7 @@ public interface AddTraineePage {
 
     AddTraineePage enterFirstName(String firstName);
 
-    AddTraineePage enterSecondName(String secondName);
+    AddTraineePage enterLastName(String lastName);
 
     ManageGroupPage createNewTrainee();
 
