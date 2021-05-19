@@ -2,6 +2,7 @@ package com.sparta.eng82.components.pages.navpages.trainee.feedbackpages;
 
 import com.sparta.eng82.interfaces.pages.NavPage;
 import com.sparta.eng82.interfaces.pages.navpages.CompetenciesPage;
+
 import com.sparta.eng82.interfaces.pages.navpages.trainee.feedbackpages.TraineeTraineeFeedbackFormPage;
 import com.sparta.eng82.interfaces.pages.navpages.trainee.feedbackpages.TraineeTrainerFeedbackFormPage;
 import org.openqa.selenium.WebDriver;
@@ -11,41 +12,6 @@ public class TraineeTrainerFeedbackFormPageImpl implements TraineeTrainerFeedbac
 
     public TraineeTrainerFeedbackFormPageImpl(WebDriver driver) {
         this.driver = driver;
-    }
-
-    @Override
-    public NavPage setTechnicalGrade(char grade) {
-        return null;
-    }
-
-    @Override
-    public NavPage setConsultantGrade(char grade) {
-        return null;
-    }
-
-    @Override
-    public CompetenciesPage clickConsultantGrade() {
-        return null;
-    }
-
-    @Override
-    public NavPage saveForm() {
-        return null;
-    }
-
-    @Override
-    public NavPage submitForm() {
-        return null;
-    }
-
-    @Override
-    public String getName() {
-        return null;
-    }
-
-    @Override
-    public String getWeek() {
-        return null;
     }
 
     @Override

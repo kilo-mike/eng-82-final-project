@@ -9,8 +9,10 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
+
 public class TraineeHomePageImpl implements TraineeHomePage {
     private WebDriver driver;
+
 
     public TraineeHomePageImpl(WebDriver driver) {
         this.driver = driver;
@@ -20,6 +22,7 @@ public class TraineeHomePageImpl implements TraineeHomePage {
     private List<WebElement> feedbackList = driver.findElements(feedbackBys);
 
     private By nameBy = new By.ByCssSelector("h1");
+
 
 
     @Override
