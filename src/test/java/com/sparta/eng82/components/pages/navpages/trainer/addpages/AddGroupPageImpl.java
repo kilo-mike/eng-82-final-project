@@ -24,21 +24,24 @@ public class AddGroupPageImpl implements AddGroupPage {
 
     //Changed the return types from AddGroupPage to void in the interface
     @Override
-    public void selectStream(String streamName) {
+    public AddGroupPageImpl selectStream(String streamName) {
         driver.findElement(streamNameField).click();
         driver.findElement(By.linkText(streamName)).click();
+        return this;
     }
 
     //Previously returned AddGroupPage
     @Override
-    public void enterGroupName(String groupName) {
+    public AddGroupPageImpl enterGroupName(String groupName) {
         driver.findElement(groupNameField).sendKeys(groupName);
+        return this;
     }
 
     //Previously returned AddGroupPage
     @Override
-    public void enterGroupStartDate(String startDate) {
+    public AddGroupPageImpl enterGroupStartDate(String startDate) {
         driver.findElement(groupStartDateField).sendKeys(startDate);
+        return this;
     }
 
     @Override
