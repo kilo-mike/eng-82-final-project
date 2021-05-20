@@ -34,7 +34,7 @@ public class ChangePasswordPageImplTests {
 
     @BeforeEach
     void setup() {
-        driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME_HEADLESS);
+        driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
         loginPage = new LoginPageImpl(driver);
     }
 
