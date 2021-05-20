@@ -12,7 +12,7 @@ public interface ProfilePage extends NavPage {
 
     default ChangePasswordPage changePassword(WebDriver driver) {
         driver.findElement(By.xpath("//*[@id=\"main-content\"]/div/div[3]/form/button")).submit();
-        return new ChangePasswordPageImpl(driver, this.getClass().getSimpleName());
+        return new ChangePasswordPageImpl(driver);
     }
 
     default String getName(WebDriver driver) {
