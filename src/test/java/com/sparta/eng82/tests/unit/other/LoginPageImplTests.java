@@ -38,7 +38,7 @@ public class LoginPageImplTests {
 
     @BeforeEach
     void setup() {
-        driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
+        driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME_HEADLESS);
         loginPage = new LoginPageImpl(driver);
         logoutPage = new LogoutPageImpl(driver);
 
