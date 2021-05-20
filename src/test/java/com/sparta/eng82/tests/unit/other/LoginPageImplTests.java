@@ -42,6 +42,7 @@ public class LoginPageImplTests {
         loginPage = new LoginPageImpl(driver);
         logoutPage = new LogoutPageImpl(driver);
 
+
         adminHomePage = new AdminHomePageImpl(driver);
         trainerHomePage = new TrainerHomePageImpl(driver);
         traineeHomePage = new TraineeHomePageImpl(driver);

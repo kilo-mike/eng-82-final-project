@@ -31,7 +31,7 @@ public class AdminHomePageTests {
     @BeforeEach
     void setup() {
         webDriverFactory = new WebDriverFactory();
-        driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
+        driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME_HEADLESS);
         loginPage = new LoginPageImpl(driver);
         adminHomePage = new AdminHomePageImpl(driver);
     }
@@ -56,8 +56,8 @@ public class AdminHomePageTests {
         adminHomePage.addTrainer().enterFirstName("test")
                 .enterSecondName("test")
                 .selectGroup("hola")
-                .addTrainer();
-        Assertions.assertTrue(adminHomePage.isTrainerAdded("test", "test", "hola"));
+                .addNewTrainer();
+        Assertions.assertTrue(adminHomePage.isTrainerAdded("Test1", "Test1", "EngTest"));
     }
 
     @AfterEach

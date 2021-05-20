@@ -16,7 +16,8 @@ public interface ProfilePage extends NavPage {
     }
 
     default String getName(WebDriver driver) {
-        return driver.findElement(new By.ByClassName("h5")).findElement(By.className("p-2 text-end")).getText();
+//        return driver.findElement(new By.ByClassName("h5")).findElement(By.className("p-2 text-end")).getText();
+        return driver.findElement(new By.ByXPath("//*[@id=\"main-content\"]/div/div[2]/span/table/tbody/tr[1]/td[2]")).getText();
     }
 
     default boolean checkNameMatches(Properties loginProperties, WebDriver driver) {
@@ -24,7 +25,8 @@ public interface ProfilePage extends NavPage {
     }
 
     default String getEmail(WebDriver driver) {
-        return driver.findElements(By.tagName("tbody")).get(1).findElement(By.className("p-2 text-end")).getText();
+//        return driver.findElements(By.tagName("tbody")).get(1).findElement(By.className("p-2 text-end")).getText();
+        return driver.findElement(new By.ByXPath("//*[@id=\"main-content\"]/div/div[2]/span/table/tbody/tr[2]/td[2]")).getText();
     }
 
     default boolean checkEmailMatches(Properties loginProperties, WebDriver driver) {
