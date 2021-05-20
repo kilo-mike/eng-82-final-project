@@ -12,6 +12,7 @@ import com.sparta.eng82.interfaces.Page;
 import com.sparta.eng82.interfaces.pages.accesspages.LoginPage;
 import com.sparta.eng82.interfaces.pages.navpages.CompetenciesPage;
 import com.sparta.eng82.interfaces.pages.navpages.ProfilePage;
+import com.sparta.eng82.tests.unit.utility.Utility;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -53,8 +54,8 @@ public interface NavPage extends Page {
     }
 
     default LoginPage logOut(WebDriver driver) {
-        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(By.cssSelector(".bi-list"))).click();
-        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(By.id("logoutBtn"))).click();
+        Utility.timedMouseClicker(driver, 500, By.cssSelector(".bi-list"));
+        new WebDriverWait(driver, 5).until(ExpectedConditions.elementToBeClickable(By.id("logoutBtn"))).click();
         return new LogoutPageImpl(driver);
     }
 }
