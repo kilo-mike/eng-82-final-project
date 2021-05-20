@@ -1,4 +1,5 @@
 src/test/resources/*.exe
+src/test/resources/chromedriver
 src/test/resources/login.properties
 target/
 .idea/
