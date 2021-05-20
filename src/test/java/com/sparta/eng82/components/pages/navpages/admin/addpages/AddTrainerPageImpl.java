@@ -5,14 +5,14 @@ import com.sparta.eng82.interfaces.pages.navpages.admin.AdminHomePage;
 import com.sparta.eng82.interfaces.pages.navpages.admin.addpages.AddTrainerPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
 
 public class AddTrainerPageImpl implements AddTrainerPage {
 
     private final By addTrainerButton = new By.ByLinkText("Add Trainer");
     private final By firstNameTextBox = new By.ById("addtrainerFirstName");
     private final By lastNameTextBox = new By.ById("addtrainerLastName");
-    private final By selectGroupDropDownBox = new By.ById("addTrainerGroup");
-    private final By addNewTrainerButton = new By.ByLinkText("Add New Trainer");
+    private final By addNewTrainerButton = new By.ByCssSelector(".modal-footer");
     WebDriver driver;
 
     public AddTrainerPageImpl(WebDriver driver) {
@@ -39,8 +39,8 @@ public class AddTrainerPageImpl implements AddTrainerPage {
 
     @Override
     public AddTrainerPage selectGroup(String groupName) {
-        driver.findElement(selectGroupDropDownBox).click();
-        driver.findElement(By.linkText(groupName)).click();// A little scuffed
+        Select drpsGroup = new Select(driver.findElement(new By.ById("addTrainerGroup")));
+        drpsGroup.selectByVisibleText(groupName);
         return new AddTrainerPageImpl(driver);
     }
 
