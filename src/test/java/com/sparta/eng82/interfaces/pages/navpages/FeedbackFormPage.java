@@ -24,7 +24,7 @@ public interface FeedbackFormPage extends NavPage {
 
 
     default NavPage setConsultantGrade(WebDriver driver, char grade) {
-        Select drpConsultantGrade = new Select(driver.findElement(new By.ByName("technicalGrade")));
+        Select drpConsultantGrade = new Select(driver.findElement(new By.ByName("ConsultantGrade")));
         drpConsultantGrade.selectByVisibleText(String.valueOf(grade));
         return this;
     }
