@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 public class LoginPageImpl implements LoginPage {
 
-    private WebDriver driver;
+    private final WebDriver driver;
 
     public LoginPageImpl(WebDriver driver) {
         this.driver = driver;

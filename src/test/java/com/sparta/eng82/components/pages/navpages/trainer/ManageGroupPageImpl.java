@@ -3,11 +3,6 @@ package com.sparta.eng82.components.pages.navpages.trainer;
 import com.sparta.eng82.components.pages.navpages.trainer.addpages.AddGroupPageImpl;
 import com.sparta.eng82.components.pages.navpages.trainer.addpages.AddStreamPageImpl;
 import com.sparta.eng82.components.pages.navpages.trainer.addpages.AddTraineePageImpl;
-import com.sparta.eng82.interfaces.Page;
-import com.sparta.eng82.interfaces.pages.accesspages.LoginPage;
-import com.sparta.eng82.interfaces.pages.navpages.CompetenciesPage;
-import com.sparta.eng82.interfaces.pages.navpages.ProfilePage;
-
 import com.sparta.eng82.interfaces.pages.navpages.trainer.ManageGroupPage;
 import com.sparta.eng82.interfaces.pages.navpages.trainer.addpages.AddGroupPage;
 import com.sparta.eng82.interfaces.pages.navpages.trainer.addpages.AddStreamPage;
@@ -17,14 +12,13 @@ import org.openqa.selenium.WebDriver;
 
 public class ManageGroupPageImpl implements ManageGroupPage {
 
+    private final By removeButton = new By.ByLinkText("Remove");
+    private final By deleteTrainerButton = new By.ByLinkText("Delete Trainer");
+    private final By addTraineeButton = new By.ByLinkText("Add Trainee");
+    private final By addGroupButton = new By.ByLinkText("Add Group");
+    private final By addStreamButton = new By.ByLinkText("Add Stream");
+    private final By listClassName = new By.ByClassName("list-group");
     WebDriver driver;
-
-    private By removeButton = new By.ByLinkText("Remove");
-    private By deleteTrainerButton = new By.ByLinkText("Delete Trainer");
-    private By addTraineeButton = new By.ByLinkText("Add Trainee");
-    private By addGroupButton = new By.ByLinkText("Add Group");
-    private By addStreamButton = new By.ByLinkText("Add Stream");
-    private By listClassName = new By.ByClassName("list-group");
     private By removeButtonIdentifier;
 
     public ManageGroupPageImpl(WebDriver driver) {

@@ -11,17 +11,16 @@ import java.util.List;
 
 
 public class TraineeHomePageImpl implements TraineeHomePage {
-    private WebDriver driver;
     private final By feedbackBys = new By.ByClassName("list-group-item-action");
-    private List<WebElement> feedbackList;
     private final By nameBy = new By.ByCssSelector("h1");
+    private final WebDriver driver;
+    private final List<WebElement> feedbackList;
+    private final By currentWeekTrafficLightBy = new By.ByXPath("//*[@id=\"main-content\"]/div/div/div/div[2]/div/ul/li[1]/span");
 
     public TraineeHomePageImpl(WebDriver driver) {
         this.driver = driver;
         feedbackList = driver.findElements(feedbackBys);
     }
-
-    private By currentWeekTrafficLightBy = new By.ByXPath("//*[@id=\"main-content\"]/div/div/div/div[2]/div/ul/li[1]/span");
 
     @Override
     public TraineeFeedbackFormPage clickCurrentWeek() {
@@ -68,7 +67,7 @@ public class TraineeHomePageImpl implements TraineeHomePage {
         int maxWeekNumber = Integer.parseInt(maxWeek.substring(5));
         feedbackList.remove(0);
         for (int i = 0; i < maxWeekNumber; i++) {
-            if (Integer.parseInt(feedbackList.get(i).getText().substring(5)) != i+1) {
+            if (Integer.parseInt(feedbackList.get(i).getText().substring(5)) != i + 1) {
                 areAllWeeksDistinct = false;
             }
         }

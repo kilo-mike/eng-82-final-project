@@ -1,13 +1,11 @@
 package com.sparta.eng82.tests.unit.trainee;
 
 import com.sparta.eng82.components.pages.accesspages.LoginPageImpl;
-import com.sparta.eng82.components.pages.navpages.trainee.TraineeHomePageImpl;
 import com.sparta.eng82.components.webdriver.WebDriverFactory;
 import com.sparta.eng82.components.webdriver.WebDriverTypes;
 import com.sparta.eng82.interfaces.pages.navpages.trainee.TraineeHomePage;
 import com.sparta.eng82.interfaces.pages.navpages.trainee.feedbackpages.TraineeTraineeFeedbackFormPage;
 import com.sparta.eng82.tests.unit.utility.Utility;
-import io.cucumber.java.bs.A;
 import org.junit.Ignore;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
@@ -31,6 +29,7 @@ public class TraineeHomepageTests {
 
     private LoginPageImpl loginPage;
     private TraineeHomePage traineeHomePage;
+
     @BeforeAll
     static void setupAll() {
         webDriverFactory = new WebDriverFactory();
@@ -54,11 +53,11 @@ public class TraineeHomepageTests {
     }
 
     @BeforeEach
-    void setup(){
+    void setup() {
         driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME_HEADLESS);
         driver.get("http://localhost:8080/");
         loginPage = new LoginPageImpl(driver);
-        loginPage.enterEmail(driver, traineePropertyUsername, properties).enterPassword(driver, traineePropertyPassword,properties);
+        loginPage.enterEmail(driver, traineePropertyUsername, properties).enterPassword(driver, traineePropertyPassword, properties);
         traineeHomePage = (TraineeHomePage) loginPage.login(driver, traineePropertyName);
     }
 
@@ -72,7 +71,7 @@ public class TraineeHomepageTests {
     @DisplayName("Check that the correct form is selected when specifying a week")
     void checkThatTheCorrectFormIsSelectedWhenSpecifyingAWeek() {
         TraineeTraineeFeedbackFormPage traineeTraineeFeedbackFormPage = (TraineeTraineeFeedbackFormPage) traineeHomePage.clickFeedbackFormForWeek(2);
-        Assertions.assertEquals("Week 2" , traineeTraineeFeedbackFormPage.getWeek(driver));
+        Assertions.assertEquals("Week 2", traineeTraineeFeedbackFormPage.getWeek(driver));
     }
 
     @Test
@@ -80,7 +79,7 @@ public class TraineeHomepageTests {
     void checkThatTheCurrentWeekTestSelectsTheCorrectWeek() {
         String currentWeek = traineeHomePage.getCurrentWeek();
         TraineeTraineeFeedbackFormPage traineeTraineeFeedbackFormPage = (TraineeTraineeFeedbackFormPage) traineeHomePage.clickCurrentWeek();
-        Assertions.assertEquals(currentWeek , traineeTraineeFeedbackFormPage.getWeek(driver));
+        Assertions.assertEquals(currentWeek, traineeTraineeFeedbackFormPage.getWeek(driver));
     }
 
     @Test
@@ -104,7 +103,7 @@ public class TraineeHomepageTests {
     @Test  //TODO This can be mocked I think
     @DisplayName("Check the traffic light colour for the current week")
     void checkTheTrafficLightColourForCurrentWeek() {
-        String[] acceptableColours = {"Green","Amber","Red"};
+        String[] acceptableColours = {"Green", "Amber", "Red"};
         String colour = traineeHomePage.getCurrentTrafficLight();
         Assertions.assertTrue(Arrays.stream(acceptableColours).anyMatch(s -> s.contains(colour)));
     }
@@ -139,8 +138,6 @@ public class TraineeHomepageTests {
     void checkTheTrainerIsShownProperly() {
         Assertions.assertEquals("Manish Gadhvi", traineeHomePage.getTrainer());
     }
-
-
 
 
 }

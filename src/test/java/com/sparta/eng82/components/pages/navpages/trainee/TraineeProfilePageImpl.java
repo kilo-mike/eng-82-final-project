@@ -8,9 +8,9 @@ import java.util.Arrays;
 
 public class TraineeProfilePageImpl implements TraineeProfilePage {
 
+    private final By technicalGrade = new By.ByXPath("//*[@id=\"main-content\"]/div/div[4]/table/tbody/tr/td[1]");
+    private final By consultantGrade = new By.ByXPath("//*[@id=\"main-content\"]/div/div[4]/table/tbody/tr/td[2]");
     WebDriver driver;
-    private By technicalGrade = new By.ByXPath("//*[@id=\"main-content\"]/div/div[4]/table/tbody/tr/td[1]");
-    private By consultantGrade = new By.ByXPath("//*[@id=\"main-content\"]/div/div[4]/table/tbody/tr/td[2]");
 
     public TraineeProfilePageImpl(WebDriver driver) {
         this.driver = driver;
@@ -18,7 +18,7 @@ public class TraineeProfilePageImpl implements TraineeProfilePage {
 
     @Override
     public boolean isTechnicalGradeValid() {
-        String[] acceptableGrades = {"A","B","C","D"};
+        String[] acceptableGrades = {"A", "B", "C", "D"};
         String grade = driver.findElement(technicalGrade).toString();
         return Arrays.stream(acceptableGrades).anyMatch(s -> s.contains(grade));
 
@@ -26,7 +26,7 @@ public class TraineeProfilePageImpl implements TraineeProfilePage {
 
     @Override
     public boolean isConsultantGradeValid() {
-        String[] acceptableGrades = {"A","B","C","D"};
+        String[] acceptableGrades = {"A", "B", "C", "D"};
         String grade = driver.findElement(consultantGrade).toString();
         return Arrays.stream(acceptableGrades).anyMatch(s -> s.contains(grade));
     }

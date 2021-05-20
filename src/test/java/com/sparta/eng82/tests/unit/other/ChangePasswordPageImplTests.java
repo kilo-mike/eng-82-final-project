@@ -1,20 +1,9 @@
 package com.sparta.eng82.tests.unit.other;
 
 import com.sparta.eng82.components.pages.accesspages.LoginPageImpl;
-import com.sparta.eng82.components.pages.accesspages.LogoutPageImpl;
-import com.sparta.eng82.components.pages.navpages.admin.AdminHomePageImpl;
-import com.sparta.eng82.components.pages.navpages.admin.AdminProfilePageImpl;
-import com.sparta.eng82.components.pages.navpages.trainee.TraineeHomePageImpl;
-import com.sparta.eng82.components.pages.navpages.trainee.TraineeProfilePageImpl;
-import com.sparta.eng82.components.pages.navpages.trainer.TrainerHomePageImpl;
-import com.sparta.eng82.components.pages.navpages.trainer.TrainerProfilePageImpl;
 import com.sparta.eng82.components.webdriver.WebDriverFactory;
 import com.sparta.eng82.components.webdriver.WebDriverTypes;
-import com.sparta.eng82.interfaces.pages.NavPage;
-import com.sparta.eng82.interfaces.pages.accesspages.ChangePasswordPage;
 import com.sparta.eng82.interfaces.pages.accesspages.LoginPage;
-import com.sparta.eng82.interfaces.pages.navpages.ProfilePage;
-import com.sparta.eng82.interfaces.pages.navpages.admin.AdminHomePage;
 import com.sparta.eng82.tests.unit.utility.Utility;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -28,14 +17,13 @@ public class ChangePasswordPageImplTests {
 
     private static Properties properties;
     private static WebDriverFactory webDriverFactory;
-    private WebDriver driver;
-    private LoginPage loginPage;
     private final String password = "password";
     private final String adminPropertyUsername = "admin_username";
     private final String adminPropertyPassword = "admin_password";
     private final String adminPropertyName = "admin_name";
     private final String passwordChange = "hello";
-
+    private WebDriver driver;
+    private LoginPage loginPage;
 
     @BeforeAll
     static void setupAll() {
@@ -45,7 +33,7 @@ public class ChangePasswordPageImplTests {
     }
 
     @BeforeEach
-    void setup(){
+    void setup() {
         driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME_HEADLESS);
         loginPage = new LoginPageImpl(driver);
     }

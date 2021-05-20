@@ -16,22 +16,26 @@ import java.util.Properties;
 
 public class AddTainerPageTest {
     private static WebDriver driver;
+    private static Properties properties;
+    private final String adminPropertyUsername = "admin_username";
+    private final String adminPropertyPassword = "admin_password";
+    private final String adminPropertyName = "admin_name";
+    private final String trainersFirstName = "Shelly";
+    private final String trainersLastName = "Brown";
     private WebDriverFactory webDriverFactory;
     private LoginPageImpl loginPage;
     private AdminHomePageImpl adminHomePage;
     private AddTrainerPageImpl addTrainerPage;
-    private final String adminPropertyUsername = "admin_username";
-    private final String adminPropertyPassword = "admin_password";
-    private final String adminPropertyName = "admin_name";
-    private static Properties properties;
-
-    private final String trainersFirstName = "Shelly";
-    private final String trainersLastName = "Brown";
 
     @BeforeAll
     static void setupAll() {
         properties = new Properties();
         Utility.loadProperties(properties);
+    }
+
+    @AfterAll
+    static void teardownAll() {
+        driver.quit();
     }
 
     @BeforeEach
@@ -40,29 +44,6 @@ public class AddTainerPageTest {
         driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME_HEADLESS);
         loginPage = new LoginPageImpl(driver);
         adminHomePage = new AdminHomePageImpl(driver);
-    }
-
-    @Nested
-    class DoesTextShowUpInTextBox {
-        @Test
-        @DisplayName("Does text in first name show up?")
-        void doesTextInFirstNameShowUp() {
-            loginPage.enterEmail(driver, adminPropertyUsername, properties);
-            loginPage.enterPassword(driver, adminPropertyPassword, properties);
-            loginPage.login(driver, properties.getProperty(adminPropertyName));
-            adminHomePage.addTrainer().enterFirstName(trainersFirstName);
-           Assertions.assertEquals(trainersFirstName, driver.findElement(By.id("addtrainerFirstName")).getAttribute("value"));
-        }
-
-        @Test
-        @DisplayName("Does text in last name show up?")
-        void doesTextInLastNameShowUp() {
-            loginPage.enterEmail(driver, adminPropertyUsername, properties);
-            loginPage.enterPassword(driver, adminPropertyPassword, properties);
-            loginPage.login(driver, properties.getProperty(adminPropertyName));
-            adminHomePage.addTrainer().enterSecondName(trainersLastName);
-            Assertions.assertEquals(trainersLastName, driver.findElement(By.id("addtrainerLastName")).getAttribute("value"));
-        }
     }
 
     //TEST WILL FAIL!!!!! As a method isn't working properly!
@@ -82,8 +63,26 @@ public class AddTainerPageTest {
         driver.close();
     }
 
-    @AfterAll
-    static void teardownAll(){
-        driver.quit();
+    @Nested
+    class DoesTextShowUpInTextBox {
+        @Test
+        @DisplayName("Does text in first name show up?")
+        void doesTextInFirstNameShowUp() {
+            loginPage.enterEmail(driver, adminPropertyUsername, properties);
+            loginPage.enterPassword(driver, adminPropertyPassword, properties);
+            loginPage.login(driver, properties.getProperty(adminPropertyName));
+            adminHomePage.addTrainer().enterFirstName(trainersFirstName);
+            Assertions.assertEquals(trainersFirstName, driver.findElement(By.id("addtrainerFirstName")).getAttribute("value"));
+        }
+
+        @Test
+        @DisplayName("Does text in last name show up?")
+        void doesTextInLastNameShowUp() {
+            loginPage.enterEmail(driver, adminPropertyUsername, properties);
+            loginPage.enterPassword(driver, adminPropertyPassword, properties);
+            loginPage.login(driver, properties.getProperty(adminPropertyName));
+            adminHomePage.addTrainer().enterSecondName(trainersLastName);
+            Assertions.assertEquals(trainersLastName, driver.findElement(By.id("addtrainerLastName")).getAttribute("value"));
+        }
     }
 }

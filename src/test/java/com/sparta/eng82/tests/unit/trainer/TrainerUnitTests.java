@@ -19,7 +19,6 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.EnumSet;
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
 
 public class TrainerUnitTests {
     static WebDriver driver;
@@ -35,6 +34,7 @@ public class TrainerUnitTests {
     private final String traineePropertyUsername = "trainee_username";
     private final String traineePropertyPassword = "trainee_password";
     private final String traineePropertyName = "trainee_name";
+
     @BeforeAll
     static void setup() {
         webDriverFactory = new WebDriverFactory();
@@ -63,7 +63,7 @@ public class TrainerUnitTests {
         driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME_HEADLESS);
         driver.get("http://localhost:8080/");
         LoginPageImpl loginPage = new LoginPageImpl(driver);
-        loginPage.enterEmail(driver, trainerPropertyUsername, properties).enterPassword(driver, trainerPropertyPassword,properties);
+        loginPage.enterEmail(driver, trainerPropertyUsername, properties).enterPassword(driver, trainerPropertyPassword, properties);
         loginPage.login(driver, trainerPropertyName);
         Assertions.assertEquals("http://localhost:8080/", driver.getCurrentUrl());
     }
@@ -74,21 +74,21 @@ public class TrainerUnitTests {
         driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME_HEADLESS);
         driver.get("http://localhost:8080/");
         LoginPageImpl loginPage = new LoginPageImpl(driver);
-        loginPage.enterEmail(driver, trainerPropertyUsername, properties).enterPassword(driver, trainerPropertyPassword,properties);
+        loginPage.enterEmail(driver, trainerPropertyUsername, properties).enterPassword(driver, trainerPropertyPassword, properties);
         TrainerHomePage trainerHomePage = (TrainerHomePage) loginPage.login(driver, trainerPropertyName);
 
         TrainerTraineeFeedbackFormPage trainerTraineeFeedbackFormPage = trainerHomePage.selectJaneDoe();
 
         Assertions.assertEquals("http://localhost:8080/feedback?id=4", trainerTraineeFeedbackFormPage.getUrl(driver));
     }
-    
+
     @Test
     @DisplayName("Checking that manage group button takes the user to the correct page")
     void checkingThatManageGroupButtonTakesTheUserToTheCorrectPage() {
         driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME_HEADLESS);
         driver.get("http://localhost:8080/");
         LoginPageImpl loginPage = new LoginPageImpl(driver);
-        loginPage.enterEmail(driver, trainerPropertyUsername, properties).enterPassword(driver, trainerPropertyPassword,properties);
+        loginPage.enterEmail(driver, trainerPropertyUsername, properties).enterPassword(driver, trainerPropertyPassword, properties);
         TrainerHomePage trainerHomePage = (TrainerHomePage) loginPage.login(driver, trainerPropertyName);
 
         ManageGroupPage manageGroupPage = trainerHomePage.manageGroupButton();
@@ -103,7 +103,7 @@ public class TrainerUnitTests {
         driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME_HEADLESS);
         driver.get("http://localhost:8080/");
         LoginPageImpl loginPage = new LoginPageImpl(driver);
-        loginPage.enterEmail(driver, trainerPropertyUsername, properties).enterPassword(driver, trainerPropertyPassword,properties);
+        loginPage.enterEmail(driver, trainerPropertyUsername, properties).enterPassword(driver, trainerPropertyPassword, properties);
         TrainerHomePage trainerHomePage = (TrainerHomePage) loginPage.login(driver, trainerPropertyName);
 
         TrainerTraineeFeedbackFormPage trainerTraineeFeedbackFormPage = trainerHomePage.selectTraineeName(2, "JaneDoe");
@@ -115,19 +115,19 @@ public class TrainerUnitTests {
         driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME_HEADLESS);
         driver.get("http://localhost:8080/");
         LoginPageImpl loginPage = new LoginPageImpl(driver);
-        loginPage.enterEmail(driver, trainerPropertyUsername, properties).enterPassword(driver, trainerPropertyPassword,properties);
+        loginPage.enterEmail(driver, trainerPropertyUsername, properties).enterPassword(driver, trainerPropertyPassword, properties);
         TrainerHomePage trainerHomePage = (TrainerHomePage) loginPage.login(driver, trainerPropertyName);
 
         Assertions.assertTrue(trainerHomePage.isUserDisplayNameCorrect());
     }
-    
+
     @Test
     @DisplayName("Checking that the navbar is correctly appearing after clicking")
     void checkingThatTheNavbarIsCorrectlyAppearingAfterClicking() {
         driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME_HEADLESS);
         driver.get("http://localhost:8080/");
         LoginPageImpl loginPage = new LoginPageImpl(driver);
-        loginPage.enterEmail(driver, trainerPropertyUsername, properties).enterPassword(driver, trainerPropertyPassword,properties);
+        loginPage.enterEmail(driver, trainerPropertyUsername, properties).enterPassword(driver, trainerPropertyPassword, properties);
         TrainerHomePage trainerHomePage = (TrainerHomePage) loginPage.login(driver, trainerPropertyName);
 
         Assertions.assertTrue(trainerHomePage.mainNavigationMenuAppears());
@@ -139,7 +139,7 @@ public class TrainerUnitTests {
         driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME_HEADLESS);
         driver.get("http://localhost:8080/");
         LoginPageImpl loginPage = new LoginPageImpl(driver);
-        loginPage.enterEmail(driver, trainerPropertyUsername, properties).enterPassword(driver, trainerPropertyPassword,properties);
+        loginPage.enterEmail(driver, trainerPropertyUsername, properties).enterPassword(driver, trainerPropertyPassword, properties);
         TrainerHomePage trainerHomePage = (TrainerHomePage) loginPage.login(driver, trainerPropertyName);
 
         WebElement weekDropDown = driver.findElement(By.cssSelector(".form-select"));
@@ -153,7 +153,7 @@ public class TrainerUnitTests {
 
     @Nested
     @DisplayName("TrainerTrainee Tests")
-    class TrainerTraineeTests{
+    class TrainerTraineeTests {
 
         @Test
         @DisplayName("Check that the technical grade is set AND saved as expected")
@@ -161,7 +161,7 @@ public class TrainerUnitTests {
             driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME_HEADLESS);
             driver.get("http://localhost:8080/");
             LoginPageImpl loginPage = new LoginPageImpl(driver);
-            loginPage.enterEmail(driver, trainerPropertyUsername, properties).enterPassword(driver, trainerPropertyPassword,properties);
+            loginPage.enterEmail(driver, trainerPropertyUsername, properties).enterPassword(driver, trainerPropertyPassword, properties);
             TrainerHomePage trainerHomePage = (TrainerHomePage) loginPage.login(driver, trainerPropertyName);
             TrainerTraineeFeedbackFormPage trainerTraineeFeedbackFormPage = trainerHomePage.selectJaneDoe();
             trainerTraineeFeedbackFormPage.setTechnicalGrade(driver, 'D');
@@ -176,7 +176,7 @@ public class TrainerUnitTests {
             driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME_HEADLESS);
             driver.get("http://localhost:8080/");
             LoginPageImpl loginPage = new LoginPageImpl(driver);
-            loginPage.enterEmail(driver, trainerPropertyUsername, properties).enterPassword(driver, trainerPropertyPassword,properties);
+            loginPage.enterEmail(driver, trainerPropertyUsername, properties).enterPassword(driver, trainerPropertyPassword, properties);
             TrainerHomePage trainerHomePage = (TrainerHomePage) loginPage.login(driver, trainerPropertyName);
             TrainerTraineeFeedbackFormPage trainerTraineeFeedbackFormPage = trainerHomePage.selectJaneDoe();
             trainerTraineeFeedbackFormPage.setConsultantGrade(driver, 'D');
@@ -191,7 +191,7 @@ public class TrainerUnitTests {
             driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME_HEADLESS);
             driver.get("http://localhost:8080/");
             LoginPageImpl loginPage = new LoginPageImpl(driver);
-            loginPage.enterEmail(driver, trainerPropertyUsername, properties).enterPassword(driver, trainerPropertyPassword,properties);
+            loginPage.enterEmail(driver, trainerPropertyUsername, properties).enterPassword(driver, trainerPropertyPassword, properties);
             TrainerHomePage trainerHomePage = (TrainerHomePage) loginPage.login(driver, trainerPropertyName);
             TrainerTraineeFeedbackFormPage trainerTraineeFeedbackFormPage = trainerHomePage.selectJaneDoe();
             CompetenciesPage competenciesPage = trainerTraineeFeedbackFormPage.clickConsultantGrade(driver);

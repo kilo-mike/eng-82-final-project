@@ -12,15 +12,15 @@ import org.openqa.selenium.WebDriver;
 import java.util.Properties;
 
 public class AdminHomePageTests {
+    private static Properties properties;
+    private final String adminPropertyUsername = "admin_username";
+    private final String adminPropertyPassword = "admin_password";
+    private final String adminPropertyName = "admin_name";
     private WebDriver driver;
     private WebDriverFactory webDriverFactory;
     private LoginPageImpl loginPage;
     private AdminHomePageImpl adminHomePage;
     private AddTrainerPageImpl addTrainerPage;
-    private final String adminPropertyUsername = "admin_username";
-    private final String adminPropertyPassword = "admin_password";
-    private final String adminPropertyName = "admin_name";
-    private static Properties properties;
 
     @BeforeAll
     static void setupAll() {

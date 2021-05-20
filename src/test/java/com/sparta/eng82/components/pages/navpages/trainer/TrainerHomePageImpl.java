@@ -9,7 +9,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -17,21 +16,20 @@ import java.util.concurrent.TimeUnit;
 
 public class TrainerHomePageImpl implements NavPage, TrainerHomePage {
 
+    private final By manageGroupButton = new By.ByLinkText("Manage Group");
+    private final By weekListName = new By.ByXPath("//select[@class=\"form-select mt-3 mb-3\"]");
     WebDriver driver;
-
     private By traineeNameTable;
     private By traineeNameFinder;
-
-    private By manageGroupButton = new By.ByLinkText("Manage Group");
-    private By weekListName = new By.ByXPath("//select[@class=\"form-select mt-3 mb-3\"]");
     private By weekName;
     private String userFullName;
+
     {
         try {
-           InputStream input = new FileInputStream("src/test/resources/login.properties");
-           Properties properties = new Properties();
-           properties.load(input);
-           userFullName = properties.getProperty("trainer_name");
+            InputStream input = new FileInputStream("src/test/resources/login.properties");
+            Properties properties = new Properties();
+            properties.load(input);
+            userFullName = properties.getProperty("trainer_name");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -55,7 +53,7 @@ public class TrainerHomePageImpl implements NavPage, TrainerHomePage {
 
         driver.findElement(weekListName).findElement(weekName).click();
         String traineeNames = driver.findElement(traineeNameTable).findElement(traineeNameFinder).getText();
-        if(traineeNames.isEmpty()){
+        if (traineeNames.isEmpty()) {
             System.out.println("NULL");
         }
         System.out.println(traineeNames);
