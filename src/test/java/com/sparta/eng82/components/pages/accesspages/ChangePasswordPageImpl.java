@@ -7,9 +7,6 @@ import com.sparta.eng82.interfaces.Page;
 import com.sparta.eng82.interfaces.pages.accesspages.ChangePasswordPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
-import java.util.List;
 
 public class ChangePasswordPageImpl implements ChangePasswordPage {
 
@@ -21,9 +18,8 @@ public class ChangePasswordPageImpl implements ChangePasswordPage {
     private final String adminHomeClassName = "AdminHomePageImpl";
     private final String traineeHomeClassName = "TraineeHomePageImpl";
     private final String trainerHomeClassName = "TrainerHomePageImpl";
-
-    WebDriver driver;
     private final String simpleName;
+    WebDriver driver;
 
 
     public ChangePasswordPageImpl(WebDriver driver, String simpleName) {

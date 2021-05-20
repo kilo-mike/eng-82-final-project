@@ -15,10 +15,8 @@ public class TraineeTraineeFeedbackFormPageImpl implements TraineeTraineeFeedbac
     private final By startTextBox = new By.ById("startTrainee");
     private final By stopTextBox = new By.ById("stopTrainee");
     //private final By stopTextBox = new By.ById("stopTrainee");
-
+    private final String simpleName;
     WebDriver driver;
-
-    private String simpleName;
 
     public TraineeTraineeFeedbackFormPageImpl(WebDriver driver, String simpleName) {
         this.driver = driver;
@@ -28,22 +26,20 @@ public class TraineeTraineeFeedbackFormPageImpl implements TraineeTraineeFeedbac
 
     @Override
     public boolean checkBoxesCanBeEditedBeforeSubmitting() {
-        if(driver.findElement(By.id("submitBtn")).isDisplayed()) {
+        if (driver.findElement(By.id("submitBtn")).isDisplayed()) {
             clickOnStart();
             enterStartComments("Start Test");
-            if(!driver.findElement(startTextBox).getText().equals("Start Test")){
+            if (!driver.findElement(startTextBox).getText().equals("Start Test")) {
                 return false;
             }
             clickOnCont();
             enterContComments("Continue Test");
-            if(!driver.findElement(continueTextBox).getText().equals("Continue Test")){
+            if (!driver.findElement(continueTextBox).getText().equals("Continue Test")) {
                 return false;
             }
             clickOnStop();
             enterStopComments("Stop Test");
-            if(!driver.findElement(stopTextBox).getText().equals("Stop Test")){
-                return false;
-            }
+            return driver.findElement(stopTextBox).getText().equals("Stop Test");
         }
         return true;
     }

@@ -8,9 +8,8 @@ import org.openqa.selenium.WebDriver;
 
 public class AddStreamPageImpl implements AddStreamPage {
 
-    WebDriver driver;
-
     private final By createNewStreamButton = new By.ByLinkText("Create New Stream");
+    WebDriver driver;
 
     public AddStreamPageImpl(WebDriver driver) {
         this.driver = driver;

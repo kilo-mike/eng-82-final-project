@@ -18,16 +18,14 @@ import java.util.Properties;
 
 public class LoginPageImplTests {
 
-    private WebDriver driver;
     private static WebDriverFactory webDriverFactory;
-
+    private static Properties properties;
+    private WebDriver driver;
     private LoginPageImpl loginPage;
     private LogoutPageImpl logoutPage;
     private AdminHomePageImpl adminHomePage;
     private TrainerHomePageImpl trainerHomePage;
     private TraineeHomePageImpl traineeHomePage;
-
-    private static Properties properties;
 
     @BeforeAll
     static void setupAll() {

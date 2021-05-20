@@ -13,14 +13,14 @@ import org.openqa.selenium.WebDriver;
 import java.util.Properties;
 
 public class AdminProfilePageTests {
+    private static Properties properties;
+    private final String adminPropertyUsername = "admin_username";
+    private final String adminPropertyPassword = "admin_password";
+    private final String adminPropertyName = "admin_name";
     private WebDriver driver;
     private WebDriverFactory webDriverFactory;
     private LoginPageImpl loginPage;
     private AdminHomePageImpl adminHomePage;
-    private final String adminPropertyUsername = "admin_username";
-    private final String adminPropertyPassword = "admin_password";
-    private final String adminPropertyName = "admin_name";
-    private static Properties properties;
     private AdminProfilePageImpl adminProfilePage;
 
     private ChangePasswordPageImpl changePasswordPage;

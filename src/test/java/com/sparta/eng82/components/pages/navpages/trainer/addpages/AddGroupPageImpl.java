@@ -8,13 +8,12 @@ import org.openqa.selenium.WebDriver;
 
 public class AddGroupPageImpl implements AddGroupPage {
 
-    WebDriver driver;
-
     private final By streamNameField = new By.ById("streamName");
     private final By groupNameField = new By.ById("groupName");
     private final By groupStartDateField = new By.ById("groupStartDate");
     private final By createNewGroupButton = new By.ByLinkText("Create New Group");
     private final By groupField = new By.ById("traineeGroup");
+    WebDriver driver;
 
     //private By addTraineeButton = new By.ByLinkText("Add Trainee");
 

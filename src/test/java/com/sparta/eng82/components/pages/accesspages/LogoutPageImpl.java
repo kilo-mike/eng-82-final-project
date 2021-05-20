@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 public class LogoutPageImpl implements LoginPage {
 
-    private WebDriver driver;
+    private final WebDriver driver;
 
     public LogoutPageImpl(WebDriver driver) {
         this.driver = driver;

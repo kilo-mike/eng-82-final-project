@@ -8,13 +8,12 @@ import org.openqa.selenium.WebDriver;
 
 public class AddTraineePageImpl implements AddTraineePage {
 
-    WebDriver driver;
-
     private final By traineeGroupField = new By.ById("traineeGroup");
-    private By groupNames;
     private final By traineeFirstNameField = new By.ById("traineeFirstName");
     private final By traineeLastNameField = new By.ById("traineeLastName");
     private final By createNewTraineeButton = new By.ByLinkText("Create New Trainee");
+    WebDriver driver;
+    private By groupNames;
 
     public AddTraineePageImpl(WebDriver driver) {
         this.driver = driver;
