@@ -35,8 +35,11 @@ public class TrainerUnitTests {
     private final String traineePropertyPassword = "trainee_password";
     private final String traineePropertyName = "trainee_name";
 
+    private TrainerHomePage trainerHomePage;
+    private LoginPageImpl loginPage;
+
     @BeforeAll
-    static void setup() {
+    static void setupAll() {
         webDriverFactory = new WebDriverFactory();
         normalTypes = EnumSet.of(WebDriverTypes.CHROME, WebDriverTypes.EDGE);
         headlessTypes = EnumSet.of(WebDriverTypes.CHROME_HEADLESS);
@@ -44,111 +47,88 @@ public class TrainerUnitTests {
         Utility.loadProperties(properties);
     }
 
-//    @AfterAll
-//    static void tearDown() {
-//        driver.quit();
-//    }
-//
-//    private static EnumSet<WebDriverTypes> getNormalTypes() {
-//        return normalTypes;
-//    }
-//
-//    private static EnumSet<WebDriverTypes> getHeadlessTypes() {
-//        return headlessTypes;
-//    }
-
-    @Test
-    @DisplayName("Check the URL is correct when loading a new homepage")
-    void checkTheUrlIsCorrectWhenLoadingANewHomepage() {
+    @BeforeEach
+    void setup() {
         driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME_HEADLESS);
         driver.get("http://localhost:8080/");
-        LoginPageImpl loginPage = new LoginPageImpl(driver);
+        loginPage = new LoginPageImpl(driver);
         loginPage.enterEmail(driver, trainerPropertyUsername, properties).enterPassword(driver, trainerPropertyPassword, properties);
-        loginPage.login(driver, trainerPropertyName);
-        Assertions.assertEquals("http://localhost:8080/", driver.getCurrentUrl());
+        trainerHomePage = (TrainerHomePage) loginPage.login(driver, trainerPropertyName);
+    }
+
+    @AfterAll
+    static void tearDown() {
+        driver.quit();
     }
 
     @Test
     @DisplayName("Check that the correct form is selected when specifying a student")
-    void checkThatTheCorrectFormIsSelectedWhenSpecifyingAWeek() {
-        driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME_HEADLESS);
-        driver.get("http://localhost:8080/");
-        LoginPageImpl loginPage = new LoginPageImpl(driver);
-        loginPage.enterEmail(driver, trainerPropertyUsername, properties).enterPassword(driver, trainerPropertyPassword, properties);
-        TrainerHomePage trainerHomePage = (TrainerHomePage) loginPage.login(driver, trainerPropertyName);
-
+    void checkThatTheCorrectFormIsSelectedWhenSpecifyingAStudent() {
         TrainerTraineeFeedbackFormPage trainerTraineeFeedbackFormPage = trainerHomePage.selectJaneDoe();
 
         Assertions.assertEquals("http://localhost:8080/feedback?id=4", trainerTraineeFeedbackFormPage.getUrl(driver));
     }
 
-    @Test
-    @DisplayName("Checking that manage group button takes the user to the correct page")
-    void checkingThatManageGroupButtonTakesTheUserToTheCorrectPage() {
-        driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME_HEADLESS);
-        driver.get("http://localhost:8080/");
-        LoginPageImpl loginPage = new LoginPageImpl(driver);
-        loginPage.enterEmail(driver, trainerPropertyUsername, properties).enterPassword(driver, trainerPropertyPassword, properties);
-        TrainerHomePage trainerHomePage = (TrainerHomePage) loginPage.login(driver, trainerPropertyName);
+    @Nested
+    @DisplayName("Tests for the Trainer Home Page")
+    class TrainerHomePageTests {
 
-        ManageGroupPage manageGroupPage = trainerHomePage.manageGroupButton();
+        @Test
+        @DisplayName("Check the URL is correct when loading a new homepage")
+        void checkTheUrlIsCorrectWhenLoadingANewHomepage() {
+            driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME_HEADLESS);
+            driver.get("http://localhost:8080/");
+            LoginPageImpl loginPage = new LoginPageImpl(driver);
+            loginPage.enterEmail(driver, trainerPropertyUsername, properties).enterPassword(driver, trainerPropertyPassword, properties);
+            loginPage.login(driver, trainerPropertyName);
+            Assertions.assertEquals("http://localhost:8080/", driver.getCurrentUrl());
+        }
 
-        Assertions.assertEquals("http://localhost:8080/group", driver.getCurrentUrl());
-    }
+        // TODO: Fix the selectTraineeName() class, 'unable to locate element'
+        @Test
+        @DisplayName("Checking that the specified student is correctly selected")
+        void checkingThatTheSpecifiedStudentIsCorrectlySelected() {
+            driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME_HEADLESS);
+            driver.get("http://localhost:8080/");
+            LoginPageImpl loginPage = new LoginPageImpl(driver);
+            loginPage.enterEmail(driver, trainerPropertyUsername, properties).enterPassword(driver, trainerPropertyPassword, properties);
+            TrainerHomePage trainerHomePage = (TrainerHomePage) loginPage.login(driver, trainerPropertyName);
 
-    // TODO: Fix the selectTraineeName() class, 'unable to locate element'
-    @Test
-    @DisplayName("Checking that the specified student is correctly selected")
-    void checkingThatTheSpecifiedStudentIsCorrectlySelected() {
-        driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME_HEADLESS);
-        driver.get("http://localhost:8080/");
-        LoginPageImpl loginPage = new LoginPageImpl(driver);
-        loginPage.enterEmail(driver, trainerPropertyUsername, properties).enterPassword(driver, trainerPropertyPassword, properties);
-        TrainerHomePage trainerHomePage = (TrainerHomePage) loginPage.login(driver, trainerPropertyName);
+            TrainerTraineeFeedbackFormPage trainerTraineeFeedbackFormPage = trainerHomePage.selectTraineeName(2, "JaneDoe");
+        }
 
-        TrainerTraineeFeedbackFormPage trainerTraineeFeedbackFormPage = trainerHomePage.selectTraineeName(2, "JaneDoe");
-    }
+        @Test
+        @DisplayName("Checking that manage group button takes the user to the correct page")
+        void checkingThatManageGroupButtonTakesTheUserToTheCorrectPage() {
+            ManageGroupPage manageGroupPage = trainerHomePage.manageGroupButton();
 
-    @Test
-    @DisplayName("Checking that the displayed trainer name is correctly displayed on the homepage")
-    void checkingThatTheDisplayedTrainerNameIsCorrectlyDisplayedOnTheHomepage() {
-        driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME_HEADLESS);
-        driver.get("http://localhost:8080/");
-        LoginPageImpl loginPage = new LoginPageImpl(driver);
-        loginPage.enterEmail(driver, trainerPropertyUsername, properties).enterPassword(driver, trainerPropertyPassword, properties);
-        TrainerHomePage trainerHomePage = (TrainerHomePage) loginPage.login(driver, trainerPropertyName);
+            Assertions.assertEquals("http://localhost:8080/group", driver.getCurrentUrl());
+        }
 
-        Assertions.assertTrue(trainerHomePage.isUserDisplayNameCorrect());
-    }
+        @Test
+        @DisplayName("Checking that the displayed trainer name is correctly displayed on the homepage")
+        void checkingThatTheDisplayedTrainerNameIsCorrectlyDisplayedOnTheHomepage() {
+            Assertions.assertTrue(trainerHomePage.isUserDisplayNameCorrect());
+        }
 
-    @Test
-    @DisplayName("Checking that the navbar is correctly appearing after clicking")
-    void checkingThatTheNavbarIsCorrectlyAppearingAfterClicking() {
-        driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME_HEADLESS);
-        driver.get("http://localhost:8080/");
-        LoginPageImpl loginPage = new LoginPageImpl(driver);
-        loginPage.enterEmail(driver, trainerPropertyUsername, properties).enterPassword(driver, trainerPropertyPassword, properties);
-        TrainerHomePage trainerHomePage = (TrainerHomePage) loginPage.login(driver, trainerPropertyName);
+        @Test
+        @DisplayName("Checking that the navbar is correctly appearing after clicking")
+        void checkingThatTheNavbarIsCorrectlyAppearingAfterClicking() {
+            Assertions.assertTrue(trainerHomePage.mainNavigationMenuAppears());
+        }
 
-        Assertions.assertTrue(trainerHomePage.mainNavigationMenuAppears());
-    }
+        @RepeatedTest(3)
+        @DisplayName("Checking that Navigation Menu correctly changes visibility after clicks")
+        void checkingThatNavigationMenuCorrectlyChangesVisibilityAfterClicks() {
+            Assertions.assertTrue(trainerHomePage.isNavigationMenuVisibilityChangingAfterClick());
+        }
 
-    @Test
-    @DisplayName("Checking that clicking on a specified week correctly selects that week")
-    void checkingThatClickingOnASpecifiedWeekCorrectlySelectsThatWeek() {
-        driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME_HEADLESS);
-        driver.get("http://localhost:8080/");
-        LoginPageImpl loginPage = new LoginPageImpl(driver);
-        loginPage.enterEmail(driver, trainerPropertyUsername, properties).enterPassword(driver, trainerPropertyPassword, properties);
-        TrainerHomePage trainerHomePage = (TrainerHomePage) loginPage.login(driver, trainerPropertyName);
-
-        WebElement weekDropDown = driver.findElement(By.cssSelector(".form-select"));
-        Select select = new Select(weekDropDown);
-
-        select.selectByValue("3");
-        String isSelected = driver.findElement(By.cssSelector("<.form-select><attribute=>")).getAttribute("selected");
-        System.out.println(isSelected);
-        driver.findElement(By.cssSelector(".form-select"));
+        //TODO: CHANGE THE TRAINER BACK TO MANISH IN login.properties
+        @Test
+        @DisplayName("Checking that clicking on a specified week correctly selects that week")
+        void checkingThatClickingOnASpecifiedWeekCorrectlySelectsThatWeek() {
+            Assertions.assertTrue(trainerHomePage.isChosenWeekDisplayingAsCurrentlySelected(2));
+        }
     }
 
     @Nested
@@ -158,11 +138,6 @@ public class TrainerUnitTests {
         @Test
         @DisplayName("Check that the technical grade is set AND saved as expected")
         void checkThatTheTechnicalGradeIsSetAndSavedAsExpected() {
-            driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME_HEADLESS);
-            driver.get("http://localhost:8080/");
-            LoginPageImpl loginPage = new LoginPageImpl(driver);
-            loginPage.enterEmail(driver, trainerPropertyUsername, properties).enterPassword(driver, trainerPropertyPassword, properties);
-            TrainerHomePage trainerHomePage = (TrainerHomePage) loginPage.login(driver, trainerPropertyName);
             TrainerTraineeFeedbackFormPage trainerTraineeFeedbackFormPage = trainerHomePage.selectJaneDoe();
             trainerTraineeFeedbackFormPage.setTechnicalGrade(driver, 'D');
             trainerTraineeFeedbackFormPage.saveForm(driver);
@@ -173,11 +148,6 @@ public class TrainerUnitTests {
         @Test
         @DisplayName("Check that the consultant grade is set AND saved as expected")
         void checkThatTheConsultantGradeIsSetAndSavedAsExpected() {
-            driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME_HEADLESS);
-            driver.get("http://localhost:8080/");
-            LoginPageImpl loginPage = new LoginPageImpl(driver);
-            loginPage.enterEmail(driver, trainerPropertyUsername, properties).enterPassword(driver, trainerPropertyPassword, properties);
-            TrainerHomePage trainerHomePage = (TrainerHomePage) loginPage.login(driver, trainerPropertyName);
             TrainerTraineeFeedbackFormPage trainerTraineeFeedbackFormPage = trainerHomePage.selectJaneDoe();
             trainerTraineeFeedbackFormPage.setConsultantGrade(driver, 'D');
             trainerTraineeFeedbackFormPage.saveForm(driver);
@@ -188,11 +158,6 @@ public class TrainerUnitTests {
         @Test
         @DisplayName("Check that clicking the Consultant Grade title opens the Competencies Page")
         void checkThatClickingTheConsultantGradeTitleOpensTheCompetenciesPage() {
-            driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME_HEADLESS);
-            driver.get("http://localhost:8080/");
-            LoginPageImpl loginPage = new LoginPageImpl(driver);
-            loginPage.enterEmail(driver, trainerPropertyUsername, properties).enterPassword(driver, trainerPropertyPassword, properties);
-            TrainerHomePage trainerHomePage = (TrainerHomePage) loginPage.login(driver, trainerPropertyName);
             TrainerTraineeFeedbackFormPage trainerTraineeFeedbackFormPage = trainerHomePage.selectJaneDoe();
             CompetenciesPage competenciesPage = trainerTraineeFeedbackFormPage.clickConsultantGrade(driver);
             Assertions.assertEquals("http://localhost:8080/competencies", driver.getCurrentUrl());
@@ -201,11 +166,6 @@ public class TrainerUnitTests {
         @Test
         @DisplayName("Check that the Submit Form button works for Trainers")
         void checkThatTheSubmitFormButtonWorks() {
-            driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME_HEADLESS);
-            driver.get("http://localhost:8080/");
-            LoginPageImpl loginPage = new LoginPageImpl(driver);
-            loginPage.enterEmail(driver, trainerPropertyUsername, properties).enterPassword(driver, trainerPropertyPassword, properties);
-            TrainerHomePage trainerHomePage = (TrainerHomePage) loginPage.login(driver, trainerPropertyName);
             TrainerTraineeFeedbackFormPage trainerTraineeFeedbackFormPage = trainerHomePage.selectJaneDoe();
             trainerTraineeFeedbackFormPage.submitForm(driver, "TrainerHomePageImpl");
 
@@ -214,6 +174,7 @@ public class TrainerUnitTests {
             LoginPageImpl loginPage2 = new LoginPageImpl(driver2);
             loginPage2.enterEmail(driver2, traineePropertyUsername, properties).enterPassword(driver2, traineePropertyPassword, properties);
             TraineeHomePage traineeHomePage = (TraineeHomePage) loginPage.login(driver2, traineePropertyName);
+
             TraineeTraineeFeedbackFormPage traineeTraineeFeedbackFormPage = (TraineeTraineeFeedbackFormPage) traineeHomePage.clickFeedbackFormForWeek(2);
             String testText = "hello, how are you?";
             boolean interactable = true;

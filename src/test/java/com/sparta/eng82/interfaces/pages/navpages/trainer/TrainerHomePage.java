@@ -15,6 +15,10 @@ public interface TrainerHomePage extends NavPage {
 
     boolean mainNavigationMenuAppears();
 
+    boolean isNavigationMenuVisibilityChangingAfterClick();
+
+    boolean isChosenWeekDisplayingAsCurrentlySelected(int week);
+
     // TODO: Delete this
     TrainerTraineeFeedbackFormPage selectJaneDoe();
 
