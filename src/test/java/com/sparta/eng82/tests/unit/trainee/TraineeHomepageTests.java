@@ -39,6 +39,20 @@ public class TraineeHomepageTests {
         Utility.loadProperties(properties);
     }
 
+    @BeforeEach
+    void setup() {
+        driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
+        driver.get("http://localhost:8080/");
+        loginPage = new LoginPageImpl(driver);
+        loginPage.enterEmail(driver, traineePropertyUsername, properties).enterPassword(driver, traineePropertyPassword, properties);
+        traineeHomePage = (TraineeHomePage) loginPage.login(driver, traineePropertyName);
+    }
+
+    @AfterEach
+    void close(){
+        driver.close();
+    }
+
     @AfterAll
     static void tearDown() {
         driver.quit();
@@ -52,14 +66,6 @@ public class TraineeHomepageTests {
         return headlessTypes;
     }
 
-    @BeforeEach
-    void setup() {
-        driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME_HEADLESS);
-        driver.get("http://localhost:8080/");
-        loginPage = new LoginPageImpl(driver);
-        loginPage.enterEmail(driver, traineePropertyUsername, properties).enterPassword(driver, traineePropertyPassword, properties);
-        traineeHomePage = (TraineeHomePage) loginPage.login(driver, traineePropertyName);
-    }
 
     @Test
     @DisplayName("Check the URL is correct when loading a new homepage")
