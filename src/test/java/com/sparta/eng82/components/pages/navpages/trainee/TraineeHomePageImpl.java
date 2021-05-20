@@ -37,12 +37,12 @@ public class TraineeHomePageImpl implements TraineeHomePage {
 
     @Override
     public String getCurrentWeek() {
-        return feedbackList.get(0).toString();
+        return feedbackList.get(0).getText();
     }
 
     @Override
     public boolean areAllPreviousWeeksShown() {
-        String maxWeek = feedbackList.get(0).toString();
+        String maxWeek = feedbackList.get(0).getText();
         int maxWeekNumber = Integer.parseInt(maxWeek.substring(5));
         return feedbackList.size() == maxWeekNumber + 1;
     }
@@ -50,10 +50,10 @@ public class TraineeHomePageImpl implements TraineeHomePage {
     @Override
     public boolean areAllWeeksPriorToCurrentWeek() {
         boolean areAllWeeksPriorToCurrentWeek = true;
-        String maxWeek = feedbackList.get(0).toString();
+        String maxWeek = feedbackList.get(0).getText();
         int maxWeekNumber = Integer.parseInt(maxWeek.substring(5));
         for (WebElement currentWeekElement : feedbackList) {
-            if (Integer.parseInt(currentWeekElement.toString().substring(5)) > maxWeekNumber) {
+            if (Integer.parseInt(currentWeekElement.getText().substring(5)) > maxWeekNumber) {
                 areAllWeeksPriorToCurrentWeek = false;
                 break;
             }
@@ -64,14 +64,13 @@ public class TraineeHomePageImpl implements TraineeHomePage {
     @Override
     public boolean areAllWeeksDistinct() {
         boolean areAllWeeksDistinct = true;
-        String maxWeek = feedbackList.get(0).toString();
+        String maxWeek = feedbackList.get(0).getText();
         int maxWeekNumber = Integer.parseInt(maxWeek.substring(5));
         feedbackList.remove(0);
         for (int i = 0; i < maxWeekNumber; i++) {
-            if (Integer.parseInt(feedbackList.get(i).toString()) != i) {
+            if (Integer.parseInt(feedbackList.get(i).getText().substring(5)) != i+1) {
                 areAllWeeksDistinct = false;
             }
-
         }
         return areAllWeeksDistinct;
     }
@@ -101,13 +100,13 @@ public class TraineeHomePageImpl implements TraineeHomePage {
     @Override
     public String getStream() {
         String[] course = driver.findElement(By.tagName("h5")).getText().split("-");
-        return course[1];
+        return course[1].trim();
     }
 
     @Override
     public String getGroup() {
         String[] course = driver.findElement(By.tagName("h5")).getText().split("-");
-        return course[0];
+        return course[0].trim();
     }
 
     @Override
