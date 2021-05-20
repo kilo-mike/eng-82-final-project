@@ -1,7 +1,6 @@
 package com.sparta.eng82.interfaces.pages.navpages;
 
 import com.sparta.eng82.components.pages.navpages.CompetenciesPageImpl;
-import com.sparta.eng82.components.pages.navpages.admin.AdminHomePageImpl;
 import com.sparta.eng82.components.pages.navpages.trainee.TraineeHomePageImpl;
 import com.sparta.eng82.components.pages.navpages.trainer.TrainerHomePageImpl;
 import com.sparta.eng82.interfaces.pages.NavPage;
@@ -62,7 +61,7 @@ public interface FeedbackFormPage extends NavPage {
         return null;
     }
 
-    default String getWeek(WebDriver driver, int week) {
+    default String getWeek(WebDriver driver) {
         String extractedWeek = driver.findElement(new By.ByClassName("mt-5 fw-bold text-center")).getText();
         Pattern pattern = Pattern.compile("/ (.*?)");
         Matcher matcher = pattern.matcher(extractedWeek);

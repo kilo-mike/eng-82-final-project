@@ -1,8 +1,8 @@
 package com.sparta.eng82.components.pages.accesspages;
 
 import com.sparta.eng82.components.pages.navpages.admin.AdminHomePageImpl;
-import com.sparta.eng82.components.pages.navpages.trainee.TraineeProfilePageImpl;
-import com.sparta.eng82.components.pages.navpages.trainer.TrainerProfilePageImpl;
+import com.sparta.eng82.components.pages.navpages.trainee.TraineeHomePageImpl;
+import com.sparta.eng82.components.pages.navpages.trainer.TrainerHomePageImpl;
 import com.sparta.eng82.interfaces.Page;
 import com.sparta.eng82.interfaces.pages.accesspages.LoginPage;
 import org.openqa.selenium.By;
@@ -56,14 +56,13 @@ public class LoginPageImpl implements LoginPage {
     @Override
     public Page login(String userPropertyName) {
         driver.findElement(loginButton).click();
-
         switch (userPropertyName) {
             case adminName:
                 return new AdminHomePageImpl(driver);
             case trainerName:
-                return new TrainerProfilePageImpl(driver);
+                return new TrainerHomePageImpl(driver);
             case traineeName:
-                return new TraineeProfilePageImpl(driver);
+                return new TraineeHomePageImpl(driver);
         }
         return null;
     }

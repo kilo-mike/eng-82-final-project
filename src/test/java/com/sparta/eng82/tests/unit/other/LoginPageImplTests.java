@@ -51,7 +51,7 @@ public class LoginPageImplTests {
     void enterPasswordTest() {
         loginPage.enterPassword(adminPropertyPassword, properties);
         Assertions.assertEquals(properties.getProperty(adminPropertyPassword), driver.findElement(new By.ById("password")).getAttribute("value"));
-        
+
     }
 
     @Test
