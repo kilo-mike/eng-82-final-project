@@ -13,7 +13,7 @@ public class AdminHomePageImpl implements AdminHomePage {
     private final By redButton = new By.ByCssSelector(".container > .btn");
     private final By trainersTable = new By.ById("trainersTable");
     private final By trainersTableBody = new By.ByTagName("tbody");
-    private final By profileButton = new By.ByClassName("bi bi-person-circle");
+    private final By profileButton = new By.ByCssSelector(".bi-person-circle");
     WebDriver driver;
     public AdminHomePageImpl(WebDriver driver) {
         this.driver = driver;
