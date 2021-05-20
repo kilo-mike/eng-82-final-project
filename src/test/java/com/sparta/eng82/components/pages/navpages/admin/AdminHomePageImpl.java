@@ -16,6 +16,7 @@ public class AdminHomePageImpl implements AdminHomePage {
     private final By redButton = new By.ByClassName("btn bg-color-red");
     private final By trainersTable = new By.ById("trainersTable");
     private final By trainersTableBody = new By.ByTagName("tbody");
+    private final By profileButton = new By.ByClassName("bi bi-person-circle");
     WebDriver driver;
 
     public AdminHomePageImpl(WebDriver driver) {
@@ -26,6 +27,12 @@ public class AdminHomePageImpl implements AdminHomePage {
     public AddTrainerPage addTrainer() {
         driver.findElement(mainContent).findElement(redButton).click();
         return new AddTrainerPageImpl(driver);
+    }
+
+    //TODO May need some refactoring
+    public AdminProfilePageImpl navigateToProfile(){
+        driver.findElement(profileButton).click();
+        return new AdminProfilePageImpl(driver);
     }
 
     @Override
