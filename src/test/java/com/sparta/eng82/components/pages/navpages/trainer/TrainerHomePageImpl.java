@@ -37,6 +37,12 @@ public class TrainerHomePageImpl implements NavPage, TrainerHomePage {
         return new TrainerTraineeFeedbackFormPageImpl(driver, this.getClass().getSimpleName());
     }
 
+    //TODO: Delete this
+    public TrainerTraineeFeedbackFormPage selectJaneDoe() {
+        driver.findElement(new By.ByCssSelector("#traineeTable2 td:nth-child(1)")).click();
+        return new TrainerTraineeFeedbackFormPageImpl(driver, this.getClass().getSimpleName());
+    }
+
     @Override
     public boolean menuDropdownDisplays() {
         return false;
