@@ -52,8 +52,8 @@ public class TraineeHomepageTests {
         driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
         driver.get("http://localhost:8080/");
         LoginPageImpl loginPage = new LoginPageImpl(driver);
-        loginPage.enterEmail(traineePropertyUsername, properties).enterPassword(traineePropertyPassword,properties);
-        loginPage.login(traineePropertyName);
+        loginPage.enterEmail(driver, traineePropertyUsername, properties).enterPassword(driver, traineePropertyPassword,properties);
+        loginPage.login(driver, traineePropertyName);
         Assertions.assertEquals("http://localhost:8080/", driver.getCurrentUrl());
     }
 
@@ -63,8 +63,8 @@ public class TraineeHomepageTests {
         driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
         driver.get("http://localhost:8080/");
         LoginPageImpl loginPage = new LoginPageImpl(driver);
-        loginPage.enterEmail(traineePropertyUsername, properties).enterPassword(traineePropertyPassword,properties);
-        TraineeHomePage traineeHomePage = (TraineeHomePage) loginPage.login(traineePropertyName);
+        loginPage.enterEmail(driver, traineePropertyUsername, properties).enterPassword(driver, traineePropertyPassword,properties);
+        TraineeHomePage traineeHomePage = (TraineeHomePage) loginPage.login(driver, traineePropertyName);
         Assertions.assertEquals(traineeHomePage.clickFeedbackFormForWeek(2).getWeek(driver), "Week 2");
 
     }
