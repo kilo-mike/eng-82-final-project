@@ -16,7 +16,9 @@ public class TrainerTrainerFeedbackFormPageImpl implements TrainerTrainerFeedbac
     private final By stopTrainerTextField = new By.ById("stopTrainer");
     private final By startTrainerTextField = new By.ById("startTrainer");
     private final By continueTrainerTextField = new By.ById("continueTrainer");
+
     WebDriver driver;
+
     public TrainerTrainerFeedbackFormPageImpl(WebDriver driver) {
         this.driver = driver;
     }
@@ -66,6 +68,6 @@ public class TrainerTrainerFeedbackFormPageImpl implements TrainerTrainerFeedbac
     @Override
     public TrainerTraineeFeedbackFormPage clickOnTrainee() {
         driver.findElement(traineeButton).click();
-        return new TrainerTraineeFeedbackFormPageImpl(driver);
+        return new TrainerTraineeFeedbackFormPageImpl(driver, this.getClass().getSimpleName());
     }
 }

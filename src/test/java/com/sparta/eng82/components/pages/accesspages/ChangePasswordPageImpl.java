@@ -14,9 +14,11 @@ public class ChangePasswordPageImpl implements ChangePasswordPage {
     private final By newPassword = new By.ByName("newPassword");
     private final By confirmPassword = new By.ByName("confirmPassword");
     private final By changePasswordButton = new By.ByName("loginBtn");
-    private final String adminProfileClassName = "AdminProfilePageImpl";
-    private final String traineeProfileClassName = "TraineeProfilePageImpl";
-    private final String trainerProfileClassName = "TrainerProfilePageImpl";
+
+    private final String adminHomeClassName = "AdminHomePageImpl";
+    private final String traineeHomeClassName = "TraineeHomePageImpl";
+    private final String trainerHomeClassName = "TrainerHomePageImpl";
+
     WebDriver driver;
     private final String simpleName;
 
@@ -48,11 +50,11 @@ public class ChangePasswordPageImpl implements ChangePasswordPage {
     public Page clickChange() {
         driver.findElement(changePasswordButton).click();
         switch (simpleName) {
-            case adminProfileClassName:
+            case adminHomeClassName:
                 return new AdminHomePageImpl(driver);
-            case traineeProfileClassName:
+            case traineeHomeClassName:
                 return new TraineeHomePageImpl(driver);
-            case trainerProfileClassName:
+            case trainerHomeClassName:
                 return new TrainerHomePageImpl(driver);
         }
         return null;

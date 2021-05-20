@@ -14,11 +14,14 @@ import com.sparta.eng82.interfaces.pages.navpages.CompetenciesPage;
 import com.sparta.eng82.interfaces.pages.navpages.ProfilePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public interface NavPage extends Page {
 
     default Page goToHomePage(WebDriver driver) {
-        driver.findElement(new By.ById("navbar Nav")).findElement(new By.ByLinkText("Home")).click();
+        driver.findElement(new By.ById("menuBtn-container")).findElement(new By.ByTagName("button")).click();
+        driver.findElement(new By.ByLinkText("Home")).click();
         if (AdminHomePageImpl.class.equals(this.getClass())) {
             return new AdminHomePageImpl(driver);
         } else if (TrainerHomePageImpl.class.equals(this.getClass())) {
@@ -30,7 +33,8 @@ public interface NavPage extends Page {
     }
 
     default ProfilePage goToProfilePage(WebDriver driver) {
-        driver.findElement(new By.ById("navbar Nav")).findElement(new By.ByLinkText("Profile")).click();
+        driver.findElement(new By.ById("menuBtn-container")).findElement(new By.ByTagName("button")).click();
+        driver.findElement(new By.ByLinkText("Profile")).click();
         if (AdminProfilePageImpl.class.equals(this.getClass())) {
             return new AdminProfilePageImpl(driver);
         } else if (TrainerProfilePageImpl.class.equals(this.getClass())) {
@@ -42,13 +46,18 @@ public interface NavPage extends Page {
     }
 
     default CompetenciesPage goToCompetenciesPage(WebDriver driver) {
-        driver.findElement(new By.ById("navbar Nav")).findElement(new By.ByLinkText("Behavioural Competencies")).click();
+        driver.findElement(new By.ById("menuBtn-container")).findElement(new By.ByTagName("button")).click();
+        driver.findElement(new By.ByLinkText("Behavioural Competencies")).click();
         return new CompetenciesPageImpl(driver);
     }
 
     default LoginPage logOut(WebDriver driver) {
-        driver.findElement(new By.ById("navbar Nav")).findElement(new By.ById("logoutBtn")).click();
+        // TODO not consistently working
+        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(new By.ByClassName("container-fluid")));
+        driver.findElement(new By.ById("menuBtn-container")).findElement(new By.ByTagName("button")).click();
+
+        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(new By.ByClassName("navbar-collapse bg-color-main collapse show")));
+        driver.findElement(new By.ById("logoutBtn")).click();
         return new LoginPageImpl(driver);
     }
-
 }
