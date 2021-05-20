@@ -48,9 +48,9 @@ public class ChangePasswordPageImplTests {
     @Test
     @DisplayName("Checking if the number of dots that pop up is the same as the the number of characters typed")
     void isTheNumberOfDotsThatPopUpTheSameAsTheTheNumberOfCharactersTyped() {
-        loginPage.enterEmail(adminPropertyUsername, properties)
-                .enterPassword(adminPropertyPassword, properties)
-                .login(properties.getProperty(adminPropertyName));
+        loginPage.enterEmail(driver, adminPropertyUsername, properties)
+                .enterPassword(driver, adminPropertyPassword, properties)
+                .login(driver, properties.getProperty(adminPropertyName));
         adminHomePageImpl.navigateToProfile().changePassword(driver, adminProfilePage);
     }
 

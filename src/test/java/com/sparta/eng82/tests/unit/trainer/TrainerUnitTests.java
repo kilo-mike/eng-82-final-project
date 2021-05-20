@@ -65,17 +65,17 @@ public class TrainerUnitTests {
     @Test
     @DisplayName("Logout check message")
     void logoutCheckMessage() {
-        loginPage.enterEmail(trainerPropertyUsername, properties)
-                .enterPassword(trainerPropertyPassword, properties)
-                .login(properties.getProperty(trainerPropertyName));
+        loginPage.enterEmail(driver, trainerPropertyUsername, properties)
+                .enterPassword(driver, trainerPropertyPassword, properties)
+                .login(driver, properties.getProperty(trainerPropertyName));
     }
 
     @Test
     @DisplayName("Check the URL is correct when loading a new homepage")
     void checkTheUrlIsCorrectWhenLoadingANewHomepage() {
-        loginPage.enterEmail(trainerPropertyUsername, properties)
-                .enterPassword(trainerPropertyPassword, properties)
-                .login(properties.getProperty(trainerPropertyName));
+        loginPage.enterEmail(driver, trainerPropertyUsername, properties)
+                .enterPassword(driver, trainerPropertyPassword, properties)
+                .login(driver, properties.getProperty(trainerPropertyName));
 
         Assertions.assertEquals("http://localhost:8080/", driver.getCurrentUrl());
     }
@@ -86,7 +86,7 @@ public class TrainerUnitTests {
         driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
         driver.get("http://localhost:8080/");
         LoginPageImpl loginPage = new LoginPageImpl(driver);
-        TraineeHomePageImpl traineeHomePage = (TraineeHomePageImpl) loginPage.login("trainee2");
+        TraineeHomePageImpl traineeHomePage = (TraineeHomePageImpl) loginPage.login(driver, "trainee2");
         Assertions.assertEquals(traineeHomePage.clickFeedbackFormForWeek(2).getWeek(driver), "Week 2");
     }
     
@@ -97,9 +97,9 @@ public class TrainerUnitTests {
         @Test
         @DisplayName("Checking that stream selections are correct")
         void checkingThatStreamSelectionsAreCorrect() {
-            loginPage.enterEmail(trainerPropertyUsername, properties)
-                    .enterPassword(trainerPropertyPassword, properties)
-                    .login(properties.getProperty(trainerPropertyName));
+            loginPage.enterEmail(driver, trainerPropertyUsername, properties)
+                    .enterPassword(driver, trainerPropertyPassword, properties)
+                    .login(driver, properties.getProperty(trainerPropertyName));
 
             loginPage = (LoginPageImpl) trainerHomePage.selectJaneDoe();
 
