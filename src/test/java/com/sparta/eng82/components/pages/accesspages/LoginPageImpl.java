@@ -30,6 +30,7 @@ public class LoginPageImpl implements LoginPage {
 
     WebDriver driver;
 
+
     public LoginPageImpl(WebDriver driver) {
         this.driver = driver;
         driver.get("http://localhost:8080/login");
