@@ -1,6 +1,7 @@
 package com.sparta.eng82.interfaces.pages;
 
 import com.sparta.eng82.components.pages.accesspages.LoginPageImpl;
+import com.sparta.eng82.components.pages.accesspages.LogoutPageImpl;
 import com.sparta.eng82.components.pages.navpages.CompetenciesPageImpl;
 import com.sparta.eng82.components.pages.navpages.admin.AdminHomePageImpl;
 import com.sparta.eng82.components.pages.navpages.admin.AdminProfilePageImpl;
@@ -14,8 +15,8 @@ import com.sparta.eng82.interfaces.pages.navpages.CompetenciesPage;
 import com.sparta.eng82.interfaces.pages.navpages.ProfilePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.concurrent.TimeUnit;
 
 public interface NavPage extends Page {
 
@@ -52,12 +53,10 @@ public interface NavPage extends Page {
     }
 
     default LoginPage logOut(WebDriver driver) {
-        // TODO not consistently working
-        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(new By.ByClassName("container-fluid")));
-        driver.findElement(new By.ById("menuBtn-container")).findElement(new By.ByTagName("button")).click();
-
-        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(new By.ByClassName("navbar-collapse bg-color-main collapse show")));
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.findElement(new By.ByCssSelector(".bi-list")).click();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.findElement(new By.ById("logoutBtn")).click();
-        return new LoginPageImpl(driver);
+        return new LogoutPageImpl(driver);
     }
 }
