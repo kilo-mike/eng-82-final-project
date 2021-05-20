@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class Utility {
+
+    public static final long TIME = 400;
+
     public static void loadProperties(Properties properties) {
         try {
             properties.load(new FileReader("src/test/resources/login.properties"));

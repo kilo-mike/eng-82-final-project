@@ -35,7 +35,7 @@ public interface NavPage extends Page {
 
     default ProfilePage goToProfilePage(WebDriver driver) {
         // TODO ? maybe ? competencies -> profile etc, extend if statement with ORs
-        driver.findElement(By.id("menuBtn-container")).findElement(By.tagName("button")).click();
+        Utility.timedMouseClicker(driver, Utility.TIME, By.cssSelector(".bi-list"));
         driver.findElement(By.linkText("Profile")).click();
         if (AdminHomePageImpl.class.equals(this.getClass())) {
             return new AdminProfilePageImpl(driver);
@@ -54,7 +54,7 @@ public interface NavPage extends Page {
     }
 
     default LoginPage logOut(WebDriver driver) {
-        Utility.timedMouseClicker(driver, 500, By.cssSelector(".bi-list"));
+        Utility.timedMouseClicker(driver, Utility.TIME, By.cssSelector(".bi-list"));
         new WebDriverWait(driver, 5).until(ExpectedConditions.elementToBeClickable(By.id("logoutBtn"))).click();
         return new LogoutPageImpl(driver);
     }
