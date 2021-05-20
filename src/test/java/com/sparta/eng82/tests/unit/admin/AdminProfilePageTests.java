@@ -45,7 +45,7 @@ public class AdminProfilePageTests {
         loginPage.enterEmail(driver, adminPropertyUsername, properties);
         loginPage.enterPassword(driver, adminPropertyPassword, properties);
         loginPage.login(driver, properties.getProperty(adminPropertyName));
-        adminProfilePage = (AdminProfilePageImpl) adminHomePage.navigateToProfile().goToProfilePage(driver);
+        adminProfilePage = (AdminProfilePageImpl) adminHomePage.goToProfilePage(driver);
         Assertions.assertEquals("ROLE_ADMIN", adminProfilePage.getName(driver));
     }
 
@@ -56,7 +56,7 @@ public class AdminProfilePageTests {
         loginPage.enterEmail(driver, adminPropertyUsername, properties);
         loginPage.enterPassword(driver, adminPropertyPassword, properties);
         loginPage.login(driver, properties.getProperty(adminPropertyName));
-        adminProfilePage = (AdminProfilePageImpl) adminHomePage.navigateToProfile().goToProfilePage(driver);
+        adminProfilePage = (AdminProfilePageImpl) adminHomePage.goToProfilePage(driver);
         Assertions.assertEquals("admin@sparta.com", adminProfilePage.getEmail(driver));
     }
 
@@ -67,7 +67,7 @@ public class AdminProfilePageTests {
         loginPage.enterEmail(driver, adminPropertyUsername, properties);
         loginPage.enterPassword(driver, adminPropertyPassword, properties);
         loginPage.login(driver, properties.getProperty(adminPropertyName));
-        adminProfilePage = (AdminProfilePageImpl) adminHomePage.navigateToProfile().goToProfilePage(driver);
+        adminProfilePage = (AdminProfilePageImpl) adminHomePage.goToProfilePage(driver);
         Assertions.assertTrue(adminProfilePage.checkNameMatches(properties, driver));
 
     }
@@ -79,7 +79,7 @@ public class AdminProfilePageTests {
         loginPage.enterEmail(driver, adminPropertyUsername, properties);
         loginPage.enterPassword(driver, adminPropertyPassword, properties);
         loginPage.login(driver, properties.getProperty(adminPropertyName));
-        adminProfilePage = (AdminProfilePageImpl) adminHomePage.navigateToProfile().goToProfilePage(driver);
+        adminProfilePage = (AdminProfilePageImpl) adminHomePage.goToProfilePage(driver);
         Assertions.assertTrue(adminProfilePage.checkEmailMatches(properties, driver));
     }
 
@@ -89,8 +89,8 @@ public class AdminProfilePageTests {
         loginPage.enterEmail(driver, adminPropertyUsername, properties);
         loginPage.enterPassword(driver, adminPropertyPassword, properties);
         loginPage.login(driver, properties.getProperty(adminPropertyName));
-        adminProfilePage = (AdminProfilePageImpl) adminHomePage.navigateToProfile().goToProfilePage(driver);
-        changePasswordPage = (ChangePasswordPageImpl) adminProfilePage.changePassword(driver, adminProfilePage);
+        adminProfilePage = (AdminProfilePageImpl) adminHomePage.goToProfilePage(driver);
+        changePasswordPage = (ChangePasswordPageImpl) adminProfilePage.changePassword(driver);
         Assertions.assertEquals(ChangePasswordPageImpl.class, changePasswordPage.getClass());
 
     }

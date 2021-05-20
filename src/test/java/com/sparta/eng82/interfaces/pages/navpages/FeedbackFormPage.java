@@ -6,8 +6,11 @@ import com.sparta.eng82.components.pages.navpages.trainer.TrainerHomePageImpl;
 import com.sparta.eng82.interfaces.pages.NavPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,7 +27,7 @@ public interface FeedbackFormPage extends NavPage {
 
 
     default NavPage setConsultantGrade(WebDriver driver, char grade) {
-        Select drpConsultantGrade = new Select(driver.findElement(new By.ByName("ConsultantGrade")));
+        Select drpConsultantGrade = new Select(driver.findElement(new By.ByName("consultantGrade")));
         drpConsultantGrade.selectByVisibleText(String.valueOf(grade));
         return this;
     }
@@ -61,7 +64,11 @@ public interface FeedbackFormPage extends NavPage {
     }
 
     default String getWeek(WebDriver driver) {
-        String[] extractedWeek = driver.findElement(new By.ByXPath("//*[@id=\"feedbackText\"]/div/h1")).getText().split("/");
+        By textField = new By.ByXPath("//*[@id=\"feedbackText\"]/div/h1");
+        //WebDriverWait wait = new WebDriverWait(driver, 10);
+        //wait.until(ExpectedConditions.visibilityOfElementLocated(textField));
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        String[] extractedWeek = driver.findElement(textField).getText().split("/");
         return extractedWeek[1].trim();
     }
 }
