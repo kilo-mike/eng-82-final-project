@@ -98,12 +98,13 @@ public class ChangePasswordPageImplTests {
                 .enterConfirmPassword(newPassword)
                 .clickChange(user)
                 .logOut(driver)
+                //TODO enter email, enter password not working
                 .enterEmail(driver, user + "_username", properties)
                 .enterPassword(driver, newPassword)
                 .login(driver, user + "_name");
 
         Assertions.assertFalse(driver.getCurrentUrl().endsWith("/login"));
-        setPasswordBack( driver, loginPage, user);
+        setPasswordBack(driver, loginPage, user);
     }
 
     @ParameterizedTest
@@ -113,7 +114,7 @@ public class ChangePasswordPageImplTests {
         setPasswordBack(driver, loginPage, user);
     }
 
-    private void setPasswordBack( WebDriver driver, LoginPage loginPage, String user){
+    private void setPasswordBack(WebDriver driver, LoginPage loginPage, String user) {
         loginPage.enterEmail(driver, user + "_username", properties)
                 .enterPassword(driver, newPassword)
                 .login(driver, user + "_name")
