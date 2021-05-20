@@ -7,13 +7,16 @@ import com.sparta.eng82.interfaces.Page;
 import com.sparta.eng82.interfaces.pages.accesspages.ChangePasswordPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 public class ChangePasswordPageImpl implements ChangePasswordPage {
 
     private final By currentPassword = new By.ByName("currentPassword");
     private final By newPassword = new By.ByName("newPassword");
     private final By confirmPassword = new By.ByName("confirmPassword");
-    private final By changePasswordButton = new By.ByName("loginBtn");
+    private final By changePasswordButton = new By.ByName("Change");
 
     private final String adminHomeClassName = "AdminHomePageImpl";
     private final String traineeHomeClassName = "TraineeHomePageImpl";

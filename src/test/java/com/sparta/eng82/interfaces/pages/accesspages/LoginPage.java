@@ -4,6 +4,7 @@ import com.sparta.eng82.components.pages.navpages.admin.AdminHomePageImpl;
 import com.sparta.eng82.components.pages.navpages.trainee.TraineeHomePageImpl;
 import com.sparta.eng82.components.pages.navpages.trainer.TrainerHomePageImpl;
 import com.sparta.eng82.interfaces.Page;
+import com.sparta.eng82.interfaces.pages.NavPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -27,7 +28,7 @@ public interface LoginPage extends Page {
     /**
      * @param userPropertyName can be either "admin_name", "trainer_name" or "trainee_name"
      */
-    default Page login(WebDriver driver, String userPropertyName) {
+    default NavPage login(WebDriver driver, String userPropertyName) {
         driver.findElement(new By.ById("loginBtn")).click();
         switch (userPropertyName) {
             case "admin_name":
