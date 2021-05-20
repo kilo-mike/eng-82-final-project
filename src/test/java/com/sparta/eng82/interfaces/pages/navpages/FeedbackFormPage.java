@@ -40,12 +40,16 @@ public interface FeedbackFormPage extends NavPage {
         return this;
     }
 
+    /**
+     * @param simpleName can be either "Trainer", "Trainee"
+     */
+
     default NavPage submitForm(WebDriver driver, String simpleName) {
         driver.findElement(new By.ById("submitBtn")).click();
         switch (simpleName) {
-            case "TrainerHomePageImpl":
+            case "Trainee":
                 return new TraineeHomePageImpl(driver);
-            case "TraineeHomePageImpl":
+            case "Trainer":
                 return new TrainerHomePageImpl(driver);
         }
         return null;
