@@ -17,11 +17,15 @@ public class ChangePasswordPageImplTests {
 
     private static Properties properties;
     private static WebDriverFactory webDriverFactory;
+
     private final String password = "password";
-    private final String adminPropertyUsername = "admin_username";
-    private final String adminPropertyPassword = "admin_password";
-    private final String adminPropertyName = "admin_name";
-    private final String passwordChange = "hello";
+    private final String newPassword = "new-password-123";
+    private final String dummyPassword = "niewiem";
+
+    private final By byCurrentPassword = By.name("currentPassword");
+    private final By byNewPassword = By.name("newPassword");
+    private final By byConfirmPassword = By.name("confirmPassword");
+
     private WebDriver driver;
     private LoginPage loginPage;
 
@@ -40,8 +44,8 @@ public class ChangePasswordPageImplTests {
 
     @ParameterizedTest
     @ValueSource(strings = {"admin", "trainer", "trainee"})
-    @DisplayName("Check length of hidden password characters matches actual password length")
-    void numberOfCharactersPasswordCorrect(String user) {
+    @DisplayName("Check length of hidden password characters matches actual current password length")
+    void numberOfCharactersCurrentPasswordCorrect(String user) {
         loginPage.enterEmail(driver, user + "_username", properties)
                 .enterPassword(driver, user + "_password", properties)
                 .login(driver, user + "_name")
@@ -49,42 +53,39 @@ public class ChangePasswordPageImplTests {
                 .changePassword(driver)
                 .enterCurrentPassword(password);
 
-        Assertions.assertEquals(password.length(), driver.findElement(By.name("currentPassword")).getAttribute("value").length());
+        Assertions.assertEquals(password.length(), driver.findElement(byCurrentPassword).getAttribute("value").length());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"admin", "trainer", "trainee"})
+    @DisplayName("Check length of new password")
+    void checkLengthOfNewPassword(String user) {
+        loginPage.enterEmail(driver, user + "_username", properties)
+                .enterPassword(driver, user + "_password", properties)
+                .login(driver, user + "_name")
+                .goToProfilePage(driver)
+                .changePassword(driver)
+                .enterNewPassword(password);
+
+        Assertions.assertEquals(password.length(), driver.findElement(byNewPassword).getAttribute("value").length());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"admin", "trainer", "trainee"})
+    @DisplayName("Check length of confirmed password")
+    void checkLengthOfConfirmedPassword(String user) {
+        loginPage.enterEmail(driver, user + "_username", properties)
+                .enterPassword(driver, user + "_password", properties)
+                .login(driver, user + "_name")
+                .goToProfilePage(driver)
+                .changePassword(driver)
+                .enterConfirmPassword(password);
+
+        Assertions.assertEquals(password.length(), driver.findElement(byConfirmPassword).getAttribute("value").length());
     }
 
     @AfterEach
     void tearDown() {
         driver.quit();
     }
-
-//    @Test
-//    @DisplayName("Checking if the number of dots that pop up in current is the same as the the number of characters typed")
-//    void isTheNumberOfDotsThatPopUpInCurrentPasswordTheSameAsTheNumberOfCharactersTyped() {
-//        loginPage.enterEmail(driver, adminPropertyUsername, properties)
-//                .enterPassword(driver, adminPropertyPassword, properties)
-//                .login(driver, adminPropertyName);
-//        adminHomePageImpl.goToProfilePage(driver).changePassword(driver, adminProfilePage).enterCurrentPassword(properties.getProperty(adminPropertyPassword));
-//        //Go to profile method doesn't work TODO GO TO PROFILE NEEDS TO BE FIXED
-//        Assertions.assertEquals(properties.getProperty(adminPropertyPassword).length(), driver.findElement(By.name("currentPassword")).getAttribute("value").length());
-//    }
-//
-//    @Test
-//    @DisplayName("Is the number of dots in new password equivalent to the length of the password")
-//    void isTheNumberOfDotsInNewPasswordEquivalentToTheLengthOfThePassword() {
-//        loginPage.enterEmail(driver, adminPropertyUsername, properties)
-//                .enterPassword(driver, adminPropertyPassword, properties)
-//                .login(driver, properties.getProperty(adminPropertyName));
-//        adminHomePageImpl.goToProfilePage(driver).changePassword(driver, adminProfilePage).enterNewPassword(passwordChange);
-//        Assertions.assertEquals(passwordChange.length(), driver.findElement(By.name("newPassword")).getAttribute("value").length());
-//    }
-//
-//    @Test
-//    @DisplayName("Is the number of dots in confirm password equivalent to the length of the password")
-//    void isTheNumberOfDotsInConfirmPasswordEquivalentToTheLengthOfThePassword() {
-//        loginPage.enterEmail(driver, adminPropertyUsername, properties)
-//                .enterPassword(driver, adminPropertyPassword, properties)
-//                .login(driver, properties.getProperty(adminPropertyName));
-//        adminHomePageImpl.goToProfilePage(driver).changePassword(driver, adminProfilePage).enterCurrentPassword(passwordChange);
-//        Assertions.assertEquals(passwordChange.length(), driver.findElement(By.name("confirmPassword")).getAttribute("value").length());
-//    }
 }
