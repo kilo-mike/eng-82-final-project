@@ -5,6 +5,7 @@ import com.sparta.eng82.components.pages.navpages.trainee.TraineeHomePageImpl;
 import com.sparta.eng82.components.webdriver.WebDriverFactory;
 import com.sparta.eng82.components.webdriver.WebDriverTypes;
 import com.sparta.eng82.interfaces.pages.navpages.trainee.TraineeHomePage;
+import com.sparta.eng82.interfaces.pages.navpages.trainee.feedbackpages.TraineeTraineeFeedbackFormPage;
 import com.sparta.eng82.tests.unit.utility.Utility;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
@@ -65,7 +66,8 @@ public class TraineeHomepageTests {
         LoginPageImpl loginPage = new LoginPageImpl(driver);
         loginPage.enterEmail(driver, traineePropertyUsername, properties).enterPassword(driver, traineePropertyPassword,properties);
         TraineeHomePage traineeHomePage = (TraineeHomePage) loginPage.login(driver, traineePropertyName);
-        Assertions.assertEquals(traineeHomePage.clickFeedbackFormForWeek(2).getWeek(driver), "Week 2");
+        TraineeTraineeFeedbackFormPage traineeTraineeFeedbackFormPage = (TraineeTraineeFeedbackFormPage) traineeHomePage.clickFeedbackFormForWeek(2);
+        Assertions.assertEquals("Week 2" , traineeTraineeFeedbackFormPage.getWeek(driver));
 
     }
 
