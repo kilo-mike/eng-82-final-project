@@ -10,8 +10,9 @@ import java.util.Properties;
 
 public interface ProfilePage extends NavPage {
 
-    default ChangePasswordPage changePassword(WebDriver driver, ProfilePage profilePage) {
-        return new ChangePasswordPageImpl(driver, profilePage.getClass().getSimpleName());
+    default ChangePasswordPage changePassword(WebDriver driver) {
+        driver.findElement(By.xpath("//*[@id=\"main-content\"]/div/div[3]/form/button")).submit();
+        return new ChangePasswordPageImpl(driver, this.getClass().getSimpleName());
     }
 
     default String getName(WebDriver driver) {

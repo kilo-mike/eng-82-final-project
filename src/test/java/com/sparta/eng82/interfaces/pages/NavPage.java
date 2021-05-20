@@ -1,6 +1,5 @@
 package com.sparta.eng82.interfaces.pages;
 
-import com.sparta.eng82.components.pages.accesspages.LoginPageImpl;
 import com.sparta.eng82.components.pages.accesspages.LogoutPageImpl;
 import com.sparta.eng82.components.pages.navpages.CompetenciesPageImpl;
 import com.sparta.eng82.components.pages.navpages.admin.AdminHomePageImpl;
@@ -15,14 +14,14 @@ import com.sparta.eng82.interfaces.pages.navpages.CompetenciesPage;
 import com.sparta.eng82.interfaces.pages.navpages.ProfilePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-
-import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public interface NavPage extends Page {
 
     default Page goToHomePage(WebDriver driver) {
-        driver.findElement(new By.ById("menuBtn-container")).findElement(new By.ByTagName("button")).click();
-        driver.findElement(new By.ByLinkText("Home")).click();
+        driver.findElement(By.id("menuBtn-container")).findElement(By.tagName("button")).click();
+        driver.findElement(By.linkText("Home")).click();
         if (AdminHomePageImpl.class.equals(this.getClass())) {
             return new AdminHomePageImpl(driver);
         } else if (TrainerHomePageImpl.class.equals(this.getClass())) {
@@ -34,29 +33,28 @@ public interface NavPage extends Page {
     }
 
     default ProfilePage goToProfilePage(WebDriver driver) {
-        driver.findElement(new By.ById("menuBtn-container")).findElement(new By.ByTagName("button")).click();
-        driver.findElement(new By.ByLinkText("Profile")).click();
-        if (AdminProfilePageImpl.class.equals(this.getClass())) {
+        // TODO ? maybe ? competencies -> profile etc, extend if statement with ORs
+        driver.findElement(By.id("menuBtn-container")).findElement(By.tagName("button")).click();
+        driver.findElement(By.linkText("Profile")).click();
+        if (AdminHomePageImpl.class.equals(this.getClass())) {
             return new AdminProfilePageImpl(driver);
-        } else if (TrainerProfilePageImpl.class.equals(this.getClass())) {
+        } else if (TrainerHomePageImpl.class.equals(this.getClass())) {
             return new TrainerProfilePageImpl(driver);
-        } else if (TraineeProfilePageImpl.class.equals(this.getClass())) {
+        } else if (TraineeHomePageImpl.class.equals(this.getClass())) {
             return new TraineeProfilePageImpl(driver);
         }
         return null;
     }
 
     default CompetenciesPage goToCompetenciesPage(WebDriver driver) {
-        driver.findElement(new By.ById("menuBtn-container")).findElement(new By.ByTagName("button")).click();
-        driver.findElement(new By.ByLinkText("Behavioural Competencies")).click();
+        driver.findElement(By.id("menuBtn-container")).findElement(By.tagName("button")).click();
+        driver.findElement(By.linkText("Behavioural Competencies")).click();
         return new CompetenciesPageImpl(driver);
     }
 
     default LoginPage logOut(WebDriver driver) {
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.findElement(new By.ByCssSelector(".bi-list")).click();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.findElement(new By.ById("logoutBtn")).click();
+        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(By.cssSelector(".bi-list"))).click();
+        new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(By.id("logoutBtn"))).click();
         return new LogoutPageImpl(driver);
     }
 }
