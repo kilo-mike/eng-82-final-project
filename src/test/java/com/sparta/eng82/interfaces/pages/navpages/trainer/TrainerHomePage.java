@@ -15,4 +15,7 @@ public interface TrainerHomePage extends NavPage {
 
     boolean mainNavigationMenuAppears();
 
+    // TODO: Delete this
+    TrainerTraineeFeedbackFormPage selectJaneDoe();
+
 }
