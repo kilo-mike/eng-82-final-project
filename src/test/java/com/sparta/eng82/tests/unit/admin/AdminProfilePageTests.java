@@ -34,7 +34,7 @@ public class AdminProfilePageTests {
     @BeforeEach
     void setup() {
         webDriverFactory = new WebDriverFactory();
-        driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME_HEADLESS);
+        driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
         loginPage = new LoginPageImpl(driver);
         adminHomePage = new AdminHomePageImpl(driver);
     }

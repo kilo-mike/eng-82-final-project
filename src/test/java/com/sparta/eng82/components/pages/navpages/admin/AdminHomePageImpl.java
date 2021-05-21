@@ -3,12 +3,14 @@ package com.sparta.eng82.components.pages.navpages.admin;
 import com.sparta.eng82.components.pages.navpages.admin.addpages.AddTrainerPageImpl;
 import com.sparta.eng82.interfaces.pages.navpages.admin.AdminHomePage;
 import com.sparta.eng82.interfaces.pages.navpages.admin.addpages.AddTrainerPage;
+import com.sparta.eng82.tests.unit.utility.Utility;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class AdminHomePageImpl implements AdminHomePage {
 
@@ -25,29 +27,25 @@ public class AdminHomePageImpl implements AdminHomePage {
 
     @Override
     public AddTrainerPage addTrainer() {
-        driver.findElement(mainContent).findElement(redButton).click();
+//        driver.findElement(mainContent).findElement(redButton).submit();
+        Utility.timedMouseClicker(driver, 400, new By.ByXPath("//*[@id=\"main-content\"]/div/div/div/div[1]/button"));
         return new AddTrainerPageImpl(driver);
     }
 
     @Override
     public boolean isTrainerAdded(String firstName, String lastName, String group) {
-        return driver.findElement(mainContent).findElement(new By.ByLinkText(firstName)).isDisplayed()
-                && driver.findElement(mainContent).findElement(new By.ByLinkText(lastName)).isDisplayed()
-                && driver.findElement(mainContent).findElement(new By.ByLinkText(group)).isDisplayed();
+        List<WebElement> output = driver.findElement(trainersTable).findElements(new By.ByTagName("td"));
+
+        return IntStream.range(0, output.size()).anyMatch(i -> output.get(i).getText().equals(firstName)
+                && output.get(i + 1).getText().equals(lastName)
+                && output.get(i + 2).getText().equals(group));
     }
 
     @Override
-    public String[][] getAllTrainersAvailable() {
-        ArrayList<ArrayList<String>> output = new ArrayList<>();
-        for (WebElement webElement : driver.findElement(trainersTable).findElements(trainersTableBody)) {
-            ArrayList<String> temp = new ArrayList<>();
-            List<WebElement> entries = webElement.findElements(By.tagName("td"));
-            for (WebElement entry : entries) {
-                temp.add(entry.getText());
-            }
-            output.add(temp);
-            temp.clear();
-        }
-        return output.stream().map(u -> u.toArray(new String[0])).toArray(String[][]::new);
+    public boolean getAllTrainersAvailable(int howManyTrainers) {
+
+        List<WebElement> output = driver.findElement(trainersTable).findElements(new By.ByTagName("td"));
+        return output.size() / 3 == howManyTrainers;
+
     }
 }

@@ -31,7 +31,7 @@ public class AdminHomePageTests {
     @BeforeEach
     void setup() {
         webDriverFactory = new WebDriverFactory();
-        driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME_HEADLESS);
+        driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
         loginPage = new LoginPageImpl(driver);
         adminHomePage = new AdminHomePageImpl(driver);
     }
@@ -53,15 +53,26 @@ public class AdminHomePageTests {
         loginPage.enterEmail(driver, adminPropertyUsername, properties);
         loginPage.enterPassword(driver, adminPropertyPassword, properties);
         loginPage.login(driver, properties.getProperty(adminPropertyName));
-        adminHomePage.addTrainer().enterFirstName("test")
-                .enterSecondName("test")
-                .selectGroup("hola")
+        adminHomePage.addTrainer().enterFirstName("test3")
+                .enterSecondName("test3")
+                .selectGroup("No Group")
                 .addNewTrainer();
-        Assertions.assertTrue(adminHomePage.isTrainerAdded("Test1", "Test1", "EngTest"));
+        Assertions.assertTrue(adminHomePage.isTrainerAdded("test3", "test3", "Not Assigned"));
     }
+
+    @Test
+    @DisplayName("Is the size of the return list with all the trainers right ")
+    void isTheSizeOfTheReturnListWithAllTheTrainersRight() {
+        loginPage.enterEmail(driver, adminPropertyUsername, properties);
+        loginPage.enterPassword(driver, adminPropertyPassword, properties);
+        loginPage.login(driver, properties.getProperty(adminPropertyName));
+        Assertions.assertTrue(adminHomePage.getAllTrainersAvailable(7));
+    }
+
 
     @AfterEach
     void tearDown() {
         driver.quit();
     }
+
 }
