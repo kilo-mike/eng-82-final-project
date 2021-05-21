@@ -5,8 +5,11 @@ import com.sparta.eng82.interfaces.pages.NavPage;
 import com.sparta.eng82.interfaces.pages.navpages.trainer.ManageGroupPage;
 import com.sparta.eng82.interfaces.pages.navpages.trainer.TrainerHomePage;
 import com.sparta.eng82.interfaces.pages.navpages.trainer.feedbackpages.TrainerTraineeFeedbackFormPage;
+import com.sparta.eng82.tests.unit.utility.Utility;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -23,6 +26,8 @@ public class TrainerHomePageImpl implements NavPage, TrainerHomePage {
     private By traineeNameFinder;
     private By weekName;
     private String userFullName;
+
+    private Utility utility = new Utility();
 
     {
         try {
@@ -85,6 +90,26 @@ public class TrainerHomePageImpl implements NavPage, TrainerHomePage {
         driver.findElement(By.cssSelector(".bi-list")).click();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         String navBarStatus = driver.findElement(By.id("navbarNav")).getAttribute("class");
+
         return navBarStatus.equals(navBarShowing);
+    }
+
+    @Override
+    public boolean isNavigationMenuVisibilityChangingAfterClick() {
+        String navBarChanging = "navbar-collapse bg-color-main collapsing";
+        utility.timedMouseClicker(driver, 400, By.cssSelector(".bi-list"));
+        String navBarStatus = driver.findElement(By.id("navbarNav")).getAttribute("class");
+
+        return navBarStatus.equals(navBarChanging);
+    }
+
+    @Override
+    public boolean isChosenWeekDisplayingAsCurrentlySelected(int week) {
+        WebElement weekDropDown = driver.findElement(By.cssSelector(".form-select"));
+        Select select = new Select(weekDropDown);
+        select.selectByValue(Integer.toString(week));
+        String isSelectedString = select.getOptions().get(week - 1).getAttribute("selected");
+
+        return isSelectedString.equals("true");
     }
 }
