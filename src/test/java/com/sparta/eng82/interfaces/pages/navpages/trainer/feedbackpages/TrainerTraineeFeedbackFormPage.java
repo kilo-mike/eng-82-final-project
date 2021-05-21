@@ -25,5 +25,7 @@ public interface TrainerTraineeFeedbackFormPage extends TrainerFeedbackFormPage,
 
     boolean isSubmitButtonPresent();
 
+    String getSimpleName();
+
 
 }

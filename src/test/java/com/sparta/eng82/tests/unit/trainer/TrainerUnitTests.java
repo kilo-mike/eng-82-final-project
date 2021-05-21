@@ -171,28 +171,30 @@ public class TrainerUnitTests {
         @Test
         @DisplayName("Check that the technical grade is set AND saved as expected")
         void checkThatTheTechnicalGradeIsSetAndSavedAsExpected() {
-            TrainerTraineeFeedbackFormPage trainerTraineeFeedbackFormPage = trainerHomePage.selectJaneDoe();
+            TrainerTraineeFeedbackFormPage trainerTraineeFeedbackFormPage = trainerHomePage.selectTraineeName(2, "Bob Smith");
             trainerTraineeFeedbackFormPage.setTechnicalGrade(driver, 'D');
             trainerTraineeFeedbackFormPage.saveForm(driver);
-            trainerHomePage.selectJaneDoe();
+            trainerHomePage.selectTraineeName(2, "Bob Smith");
             Assertions.assertEquals("D", driver.findElement(By.name("technicalGrade")).findElement(By.xpath("//option[@selected=\"selected\"]")).getText());
         }
 
         @Test
         @DisplayName("Check that the consultant grade is set AND saved as expected")
         void checkThatTheConsultantGradeIsSetAndSavedAsExpected() {
-            TrainerTraineeFeedbackFormPage trainerTraineeFeedbackFormPage = trainerHomePage.selectJaneDoe();
+            TrainerTraineeFeedbackFormPage trainerTraineeFeedbackFormPage = trainerHomePage.selectTraineeName(2, "Bob Smith");
             trainerTraineeFeedbackFormPage.setConsultantGrade(driver, 'D');
             trainerTraineeFeedbackFormPage.saveForm(driver);
-            trainerHomePage.selectJaneDoe();
+            trainerHomePage.selectTraineeName(2, "Bob Smith");
             Assertions.assertEquals("D", driver.findElement(By.name("consultantGrade")).findElement(By.xpath("//option[@selected=\"selected\"]")).getText());
         }
 
         @Test
         @DisplayName("Check that clicking the Consultant Grade title opens the Competencies Page")
         void checkThatClickingTheConsultantGradeTitleOpensTheCompetenciesPage() {
-            TrainerTraineeFeedbackFormPage trainerTraineeFeedbackFormPage = trainerHomePage.selectJaneDoe();
-            CompetenciesPage competenciesPage = trainerTraineeFeedbackFormPage.clickConsultantGrade(driver);
+            TrainerTraineeFeedbackFormPage trainerTraineeFeedbackFormPage = trainerHomePage.selectTraineeName(2, "Bob Smith");
+            if(trainerTraineeFeedbackFormPage.getSimpleName() != null){
+                CompetenciesPage competenciesPage = trainerTraineeFeedbackFormPage.clickConsultantGrade(driver);
+            }
             Assertions.assertEquals("http://localhost:8080/competencies", driver.getCurrentUrl());
         }
 
@@ -200,7 +202,8 @@ public class TrainerUnitTests {
         @DisplayName("Check that the Submit Form button works for Trainers")
             //This test will likely NOT WORK if the trainee driver (driver2) is run headless.
         void checkThatTheSubmitFormButtonWorks() {
-            TrainerTraineeFeedbackFormPage trainerTraineeFeedbackFormPage = trainerHomePage.selectJaneDoe();
+
+            TrainerTraineeFeedbackFormPage trainerTraineeFeedbackFormPage = trainerHomePage.selectTraineeName(2, "Bob Smith");
             trainerTraineeFeedbackFormPage.submitForm(driver, "Trainer");
 
             WebDriver driver2 = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
@@ -213,15 +216,11 @@ public class TrainerUnitTests {
             String testText = "hello, how are you?";
             boolean interactable = true;
             try {
-
-                traineeTraineeFeedbackFormPage.setStopCommentBox(testText);
-
+                traineeTraineeFeedbackFormPage.editStopCommentBox(testText);
             } catch (ElementNotInteractableException e) {
                 interactable = false;
             }
             Assertions.assertFalse(interactable);
         }
     }
-
 }
-

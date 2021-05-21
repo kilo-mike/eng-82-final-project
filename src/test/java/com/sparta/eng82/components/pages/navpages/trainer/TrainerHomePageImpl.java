@@ -7,6 +7,7 @@ import com.sparta.eng82.interfaces.pages.navpages.trainer.TrainerHomePage;
 import com.sparta.eng82.interfaces.pages.navpages.trainer.feedbackpages.TrainerTraineeFeedbackFormPage;
 import com.sparta.eng82.tests.unit.utility.Utility;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -53,17 +54,17 @@ public class TrainerHomePageImpl implements NavPage, TrainerHomePage {
     @Override
     public TrainerTraineeFeedbackFormPage selectTraineeName(int week, String traineeName) {
         weekName = new By.ByXPath("//option[@value='" + week + "']");
-        traineeNameTable = new By.ById("traineeTable2");
         traineeNameFinder = new By.ByXPath("//td[\"" + traineeName + "\"]");
 
         driver.findElement(weekListName).findElement(weekName).click();
-        String traineeNames = driver.findElement(traineeNameTable).findElement(traineeNameFinder).getText();
-        if (traineeNames.isEmpty()) {
-            System.out.println("NULL");
+        try{
+            Utility.timedMouseClicker(driver, 500, By.xpath(".//*[@id='traineeTable2']/tbody/tr/td[contains(.,'" + traineeName + "')]"));
         }
-        System.out.println(traineeNames);
-
-        //driver.findElement(traineeNameLink).click();
+        catch(NoSuchElementException e){
+            // Make sure to check for/expect this output if a trainee is not present.
+            System.out.println("The trainee " + traineeName + " does not exist.");
+            return new TrainerTraineeFeedbackFormPageImpl(driver, null);
+        }
         return new TrainerTraineeFeedbackFormPageImpl(driver, this.getClass().getSimpleName());
     }
 
