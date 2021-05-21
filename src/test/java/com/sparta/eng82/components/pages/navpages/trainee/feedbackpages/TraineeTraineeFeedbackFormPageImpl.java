@@ -3,133 +3,37 @@ package com.sparta.eng82.components.pages.navpages.trainee.feedbackpages;
 import com.sparta.eng82.interfaces.pages.navpages.trainee.feedbackpages.TraineeTraineeFeedbackFormPage;
 import com.sparta.eng82.interfaces.pages.navpages.trainee.feedbackpages.TraineeTrainerFeedbackFormPage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
 public class TraineeTraineeFeedbackFormPageImpl implements TraineeTraineeFeedbackFormPage {
+    private WebDriver driver;
 
-    private final By trainerButton = new By.ByLinkText("Trainer");
-    private final By startButton = new By.ByLinkText("Start");
-    private final By stopButton = new By.ByLinkText("Stop");
-    private final By continueButton = new By.ByLinkText("Cont.");
-    private final By continueTextBox = new By.ById("continueTrainee");
-    private final By startTextBox = new By.ById("startTrainee");
-    private final By stopTextBox = new By.ById("stopTrainee");
-    //private final By stopTextBox = new By.ById("stopTrainee");
+    private final By traineeButton = new By.ByXPath("//label");
+    private final By trainerButton = new By.ByXPath("//label[2]");
+
+    private final By traineeStopButton = new By.ByXPath("//div[2]/div/label");
+    private final By traineeStartButton = new By.ByXPath("//div[2]/div/label[2]");
+    private final By traineeContinueButton = new By.ByXPath("//label[3]");
+
+    private final By traineeStopCommentBox = new By.ById("stopTrainee");
+    private final By traineeStartCommentBox = new By.ById("startTrainee");
+    private final By traineeContinueCommentBox = new By.ById("continueTrainee");
+
+    private final By traineeTechnicalGrade= new By.ById("techGrade");
+    private final By traineeConsultantGrade = new By.ById("consultGrade");
+
+    private final By trainersCommentBox =new By.ById("trainerComments");
+
+    private final By submitButton = new By.ById("submitBtn");
+    private final By saveButton = new By.ById("saveBtn");
+
+
     private final String simpleName;
-    WebDriver driver;
 
     public TraineeTraineeFeedbackFormPageImpl(WebDriver driver, String simpleName) {
         this.driver = driver;
         this.simpleName = simpleName;
-    }
-
-
-    @Override
-    public boolean checkBoxesCanBeEditedBeforeSubmitting() {
-        if (driver.findElement(By.id("submitBtn")).isDisplayed()) {
-            clickOnStart();
-            enterStartComments("Start Test");
-            if (!driver.findElement(startTextBox).getText().equals("Start Test")) {
-                return false;
-            }
-            clickOnCont();
-            enterContComments("Continue Test");
-            if (!driver.findElement(continueTextBox).getText().equals("Continue Test")) {
-                return false;
-            }
-            clickOnStop();
-            enterStopComments("Stop Test");
-            return driver.findElement(stopTextBox).getText().equals("Stop Test");
-        }
-        return true;
-    }
-
-    @Override
-    public boolean checkGradesCanBeSelectedBeforeSubmitting() {
-//        if(driver.findElement(By.id("submitBtn")).isDisplayed()) {
-//            clickOnStart();
-//            driver.findElement(By.id("techGrade")).click();
-//            if(!driver.findElement(startTextBox).getText().equals("Start Test")){
-//                return false;
-//            }
-//            clickOnCont();
-//            enterContComments("Continue Test");
-//            if(!driver.findElement(continueTextBox).getText().equals("Continue Test")){
-//                return false;
-//            }
-//            clickOnStop();
-//            enterStopComments("Stop Test");
-//            if(!driver.findElement(stopTextBox).getText().equals("Stop Test")){
-//                return false;
-//            }
-//        }
-        return true;
-    }
-
-    @Override
-    public boolean checkBoxesPersistAfterClickingSave() {
-        return false;
-    }
-
-    @Override
-    public boolean checkGradesPersistsAfterClickingSave() {
-        return false;
-    }
-
-    @Override
-    public boolean checkBoxesPersistAfterClickingSubmit() {
-        return false;
-    }
-
-    @Override
-    public boolean checkGradesPersistsAfterClickingSubmit() {
-        return false;
-    }
-
-    @Override
-    public boolean checkBoxesLockAfterClickingSubmit() {
-        return false;
-    }
-
-    @Override
-    public boolean checkGradesLockAfterClickingSubmit() {
-        return false;
-    }
-
-    @Override
-    public TraineeTraineeFeedbackFormPage clickOnStop() {
-        driver.findElement(stopButton).click();
-        return new TraineeTraineeFeedbackFormPageImpl(driver, this.getClass().getSimpleName());
-    }
-
-    @Override
-    public TraineeTraineeFeedbackFormPage enterStopComments(String comments) {
-        driver.findElement(stopTextBox).sendKeys(comments);
-        return new TraineeTraineeFeedbackFormPageImpl(driver, this.getClass().getSimpleName());
-    }
-
-    @Override
-    public TraineeTraineeFeedbackFormPage clickOnStart() {
-        driver.findElement(startButton).click();
-        return new TraineeTraineeFeedbackFormPageImpl(driver, this.getClass().getSimpleName());
-    }
-
-    @Override
-    public TraineeTraineeFeedbackFormPage enterStartComments(String comments) {
-        driver.findElement(startTextBox).sendKeys(comments);
-        return new TraineeTraineeFeedbackFormPageImpl(driver, this.getClass().getSimpleName());
-    }
-
-    @Override
-    public TraineeTraineeFeedbackFormPage clickOnCont() {
-        driver.findElement(continueButton).click();
-        return new TraineeTraineeFeedbackFormPageImpl(driver, this.getClass().getSimpleName());
-    }
-
-    @Override
-    public TraineeTraineeFeedbackFormPage enterContComments(String comments) {
-        driver.findElement(continueTextBox).sendKeys(comments);
-        return new TraineeTraineeFeedbackFormPageImpl(driver, this.getClass().getSimpleName());
     }
 
     @Override
@@ -138,7 +42,236 @@ public class TraineeTraineeFeedbackFormPageImpl implements TraineeTraineeFeedbac
         return new TraineeTrainerFeedbackFormPageImpl(driver);
     }
 
+    @Override
+    public TraineeTraineeFeedbackFormPage clickStopTab() {
+        driver.findElement(traineeStopButton).click();
+        return this;
+    }
+
+    @Override
+    public String getStopCommentBox() {
+        clickStopTab();
+        return driver.findElement(traineeStopCommentBox).getText();
+    }
+
+    @Override
+    public TraineeTraineeFeedbackFormPage setStopCommentBox(String comments) {
+        deleteStopCommentBox();
+        driver.findElement(traineeStopCommentBox).sendKeys(Keys.TAB);
+        driver.findElement(traineeStopCommentBox).sendKeys(comments);
+        driver.findElement(saveButton).click();
+        return this;
+    }
+
+    @Override
+    public TraineeTraineeFeedbackFormPage editStopCommentBox(String comments) {
+        clickStopTab();
+        driver.findElement(traineeStopCommentBox).sendKeys(comments);
+        return this;
+    }
+
+    @Override
+    public TraineeTraineeFeedbackFormPage deleteStopCommentBox() {
+        clickStopTab();
+        driver.findElement(traineeStopCommentBox).clear();
+        return this;
+    }
+
+    @Override
+    public boolean isStopCommentBoxEmpty() {
+        clickStopTab();
+        return driver.findElement(traineeStopCommentBox).getText().isEmpty();
+    }
+
+    @Override
+    public boolean isStopCommentBoxDisabled() {
+        clickStopTab();
+        return !driver.findElement(traineeStopCommentBox).isEnabled();
+    }
+
+    @Override
+    public boolean isStopCommentBoxEnabledBeforeSubmission() {
+        if(driver.findElement(submitButton).isDisplayed()){
+            clickStopTab();
+            return driver.findElement(traineeStopCommentBox).isEnabled();
+        }
+        return false;
+    }
+
+    @Override
+    public TraineeTraineeFeedbackFormPage clickStartTab() {
+        driver.findElement(traineeStartButton).click();
+        return this;
+    }
+
+    @Override
+    public String getStartCommentBox() {
+        clickStartTab();
+        return driver.findElement(traineeStartCommentBox).getText();
+    }
+
+    @Override
+    public TraineeTraineeFeedbackFormPage setStartCommentBox(String comments) {
+        clickStartTab();
+        deleteStartCommentBox();
+        driver.findElement(traineeStartCommentBox).sendKeys(comments);
+        return this;
+    }
+
+    @Override
+    public TraineeTraineeFeedbackFormPage editStartCommentBox(String comments) {
+        clickStartTab();
+        driver.findElement(traineeStartCommentBox).sendKeys(comments);
+        return this;
+    }
+
+    @Override
+    public TraineeTraineeFeedbackFormPage deleteStartCommentBox() {
+        clickStartTab();
+        driver.findElement(traineeStartCommentBox).clear();
+        return this;
+    }
+
+    @Override
+    public boolean isStartCommentBoxEmpty() {
+        clickStartTab();
+        return driver.findElement(traineeStartCommentBox).getText().isEmpty();
+    }
+
+    @Override
+    public boolean isStartCommentBoxDisabled() {
+        clickStartTab();
+        return !driver.findElement(traineeStartCommentBox).isEnabled();
+    }
+
+    @Override
+    public boolean isStartCommentBoxEnabledBeforeSubmission() {
+        clickStartTab();
+        if(driver.findElement(submitButton).isDisplayed()){
+            return driver.findElement(traineeStartCommentBox).isEnabled();
+        }
+        return false;
+    }
+
+    @Override
+    public TraineeTraineeFeedbackFormPage clickContinueTab() {
+        driver.findElement(traineeContinueButton).click();
+        return this;
+    }
+
+    @Override
+    public String getContinueCommentBox(){
+        clickContinueTab();
+        return driver.findElement(traineeContinueCommentBox).getText();
+    }
+
+    @Override
+    public TraineeTraineeFeedbackFormPage setContinueCommentBox(String comments) {
+        clickContinueTab();
+        deleteContinueCommentBox();
+        driver.findElement(traineeContinueCommentBox).sendKeys(comments);
+        return this;
+    }
+
+    @Override
+    public TraineeTraineeFeedbackFormPage editContinueCommentBox(String comments) {
+        clickContinueTab();
+        driver.findElement(traineeContinueCommentBox).sendKeys(comments);
+        return this;
+    }
+
+    @Override
+    public TraineeTraineeFeedbackFormPage deleteContinueCommentBox() {
+        clickContinueTab();
+        driver.findElement(traineeContinueCommentBox).clear();
+        return this;
+    }
+
+    @Override
+    public boolean isContinueCommentBoxEmpty() {
+        clickContinueTab();
+        return driver.findElement(traineeContinueCommentBox).getText().isEmpty();
+    }
+
+    @Override
+    public boolean isContinueCommentBoxDisabled() {
+        clickContinueTab();
+        return !driver.findElement(traineeContinueCommentBox).isEnabled();
+    }
+
+    @Override
+    public boolean isContinueCommentBoxEnabledBeforeSubmission() {
+        if(driver.findElement(submitButton).isDisplayed()){
+            return driver.findElement(traineeContinueCommentBox).isEnabled();
+        }
+        return false;
+    }
+
+    @Override
+    public String getTrainerCommentBox() {
+        return driver.findElement(trainersCommentBox).getText();
+    }
+
+    @Override
+    public TraineeTraineeFeedbackFormPage setTrainerCommentBox(String comments) {
+        driver.findElement(trainersCommentBox).sendKeys(comments);
+        return this;
+    }
+
+    @Override
+    public TraineeTraineeFeedbackFormPage deleteTrainerCommentBox() {
+        driver.findElement(trainersCommentBox).clear();
+        return this;
+    }
+
+    @Override
+    public boolean isTrainerCommentBoxEmpty() {
+        return driver.findElement(trainersCommentBox).getText().isEmpty();
+    }
+
+    @Override
+    public boolean isTrainerCommentBoxDisabled() {
+        return driver.findElement(trainersCommentBox).isEnabled();
+    }
+
     public String getSimpleName() {
         return simpleName;
     }
+
+    @Override
+    public boolean doCommentBoxesLockAfterClickingSubmit() {
+        if(!(driver.findElement(submitButton).isDisplayed())){
+            return isStopCommentBoxDisabled() && isStartCommentBoxDisabled() && isContinueCommentBoxDisabled();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean doGradesLockAfterClickingSubmit(char grade) {
+        if(!(driver.findElement(submitButton).isDisplayed())){
+            return isTechnicalGradeDisabled() && isConsultantGradeDisabled();
+        }
+        return false;
+    }
+
+    @Override
+    public String getTechnicalGrade() {
+        return driver.findElement(traineeTechnicalGrade).getText();
+    }
+
+    @Override
+    public String getConsultantGrade() {
+        return driver.findElement(traineeConsultantGrade).getText();
+    }
+
+    @Override
+    public boolean isTechnicalGradeDisabled() {
+        return !driver.findElement(traineeTechnicalGrade).isEnabled();
+    }
+
+    @Override
+    public boolean isConsultantGradeDisabled() {
+        return !driver.findElement(traineeConsultantGrade).isEnabled();
+    }
 }
+
