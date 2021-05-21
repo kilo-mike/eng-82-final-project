@@ -13,53 +13,18 @@ import java.util.concurrent.TimeUnit;
 
 public interface LoginPage extends Page {
 
-    default LoginPage enterEmail(WebDriver driver, String userPropertyUsername, Properties properties) {
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.findElement(new By.ById("username")).sendKeys(properties.getProperty(userPropertyUsername));
-        return this;
-    }
 
-    default LoginPage enterEmail(WebDriver driver, String email) {
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.findElement(new By.ById("username")).sendKeys(email);
-        return this;
-    }
+    LoginPage enterEmail();
 
-    default LoginPage enterPassword(WebDriver driver, String userPropertyPassword, Properties properties) {
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.findElement(new By.ById("password")).sendKeys(properties.getProperty(userPropertyPassword));
-        return this;
-    }
+    LoginPage enterEmail(String email);
 
-    default LoginPage enterPassword(WebDriver driver, String password) {
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.findElement(new By.ById("password")).sendKeys(password);
-        return this;
-    }
+    LoginPage enterPassword();
 
-    /**
-     * @param userPropertyName can be either "admin_name", "trainer_name" or "trainee_name"
-     */
-    default NavPage login(WebDriver driver, String userPropertyName) {
-        driver.findElement(new By.ById("loginBtn")).click();
-        switch (userPropertyName) {
-            case "admin_name":
-                return new AdminHomePageImpl(driver);
-            case "trainer_name":
-                return new TrainerHomePageImpl(driver);
-            case "trainee_name":
-                return new TraineeHomePageImpl(driver);
-        }
-        return null;
-    }
+    LoginPage enterPassword(String password);
 
-    default boolean loginAttempt(WebDriver driver, String userPropertyName, String userPropertyUsername, String userPropertyPassword, Properties properties) {
-        enterEmail(driver, userPropertyUsername, properties).enterPassword(driver, userPropertyPassword, properties).login(driver, userPropertyName);
-        return driver.getCurrentUrl().endsWith("/");
-    }
+    NavPage login();
 
-    default boolean wrongPasswordAttempt(WebDriver driver, String userPropertyName, String userPropertyUsername, String wrongPassword, Properties properties) {
-        enterEmail(driver, userPropertyUsername, properties).enterPassword(driver, wrongPassword).login(driver, userPropertyName);
-        return driver.getCurrentUrl().endsWith("login?error");
-    }
+    boolean loginAttempt();
+
+    boolean wrongPasswordAttempt();
 }

@@ -5,8 +5,7 @@ import com.sparta.eng82.components.webdriver.WebDriverFactory;
 import com.sparta.eng82.components.webdriver.WebDriverTypes;
 import com.sparta.eng82.interfaces.pages.navpages.trainee.TraineeHomePage;
 import com.sparta.eng82.interfaces.pages.navpages.trainee.feedbackpages.TraineeTraineeFeedbackFormPage;
-import com.sparta.eng82.tests.unit.utility.Utility;
-import org.junit.Ignore;
+import com.sparta.eng82.tests.unit.frameworkutil.PropertiesUtil;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 
@@ -36,7 +35,7 @@ public class TraineeHomepageTests {
         normalTypes = EnumSet.of(WebDriverTypes.CHROME, WebDriverTypes.EDGE);
         headlessTypes = EnumSet.of(WebDriverTypes.CHROME_HEADLESS);
         properties = new Properties();
-        Utility.loadProperties(properties);
+        PropertiesUtil.loadProperties(properties);
     }
 
     @BeforeEach

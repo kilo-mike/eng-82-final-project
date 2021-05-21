@@ -6,7 +6,7 @@ import com.sparta.eng82.interfaces.pages.navpages.trainee.TraineeHomePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import com.sparta.eng82.tests.unit.utility.Utility;
+import com.sparta.eng82.tests.unit.frameworkutil.PropertiesUtil;
 
 import java.util.List;
 
@@ -25,13 +25,13 @@ public class TraineeHomePageImpl implements TraineeHomePage {
 
     @Override
     public TraineeFeedbackFormPage clickCurrentWeek() {
-        Utility.timedMouseClicker(driver, 400, By.linkText(getCurrentWeek()));
+        PropertiesUtil.timedMouseClicker(driver, 400, By.linkText(getCurrentWeek()));
         return new TraineeTraineeFeedbackFormPageImpl(driver, this.getClass().getSimpleName());
     }
 
     @Override
     public TraineeFeedbackFormPage clickFeedbackFormForWeek(int week) {
-        Utility.timedMouseClicker(driver, 400, By.linkText(feedbackList.get(week).getText()));
+        PropertiesUtil.timedMouseClicker(driver, 400, By.linkText(feedbackList.get(week).getText()));
         return new TraineeTraineeFeedbackFormPageImpl(driver, this.getClass().getSimpleName());
     }
 

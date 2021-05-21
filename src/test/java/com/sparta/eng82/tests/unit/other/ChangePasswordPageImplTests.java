@@ -4,7 +4,7 @@ import com.sparta.eng82.components.pages.accesspages.LoginPageImpl;
 import com.sparta.eng82.components.webdriver.WebDriverFactory;
 import com.sparta.eng82.components.webdriver.WebDriverTypes;
 import com.sparta.eng82.interfaces.pages.accesspages.LoginPage;
-import com.sparta.eng82.tests.unit.utility.Utility;
+import com.sparta.eng82.tests.unit.frameworkutil.PropertiesUtil;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -31,7 +31,7 @@ public class ChangePasswordPageImplTests {
     static void setupAll() {
         webDriverFactory = new WebDriverFactory();
         properties = new Properties();
-        Utility.loadProperties(properties);
+        PropertiesUtil.loadProperties(properties);
     }
 
     @AfterAll

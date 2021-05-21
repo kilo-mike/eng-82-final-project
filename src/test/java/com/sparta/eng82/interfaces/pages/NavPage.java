@@ -12,14 +12,14 @@ import com.sparta.eng82.interfaces.Page;
 import com.sparta.eng82.interfaces.pages.accesspages.LoginPage;
 import com.sparta.eng82.interfaces.pages.navpages.CompetenciesPage;
 import com.sparta.eng82.interfaces.pages.navpages.ProfilePage;
-import com.sparta.eng82.tests.unit.utility.Utility;
+import com.sparta.eng82.tests.unit.frameworkutil.PropertiesUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public interface NavPage extends Page {
 
     default Page goToHomePage(WebDriver driver) {
-        Utility.timedMouseClicker(driver, Utility.TIME, By.cssSelector(".bi-list"));
+        PropertiesUtil.timedMouseClicker(driver, PropertiesUtil.TIME, By.cssSelector(".bi-list"));
         driver.findElement(By.linkText("Home")).click();
         if (AdminHomePageImpl.class.equals(this.getClass())) {
             return new AdminHomePageImpl(driver);
@@ -33,7 +33,7 @@ public interface NavPage extends Page {
 
     default ProfilePage goToProfilePage(WebDriver driver) {
         // TODO ? maybe ? competencies -> profile etc, extend if statement with ORs
-        Utility.timedMouseClicker(driver, Utility.TIME, By.cssSelector(".bi-list"));
+        PropertiesUtil.timedMouseClicker(driver, PropertiesUtil.TIME, By.cssSelector(".bi-list"));
         driver.findElement(By.linkText("Profile")).click();
         if (AdminHomePageImpl.class.equals(this.getClass())) {
             return new AdminProfilePageImpl(driver);
@@ -46,13 +46,13 @@ public interface NavPage extends Page {
     }
 
     default CompetenciesPage goToCompetenciesPage(WebDriver driver) {
-        Utility.timedMouseClicker(driver, Utility.TIME, By.cssSelector(".bi-list"));
+        PropertiesUtil.timedMouseClicker(driver, PropertiesUtil.TIME, By.cssSelector(".bi-list"));
         driver.findElement(By.linkText("Behavioural Competencies")).click();
         return new CompetenciesPageImpl(driver);
     }
 
     default LoginPage logOut(WebDriver driver) {
-        Utility.timedMouseClicker(driver, Utility.TIME, By.cssSelector(".bi-list"));
+        PropertiesUtil.timedMouseClicker(driver, PropertiesUtil.TIME, By.cssSelector(".bi-list"));
         driver.findElement(By.id("logoutBtn")).click();
         return new LogoutPageImpl(driver);
     }

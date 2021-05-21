@@ -6,7 +6,7 @@ import com.sparta.eng82.components.pages.navpages.admin.AdminHomePageImpl;
 import com.sparta.eng82.components.pages.navpages.admin.AdminProfilePageImpl;
 import com.sparta.eng82.components.webdriver.WebDriverFactory;
 import com.sparta.eng82.components.webdriver.WebDriverTypes;
-import com.sparta.eng82.tests.unit.utility.Utility;
+import com.sparta.eng82.tests.unit.frameworkutil.PropertiesUtil;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 
@@ -28,7 +28,7 @@ public class AdminProfilePageTests {
     @BeforeAll
     static void setupAll() {
         properties = new Properties();
-        Utility.loadProperties(properties);
+        PropertiesUtil.loadProperties(properties);
     }
 
     @BeforeEach

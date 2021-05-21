@@ -5,14 +5,13 @@ import com.sparta.eng82.components.pages.navpages.admin.AdminHomePageImpl;
 import com.sparta.eng82.components.pages.navpages.admin.addpages.AddTrainerPageImpl;
 import com.sparta.eng82.components.webdriver.WebDriverFactory;
 import com.sparta.eng82.components.webdriver.WebDriverTypes;
-import com.sparta.eng82.tests.unit.utility.Utility;
+import com.sparta.eng82.tests.unit.frameworkutil.PropertiesUtil;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import java.util.EnumSet;
 import java.util.Properties;
 
 public class AddTrainerPageTest {
@@ -32,7 +31,7 @@ public class AddTrainerPageTest {
     @BeforeAll
     static void setupAll(){
         properties = new Properties();
-        Utility.loadProperties(properties);
+        PropertiesUtil.loadProperties(properties);
         webDriverFactory = new WebDriverFactory();
     }
 

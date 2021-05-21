@@ -7,7 +7,7 @@ import com.sparta.eng82.interfaces.pages.navpages.trainer.ManageGroupPage;
 import com.sparta.eng82.interfaces.pages.navpages.trainer.addpages.AddGroupPage;
 import com.sparta.eng82.interfaces.pages.navpages.trainer.addpages.AddStreamPage;
 import com.sparta.eng82.interfaces.pages.navpages.trainer.addpages.AddTraineePage;
-import com.sparta.eng82.tests.unit.utility.Utility;
+import com.sparta.eng82.tests.unit.frameworkutil.PropertiesUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -27,7 +27,7 @@ public class ManageGroupPageImpl implements ManageGroupPage {
     WebDriver driver;
     private By removeButtonIdentifier;
 
-    private Utility utility = new Utility();
+    private PropertiesUtil propertiesUtil = new PropertiesUtil();
 
     public ManageGroupPageImpl(WebDriver driver) {
         this.driver = driver;
@@ -75,7 +75,7 @@ public class ManageGroupPageImpl implements ManageGroupPage {
 
     @Override
     public void clickRemoveButton(int studentIndex) {
-        utility.timedMouseClicker(driver, 400, By.cssSelector(".btn:nth-child(" + studentIndex + ")"));
+        propertiesUtil.timedMouseClicker(driver, 400, By.cssSelector(".btn:nth-child(" + studentIndex + ")"));
     }
 
     @Override
@@ -92,8 +92,8 @@ public class ManageGroupPageImpl implements ManageGroupPage {
             }
         }
         String removeButtonCss = ".btn:nth-child(" + (studentPosition*2) + ")";
-        utility.timedMouseClicker(driver, 400, By.cssSelector(".btn:nth-child(" + (studentPosition * 2) + ")"));
-        utility.timedMouseClicker(driver,400, By.linkText("Delete Trainer"));
+        propertiesUtil.timedMouseClicker(driver, 400, By.cssSelector(".btn:nth-child(" + (studentPosition * 2) + ")"));
+        propertiesUtil.timedMouseClicker(driver,400, By.linkText("Delete Trainer"));
     }
 
     @Override
@@ -110,7 +110,7 @@ public class ManageGroupPageImpl implements ManageGroupPage {
 
     @Override
     public void addStudent(String firstName, String lastName) {
-        utility.timedMouseClicker(driver, 400, By.cssSelector("form > .my-3:nth-child(2)"));
+        propertiesUtil.timedMouseClicker(driver, 400, By.cssSelector("form > .my-3:nth-child(2)"));
         driver.manage().timeouts().implicitlyWait(1,TimeUnit.SECONDS);
         Select select = new Select(driver.findElement(By.id("traineeGroup")));
         select.selectByVisibleText("Engineering 82");
@@ -121,6 +121,6 @@ public class ManageGroupPageImpl implements ManageGroupPage {
         driver.findElement(By.id("traineeLastName")).sendKeys(lastName);
 
         driver.findElement(By.cssSelector("#addNewTrainee .btn")).click();
-        utility.timedMouseClicker(driver,400,By.cssSelector("#addNewTrainee .btn"));
+        propertiesUtil.timedMouseClicker(driver,400,By.cssSelector("#addNewTrainee .btn"));
     }
 }

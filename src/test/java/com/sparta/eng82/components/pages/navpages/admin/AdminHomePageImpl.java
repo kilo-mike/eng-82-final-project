@@ -3,12 +3,11 @@ package com.sparta.eng82.components.pages.navpages.admin;
 import com.sparta.eng82.components.pages.navpages.admin.addpages.AddTrainerPageImpl;
 import com.sparta.eng82.interfaces.pages.navpages.admin.AdminHomePage;
 import com.sparta.eng82.interfaces.pages.navpages.admin.addpages.AddTrainerPage;
-import com.sparta.eng82.tests.unit.utility.Utility;
+import com.sparta.eng82.tests.unit.frameworkutil.PropertiesUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -28,7 +27,7 @@ public class AdminHomePageImpl implements AdminHomePage {
     @Override
     public AddTrainerPage addTrainer() {
 //        driver.findElement(mainContent).findElement(redButton).submit();
-        Utility.timedMouseClicker(driver, 400, new By.ByXPath("//*[@id=\"main-content\"]/div/div/div/div[1]/button"));
+        PropertiesUtil.timedMouseClicker(driver, 400, new By.ByXPath("//*[@id=\"main-content\"]/div/div/div/div[1]/button"));
         return new AddTrainerPageImpl(driver);
     }
 

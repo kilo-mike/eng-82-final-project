@@ -1,7 +1,6 @@
 package com.sparta.eng82.tests.unit.trainer;
 
 import com.sparta.eng82.components.pages.accesspages.LoginPageImpl;
-import com.sparta.eng82.components.pages.navpages.trainer.ManageGroupPageImpl;
 import com.sparta.eng82.components.webdriver.WebDriverFactory;
 import com.sparta.eng82.components.webdriver.WebDriverTypes;
 import com.sparta.eng82.interfaces.pages.navpages.CompetenciesPage;
@@ -10,18 +9,14 @@ import com.sparta.eng82.interfaces.pages.navpages.trainee.feedbackpages.TraineeT
 import com.sparta.eng82.interfaces.pages.navpages.trainer.ManageGroupPage;
 import com.sparta.eng82.interfaces.pages.navpages.trainer.TrainerHomePage;
 import com.sparta.eng82.interfaces.pages.navpages.trainer.feedbackpages.TrainerTraineeFeedbackFormPage;
-import com.sparta.eng82.tests.unit.utility.Utility;
+import com.sparta.eng82.tests.unit.frameworkutil.PropertiesUtil;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
 
 import java.util.EnumSet;
-import java.util.List;
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
 
 public class TrainerUnitTests {
     static WebDriver driver;
@@ -47,7 +42,7 @@ public class TrainerUnitTests {
         normalTypes = EnumSet.of(WebDriverTypes.CHROME, WebDriverTypes.EDGE);
         headlessTypes = EnumSet.of(WebDriverTypes.CHROME_HEADLESS);
         properties = new Properties();
-        Utility.loadProperties(properties);
+        PropertiesUtil.loadProperties(properties);
     }
 
     @BeforeEach

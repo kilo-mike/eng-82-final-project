@@ -5,7 +5,7 @@ import com.sparta.eng82.interfaces.pages.NavPage;
 import com.sparta.eng82.interfaces.pages.navpages.trainer.ManageGroupPage;
 import com.sparta.eng82.interfaces.pages.navpages.trainer.TrainerHomePage;
 import com.sparta.eng82.interfaces.pages.navpages.trainer.feedbackpages.TrainerTraineeFeedbackFormPage;
-import com.sparta.eng82.tests.unit.utility.Utility;
+import com.sparta.eng82.tests.unit.frameworkutil.PropertiesUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -28,7 +28,7 @@ public class TrainerHomePageImpl implements NavPage, TrainerHomePage {
     private By weekName;
     private String userFullName;
 
-    private Utility utility = new Utility();
+    private PropertiesUtil propertiesUtil = new PropertiesUtil();
 
     {
         try {
@@ -58,7 +58,7 @@ public class TrainerHomePageImpl implements NavPage, TrainerHomePage {
 
         driver.findElement(weekListName).findElement(weekName).click();
         try{
-            Utility.timedMouseClicker(driver, 500, By.xpath(".//*[@id='traineeTable2']/tbody/tr/td[contains(.,'" + traineeName + "')]"));
+            PropertiesUtil.timedMouseClicker(driver, 500, By.xpath(".//*[@id='traineeTable2']/tbody/tr/td[contains(.,'" + traineeName + "')]"));
         }
         catch(NoSuchElementException e){
             // Make sure to check for/expect this output if a trainee is not present.
@@ -70,7 +70,7 @@ public class TrainerHomePageImpl implements NavPage, TrainerHomePage {
 
     //TODO: Delete this
     public TrainerTraineeFeedbackFormPage selectJaneDoe() {
-        Utility.timedMouseClicker(driver, 500, new By.ByCssSelector("#traineeTable2 td:nth-child(1)"));
+        PropertiesUtil.timedMouseClicker(driver, 500, new By.ByCssSelector("#traineeTable2 td:nth-child(1)"));
         return new TrainerTraineeFeedbackFormPageImpl(driver, this.getClass().getSimpleName());
     }
 
@@ -98,7 +98,7 @@ public class TrainerHomePageImpl implements NavPage, TrainerHomePage {
     @Override
     public boolean isNavigationMenuVisibilityChangingAfterClick() {
         String navBarChanging = "navbar-collapse bg-color-main collapsing";
-        utility.timedMouseClicker(driver, 400, By.cssSelector(".bi-list"));
+        propertiesUtil.timedMouseClicker(driver, 400, By.cssSelector(".bi-list"));
         String navBarStatus = driver.findElement(By.id("navbarNav")).getAttribute("class");
 
         return navBarStatus.equals(navBarChanging);
@@ -116,7 +116,7 @@ public class TrainerHomePageImpl implements NavPage, TrainerHomePage {
 
     @Override
     public ManageGroupPage clickManageGroupButton() {
-        utility.timedMouseClicker(driver, 400, By.linkText("Manage Group"));
+        propertiesUtil.timedMouseClicker(driver, 400, By.linkText("Manage Group"));
         return new ManageGroupPageImpl(driver);
     }
 

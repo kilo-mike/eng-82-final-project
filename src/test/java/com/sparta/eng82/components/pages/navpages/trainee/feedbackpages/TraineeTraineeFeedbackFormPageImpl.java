@@ -4,7 +4,7 @@ import com.sparta.eng82.components.pages.navpages.trainee.TraineeHomePageImpl;
 import com.sparta.eng82.interfaces.pages.navpages.trainee.TraineeHomePage;
 import com.sparta.eng82.interfaces.pages.navpages.trainee.feedbackpages.TraineeTraineeFeedbackFormPage;
 import com.sparta.eng82.interfaces.pages.navpages.trainee.feedbackpages.TraineeTrainerFeedbackFormPage;
-import com.sparta.eng82.tests.unit.utility.Utility;
+import com.sparta.eng82.tests.unit.frameworkutil.PropertiesUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -46,7 +46,7 @@ public class TraineeTraineeFeedbackFormPageImpl implements TraineeTraineeFeedbac
 
     @Override
     public TraineeTraineeFeedbackFormPage clickStopTab() {
-        Utility.timedMouseClicker(driver, Utility.TIME, traineeStopButton);
+        PropertiesUtil.timedMouseClicker(driver, PropertiesUtil.TIME, traineeStopButton);
         return this;
     }
 

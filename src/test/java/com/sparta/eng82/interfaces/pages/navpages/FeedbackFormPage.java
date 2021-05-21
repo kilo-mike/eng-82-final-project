@@ -4,7 +4,7 @@ import com.sparta.eng82.components.pages.navpages.CompetenciesPageImpl;
 import com.sparta.eng82.components.pages.navpages.trainee.TraineeHomePageImpl;
 import com.sparta.eng82.components.pages.navpages.trainer.TrainerHomePageImpl;
 import com.sparta.eng82.interfaces.pages.NavPage;
-import com.sparta.eng82.tests.unit.utility.Utility;
+import com.sparta.eng82.tests.unit.frameworkutil.PropertiesUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
@@ -30,13 +30,13 @@ public interface FeedbackFormPage extends NavPage {
     }
 
     default CompetenciesPage clickConsultantGrade(WebDriver driver) {
-        Utility.timedMouseClicker(driver, 500, new By.ByLinkText("Consultant Grade"));
+        PropertiesUtil.timedMouseClicker(driver, 500, new By.ByLinkText("Consultant Grade"));
         return new CompetenciesPageImpl(driver);
     }
 
 
     default NavPage saveForm(WebDriver driver) {
-        Utility.timedMouseClicker(driver, 500, new By.ById("saveBtn"));
+        PropertiesUtil.timedMouseClicker(driver, 500, new By.ById("saveBtn"));
         return this;
     }
 
@@ -45,7 +45,7 @@ public interface FeedbackFormPage extends NavPage {
      */
 
     default NavPage submitForm(WebDriver driver, String simpleName) {
-        Utility.timedMouseClicker(driver, 500, new By.ById("submitBtn"));
+        PropertiesUtil.timedMouseClicker(driver, 500, new By.ById("submitBtn"));
         switch (simpleName) {
             case "Trainee":
                 return new TraineeHomePageImpl(driver);
