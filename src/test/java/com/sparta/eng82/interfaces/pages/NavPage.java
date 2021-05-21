@@ -16,9 +16,15 @@ import com.sparta.eng82.tests.unit.frameworkutil.PropertiesUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public interface NavPage extends Page {
+public abstract class NavPage implements Page {
 
-    default Page goToHomePage(WebDriver driver) {
+    WebDriver driver;
+
+    NavPage(WebDriver driver){
+        this.driver = driver;
+    }
+
+    public Page goToHomePage() {
         PropertiesUtil.timedMouseClicker(driver, PropertiesUtil.TIME, By.cssSelector(".bi-list"));
         driver.findElement(By.linkText("Home")).click();
         if (AdminHomePageImpl.class.equals(this.getClass())) {
@@ -31,7 +37,7 @@ public interface NavPage extends Page {
         return null;
     }
 
-    default ProfilePage goToProfilePage(WebDriver driver) {
+    public ProfilePage goToProfilePage() {
         // TODO ? maybe ? competencies -> profile etc, extend if statement with ORs
         PropertiesUtil.timedMouseClicker(driver, PropertiesUtil.TIME, By.cssSelector(".bi-list"));
         driver.findElement(By.linkText("Profile")).click();
@@ -45,13 +51,13 @@ public interface NavPage extends Page {
         return null;
     }
 
-    default CompetenciesPage goToCompetenciesPage(WebDriver driver) {
+    public CompetenciesPage goToCompetenciesPage() {
         PropertiesUtil.timedMouseClicker(driver, PropertiesUtil.TIME, By.cssSelector(".bi-list"));
         driver.findElement(By.linkText("Behavioural Competencies")).click();
         return new CompetenciesPageImpl(driver);
     }
 
-    default LoginPage logOut(WebDriver driver) {
+    public LoginPage logOut() {
         PropertiesUtil.timedMouseClicker(driver, PropertiesUtil.TIME, By.cssSelector(".bi-list"));
         driver.findElement(By.id("logoutBtn")).click();
         return new LogoutPageImpl(driver);

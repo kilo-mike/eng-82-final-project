@@ -1,4 +1,4 @@
-package com.sparta.eng82.tests.unit.frameworkutil;
+package com.sparta.eng82.tests.unit;
 
 import com.sparta.eng82.components.webdriver.WebDriverFactory;
 import com.sparta.eng82.components.webdriver.WebDriverTypes;

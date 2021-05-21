@@ -1,22 +1,20 @@
-package com.sparta.eng82.tests.unit.other;
+package com.sparta.eng82.tests;
 
 import com.sparta.eng82.components.pages.accesspages.LoginPageImpl;
 import com.sparta.eng82.components.pages.accesspages.LogoutPageImpl;
 import com.sparta.eng82.components.webdriver.WebDriverFactory;
 import com.sparta.eng82.components.webdriver.WebDriverTypes;
+import com.sparta.eng82.frameworkutil.PropertiesLoader;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import java.util.Properties;
-
 public class LoginPageImplTests {
 
     private static WebDriverFactory webDriverFactory;
     private WebDriver driver;
-    private LogoutPageImpl logoutPage;
 
     @BeforeAll
     static void setupAll() {
@@ -29,11 +27,11 @@ public class LoginPageImplTests {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"admin_username", "trainer_username", "trainee_username"})
+    @ValueSource(strings = {"admin", "trainer", "trainee"})
     @DisplayName("Enter email test")
-    void enterEmailTest(String propertyUsername) {
-        loginPage.enterEmail(driver, propertyUsername, properties);
-        Assertions.assertEquals(properties.getProperty(propertyUsername), driver.findElement(new By.ById("username")).getAttribute("value"));
+    void enterEmailTest(String user) {
+        new LoginPageImpl(driver, user).enterEmail();
+        Assertions.assertEquals(PropertiesLoader.loadProperties().getProperty(), driver.findElement(new By.ById("username")).getAttribute("value"));
     }
 
     @ParameterizedTest
