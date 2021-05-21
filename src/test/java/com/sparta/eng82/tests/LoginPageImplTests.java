@@ -1,20 +1,21 @@
 package com.sparta.eng82.tests;
 
 import com.sparta.eng82.components.pages.accesspages.LoginPageImpl;
-import com.sparta.eng82.components.pages.accesspages.LogoutPageImpl;
 import com.sparta.eng82.components.webdriver.WebDriverFactory;
 import com.sparta.eng82.components.webdriver.WebDriverTypes;
 import com.sparta.eng82.frameworkutil.PropertiesLoader;
+import com.sparta.eng82.interfaces.Page;
+import com.sparta.eng82.interfaces.pages.NavPage;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class LoginPageImplTests {
 
     private static WebDriverFactory webDriverFactory;
     private WebDriver driver;
+    private LoginPageImpl loginPage;
 
     @BeforeAll
     static void setupAll() {
@@ -30,76 +31,61 @@ public class LoginPageImplTests {
     @ValueSource(strings = {"admin", "trainer", "trainee"})
     @DisplayName("Enter email test")
     void enterEmailTest(String user) {
-        new LoginPageImpl(driver, user).enterEmail();
-        Assertions.assertEquals(PropertiesLoader.loadProperties().getProperty(), driver.findElement(new By.ById("username")).getAttribute("value"));
+        loginPage = new LoginPageImpl(driver, user).driverGet().enterEmail();
+        Assertions.assertEquals(PropertiesLoader.getEmail(user), loginPage.getEmailInputValue());
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"admin_password", "trainer_password", "trainee_password"})
+    @ValueSource(strings = {"admin", "trainer", "trainee"})
     @DisplayName("Enter password test")
-    void enterPasswordTest(String propertyPassword) {
-        loginPage.enterPassword(driver, propertyPassword, properties);
-        Assertions.assertEquals(properties.getProperty(propertyPassword), driver.findElement(new By.ById("password")).getAttribute("value"));
-
+    void enterPasswordTest(String user) {
+        loginPage = new LoginPageImpl(driver, user).driverGet().enterPassword();
+        Assertions.assertEquals(PropertiesLoader.getPassword(user), loginPage.getPasswordInputValue());
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"admin_name", "trainer_name", "trainee_name"})
+    @ValueSource(strings = {"admin", "trainer", "trainee"})
     @DisplayName("Login test")
-    void loginTest(String propertyName) {
-        Assertions.assertNull(loginPage.login(driver, properties.getProperty(propertyName)));
+    void loginTest(String user) {
+        NavPage navPage = new LoginPageImpl(driver, user).driverGet().clickLogin();
+        Assertions.assertFalse(navPage.isOnHomePage());
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"admin", "trainer", "trainee"})
     @DisplayName("Login test with entered email and password")
     void loginTestWithEnteredEmailAndPassword(String user) {
-        loginPage.enterEmail(driver, user, properties)
-                .enterPassword(driver, user, properties)
-                .login(driver, user);
-        Assertions.assertFalse(driver.getCurrentUrl().endsWith("/login"));
+        NavPage navPage = new LoginPageImpl(driver, user).driverGet().enterEmail()
+                .enterPassword()
+                .clickLogin();
+
+        Assertions.assertTrue(navPage.isOnHomePage());
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"admin", "trainer", "trainee"})
     @DisplayName("Login attempt test")
     void loginAttemptTest(String user) {
-        Assertions.assertTrue(loginPage.loginAttempt(driver, user + "_name", user + "_username", user + "_password", properties));
+        Assertions.assertTrue(new LoginPageImpl(driver, user).driverGet().loginAttempt());
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"admin", "trainer", "trainee"})
     @DisplayName("Wrong password attempt test")
     void wrongPasswordAttemptTest(String user) {
-        Assertions.assertTrue(loginPage.wrongPasswordAttempt(driver, user + "_name", user + "_username", "this-must-be-wrong-123", properties));
+        Assertions.assertTrue(new LoginPageImpl(driver, user).driverGet().wrongPasswordAttempt("this-has-to-be-wrong"));
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"admin", "trainer", "trainee"})
     @DisplayName("Logout check message")
     void logoutCheckMessage(String user) {
-
-        // TODO login should take in driver and user ONCE
-        //new LoginPageImpl(driver, user).enterEmail().enterPassword()...
-
-        new LoginPageImpl(driver, user).enterEmail()
+        loginPage = new LoginPageImpl(driver, user).driverGet().enterEmail()
                 .enterPassword()
-                .login()
+                .clickLogin()
                 .logOut();
 
-        switch (user) {
-            case "admin":
-                logoutPage = (LogoutPageImpl) adminHomePage.logOut(driver);
-                break;
-            case "trainer":
-                logoutPage = (LogoutPageImpl) trainerHomePage.logOut(driver);
-                break;
-            case "trainee":
-                logoutPage = (LogoutPageImpl) traineeHomePage.logOut(driver);
-                break;
-        }
-
-        Assertions.assertTrue(logoutPage.isLogoutMessageShowing());
+        Assertions.assertTrue(loginPage.isLogoutMessageShowing());
     }
 
     @AfterEach

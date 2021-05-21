@@ -7,30 +7,29 @@ import java.util.Properties;
 public class PropertiesLoader {
 
     static {
+        userProperties = new Properties();
         loadProperties();
     }
 
-    public static final Properties USER_PROPERTIES = new Properties();
+    public static Properties userProperties;
 
     private static void loadProperties() {
         try {
-            USER_PROPERTIES.load(new FileReader("src/test/resources/login.properties"));
+            userProperties.load(new FileReader("src/test/resources/login.properties"));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public static String getName(String user) {
-        return USER_PROPERTIES.getProperty(user + "_name");
+        return userProperties.getProperty(user + "_name");
     }
 
     public static String getEmail(String user) {
-        return USER_PROPERTIES.getProperty(user + "_username");
+        return userProperties.getProperty(user + "_username");
     }
 
     public static String getPassword(String user) {
-        return USER_PROPERTIES.getProperty(user + "_password");
+        return userProperties.getProperty(user + "_password");
     }
-
-
 }

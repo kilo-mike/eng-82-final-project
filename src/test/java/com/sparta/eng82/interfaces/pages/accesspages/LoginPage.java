@@ -1,21 +1,28 @@
 package com.sparta.eng82.interfaces.pages.accesspages;
 
+import com.sparta.eng82.components.pages.accesspages.LoginPageImpl;
 import com.sparta.eng82.interfaces.Page;
 import com.sparta.eng82.interfaces.pages.NavPage;
 
 public interface LoginPage extends Page {
 
-    LoginPage enterEmail();
+    LoginPageImpl driverGet();
 
-    LoginPage enterEmail(String email);
+    LoginPageImpl enterEmail();
 
-    LoginPage enterPassword();
+    LoginPageImpl enterEmail(String email);
 
-    LoginPage enterPassword(String password);
+    LoginPageImpl enterPassword();
 
-    NavPage login();
+    LoginPageImpl enterPassword(String password);
+
+    NavPage clickLogin();
 
     boolean loginAttempt();
 
-    boolean wrongPasswordAttempt();
+    boolean loginAttempt(String email, String password);
+
+    boolean wrongPasswordAttempt(String wrongPassword);
+
+    boolean isLogoutMessageShowing();
 }
