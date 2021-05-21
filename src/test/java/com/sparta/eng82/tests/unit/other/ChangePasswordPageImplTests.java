@@ -34,6 +34,11 @@ public class ChangePasswordPageImplTests {
         Utility.loadProperties(properties);
     }
 
+    @AfterAll
+    static void tearDownAll() {
+        webDriverFactory.endAllServices();
+    }
+
     @BeforeEach
     void setup() {
         driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);

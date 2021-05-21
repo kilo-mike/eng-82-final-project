@@ -121,4 +121,9 @@ public class LoginPageImplTests {
     void tearDown() {
         driver.quit();
     }
+
+    @AfterAll
+    static void tearDownAll() {
+        webDriverFactory.endAllServices();
+    }
 }
