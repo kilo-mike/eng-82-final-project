@@ -54,9 +54,12 @@ public interface LoginPage extends Page {
     }
 
     default boolean loginAttempt(WebDriver driver, String userPropertyName, String userPropertyUsername, String userPropertyPassword, Properties properties) {
-        enterEmail(driver, userPropertyUsername, properties);
-        enterPassword(driver, userPropertyPassword, properties);
-        login(driver, userPropertyName);
+        enterEmail(driver, userPropertyUsername, properties).enterPassword(driver, userPropertyPassword, properties).login(driver, userPropertyName);
         return driver.getCurrentUrl().endsWith("/");
+    }
+
+    default boolean wrongPasswordAttempt(WebDriver driver,String userPropertyUsername, String userPropertyName, String wrongPassword, Properties properties){
+        enterEmail(driver, userPropertyUsername, properties).enterPassword(driver, wrongPassword).login(driver, userPropertyName);
+        return driver.getCurrentUrl().endsWith("login?error");
     }
 }

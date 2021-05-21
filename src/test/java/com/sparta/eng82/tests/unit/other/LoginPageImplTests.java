@@ -82,6 +82,13 @@ public class LoginPageImplTests {
 
     @ParameterizedTest
     @ValueSource(strings = {"admin", "trainer", "trainee"})
+    @DisplayName("Login attempt test")
+    void loginAttemptTest(String user) {
+        Assertions.assertTrue(loginPage.loginAttempt(driver, user + "_name", user + "_username", user + "_password", properties));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"admin", "trainer", "trainee"})
     @DisplayName("Logout check message")
     void logoutCheckMessage(String user) {
         loginPage.enterEmail(driver, user + "_username", properties)
