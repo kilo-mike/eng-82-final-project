@@ -15,13 +15,11 @@ import com.sparta.eng82.interfaces.pages.navpages.ProfilePage;
 import com.sparta.eng82.tests.unit.utility.Utility;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public interface NavPage extends Page {
 
     default Page goToHomePage(WebDriver driver) {
-        driver.findElement(By.id("menuBtn-container")).findElement(By.tagName("button")).click();
+        Utility.timedMouseClicker(driver, Utility.TIME, By.cssSelector(".bi-list"));
         driver.findElement(By.linkText("Home")).click();
         if (AdminHomePageImpl.class.equals(this.getClass())) {
             return new AdminHomePageImpl(driver);
@@ -48,14 +46,14 @@ public interface NavPage extends Page {
     }
 
     default CompetenciesPage goToCompetenciesPage(WebDriver driver) {
-        driver.findElement(By.id("menuBtn-container")).findElement(By.tagName("button")).click();
+        Utility.timedMouseClicker(driver, Utility.TIME, By.cssSelector(".bi-list"));
         driver.findElement(By.linkText("Behavioural Competencies")).click();
         return new CompetenciesPageImpl(driver);
     }
 
     default LoginPage logOut(WebDriver driver) {
         Utility.timedMouseClicker(driver, Utility.TIME, By.cssSelector(".bi-list"));
-        new WebDriverWait(driver, 5).until(ExpectedConditions.elementToBeClickable(By.id("logoutBtn"))).click();
+        driver.findElement(By.id("logoutBtn")).click();
         return new LogoutPageImpl(driver);
     }
 }
