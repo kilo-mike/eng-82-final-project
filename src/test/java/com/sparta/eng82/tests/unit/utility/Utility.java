@@ -10,7 +10,7 @@ import java.util.Properties;
 
 public class Utility {
 
-    public static final long TIME = 400;
+    public static final long TIME = 500;
 
     public static void loadProperties(Properties properties) {
         try {

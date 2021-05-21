@@ -216,6 +216,10 @@ public class TraineeTraineeFeedbackFormPageTests {
         webDriverFactory.endAllServices();
     }
 
+    @AfterEach
+    void closeWindow(){
+        driver.close();
+    }
 
 }
 
