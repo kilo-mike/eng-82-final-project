@@ -5,17 +5,40 @@ import com.sparta.eng82.interfaces.pages.navpages.trainee.TraineeFeedbackFormPag
 
 public interface TraineeTraineeFeedbackFormPage extends TraineeFeedbackFormPage, NavPage {
 
-    TraineeTraineeFeedbackFormPage clickOnStop();
-
-    TraineeTraineeFeedbackFormPage enterStopComments(String comments);
-
-    TraineeTraineeFeedbackFormPage clickOnStart();
-
-    TraineeTraineeFeedbackFormPage enterStartComments(String comments);
-
-    TraineeTraineeFeedbackFormPage clickOnCont();
-
-    TraineeTraineeFeedbackFormPage enterContComments(String comments);
-
     TraineeTrainerFeedbackFormPage clickOnTrainer();
+
+    TraineeTraineeFeedbackFormPage clickStopTab();
+    String getStopCommentBox();
+    TraineeTraineeFeedbackFormPage setStopCommentBox(String comments);
+    TraineeTraineeFeedbackFormPage editStopCommentBox(String comments);
+    TraineeTraineeFeedbackFormPage deleteStopCommentBox();
+    boolean isStopCommentBoxEmpty();
+    boolean isStopCommentBoxDisabled();
+    boolean isStopCommentBoxEnabledBeforeSubmission();
+
+    TraineeTraineeFeedbackFormPage clickStartTab();
+    String getStartCommentBox();
+    TraineeTraineeFeedbackFormPage setStartCommentBox(String comments);
+    TraineeTraineeFeedbackFormPage editStartCommentBox(String comments);
+    TraineeTraineeFeedbackFormPage deleteStartCommentBox();
+    boolean isStartCommentBoxEmpty();
+    boolean isStartCommentBoxDisabled();
+    boolean isStartCommentBoxEnabledBeforeSubmission();
+
+    TraineeTraineeFeedbackFormPage clickContinueTab();
+    String getContinueCommentBox();
+    TraineeTraineeFeedbackFormPage setContinueCommentBox(String comments);
+    TraineeTraineeFeedbackFormPage editContinueCommentBox(String comments);
+    TraineeTraineeFeedbackFormPage deleteContinueCommentBox();
+    boolean isContinueCommentBoxEmpty();
+    boolean isContinueCommentBoxDisabled();
+    boolean isContinueCommentBoxEnabledBeforeSubmission();
+
+    String getTrainerCommentBox();
+    TraineeTraineeFeedbackFormPage setTrainerCommentBox(String comments);
+    TraineeTraineeFeedbackFormPage deleteTrainerCommentBox();
+    boolean isTrainerCommentBoxEmpty();
+    boolean isTrainerCommentBoxDisabled();
+
+
 }
