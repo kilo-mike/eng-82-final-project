@@ -1,6 +1,7 @@
 package com.sparta.eng82.tests.unit.trainer;
 
 import com.sparta.eng82.components.pages.accesspages.LoginPageImpl;
+import com.sparta.eng82.components.pages.navpages.trainer.ManageGroupPageImpl;
 import com.sparta.eng82.components.webdriver.WebDriverFactory;
 import com.sparta.eng82.components.webdriver.WebDriverTypes;
 import com.sparta.eng82.interfaces.pages.navpages.CompetenciesPage;
@@ -18,7 +19,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.EnumSet;
+import java.util.List;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 public class TrainerUnitTests {
     static WebDriver driver;
@@ -49,16 +52,22 @@ public class TrainerUnitTests {
 
     @BeforeEach
     void setup() {
-        driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME_HEADLESS);
+        driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
         driver.get("http://localhost:8080/");
         loginPage = new LoginPageImpl(driver);
         loginPage.enterEmail(driver, trainerPropertyUsername, properties).enterPassword(driver, trainerPropertyPassword, properties);
         trainerHomePage = (TrainerHomePage) loginPage.login(driver, trainerPropertyName);
     }
 
+    @AfterEach
+    void closeBrowser() {
+        driver.close();
+    }
+
+
     @AfterAll
     static void tearDown() {
-        driver.quit();
+        webDriverFactory.endAllServices();
     }
 
     @Test
@@ -69,6 +78,7 @@ public class TrainerUnitTests {
         Assertions.assertEquals("http://localhost:8080/feedback?id=4", trainerTraineeFeedbackFormPage.getUrl(driver));
     }
 
+
     @Nested
     @DisplayName("Tests for the Trainer Home Page")
     class TrainerHomePageTests {
@@ -76,7 +86,7 @@ public class TrainerUnitTests {
         @Test
         @DisplayName("Check the URL is correct when loading a new homepage")
         void checkTheUrlIsCorrectWhenLoadingANewHomepage() {
-            driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME_HEADLESS);
+            driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
             driver.get("http://localhost:8080/");
             LoginPageImpl loginPage = new LoginPageImpl(driver);
             loginPage.enterEmail(driver, trainerPropertyUsername, properties).enterPassword(driver, trainerPropertyPassword, properties);
@@ -88,7 +98,7 @@ public class TrainerUnitTests {
         @Test
         @DisplayName("Checking that the specified student is correctly selected")
         void checkingThatTheSpecifiedStudentIsCorrectlySelected() {
-            driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME_HEADLESS);
+            driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
             driver.get("http://localhost:8080/");
             LoginPageImpl loginPage = new LoginPageImpl(driver);
             loginPage.enterEmail(driver, trainerPropertyUsername, properties).enterPassword(driver, trainerPropertyPassword, properties);
@@ -97,13 +107,6 @@ public class TrainerUnitTests {
             TrainerTraineeFeedbackFormPage trainerTraineeFeedbackFormPage = trainerHomePage.selectTraineeName(2, "JaneDoe");
         }
 
-        @Test
-        @DisplayName("Checking that manage group button takes the user to the correct page")
-        void checkingThatManageGroupButtonTakesTheUserToTheCorrectPage() {
-            ManageGroupPage manageGroupPage = trainerHomePage.manageGroupButton();
-
-            Assertions.assertEquals("http://localhost:8080/group", driver.getCurrentUrl());
-        }
 
         @Test
         @DisplayName("Checking that the displayed trainer name is correctly displayed on the homepage")
@@ -128,6 +131,28 @@ public class TrainerUnitTests {
         @DisplayName("Checking that clicking on a specified week correctly selects that week")
         void checkingThatClickingOnASpecifiedWeekCorrectlySelectsThatWeek() {
             Assertions.assertTrue(trainerHomePage.isChosenWeekDisplayingAsCurrentlySelected(2));
+        }
+    }
+
+    @Nested
+    @DisplayName("Manage group page tests")
+    class ManageGroupPageTests {
+
+        @Test
+        @DisplayName("Checking that manage group button takes the user to the correct page")
+        void checkingThatManageGroupButtonTakesTheUserToTheCorrectPage() {
+            ManageGroupPage manageGroupPage = trainerHomePage.manageGroupButton();
+
+            Assertions.assertEquals("http://localhost:8080/group", driver.getCurrentUrl());
+        }
+
+        //TODO: Test incomplete
+        @Test
+        @DisplayName("Checking if a selected student is successfully removed")
+        void checkingIfASelectedStudentIsSuccessfullyRemoved() {
+            ManageGroupPage manageGroupPage = trainerHomePage.clickManageGroupButton();
+            manageGroupPage.removeStudent("Golam Choudhury");
+            Assertions.assertFalse(manageGroupPage.isTraineeRemoved("Golam Choudhury"));
         }
     }
 
@@ -165,11 +190,12 @@ public class TrainerUnitTests {
 
         @Test
         @DisplayName("Check that the Submit Form button works for Trainers")
+            //This test will likely NOT WORK if the trainee driver (driver2) is run headless.
         void checkThatTheSubmitFormButtonWorks() {
             TrainerTraineeFeedbackFormPage trainerTraineeFeedbackFormPage = trainerHomePage.selectJaneDoe();
-            trainerTraineeFeedbackFormPage.submitForm(driver, "TrainerHomePageImpl");
+            trainerTraineeFeedbackFormPage.submitForm(driver, "Trainer");
 
-            WebDriver driver2 = webDriverFactory.getWebDriver(WebDriverTypes.CHROME_HEADLESS);
+            WebDriver driver2 = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
             driver2.get("http://localhost:8080/");
             LoginPageImpl loginPage2 = new LoginPageImpl(driver2);
             loginPage2.enterEmail(driver2, traineePropertyUsername, properties).enterPassword(driver2, traineePropertyPassword, properties);
@@ -179,7 +205,9 @@ public class TrainerUnitTests {
             String testText = "hello, how are you?";
             boolean interactable = true;
             try {
-                traineeTraineeFeedbackFormPage.setContinueCommentBox(testText);
+
+                traineeTraineeFeedbackFormPage.setStopCommentBox(testText);
+
             } catch (ElementNotInteractableException e) {
                 interactable = false;
             }

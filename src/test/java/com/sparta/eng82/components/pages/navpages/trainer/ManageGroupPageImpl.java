@@ -7,8 +7,13 @@ import com.sparta.eng82.interfaces.pages.navpages.trainer.ManageGroupPage;
 import com.sparta.eng82.interfaces.pages.navpages.trainer.addpages.AddGroupPage;
 import com.sparta.eng82.interfaces.pages.navpages.trainer.addpages.AddStreamPage;
 import com.sparta.eng82.interfaces.pages.navpages.trainer.addpages.AddTraineePage;
+import com.sparta.eng82.tests.unit.utility.Utility;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class ManageGroupPageImpl implements ManageGroupPage {
 
@@ -20,6 +25,8 @@ public class ManageGroupPageImpl implements ManageGroupPage {
     private final By listClassName = new By.ByClassName("list-group");
     WebDriver driver;
     private By removeButtonIdentifier;
+
+    private Utility utility = new Utility();
 
     public ManageGroupPageImpl(WebDriver driver) {
         this.driver = driver;
@@ -58,11 +65,45 @@ public class ManageGroupPageImpl implements ManageGroupPage {
     public AddStreamPage addStream() {
         driver.findElement(addStreamButton).click();
         return new AddStreamPageImpl(driver);
-
     }
 
     @Override
     public boolean isTraineeRemoved(String traineeName) {
         return false;
+    }
+
+    @Override
+    public void clickRemoveButton(int studentIndex) {
+        utility.timedMouseClicker(driver, 400, By.cssSelector(".btn:nth-child(" + studentIndex + ")"));
+    }
+
+    @Override
+    public void removeStudent(String studentName) {
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        List<WebElement> students = driver.findElements(By.className("list-group-item-action"));
+        int studentPosition = 0;
+        for (WebElement student:students) {
+            String name = student.getText();
+            System.out.println(name);
+            System.out.println(students.indexOf(student));
+            if (name.equals("Golam Choudhury")) {
+                studentPosition = students.indexOf(student) + 1;
+            }
+        }
+        String removeButtonCss = ".btn:nth-child(" + (studentPosition*2) + ")";
+        utility.timedMouseClicker(driver, 400, By.cssSelector(".btn:nth-child(" + (studentPosition * 2) + ")"));
+        utility.timedMouseClicker(driver,400, By.linkText("Delete Trainer"));
+    }
+
+    @Override
+    public boolean isStudentPresent(String studentName) {
+        List<WebElement> students = driver.findElements(By.className("list-group-item-action"));
+        boolean isPresent = false;
+        for (WebElement student: students) {
+            if (studentName.equals(student.getText()));
+            isPresent = true;
+            break;
+        }
+        return isPresent;
     }
 }

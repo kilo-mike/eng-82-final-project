@@ -22,4 +22,6 @@ public interface TrainerHomePage extends NavPage {
     // TODO: Delete this
     TrainerTraineeFeedbackFormPage selectJaneDoe();
 
+    ManageGroupPage clickManageGroupButton();
+
 }

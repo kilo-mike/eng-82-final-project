@@ -112,4 +112,11 @@ public class TrainerHomePageImpl implements NavPage, TrainerHomePage {
 
         return isSelectedString.equals("true");
     }
+
+    @Override
+    public ManageGroupPage clickManageGroupButton() {
+        utility.timedMouseClicker(driver, 400, By.linkText("Manage Group"));
+        return new ManageGroupPageImpl(driver);
+    }
+
 }
