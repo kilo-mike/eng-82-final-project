@@ -49,14 +49,16 @@ public class TraineeHomepageTests {
     }
 
     @AfterEach
-    void close(){
+    void closeBrowser() {
         driver.close();
     }
 
+
     @AfterAll
     static void tearDown() {
-        driver.quit();
+        webDriverFactory.endAllServices();
     }
+
 
     private static EnumSet<WebDriverTypes> getNormalTypes() {
         return normalTypes;
@@ -114,11 +116,10 @@ public class TraineeHomepageTests {
         Assertions.assertTrue(Arrays.stream(acceptableColours).anyMatch(s -> s.contains(colour)));
     }
 
-    @Ignore
     @Test
     @DisplayName("Test the current week is correct")
     void testTheCurrentWeekIsCorrect() {
-        //TODO I have no idea how to test this lol
+        Assertions.assertEquals(traineeHomePage.getCurrentWeek(), traineeHomePage.getMaxWeek());
     }
 
     @Test
