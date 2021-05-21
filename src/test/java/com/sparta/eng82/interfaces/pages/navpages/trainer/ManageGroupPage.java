@@ -17,4 +17,9 @@ public interface ManageGroupPage extends NavPage {
 
     boolean isTraineeRemoved(String traineeName);
 
+    void clickRemoveButton(int studentIndex);
+
+    void removeStudent(String studentName);
+
+    boolean isStudentPresent(String studentName);
 }
