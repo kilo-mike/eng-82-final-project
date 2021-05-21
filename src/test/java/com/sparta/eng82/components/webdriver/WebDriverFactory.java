@@ -39,7 +39,7 @@ public class WebDriverFactory {
                 break;
 
         }
-        driver.manage().window().setSize(new Dimension(375, 812));
+        driver.manage().window().setSize(new Dimension(500, 1200));
         return driver;
     }
 

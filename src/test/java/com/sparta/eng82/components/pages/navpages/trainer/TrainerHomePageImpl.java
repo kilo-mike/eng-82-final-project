@@ -69,7 +69,7 @@ public class TrainerHomePageImpl implements NavPage, TrainerHomePage {
 
     //TODO: Delete this
     public TrainerTraineeFeedbackFormPage selectJaneDoe() {
-        driver.findElement(new By.ByCssSelector("#traineeTable2 td:nth-child(1)")).click();
+        Utility.timedMouseClicker(driver, 500, new By.ByCssSelector("#traineeTable2 td:nth-child(1)"));
         return new TrainerTraineeFeedbackFormPageImpl(driver, this.getClass().getSimpleName());
     }
 
