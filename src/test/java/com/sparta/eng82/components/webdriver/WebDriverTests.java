@@ -23,11 +23,6 @@ public class WebDriverTests {
         headlessTypes = EnumSet.of(WebDriverTypes.CHROME_HEADLESS);
     }
 
-    @AfterAll
-    static void tearDown() {
-        driver.quit();
-    }
-
     private static EnumSet<WebDriverTypes> getNormalTypes() {
         return normalTypes;
     }
@@ -65,5 +60,11 @@ public class WebDriverTests {
     @AfterEach
     void closeBrowser() {
         driver.close();
+    }
+
+
+    @AfterAll
+    static void tearDown() {
+        webDriverFactory.endAllServices();
     }
 }
