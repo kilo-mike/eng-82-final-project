@@ -15,7 +15,7 @@ import org.openqa.selenium.WebDriver;
 import java.util.EnumSet;
 import java.util.Properties;
 
-public class AddTainerPageTest {
+public class AddTrainerPageTest {
     private static Properties properties;
     private final String adminPropertyUsername = "admin_username";
     private final String adminPropertyPassword = "admin_password";
@@ -31,6 +31,8 @@ public class AddTainerPageTest {
 
     @BeforeAll
     static void setupAll(){
+        properties = new Properties();
+        Utility.loadProperties(properties);
         webDriverFactory = new WebDriverFactory();
     }
 
