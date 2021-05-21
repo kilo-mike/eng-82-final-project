@@ -1,6 +1,7 @@
 package com.sparta.eng82.interfaces.pages.accesspages;
 
 import com.sparta.eng82.interfaces.Page;
+import com.sparta.eng82.interfaces.pages.NavPage;
 
 public interface ChangePasswordPage extends Page {
 
@@ -10,7 +11,7 @@ public interface ChangePasswordPage extends Page {
 
     ChangePasswordPage enterConfirmPassword(String password);
 
-    Page clickChange();
+    NavPage clickChange(String user);
 
-    boolean changePasswordAttempt(String currentPassword, String newPassword, String confirmPassword);
+    boolean changePasswordAttempt(String user, String currentPassword, String newPassword, String confirmPassword);
 }

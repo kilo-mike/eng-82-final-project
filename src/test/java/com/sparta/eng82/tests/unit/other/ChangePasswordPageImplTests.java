@@ -84,6 +84,48 @@ public class ChangePasswordPageImplTests {
         Assertions.assertEquals(password.length(), driver.findElement(byConfirmPassword).getAttribute("value").length());
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"admin", "trainer", "trainee"})
+    @DisplayName("Change password and attempt login")
+    void changePasswordAndAttemptLogin(String user) {
+        loginPage.enterEmail(driver, user + "_username", properties)
+                .enterPassword(driver, user + "_password", properties)
+                .login(driver, user + "_name")
+                .goToProfilePage(driver)
+                .changePassword(driver)
+                .enterCurrentPassword(password)
+                .enterNewPassword(newPassword)
+                .enterConfirmPassword(newPassword)
+                .clickChange(user)
+                .logOut(driver)
+                //TODO enter email, enter password not working
+                .enterEmail(driver, user + "_username", properties)
+                .enterPassword(driver, newPassword)
+                .login(driver, user + "_name");
+
+        Assertions.assertFalse(driver.getCurrentUrl().endsWith("/login"));
+        setPasswordBack(driver, loginPage, user);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"admin", "trainer", "trainee"})
+    @DisplayName("set password back")
+    void setPasswordBackToPassword(String user) {
+        setPasswordBack(driver, loginPage, user);
+    }
+
+    private void setPasswordBack(WebDriver driver, LoginPage loginPage, String user) {
+        loginPage.enterEmail(driver, user + "_username", properties)
+                .enterPassword(driver, newPassword)
+                .login(driver, user + "_name")
+                .goToProfilePage(driver)
+                .changePassword(driver)
+                .enterCurrentPassword(newPassword)
+                .enterNewPassword(password)
+                .enterConfirmPassword(password)
+                .clickChange(user);
+    }
+
     @AfterEach
     void tearDown() {
         driver.quit();

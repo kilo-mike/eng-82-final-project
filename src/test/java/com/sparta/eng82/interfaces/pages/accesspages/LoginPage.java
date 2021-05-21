@@ -19,9 +19,21 @@ public interface LoginPage extends Page {
         return this;
     }
 
+    default LoginPage enterEmail(WebDriver driver, String email) {
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.findElement(new By.ById("username")).sendKeys(email);
+        return this;
+    }
+
     default LoginPage enterPassword(WebDriver driver, String userPropertyPassword, Properties properties) {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.findElement(new By.ById("password")).sendKeys(properties.getProperty(userPropertyPassword));
+        return this;
+    }
+
+    default LoginPage enterPassword(WebDriver driver, String password) {
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.findElement(new By.ById("password")).sendKeys(password);
         return this;
     }
 

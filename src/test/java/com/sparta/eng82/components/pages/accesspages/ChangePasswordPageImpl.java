@@ -3,7 +3,7 @@ package com.sparta.eng82.components.pages.accesspages;
 import com.sparta.eng82.components.pages.navpages.admin.AdminHomePageImpl;
 import com.sparta.eng82.components.pages.navpages.trainee.TraineeHomePageImpl;
 import com.sparta.eng82.components.pages.navpages.trainer.TrainerHomePageImpl;
-import com.sparta.eng82.interfaces.Page;
+import com.sparta.eng82.interfaces.pages.NavPage;
 import com.sparta.eng82.interfaces.pages.accesspages.ChangePasswordPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -13,18 +13,13 @@ public class ChangePasswordPageImpl implements ChangePasswordPage {
     private final By currentPassword = new By.ByName("currentPassword");
     private final By newPassword = new By.ByName("newPassword");
     private final By confirmPassword = new By.ByName("confirmPassword");
-    private final By changePasswordButton = new By.ByName("Change");
+    private final By changePasswordButton = new By.ById("loginBtn");
 
-    private final String adminHomeClassName = "AdminHomePageImpl";
-    private final String traineeHomeClassName = "TraineeHomePageImpl";
-    private final String trainerHomeClassName = "TrainerHomePageImpl";
-    private final String simpleName;
     WebDriver driver;
 
 
-    public ChangePasswordPageImpl(WebDriver driver, String simpleName) {
+    public ChangePasswordPageImpl(WebDriver driver) {
         this.driver = driver;
-        this.simpleName = simpleName;
     }
 
     @Override
@@ -45,23 +40,26 @@ public class ChangePasswordPageImpl implements ChangePasswordPage {
         return this;
     }
 
+    /**
+     * @param user can be either "admin", "trainer" or "trainee"
+     */
     @Override
-    public Page clickChange() {
+    public NavPage clickChange(String user) {
         driver.findElement(changePasswordButton).click();
-        switch (simpleName) {
-            case adminHomeClassName:
+        switch (user) {
+            case "admin":
                 return new AdminHomePageImpl(driver);
-            case traineeHomeClassName:
-                return new TraineeHomePageImpl(driver);
-            case trainerHomeClassName:
+            case "trainer":
                 return new TrainerHomePageImpl(driver);
+            case "trainee":
+                return new TraineeHomePageImpl(driver);
         }
         return null;
     }
 
     @Override
-    public boolean changePasswordAttempt(String currentPassword, String newPassword, String confirmPassword) {
-        enterCurrentPassword(confirmPassword).enterNewPassword(newPassword).enterConfirmPassword(confirmPassword).clickChange();
+    public boolean changePasswordAttempt(String user, String currentPassword, String newPassword, String confirmPassword) {
+        enterCurrentPassword(confirmPassword).enterNewPassword(newPassword).enterConfirmPassword(confirmPassword).clickChange(user);
         return !getUrl(driver).endsWith("change-password");
     }
 }
