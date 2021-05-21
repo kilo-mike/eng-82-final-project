@@ -1,9 +1,11 @@
 package com.sparta.eng82.components.pages.navpages.trainee.feedbackpages;
 
+import com.sparta.eng82.components.pages.navpages.trainee.TraineeHomePageImpl;
+import com.sparta.eng82.interfaces.pages.navpages.trainee.TraineeHomePage;
 import com.sparta.eng82.interfaces.pages.navpages.trainee.feedbackpages.TraineeTraineeFeedbackFormPage;
 import com.sparta.eng82.interfaces.pages.navpages.trainee.feedbackpages.TraineeTrainerFeedbackFormPage;
+import com.sparta.eng82.tests.unit.utility.Utility;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
 public class TraineeTraineeFeedbackFormPageImpl implements TraineeTraineeFeedbackFormPage {
@@ -44,7 +46,7 @@ public class TraineeTraineeFeedbackFormPageImpl implements TraineeTraineeFeedbac
 
     @Override
     public TraineeTraineeFeedbackFormPage clickStopTab() {
-        driver.findElement(traineeStopButton).click();
+        Utility.timedMouseClicker(driver, Utility.TIME, traineeStopButton);
         return this;
     }
 
@@ -55,26 +57,28 @@ public class TraineeTraineeFeedbackFormPageImpl implements TraineeTraineeFeedbac
     }
 
     @Override
-    public TraineeTraineeFeedbackFormPage setStopCommentBox(String comments) {
-        deleteStopCommentBox();
-        driver.findElement(traineeStopCommentBox).sendKeys(Keys.TAB);
-        driver.findElement(traineeStopCommentBox).sendKeys(comments);
-        driver.findElement(saveButton).click();
-        return this;
-    }
-
-    @Override
-    public TraineeTraineeFeedbackFormPage editStopCommentBox(String comments) {
-        clickStopTab();
-        driver.findElement(traineeStopCommentBox).sendKeys(comments);
-        return this;
-    }
-
-    @Override
-    public TraineeTraineeFeedbackFormPage deleteStopCommentBox() {
+    public TraineeHomePage setStopCommentBox(String comments) {
         clickStopTab();
         driver.findElement(traineeStopCommentBox).clear();
-        return this;
+        driver.findElement(traineeStopCommentBox).sendKeys(comments);
+        this.saveForm(driver);
+        return new TraineeHomePageImpl(driver);
+    }
+
+    @Override
+    public TraineeHomePage editStopCommentBox(String comments) {
+        clickStopTab();
+        driver.findElement(traineeStopCommentBox).sendKeys(comments);
+        this.saveForm(driver);
+        return new TraineeHomePageImpl(driver);
+    }
+
+    @Override
+    public TraineeHomePage deleteStopCommentBox() {
+        clickStopTab();
+        driver.findElement(traineeStopCommentBox).clear();
+        this.saveForm(driver);
+        return new TraineeHomePageImpl(driver);
     }
 
     @Override
@@ -112,8 +116,6 @@ public class TraineeTraineeFeedbackFormPageImpl implements TraineeTraineeFeedbac
 
     @Override
     public TraineeTraineeFeedbackFormPage setStartCommentBox(String comments) {
-        clickStartTab();
-        deleteStartCommentBox();
         driver.findElement(traineeStartCommentBox).sendKeys(comments);
         return this;
     }
@@ -167,8 +169,6 @@ public class TraineeTraineeFeedbackFormPageImpl implements TraineeTraineeFeedbac
 
     @Override
     public TraineeTraineeFeedbackFormPage setContinueCommentBox(String comments) {
-        clickContinueTab();
-        deleteContinueCommentBox();
         driver.findElement(traineeContinueCommentBox).sendKeys(comments);
         return this;
     }

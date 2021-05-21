@@ -19,7 +19,7 @@ public class TraineeProfilePageImpl implements TraineeProfilePage {
     @Override
     public boolean isTechnicalGradeValid() {
         String[] acceptableGrades = {"A", "B", "C", "D"};
-        String grade = driver.findElement(technicalGrade).toString();
+        String grade = driver.findElement(technicalGrade).getText();
         return Arrays.stream(acceptableGrades).anyMatch(s -> s.contains(grade));
 
     }
@@ -27,13 +27,13 @@ public class TraineeProfilePageImpl implements TraineeProfilePage {
     @Override
     public boolean isConsultantGradeValid() {
         String[] acceptableGrades = {"A", "B", "C", "D"};
-        String grade = driver.findElement(consultantGrade).toString();
+        String grade = driver.findElement(consultantGrade).getText();
         return Arrays.stream(acceptableGrades).anyMatch(s -> s.contains(grade));
     }
 
     @Override
     public boolean areBothGradesValid() {
-        return (isAverageGradeCorrect() && isConsultantGradeValid());
+        return (isTechnicalGradeValid() && isConsultantGradeValid());
     }
 
     @Override

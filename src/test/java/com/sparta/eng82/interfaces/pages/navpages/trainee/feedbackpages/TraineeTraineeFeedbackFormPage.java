@@ -2,6 +2,7 @@ package com.sparta.eng82.interfaces.pages.navpages.trainee.feedbackpages;
 
 import com.sparta.eng82.interfaces.pages.NavPage;
 import com.sparta.eng82.interfaces.pages.navpages.trainee.TraineeFeedbackFormPage;
+import com.sparta.eng82.interfaces.pages.navpages.trainee.TraineeHomePage;
 
 public interface TraineeTraineeFeedbackFormPage extends TraineeFeedbackFormPage, NavPage {
 
@@ -9,9 +10,9 @@ public interface TraineeTraineeFeedbackFormPage extends TraineeFeedbackFormPage,
 
     TraineeTraineeFeedbackFormPage clickStopTab();
     String getStopCommentBox();
-    TraineeTraineeFeedbackFormPage setStopCommentBox(String comments);
-    TraineeTraineeFeedbackFormPage editStopCommentBox(String comments);
-    TraineeTraineeFeedbackFormPage deleteStopCommentBox();
+    TraineeHomePage setStopCommentBox(String comments);
+    TraineeHomePage editStopCommentBox(String comments);
+    TraineeHomePage deleteStopCommentBox();
     boolean isStopCommentBoxEmpty();
     boolean isStopCommentBoxDisabled();
     boolean isStopCommentBoxEnabledBeforeSubmission();

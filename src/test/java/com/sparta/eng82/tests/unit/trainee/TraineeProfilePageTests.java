@@ -1,6 +1,7 @@
 package com.sparta.eng82.tests.unit.trainee;
 
 import com.sparta.eng82.components.pages.accesspages.LoginPageImpl;
+import com.sparta.eng82.components.pages.navpages.trainee.TraineeProfilePageImpl;
 import com.sparta.eng82.components.webdriver.WebDriverFactory;
 import com.sparta.eng82.components.webdriver.WebDriverTypes;
 import com.sparta.eng82.interfaces.pages.navpages.trainee.TraineeHomePage;
@@ -25,6 +26,7 @@ public class TraineeProfilePageTests {
 
     private LoginPageImpl loginPage;
     private TraineeHomePage traineeHomePage;
+    private TraineeProfilePageImpl trainerProfilePage;
 
     @BeforeAll
     static void setupAll() {
@@ -42,6 +44,7 @@ public class TraineeProfilePageTests {
         loginPage = new LoginPageImpl(driver);
         loginPage.enterEmail(driver, traineePropertyUsername, properties).enterPassword(driver, traineePropertyPassword, properties);
         traineeHomePage = (TraineeHomePage) loginPage.login(driver, traineePropertyName);
+        trainerProfilePage = (TraineeProfilePageImpl) traineeHomePage.goToProfilePage(driver);
     }
 
     @AfterEach
@@ -68,18 +71,19 @@ public class TraineeProfilePageTests {
     @Test
     @DisplayName("is Technical Grade Valid Test")
     void isTechnicalGradeValidTest() {
-
+        Assertions.assertTrue(trainerProfilePage.isTechnicalGradeValid());
     }
 
     @Test
     @DisplayName("is Consultant Grade Valid Test")
     void isConsultantGradeValidTest() {
-
+        Assertions.assertTrue(trainerProfilePage.isTechnicalGradeValid());
     }
 
     @Test
     @DisplayName("is Both Grades Valid Test")
     void isBothGradesValidTest() {
+        Assertions.assertTrue(trainerProfilePage.areBothGradesValid());
 
     }
 }
