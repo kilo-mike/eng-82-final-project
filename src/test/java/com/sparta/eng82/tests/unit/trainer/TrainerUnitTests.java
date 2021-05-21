@@ -59,16 +59,16 @@ public class TrainerUnitTests {
         trainerHomePage = (TrainerHomePage) loginPage.login(driver, trainerPropertyName);
     }
 
-//    @AfterEach
-//    void closeBrowser() {
-//        driver.close();
-//    }
-//
-//
-//    @AfterAll
-//    static void tearDown() {
-//        webDriverFactory.endAllServices();
-//    }
+    @AfterEach
+    void closeBrowser() {
+        driver.close();
+    }
+
+
+    @AfterAll
+    static void tearDown() {
+        webDriverFactory.endAllServices();
+    }
 
     @Test
     @DisplayName("Check that the correct form is selected when specifying a student")
