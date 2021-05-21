@@ -21,5 +21,7 @@ public interface ManageGroupPage extends NavPage {
 
     void removeStudent(String studentName);
 
+    void addStudent(String firstName, String lastName);
+
     boolean isStudentPresent(String studentName);
 }

@@ -59,16 +59,16 @@ public class TrainerUnitTests {
         trainerHomePage = (TrainerHomePage) loginPage.login(driver, trainerPropertyName);
     }
 
-    @AfterEach
-    void closeBrowser() {
-        driver.close();
-    }
-
-
-    @AfterAll
-    static void tearDown() {
-        webDriverFactory.endAllServices();
-    }
+//    @AfterEach
+//    void closeBrowser() {
+//        driver.close();
+//    }
+//
+//
+//    @AfterAll
+//    static void tearDown() {
+//        webDriverFactory.endAllServices();
+//    }
 
     @Test
     @DisplayName("Check that the correct form is selected when specifying a student")
@@ -107,7 +107,6 @@ public class TrainerUnitTests {
             TrainerTraineeFeedbackFormPage trainerTraineeFeedbackFormPage = trainerHomePage.selectTraineeName(2, "JaneDoe");
         }
 
-
         @Test
         @DisplayName("Checking that the displayed trainer name is correctly displayed on the homepage")
         void checkingThatTheDisplayedTrainerNameIsCorrectlyDisplayedOnTheHomepage() {
@@ -141,7 +140,7 @@ public class TrainerUnitTests {
         @Test
         @DisplayName("Checking that manage group button takes the user to the correct page")
         void checkingThatManageGroupButtonTakesTheUserToTheCorrectPage() {
-            ManageGroupPage manageGroupPage = trainerHomePage.manageGroupButton();
+            ManageGroupPage manageGroupPage = trainerHomePage.clickManageGroupButton();
 
             Assertions.assertEquals("http://localhost:8080/group", driver.getCurrentUrl());
         }
@@ -153,6 +152,15 @@ public class TrainerUnitTests {
             ManageGroupPage manageGroupPage = trainerHomePage.clickManageGroupButton();
             manageGroupPage.removeStudent("Golam Choudhury");
             Assertions.assertFalse(manageGroupPage.isTraineeRemoved("Golam Choudhury"));
+        }
+
+        // TODO: Not able to type the names in the fields, see method in ManageGroupPageImpl
+        @Test
+        @DisplayName("Checking if a new trainee is successfully added")
+        void checkingIfANewTraineeIsSuccessfullyAdded() {
+            ManageGroupPage manageGroupPage = trainerHomePage.clickManageGroupButton();
+            manageGroupPage.addStudent("Jack", "Ingham");
+            Assertions.assertTrue(manageGroupPage.isStudentPresent("Jack Ingham"));
         }
     }
 
