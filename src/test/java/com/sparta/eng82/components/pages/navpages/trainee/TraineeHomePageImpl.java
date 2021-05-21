@@ -114,4 +114,9 @@ public class TraineeHomePageImpl implements TraineeHomePage {
         List<WebElement> trainer = driver.findElements(By.tagName("label"));
         return trainer.get(1).getText();
     }
+
+    @Override
+    public String getMaxWeek() {
+         return feedbackList.get(feedbackList.size() - 1).getText();
+    }
 }

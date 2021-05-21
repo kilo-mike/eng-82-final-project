@@ -82,6 +82,20 @@ public class LoginPageImplTests {
 
     @ParameterizedTest
     @ValueSource(strings = {"admin", "trainer", "trainee"})
+    @DisplayName("Login attempt test")
+    void loginAttemptTest(String user) {
+        Assertions.assertTrue(loginPage.loginAttempt(driver, user + "_name", user + "_username", user + "_password", properties));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"admin", "trainer", "trainee"})
+    @DisplayName("Wrong password attempt test")
+    void wrongPasswordAttemptTest(String user) {
+        Assertions.assertTrue(loginPage.wrongPasswordAttempt(driver, user + "_name", user + "_username", "this-must-be-wrong-123", properties));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"admin", "trainer", "trainee"})
     @DisplayName("Logout check message")
     void logoutCheckMessage(String user) {
         loginPage.enterEmail(driver, user + "_username", properties)
@@ -106,5 +120,10 @@ public class LoginPageImplTests {
     @AfterEach
     void tearDown() {
         driver.quit();
+    }
+
+    @AfterAll
+    static void tearDownAll() {
+        webDriverFactory.endAllServices();
     }
 }

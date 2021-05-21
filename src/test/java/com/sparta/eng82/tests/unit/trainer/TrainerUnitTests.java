@@ -205,7 +205,9 @@ public class TrainerUnitTests {
             String testText = "hello, how are you?";
             boolean interactable = true;
             try {
+
                 traineeTraineeFeedbackFormPage.setStopCommentBox(testText);
+
             } catch (ElementNotInteractableException e) {
                 interactable = false;
             }
