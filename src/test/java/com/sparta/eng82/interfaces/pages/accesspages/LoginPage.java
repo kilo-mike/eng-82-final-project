@@ -58,7 +58,7 @@ public interface LoginPage extends Page {
         return driver.getCurrentUrl().endsWith("/");
     }
 
-    default boolean wrongPasswordAttempt(WebDriver driver,String userPropertyUsername, String userPropertyName, String wrongPassword, Properties properties){
+    default boolean wrongPasswordAttempt(WebDriver driver, String userPropertyName, String userPropertyUsername, String wrongPassword, Properties properties) {
         enterEmail(driver, userPropertyUsername, properties).enterPassword(driver, wrongPassword).login(driver, userPropertyName);
         return driver.getCurrentUrl().endsWith("login?error");
     }

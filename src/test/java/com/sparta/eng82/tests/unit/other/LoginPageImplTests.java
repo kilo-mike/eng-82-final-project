@@ -89,6 +89,13 @@ public class LoginPageImplTests {
 
     @ParameterizedTest
     @ValueSource(strings = {"admin", "trainer", "trainee"})
+    @DisplayName("Wrong password attempt test")
+    void wrongPasswordAttemptTest(String user) {
+        Assertions.assertTrue(loginPage.wrongPasswordAttempt(driver, user + "_name", user + "_username", "this-must-be-wrong-123", properties));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"admin", "trainer", "trainee"})
     @DisplayName("Logout check message")
     void logoutCheckMessage(String user) {
         loginPage.enterEmail(driver, user + "_username", properties)
