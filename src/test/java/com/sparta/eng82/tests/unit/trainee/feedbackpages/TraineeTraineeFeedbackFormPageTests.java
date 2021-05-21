@@ -15,8 +15,8 @@ import java.util.Properties;
 
 public class TraineeTraineeFeedbackFormPageTests {
 
-    private WebDriver driver;
-    private WebDriverFactory webDriverFactory;
+    static WebDriver driver;
+    static WebDriverFactory webDriverFactory;
     private LoginPageImpl loginPage;
 
     private final String traineePropertyUsername = "trainee_username";
@@ -59,14 +59,13 @@ public class TraineeTraineeFeedbackFormPageTests {
     @Test
     @DisplayName("Get Comment From Stop Box Test")
     void getCommentFromStopBoxTest() {
-        traineeTraineeFeedbackFormPage.setStopCommentBox("Test");
-
-        Assertions.assertEquals("Test", traineeTraineeFeedbackFormPage.getStopCommentBox());
+        Assertions.assertEquals("Trainee Stop Comment", traineeTraineeFeedbackFormPage.getStopCommentBox());
     }
 
     @Test
     @DisplayName("Set Comment In Stop Box Test")
     void setCommentInStopBoxTest() {
+
 
     }
 
@@ -210,6 +209,11 @@ public class TraineeTraineeFeedbackFormPageTests {
     @DisplayName("Is Trainer Comment Comment Box Disabled Test")
     void isTrainerCommentCommentBoxDisabledTest() {
 
+    }
+
+    @AfterAll
+    static void tearDown() {
+        webDriverFactory.endAllServices();
     }
 
 
