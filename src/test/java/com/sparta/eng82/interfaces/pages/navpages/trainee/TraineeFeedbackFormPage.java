@@ -5,20 +5,17 @@ import com.sparta.eng82.interfaces.pages.navpages.FeedbackFormPage;
 
 public interface TraineeFeedbackFormPage extends FeedbackFormPage, NavPage {
 
-    boolean checkBoxesCanBeEditedBeforeSubmitting();
+    boolean doCommentBoxesLockAfterClickingSubmit();
 
-    boolean checkGradesCanBeSelectedBeforeSubmitting();
+    boolean doGradesLockAfterClickingSubmit(char grade);
 
-    boolean checkBoxesPersistAfterClickingSave();
+    String getTechnicalGrade();
 
-    boolean checkGradesPersistsAfterClickingSave();
+    String getConsultantGrade();
 
-    boolean checkBoxesPersistAfterClickingSubmit();
+    boolean isTechnicalGradeDisabled();
 
-    boolean checkGradesPersistsAfterClickingSubmit();
+    boolean isConsultantGradeDisabled();
 
-    boolean checkBoxesLockAfterClickingSubmit();
-
-    boolean checkGradesLockAfterClickingSubmit();
 
 }
