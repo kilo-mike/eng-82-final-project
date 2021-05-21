@@ -18,7 +18,7 @@ public class AdminProfilePageTests {
     private final String adminPropertyPassword = "admin_password";
     private final String adminPropertyName = "admin_name";
     private WebDriver driver;
-    private WebDriverFactory webDriverFactory;
+    private static WebDriverFactory webDriverFactory;
     private LoginPageImpl loginPage;
     private AdminHomePageImpl adminHomePage;
     private AdminProfilePageImpl adminProfilePage;
@@ -99,5 +99,10 @@ public class AdminProfilePageTests {
     @AfterEach
     void tearDown() {
         driver.quit();
+    }
+
+    @AfterAll
+    static void tearDownAll(){
+        webDriverFactory.endAllServices();
     }
 }
