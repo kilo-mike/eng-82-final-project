@@ -179,7 +179,7 @@ public class TrainerUnitTests {
             String testText = "hello, how are you?";
             boolean interactable = true;
             try {
-                traineeTraineeFeedbackFormPage.enterContComments(testText);
+                traineeTraineeFeedbackFormPage.setContinueCommentBox(testText);
             } catch (ElementNotInteractableException e) {
                 interactable = false;
             }

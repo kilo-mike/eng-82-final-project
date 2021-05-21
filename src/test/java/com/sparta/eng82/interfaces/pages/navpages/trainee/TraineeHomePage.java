@@ -27,4 +27,6 @@ public interface TraineeHomePage extends NavPage {
     String getGroup();
 
     String getTrainer();
+
+    String getMaxWeek();
 }
