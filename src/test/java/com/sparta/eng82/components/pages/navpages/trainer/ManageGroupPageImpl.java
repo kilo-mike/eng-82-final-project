@@ -11,6 +11,7 @@ import com.sparta.eng82.tests.unit.utility.Utility;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -105,5 +106,21 @@ public class ManageGroupPageImpl implements ManageGroupPage {
             break;
         }
         return isPresent;
+    }
+
+    @Override
+    public void addStudent(String firstName, String lastName) {
+        utility.timedMouseClicker(driver, 400, By.cssSelector("form > .my-3:nth-child(2)"));
+        driver.manage().timeouts().implicitlyWait(1,TimeUnit.SECONDS);
+        Select select = new Select(driver.findElement(By.id("traineeGroup")));
+        select.selectByVisibleText("Engineering 82");
+        driver.manage().timeouts().implicitlyWait(1,TimeUnit.SECONDS);
+
+        driver.findElement(By.id("traineeFirstName")).sendKeys(firstName);
+
+        driver.findElement(By.id("traineeLastName")).sendKeys(lastName);
+
+        driver.findElement(By.cssSelector("#addNewTrainee .btn")).click();
+        utility.timedMouseClicker(driver,400,By.cssSelector("#addNewTrainee .btn"));
     }
 }
