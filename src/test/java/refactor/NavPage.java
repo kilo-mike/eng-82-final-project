@@ -5,10 +5,10 @@ import org.openqa.selenium.WebDriver;
 import refactor.frameworkutil.ActionClicker;
 import refactor.frameworkutil.Users;
 import refactor.pages.ProfilePage;
-import refactor.pages.access.CompetenciesPageImpl;
-import refactor.pages.access.LoginPageImpl;
 import refactor.pages.admin.AdminHomePageImpl;
 import refactor.pages.admin.AdminProfilePageImpl;
+import refactor.pages.other.CompetenciesPageImpl;
+import refactor.pages.other.LoginPageImpl;
 import refactor.pages.trainee.TraineeHomePageImpl;
 import refactor.pages.trainee.TraineeProfilePageImpl;
 import refactor.pages.trainer.TrainerHomePageImpl;
@@ -22,6 +22,11 @@ public abstract class NavPage implements Page {
     public NavPage(WebDriver driver, String user) {
         this.driver = driver;
         this.user = user;
+    }
+
+
+    public boolean isOnCompetenciesPage() {
+        return driver.getCurrentUrl().endsWith("competencies");
     }
 
     public boolean isOnHomePage() {

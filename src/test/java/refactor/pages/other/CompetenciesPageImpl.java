@@ -1,4 +1,4 @@
-package refactor.pages.access;
+package refactor.pages.other;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -56,6 +56,6 @@ public class CompetenciesPageImpl extends NavPage implements CompetenciesPage {
 
     @Override
     public String getUrl() {
-        return null;
+        return driver.getCurrentUrl();
     }
 }
