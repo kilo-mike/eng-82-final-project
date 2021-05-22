@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import refactor.components.NavPage;
 import refactor.components.frameworkutil.PropertiesLoader;
 import refactor.components.pages.ProfilePage;
+import refactor.components.pages.other.ChangePasswordPage;
+import refactor.components.pages.other.ChangePasswordPageImpl;
 
 public class AdminProfilePageImpl extends NavPage implements ProfilePage{
 
@@ -22,12 +24,11 @@ public class AdminProfilePageImpl extends NavPage implements ProfilePage{
         return driver.getCurrentUrl();
     }
 
-//    @Override
-//    public ChangePasswordPage changePassword() {
-//    driver.findElement(By.xpath("//*[@id=\"main-content\"]/div/div[3]/form/button")).submit();
-//        return new ChangePasswordPageImpl(driver);
-//        return null;
-//    }
+    @Override
+    public ChangePasswordPage goToChangePasswordPage() {
+        driver.findElement(By.xpath("//*[@id=\"main-content\"]/div/div[3]/form/button")).submit();
+        return new ChangePasswordPageImpl(driver, user);
+    }
 
     @Override
     public String getName() {

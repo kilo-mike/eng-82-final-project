@@ -1,8 +1,11 @@
 package refactor.components.pages.trainee;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import refactor.components.NavPage;
 import refactor.components.pages.ProfilePage;
+import refactor.components.pages.other.ChangePasswordPage;
+import refactor.components.pages.other.ChangePasswordPageImpl;
 
 public class TraineeProfilePageImpl extends NavPage implements ProfilePage {
 
@@ -18,6 +21,12 @@ public class TraineeProfilePageImpl extends NavPage implements ProfilePage {
     @Override
     public String getUrl() {
         return driver.getCurrentUrl();
+    }
+
+    @Override
+    public ChangePasswordPage goToChangePasswordPage() {
+        driver.findElement(By.xpath("//*[@id=\"main-content\"]/div/div[3]/form/button")).submit();
+        return new ChangePasswordPageImpl(driver, user);
     }
 
     @Override

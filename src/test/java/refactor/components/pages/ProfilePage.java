@@ -1,8 +1,10 @@
 package refactor.components.pages;
 
+import refactor.components.pages.other.ChangePasswordPage;
+
 public interface ProfilePage {
 
-    //ChangePasswordPage changePassword();
+    ChangePasswordPage goToChangePasswordPage();
 
     String getName();
 
