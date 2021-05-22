@@ -1,6 +1,4 @@
-package refactor.pages;
-
-import refactor.NavPage;
+package refactor.components.pages;
 
 public interface ProfilePage {
 

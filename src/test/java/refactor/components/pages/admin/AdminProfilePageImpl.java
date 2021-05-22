@@ -1,10 +1,10 @@
-package refactor.pages.admin;
+package refactor.components.pages.admin;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import refactor.NavPage;
-import refactor.frameworkutil.PropertiesLoader;
-import refactor.pages.ProfilePage;
+import refactor.components.NavPage;
+import refactor.components.frameworkutil.PropertiesLoader;
+import refactor.components.pages.ProfilePage;
 
 public class AdminProfilePageImpl extends NavPage implements ProfilePage{
 

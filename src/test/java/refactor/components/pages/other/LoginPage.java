@@ -1,6 +1,6 @@
-package refactor.pages.other;
+package refactor.components.pages.other;
 
-import refactor.Page;
+import refactor.components.Page;
 
 public interface LoginPage extends Page {
 

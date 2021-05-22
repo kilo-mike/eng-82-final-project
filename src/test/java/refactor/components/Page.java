@@ -1,4 +1,4 @@
-package refactor;
+package refactor.components;
 
 public interface Page {
 

@@ -5,10 +5,10 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.openqa.selenium.WebDriver;
-import refactor.frameworkutil.PropertiesLoader;
-import refactor.frameworkutil.WebDriverFactory;
-import refactor.frameworkutil.WebDriverTypes;
-import refactor.pages.other.LoginPageImpl;
+import refactor.components.frameworkutil.PropertiesLoader;
+import refactor.components.frameworkutil.WebDriverFactory;
+import refactor.components.frameworkutil.WebDriverTypes;
+import refactor.components.pages.other.LoginPageImpl;
 
 public class LoginPageImplTests {
 

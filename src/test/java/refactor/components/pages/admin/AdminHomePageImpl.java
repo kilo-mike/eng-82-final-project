@@ -1,10 +1,10 @@
-package refactor.pages.admin;
+package refactor.components.pages.admin;
 
 import com.sparta.eng82.interfaces.pages.navpages.admin.AdminHomePage;
 import com.sparta.eng82.interfaces.pages.navpages.admin.addpages.AddTrainerPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import refactor.NavPage;
+import refactor.components.NavPage;
 
 public class AdminHomePageImpl extends NavPage implements AdminHomePage {
 

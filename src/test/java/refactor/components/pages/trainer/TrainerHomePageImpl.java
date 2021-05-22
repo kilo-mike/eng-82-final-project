@@ -1,8 +1,8 @@
-package refactor.pages.trainer;
+package refactor.components.pages.trainer;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import refactor.NavPage;
+import refactor.components.NavPage;
 
 public class TrainerHomePageImpl extends NavPage implements TrainerHomePage {
 

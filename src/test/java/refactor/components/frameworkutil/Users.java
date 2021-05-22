@@ -1,4 +1,4 @@
-package refactor.frameworkutil;
+package refactor.components.frameworkutil;
 
 public class Users {
 

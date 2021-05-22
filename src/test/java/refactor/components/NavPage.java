@@ -1,18 +1,18 @@
-package refactor;
+package refactor.components;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import refactor.frameworkutil.ActionClicker;
-import refactor.frameworkutil.Users;
-import refactor.pages.ProfilePage;
-import refactor.pages.admin.AdminHomePageImpl;
-import refactor.pages.admin.AdminProfilePageImpl;
-import refactor.pages.other.CompetenciesPageImpl;
-import refactor.pages.other.LoginPageImpl;
-import refactor.pages.trainee.TraineeHomePageImpl;
-import refactor.pages.trainee.TraineeProfilePageImpl;
-import refactor.pages.trainer.TrainerHomePageImpl;
-import refactor.pages.trainer.TrainerProfilePageImpl;
+import refactor.components.frameworkutil.ActionClicker;
+import refactor.components.frameworkutil.Users;
+import refactor.components.pages.ProfilePage;
+import refactor.components.pages.admin.AdminHomePageImpl;
+import refactor.components.pages.admin.AdminProfilePageImpl;
+import refactor.components.pages.other.CompetenciesPageImpl;
+import refactor.components.pages.other.LoginPageImpl;
+import refactor.components.pages.trainee.TraineeHomePageImpl;
+import refactor.components.pages.trainee.TraineeProfilePageImpl;
+import refactor.components.pages.trainer.TrainerHomePageImpl;
+import refactor.components.pages.trainer.TrainerProfilePageImpl;
 
 public abstract class NavPage implements Page {
 

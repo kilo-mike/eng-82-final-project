@@ -1,12 +1,12 @@
-package refactor.pages.other;
+package refactor.components.pages.other;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import refactor.NavPage;
-import refactor.frameworkutil.PropertiesLoader;
-import refactor.pages.admin.AdminHomePageImpl;
-import refactor.pages.trainee.TraineeHomePageImpl;
-import refactor.pages.trainer.TrainerHomePageImpl;
+import refactor.components.NavPage;
+import refactor.components.frameworkutil.PropertiesLoader;
+import refactor.components.pages.admin.AdminHomePageImpl;
+import refactor.components.pages.trainee.TraineeHomePageImpl;
+import refactor.components.pages.trainer.TrainerHomePageImpl;
 
 import java.util.concurrent.TimeUnit;
 

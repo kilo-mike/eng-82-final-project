@@ -1,8 +1,8 @@
-package refactor.pages.trainee;
+package refactor.components.pages.trainee;
 
 import org.openqa.selenium.WebDriver;
-import refactor.NavPage;
-import refactor.pages.ProfilePage;
+import refactor.components.NavPage;
+import refactor.components.pages.ProfilePage;
 
 public class TraineeProfilePageImpl extends NavPage implements ProfilePage {
 

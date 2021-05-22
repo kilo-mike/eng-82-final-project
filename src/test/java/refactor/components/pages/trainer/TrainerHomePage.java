@@ -1,4 +1,4 @@
-package refactor.pages.trainer;
+package refactor.components.pages.trainer;
 
 public interface TrainerHomePage {
 //

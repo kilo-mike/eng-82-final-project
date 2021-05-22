@@ -1,4 +1,4 @@
-package refactor.pages.other;
+package refactor.components.pages.other;
 
 public interface CompetenciesPage {
 

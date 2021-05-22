@@ -1,4 +1,4 @@
-package refactor.frameworkutil;
+package refactor.components.frameworkutil;
 
 import java.io.FileReader;
 import java.io.IOException;

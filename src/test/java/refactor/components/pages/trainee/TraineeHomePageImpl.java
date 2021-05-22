@@ -1,9 +1,9 @@
-package refactor.pages.trainee;
+package refactor.components.pages.trainee;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import refactor.NavPage;
+import refactor.components.NavPage;
 
 import java.util.List;
 

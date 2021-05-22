@@ -1,8 +1,8 @@
-package refactor.pages.other;
+package refactor.components.pages.other;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import refactor.NavPage;
+import refactor.components.NavPage;
 
 public class CompetenciesPageImpl extends NavPage implements CompetenciesPage {
 

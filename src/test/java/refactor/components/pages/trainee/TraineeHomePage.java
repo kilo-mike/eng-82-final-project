@@ -1,4 +1,4 @@
-package refactor.pages.trainee;
+package refactor.components.pages.trainee;
 
 public interface TraineeHomePage {
 

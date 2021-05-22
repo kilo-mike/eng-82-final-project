@@ -1,4 +1,4 @@
-package refactor.pages.admin;
+package refactor.components.pages.admin;
 
 import com.sparta.eng82.interfaces.pages.navpages.admin.addpages.AddTrainerPage;
 
