@@ -3,7 +3,6 @@ package refactor.tests.unit.other;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import refactor.components.frameworkutil.WebDriverFactory;
 import refactor.components.frameworkutil.WebDriverTypes;
@@ -46,51 +45,53 @@ public class ChangePasswordPageImplTests {
                 .lengthOfCurrentPasswordInputValue());
     }
 
-//
-//    @ParameterizedTest
-//    @ValueSource(strings = {"admin", "trainer", "trainee"})
-//    @DisplayName("Check length of new password")
-//    void checkLengthOfNewPassword(String user) {
-//        loginPage.enterEmail(driver, user + "_username", properties)
-//                .enterPassword(driver, user + "_password", properties)
-//                .login(driver, user + "_name")
-//                .goToProfilePage(driver)
-//                .changePassword(driver)
-//                .enterNewPassword(password);
-//
-//        Assertions.assertEquals(password.length(), driver.findElement(byNewPassword).getAttribute("value").length());
-//    }
-//
-//    @ParameterizedTest
-//    @ValueSource(strings = {"admin", "trainer", "trainee"})
-//    @DisplayName("Check length of confirmed password")
-//    void checkLengthOfConfirmedPassword(String user) {
-//        loginPage.enterEmail(driver, user + "_username", properties)
-//                .enterPassword(driver, user + "_password", properties)
-//                .login(driver, user + "_name")
-//                .goToProfilePage(driver)
-//                .changePassword(driver)
-//                .enterConfirmPassword(password);
-//
-//        Assertions.assertEquals(password.length(), driver.findElement(byConfirmPassword).getAttribute("value").length());
-//    }
-//
-//    @ParameterizedTest
-//    @ValueSource(strings = {"admin", "trainer", "trainee"})
-//    @DisplayName("Change password")
-//    void changePassword(String user) {
-//        loginPage.enterEmail(driver, user + "_username", properties)
-//                .enterPassword(driver, user + "_password", properties)
-//                .login(driver, user + "_name")
-//                .goToProfilePage(driver)
-//                .changePassword(driver)
-//                .enterCurrentPassword(password)
-//                .enterNewPassword(password)
-//                .enterConfirmPassword(password)
-//                .clickChange(user);
-//
-//        Assertions.assertTrue(driver.getCurrentUrl().endsWith("/"));
-//    }
+    @ParameterizedTest
+    @ValueSource(strings = {"admin", "trainer", "trainee"})
+    @DisplayName("Check length of new password")
+    void checkLengthOfNewPassword(String user) {
+        Assertions.assertEquals(password.length(), new LoginPageImpl(driver, user)
+                .driverGet()
+                .enterEmail()
+                .enterPassword()
+                .clickLogin()
+                .goToProfilePage()
+                .goToChangePasswordPage()
+                .enterNewPassword(password)
+                .lengthOfNewPasswordInputValue());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"admin", "trainer", "trainee"})
+    @DisplayName("Check length of confirmed password")
+    void checkLengthOfConfirmedPassword(String user) {
+        Assertions.assertEquals(password.length(), new LoginPageImpl(driver, user)
+                .driverGet()
+                .enterEmail()
+                .enterPassword()
+                .clickLogin()
+                .goToProfilePage()
+                .goToChangePasswordPage()
+                .enterConfirmPassword(password)
+                .lengthOfConfirmPasswordInputValue());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"admin", "trainer", "trainee"})
+    @DisplayName("Change password")
+    void changePassword(String user) {
+        Assertions.assertTrue(new LoginPageImpl(driver, user)
+                .driverGet()
+                .enterEmail()
+                .enterPassword()
+                .clickLogin()
+                .goToProfilePage()
+                .goToChangePasswordPage()
+                .enterCurrentPassword()
+                .enterNewPassword(password)
+                .enterConfirmPassword(password)
+                .clickChange(user)
+                .isOnHomePage());
+    }
 
     @AfterEach
     void tearDown() {
