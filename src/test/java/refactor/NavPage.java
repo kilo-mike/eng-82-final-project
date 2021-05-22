@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import refactor.frameworkutil.ActionClicker;
 import refactor.frameworkutil.Users;
 import refactor.pages.ProfilePage;
+import refactor.pages.access.CompetenciesPageImpl;
 import refactor.pages.access.LoginPageImpl;
 import refactor.pages.admin.AdminHomePageImpl;
 import refactor.pages.admin.AdminProfilePageImpl;
@@ -55,11 +56,11 @@ public abstract class NavPage implements Page {
         return null;
     }
 
-//    public CompetenciesPage goToCompetenciesPage() {
-//        ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, By.cssSelector(".bi-list"));
-//        driver.findElement(By.linkText("Behavioural Competencies")).click();
-//        return new CompetenciesPageImpl(driver);
-//    }
+    public CompetenciesPageImpl goToCompetenciesPage() {
+        ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, By.cssSelector(".bi-list"));
+        driver.findElement(By.linkText("Behavioural Competencies")).click();
+        return new CompetenciesPageImpl(driver, user);
+    }
 
     public LoginPageImpl logOut() {
         ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, By.cssSelector(".bi-list"));
