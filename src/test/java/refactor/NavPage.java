@@ -24,7 +24,6 @@ public abstract class NavPage implements Page {
         this.user = user;
     }
 
-
     public boolean isOnCompetenciesPage() {
         return driver.getCurrentUrl().endsWith("competencies");
     }
