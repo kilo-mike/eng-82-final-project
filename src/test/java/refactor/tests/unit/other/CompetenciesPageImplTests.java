@@ -118,6 +118,19 @@ public class CompetenciesPageImplTests {
                 .hasImaginativeSection());
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"admin", "trainer", "trainee"})
+    @DisplayName("Check that has all sections")
+    void checkThatHasAllSections(String user) {
+        Assertions.assertTrue(new LoginPageImpl(driver, user)
+                .driverGet()
+                .enterEmail()
+                .enterPassword()
+                .clickLogin()
+                .goToCompetenciesPage()
+                .hasAllSections());
+    }
+
     @AfterEach
     void tearDown() {
         driver.quit();

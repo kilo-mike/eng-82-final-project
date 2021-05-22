@@ -24,6 +24,10 @@ public class CompetenciesPageImpl extends NavPage implements CompetenciesPage {
         this.user = user;
     }
 
+    public boolean hasAllSections(){
+        return hasAnalyticSection() && hasIndependentSection() && hasDeterminedSection() && hasProfessionalSection() && hasStudiousSection() && hasImaginativeSection();
+    }
+
     @Override
     public boolean hasAnalyticSection() {
         return driver.findElement(competenciesContainer).findElement(analytic).findElement(fwBold).isDisplayed();
