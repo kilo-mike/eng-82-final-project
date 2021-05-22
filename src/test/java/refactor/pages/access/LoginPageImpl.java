@@ -1,4 +1,4 @@
-package refactor.pages;
+package refactor.pages.access;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

@@ -9,7 +9,7 @@ import refactor.NavPage;
 import refactor.frameworkutil.PropertiesLoader;
 import refactor.frameworkutil.WebDriverFactory;
 import refactor.frameworkutil.WebDriverTypes;
-import refactor.pages.LoginPageImpl;
+import refactor.pages.access.LoginPageImpl;
 
 public class LoginPageImplTests {
 

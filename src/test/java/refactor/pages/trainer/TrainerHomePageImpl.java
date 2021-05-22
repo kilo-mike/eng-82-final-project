@@ -18,7 +18,8 @@ public class TrainerHomePageImpl extends NavPage implements TrainerHomePage {
 
     public TrainerHomePageImpl(WebDriver driver, String user) {
         super(driver, user);
-
+        this.driver = driver;
+        this.user = user;
     }
 
     @Override

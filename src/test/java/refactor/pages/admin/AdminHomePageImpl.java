@@ -14,11 +14,13 @@ public class AdminHomePageImpl extends NavPage implements AdminHomePage {
     private final By trainersTableBody = new By.ByTagName("tbody");
     private final By profileButton = new By.ByCssSelector(".bi-person-circle");
 
-    WebDriver driver;
-    String user;
+    private final WebDriver driver;
+    private final String user;
 
     public AdminHomePageImpl(WebDriver driver, String user) {
         super(driver, user);
+        this.driver = driver;
+        this.user = user;
     }
 
     @Override

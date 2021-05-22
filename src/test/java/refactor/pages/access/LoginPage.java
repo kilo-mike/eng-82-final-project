@@ -1,4 +1,4 @@
-package refactor.pages;
+package refactor.pages.access;
 
 import refactor.Page;
 

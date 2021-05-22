@@ -9,18 +9,20 @@ import java.util.List;
 
 
 public class TraineeHomePageImpl extends NavPage implements TraineeHomePage {
+
     private final By feedbackBys = new By.ByClassName("list-group-item-action");
     private final By nameBy = new By.ByCssSelector("h1");
     private final List<WebElement> feedbackList;
     private final By currentWeekTrafficLightBy = new By.ByXPath("//*[@id=\"main-content\"]/div/div/div/div[2]/div/ul/li[1]/span");
 
     private final WebDriver driver;
-    private String user;
+    private final String user;
 
 
     public TraineeHomePageImpl(WebDriver driver, String user) {
         super(driver, user);
         this.driver = driver;
+        this.user = user;
         feedbackList = driver.findElements(feedbackBys);
     }
 

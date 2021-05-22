@@ -3,7 +3,15 @@ package refactor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import refactor.frameworkutil.ActionClicker;
-import refactor.pages.LoginPageImpl;
+import refactor.frameworkutil.Users;
+import refactor.pages.ProfilePage;
+import refactor.pages.access.LoginPageImpl;
+import refactor.pages.admin.AdminHomePageImpl;
+import refactor.pages.admin.AdminProfilePageImpl;
+import refactor.pages.trainee.TraineeHomePageImpl;
+import refactor.pages.trainee.TraineeProfilePageImpl;
+import refactor.pages.trainer.TrainerHomePageImpl;
+import refactor.pages.trainer.TrainerProfilePageImpl;
 
 public abstract class NavPage implements Page {
 
@@ -19,33 +27,34 @@ public abstract class NavPage implements Page {
         return driver.getCurrentUrl().endsWith("/");
     }
 
-//    public Page goToHomePage() {
-//        ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, By.cssSelector(".bi-list"));
-//        driver.findElement(By.linkText("Home")).click();
-//        if (AdminHomePageImpl.class.equals(this.getClass())) {
-//            return new AdminHomePageImpl(driver);
-//        } else if (TrainerHomePageImpl.class.equals(this.getClass())) {
-//            return new TrainerHomePageImpl(driver);
-//        } else if (TraineeHomePageImpl.class.equals(this.getClass())) {
-//            return new TraineeHomePageImpl(driver);
-//        }
-//        return null;
-//    }
-//
-//    public ProfilePage goToProfilePage() {
-//        // TODO ? maybe ? competencies -> profile etc, extend if statement with ORs
-//        ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, By.cssSelector(".bi-list"));
-//        driver.findElement(By.linkText("Profile")).click();
-//        if (AdminHomePageImpl.class.equals(this.getClass())) {
-//            return new AdminProfilePageImpl(driver);
-//        } else if (TrainerHomePageImpl.class.equals(this.getClass())) {
-//            return new TrainerProfilePageImpl(driver);
-//        } else if (TraineeHomePageImpl.class.equals(this.getClass())) {
-//            return new TraineeProfilePageImpl(driver);
-//        }
-//        return null;
-//    }
-//
+    public NavPage goToHomePage() {
+        ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, By.cssSelector(".bi-list"));
+        driver.findElement(By.linkText("Home")).click();
+        switch (user) {
+            case Users.ADMIN:
+                return new AdminHomePageImpl(driver, user);
+            case Users.TRAINER:
+                return new TrainerHomePageImpl(driver, user);
+            case Users.TRAINEE:
+                return new TraineeHomePageImpl(driver, user);
+        }
+        return null;
+    }
+
+    public ProfilePage goToProfilePage() {
+        ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, By.cssSelector(".bi-list"));
+        driver.findElement(By.linkText("Profile")).click();
+        switch (user) {
+            case Users.ADMIN:
+                return new AdminProfilePageImpl(driver, user);
+            case Users.TRAINER:
+                return new TrainerProfilePageImpl(driver, user);
+            case Users.TRAINEE:
+                return new TraineeProfilePageImpl(driver, user);
+        }
+        return null;
+    }
+
 //    public CompetenciesPage goToCompetenciesPage() {
 //        ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, By.cssSelector(".bi-list"));
 //        driver.findElement(By.linkText("Behavioural Competencies")).click();
