@@ -1,6 +1,7 @@
 package refactor.components.pages.trainer.feedbackpages;
 
 import refactor.components.pages.trainer.TrainerFeedbackFormPage;
+import refactor.components.pages.trainer.TrainerHomePageImpl;
 
 public interface TrainerTrainerFeedbackFormPage extends TrainerFeedbackFormPage {
 
@@ -19,4 +20,8 @@ public interface TrainerTrainerFeedbackFormPage extends TrainerFeedbackFormPage 
     TrainerTrainerFeedbackFormPageImpl enterTrainerContComments(String comments);
 
     TrainerTraineeFeedbackFormPageImpl clickOnTrainee();
+
+    TrainerHomePageImpl clickSave();
+
+    TrainerHomePageImpl clickSubmit();
 }

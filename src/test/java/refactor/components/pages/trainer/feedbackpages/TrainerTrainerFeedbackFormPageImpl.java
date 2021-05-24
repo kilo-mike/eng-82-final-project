@@ -4,6 +4,7 @@ package refactor.components.pages.trainer.feedbackpages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import refactor.components.pages.FeedbackFormPage;
+import refactor.components.pages.trainer.TrainerHomePageImpl;
 
 public class TrainerTrainerFeedbackFormPageImpl extends FeedbackFormPage implements TrainerTrainerFeedbackFormPage {
 
@@ -15,6 +16,8 @@ public class TrainerTrainerFeedbackFormPageImpl extends FeedbackFormPage impleme
     private final By stopTrainerTextField = new By.ById("stopTrainer");
     private final By startTrainerTextField = new By.ById("startTrainer");
     private final By continueTrainerTextField = new By.ById("continueTrainer");
+    private final By saveButton = new By.ById("saveBtn");
+    private final By submitButton = new By.ById("submitBtn");
 
 
     private final By traineeButton = new By.ByLinkText("Trainee");
@@ -83,6 +86,18 @@ public class TrainerTrainerFeedbackFormPageImpl extends FeedbackFormPage impleme
         return new TrainerTraineeFeedbackFormPageImpl(driver, this.getClass().getSimpleName());
     }
 
+    @Override
+    public TrainerHomePageImpl clickSave() {
+        driver.findElement(saveButton).click();
+        return new TrainerHomePageImpl(driver, user);
+    }
+
+    @Override
+    public TrainerHomePageImpl clickSubmit() {
+        driver.findElement(submitButton).click();
+        return new TrainerHomePageImpl(driver, user);
+    }
+
 
     @Override
     public String getUrl() {
@@ -103,5 +118,13 @@ public class TrainerTrainerFeedbackFormPageImpl extends FeedbackFormPage impleme
 
     public boolean checkAllCommentsHaveBeenInputSuccessfully(String stopComment, String startComment, String continueComment) {
         return getStopInputValue().equals(stopComment) && getStartInputValue().equals(startComment) && getContInputValue().equals(continueComment);
+    }
+
+    public TrainerHomePageImpl clearCommentsAndSave() {
+        driver.findElement(stopTrainerTextField).clear();
+        driver.findElement(startTrainerTextField).clear();
+        driver.findElement(continueTrainerTextField).clear();
+        driver.findElement(trainerCommentsTextField).clear();
+        return clickSave();
     }
 }

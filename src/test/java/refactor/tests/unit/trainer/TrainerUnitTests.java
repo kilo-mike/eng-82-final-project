@@ -210,6 +210,13 @@ public class TrainerUnitTests {
     @Nested
     @DisplayName("TrainerTrainer tests")
     class TrainerTrainerTests {
+        int week = 2;
+        String name = "Jane Doe";
+
+        @AfterEach
+        void tearDown() {
+            trainerHomePage.selectTraineeName(week, name).clickOnTrainer().clearCommentsAndSave();
+        }
 
         @Test
         @DisplayName("Check comment inputs are working")
@@ -219,7 +226,7 @@ public class TrainerUnitTests {
             String contComment = "Keep being OK";
 
             Assertions.assertTrue(trainerHomePage
-                    .selectTraineeName(2, "Jane Doe")
+                    .selectTraineeName(week, name)
                     .clickOnTrainer()
                     .enterTrainerStopComments(stopComment)
                     .clickOnStart()

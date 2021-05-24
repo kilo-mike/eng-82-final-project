@@ -40,25 +40,25 @@ public class TrainerTraineeFeedbackFormPageImpl extends FeedbackFormPage impleme
     }
 
     @Override
-    public TrainerTraineeFeedbackFormPage clickOnStop() {
+    public TrainerTraineeFeedbackFormPageImpl clickOnStop() {
         driver.findElement(stopButton).click();
         return this;
     }
 
     @Override
-    public TrainerTraineeFeedbackFormPage clickOnStart() {
+    public TrainerTraineeFeedbackFormPageImpl clickOnStart() {
         driver.findElement(startButton).click();
         return this;
     }
 
     @Override
-    public TrainerTraineeFeedbackFormPage clickOnCont() {
+    public TrainerTraineeFeedbackFormPageImpl clickOnCont() {
         driver.findElement(continueButton).click();
         return this;
     }
 
     @Override
-    public TrainerTrainerFeedbackFormPage clickOnTrainer() {
+    public TrainerTrainerFeedbackFormPageImpl clickOnTrainer() {
         ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, trainerButton);
         return new TrainerTrainerFeedbackFormPageImpl(driver, user);
     }
