@@ -23,8 +23,9 @@ public class TrainerTrainerFeedbackFormPageImpl extends FeedbackFormPage impleme
     private final By saveButton = new By.ById("saveBtn");
     private final By submitButton = new By.ById("submitBtn");
 
+    private final By traineeButton = new By.ByXPath("/html/body/div[2]/div/div/form/div[1]/label[1]");
 
-    private final By traineeButton = new By.ByLinkText("Trainee");
+    private final By trainerDiv = new By.ById("trainer");
 
     private final WebDriver driver;
     private final String user;
@@ -121,12 +122,15 @@ public class TrainerTrainerFeedbackFormPageImpl extends FeedbackFormPage impleme
     }
 
     public TrainerTrainerFeedbackFormPageImpl enterStopStartContComments(String stopComments, String startComments, String contComments){
-        enterTrainerStopComments(stopComments).clickOnStart().enterTrainerStartComments(startComments).clickOnCont().enterTrainerContComments(contComments);
-        return this;
+        return this.clickOnStop().enterTrainerStopComments(stopComments).clickOnStart().enterTrainerStartComments(startComments).clickOnCont().enterTrainerContComments(contComments);
     }
 
     public boolean checkAllCommentsHaveBeenInputSuccessfully(String stopComment, String startComment, String continueComment) {
         return clickOnStop().getStopInputValue().equals(stopComment) && clickOnStart().getStartInputValue().equals(startComment) && clickOnCont().getContInputValue().equals(continueComment);
+    }
+
+    public boolean isTrainerDisplayed(){
+        return driver.findElement(trainerDiv).isDisplayed();
     }
 
     public TrainerHomePageImpl clearCommentsAndSave() {
