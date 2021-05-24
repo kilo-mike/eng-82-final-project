@@ -1,17 +1,15 @@
-package com.sparta.eng82.tests.unit.trainee;
+package refactor.tests.unit.trainee;
 
-import com.sparta.eng82.components.pages.accesspages.LoginPageImpl;
-import com.sparta.eng82.components.webdriver.WebDriverFactory;
-import com.sparta.eng82.components.webdriver.WebDriverTypes;
-import com.sparta.eng82.interfaces.pages.navpages.trainee.TraineeHomePage;
-import com.sparta.eng82.interfaces.pages.navpages.trainee.feedbackpages.TraineeTraineeFeedbackFormPage;
-import com.sparta.eng82.tests.unit.frameworkutil.PropertiesUtil;
+
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
+import refactor.components.frameworkutil.WebDriverFactory;
+import refactor.components.frameworkutil.WebDriverTypes;
+import refactor.components.pages.other.LoginPageImpl;
+import refactor.components.pages.trainee.TraineeHomePageImpl;
 
 import java.util.Arrays;
 import java.util.EnumSet;
-import java.util.Properties;
 
 public class TraineeHomepageTests {
 
@@ -21,30 +19,26 @@ public class TraineeHomepageTests {
     private static EnumSet<WebDriverTypes> normalTypes;
     private static EnumSet<WebDriverTypes> headlessTypes;
 
-    private static Properties properties;
+
     private final String traineePropertyUsername = "trainee_username";
     private final String traineePropertyPassword = "trainee_password";
     private final String traineePropertyName = "trainee_name";
 
     private LoginPageImpl loginPage;
-    private TraineeHomePage traineeHomePage;
+    private TraineeHomePageImpl traineeHomePage;
 
     @BeforeAll
     static void setupAll() {
         webDriverFactory = new WebDriverFactory();
         normalTypes = EnumSet.of(WebDriverTypes.CHROME, WebDriverTypes.EDGE);
         headlessTypes = EnumSet.of(WebDriverTypes.CHROME_HEADLESS);
-        properties = new Properties();
-        PropertiesUtil.loadProperties(properties);
     }
 
     @BeforeEach
     void setup() {
         driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
-        driver.get("http://localhost:8080/");
-        loginPage = new LoginPageImpl(driver);
-        loginPage.enterEmail(driver, traineePropertyUsername, properties).enterPassword(driver, traineePropertyPassword, properties);
-        traineeHomePage = (TraineeHomePage) loginPage.login(driver, traineePropertyName);
+        traineeHomePage = (TraineeHomePageImpl) new LoginPageImpl(driver, "trainee").login();
+
     }
 
     @AfterEach
@@ -77,16 +71,13 @@ public class TraineeHomepageTests {
     @Test
     @DisplayName("Check that the correct form is selected when specifying a week")
     void checkThatTheCorrectFormIsSelectedWhenSpecifyingAWeek() {
-        TraineeTraineeFeedbackFormPage traineeTraineeFeedbackFormPage = (TraineeTraineeFeedbackFormPage) traineeHomePage.clickFeedbackFormForWeek(2);
-        Assertions.assertEquals("Week 2", traineeTraineeFeedbackFormPage.getWeek(driver));
+        Assertions.assertEquals("Week 2", traineeHomePage.clickFeedbackFormForWeek(2).getWeek());
     }
 
     @Test
     @DisplayName("Check that the current week test selects the correct week")
     void checkThatTheCurrentWeekTestSelectsTheCorrectWeek() {
-        String currentWeek = traineeHomePage.getCurrentWeek();
-        TraineeTraineeFeedbackFormPage traineeTraineeFeedbackFormPage = (TraineeTraineeFeedbackFormPage) traineeHomePage.clickCurrentWeek();
-        Assertions.assertEquals(currentWeek, traineeTraineeFeedbackFormPage.getWeek(driver));
+        Assertions.assertEquals(traineeHomePage.getCurrentWeek(), traineeHomePage.clickCurrentWeek().getWeek());
     }
 
     @Test
@@ -110,9 +101,9 @@ public class TraineeHomepageTests {
     @Test  //TODO This can be mocked I think
     @DisplayName("Check the traffic light colour for the current week")
     void checkTheTrafficLightColourForCurrentWeek() {
-        String[] acceptableColours = {"Green", "Amber", "Red"};
-        String colour = traineeHomePage.getCurrentTrafficLight();
-        Assertions.assertTrue(Arrays.stream(acceptableColours).anyMatch(s -> s.contains(colour)));
+        // TODO
+        //traineHomePage.checkTrafficLightColourForCurrentWeek();
+        Assertions.assertTrue(Arrays.stream(new String[]{"Green", "Amber", "Red"}).anyMatch(s -> s.contains(traineeHomePage.getCurrentTrafficLight())));
     }
 
     @Test

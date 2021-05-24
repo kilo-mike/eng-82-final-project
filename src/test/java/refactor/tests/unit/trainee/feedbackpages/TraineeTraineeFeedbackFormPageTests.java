@@ -1,16 +1,17 @@
-package com.sparta.eng82.tests.unit.trainee.feedbackpages;
+package refactor.tests.unit.trainee.feedbackpages;
 
-import com.sparta.eng82.components.pages.accesspages.LoginPageImpl;
-import com.sparta.eng82.components.pages.navpages.trainee.feedbackpages.TraineeTrainerFeedbackFormPageImpl;
-import com.sparta.eng82.components.webdriver.WebDriverFactory;
-import com.sparta.eng82.components.webdriver.WebDriverTypes;
-import com.sparta.eng82.interfaces.pages.navpages.trainee.TraineeHomePage;
-import com.sparta.eng82.interfaces.pages.navpages.trainee.feedbackpages.TraineeTraineeFeedbackFormPage;
-import com.sparta.eng82.tests.unit.frameworkutil.PropertiesUtil;
 import org.junit.Ignore;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import refactor.components.frameworkutil.WebDriverFactory;
+import refactor.components.frameworkutil.WebDriverTypes;
+import refactor.components.pages.other.LoginPageImpl;
+import refactor.components.pages.trainee.TraineeHomePage;
+import refactor.components.pages.trainee.TraineeHomePageImpl;
+import refactor.components.pages.trainee.feedback.TraineeTraineeFeedbackFormPage;
+import refactor.components.pages.trainee.feedback.TraineeTraineeFeedbackFormPageImpl;
+import refactor.components.pages.trainee.feedback.TraineeTrainerFeedbackFormPageImpl;
 
 import java.util.Properties;
 
@@ -24,24 +25,16 @@ public class TraineeTraineeFeedbackFormPageTests {
     private final String traineePropertyPassword = "trainee_password";
     private final String traineePropertyName = "trainee_name";
 
-    private static Properties properties;
-    private TraineeHomePage traineeHomePage;
-    private TraineeTraineeFeedbackFormPage traineeTraineeFeedbackFormPage;
+    private TraineeHomePageImpl traineeHomePage;
+    private TraineeTraineeFeedbackFormPageImpl traineeTraineeFeedbackFormPage;
 
-    @BeforeAll
-    static void setupAll() {
-        properties = new Properties();
-        PropertiesUtil.loadProperties(properties);
-    }
 
     @BeforeEach
     void setup() {
         webDriverFactory = new WebDriverFactory();
         driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME_HEADLESS);
-        loginPage = new LoginPageImpl(driver);
-        loginPage.enterEmail(driver, traineePropertyUsername, properties).enterPassword(driver, traineePropertyPassword, properties);
-        traineeHomePage = (TraineeHomePage) loginPage.login(driver, traineePropertyName);
-        traineeTraineeFeedbackFormPage = (TraineeTraineeFeedbackFormPage) traineeHomePage.clickFeedbackFormForWeek(2);
+        traineeHomePage = (TraineeHomePageImpl) new LoginPageImpl(driver, "trainee").login();
+        traineeTraineeFeedbackFormPage =  traineeHomePage.clickFeedbackFormForWeek(2);
     }
 
     @Test
