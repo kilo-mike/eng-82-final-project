@@ -40,8 +40,6 @@ public class TrainerHomePageImpl extends NavPage implements TrainerHomePage {
     }
 
 
-
-
     {
         try {
             InputStream input = new FileInputStream("src/test/resources/login.properties");
@@ -60,7 +58,7 @@ public class TrainerHomePageImpl extends NavPage implements TrainerHomePage {
     }
 
     @Override
-    public TrainerTraineeFeedbackFormPage selectTraineeName(int week, String traineeName) {
+    public TrainerTraineeFeedbackFormPageImpl selectTraineeName(int week, String traineeName) {
         weekName = new By.ByXPath("//option[@value='" + week + "']");
         traineeNameFinder = new By.ByXPath("//td[\"" + traineeName + "\"]");
 

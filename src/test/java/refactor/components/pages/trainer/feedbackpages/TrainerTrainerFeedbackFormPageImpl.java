@@ -4,9 +4,10 @@ package refactor.components.pages.trainer.feedbackpages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import refactor.components.NavPage;
+import refactor.components.pages.FeedbackFormPage;
 import refactor.components.pages.trainer.TrainerFeedbackFormPage;
 
-public class TrainerTrainerFeedbackFormPageImpl extends NavPage implements TrainerTrainerFeedbackFormPage {
+public class TrainerTrainerFeedbackFormPageImpl extends FeedbackFormPage implements TrainerTrainerFeedbackFormPage {
 
     private final By trainerCommentsTextField = new By.ById("trainerComments");
     private final By stopButton = new By.ByLinkText("Stop");
