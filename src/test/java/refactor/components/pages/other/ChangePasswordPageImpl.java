@@ -1,9 +1,9 @@
 package refactor.components.pages.other;
 
-import com.sparta.eng82.frameworkutil.PropertiesLoader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import refactor.components.NavPage;
+import refactor.components.frameworkutil.PropertiesLoader;
 import refactor.components.pages.admin.AdminHomePageImpl;
 import refactor.components.pages.trainee.TraineeHomePageImpl;
 import refactor.components.pages.trainer.TrainerHomePageImpl;
