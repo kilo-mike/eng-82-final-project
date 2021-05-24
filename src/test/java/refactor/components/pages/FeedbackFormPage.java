@@ -1,53 +1,56 @@
 package refactor.components.pages;
 
-import com.sparta.eng82.components.pages.navpages.CompetenciesPageImpl;
-import com.sparta.eng82.components.pages.navpages.trainee.TraineeHomePageImpl;
-import com.sparta.eng82.components.pages.navpages.trainer.TrainerHomePageImpl;
-import com.sparta.eng82.interfaces.pages.NavPage;
-import com.sparta.eng82.tests.unit.frameworkutil.PropertiesUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
+import refactor.components.NavPage;
+import refactor.components.frameworkutil.ActionClicker;
+import refactor.components.pages.other.CompetenciesPage;
+import refactor.components.pages.other.CompetenciesPageImpl;
+import refactor.components.pages.trainee.TraineeHomePageImpl;
+import refactor.components.pages.trainer.TrainerHomePageImpl;
 
 import java.util.concurrent.TimeUnit;
 
-public interface FeedbackFormPage {
+public abstract class FeedbackFormPage extends NavPage {
 
-    // TODO turn into simple interface, then implement. Any class that needs its methods just extends the class
+    private final WebDriver driver;
+    private final String user;
 
-    /**
-     * @param grade can be either "A", "B", "C" or "D"
-     */
-    default NavPage setTechnicalGrade(WebDriver driver, char grade) {
+    public FeedbackFormPage(WebDriver driver, String user) {
+        super(driver, user);
+        this.driver = driver;
+        this.user = user;
+    }
+
+    public NavPage setTechnicalGrade( char grade) {
         Select drpTechnicalGrade = new Select(driver.findElement(new By.ByName("technicalGrade")));
         drpTechnicalGrade.selectByVisibleText(String.valueOf(grade));
         return this;
     }
 
-
-    default NavPage setConsultantGrade(WebDriver driver, char grade) {
+    public NavPage setConsultantGrade( char grade) {
         Select drpConsultantGrade = new Select(driver.findElement(new By.ByName("consultantGrade")));
         drpConsultantGrade.selectByVisibleText(String.valueOf(grade));
         return this;
     }
 
-    default CompetenciesPage clickConsultantGrade(WebDriver driver) {
-        PropertiesUtil.timedMouseClicker(driver, 500, new By.ByLinkText("Consultant Grade"));
-        return new CompetenciesPageImpl(driver);
+    public CompetenciesPage clickConsultantGrade() {
+        ActionClicker.timedMouseClicker(driver, 500, new By.ByLinkText("Consultant Grade"));
+        return new CompetenciesPageImpl(driver,user);
     }
 
 
-    default NavPage saveForm(WebDriver driver) {
-        PropertiesUtil.timedMouseClicker(driver, 500, new By.ById("saveBtn"));
+    public NavPage saveForm() {
+        ActionClicker.timedMouseClicker(driver, 500, new By.ById("saveBtn"));
         return this;
     }
 
     /**
      * @param simpleName can be either "Trainer", "Trainee"
      */
-
-    default NavPage submitForm(WebDriver driver, String simpleName) {
-        PropertiesUtil.timedMouseClicker(driver, 500, new By.ById("submitBtn"));
+    public NavPage submitForm( String simpleName) {
+        ActionClicker.timedMouseClicker(driver, 500, new By.ById("submitBtn"));
         switch (simpleName) {
             case "Trainee":
                 return new TraineeHomePageImpl(driver, user);
@@ -56,16 +59,13 @@ public interface FeedbackFormPage {
         }
         return null;
     }
-
-    default String getName(WebDriver driver, String name) {
+    public String getName( String name) {
         String[] extractedName = driver.findElement(new By.ByXPath("//*[@id=\"feedbackText\"]/div/h1")).getText().split("/");
         return extractedName[1].trim();
     }
 
-    default String getWeek(WebDriver driver) {
+    public String getWeek() {
         By textField = new By.ByXPath("//*[@id=\"feedbackText\"]/div/h1");
-        //WebDriverWait wait = new WebDriverWait(driver, 10);
-        //wait.until(ExpectedConditions.visibilityOfElementLocated(textField));
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         String[] extractedWeek = driver.findElement(textField).getText().split("/");
         return extractedWeek[1].trim();
