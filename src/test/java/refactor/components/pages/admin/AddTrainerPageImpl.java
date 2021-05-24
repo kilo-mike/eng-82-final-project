@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 import refactor.components.frameworkutil.ActionClicker;
 
+import java.sql.Driver;
+
 public class AddTrainerPageImpl implements AddTrainerPage {
 
     private final By addTrainerButton = new By.ByLinkText("Add Trainer");
@@ -49,4 +51,14 @@ public class AddTrainerPageImpl implements AddTrainerPage {
         ActionClicker.timedMouseClicker(driver,400,new By.ByXPath("//*[@id=\"trainerModal\"]/div/div/form/div[2]/button"));
         return new AdminHomePageImpl(driver, user);
     }
+
+
+    //TODO fill out these methods later
+    //public String currentValueInFirstNameBox(){}
+
+    //public String currentValueInLastNameBox(){}
+
+//    public String currentGroupSelected(){
+//        return driver.findElement(By.id("addTrainerGroup")).getAttribute("value");
+//    }
 }
