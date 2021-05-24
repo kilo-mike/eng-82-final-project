@@ -8,22 +8,14 @@ import refactor.components.pages.trainer.TrainerHomePageImpl;
 
 public class TrainerTrainerFeedbackFormPageImpl extends FeedbackFormPage implements TrainerTrainerFeedbackFormPage {
 
-    private final By trainerButton = new By.ByXPath("/html/body/div[2]/div/div/form/div[1]/label[2]");
-
     private final By trainerCommentsTextField = new By.ById("trainerComments");
-
-    private final By trainerStopButton = new By.ByXPath("/html/body/div[2]/div/div/form/div[2]/div[1]/label[1]");
-    private final By trainerStartButton = new By.ByXPath("/html/body/div[2]/div/div/form/div[2]/div[1]/label[2]");
-    private final By trainerContinueButton = new By.ByXPath("/html/body/div[2]/div/div/form/div[2]/div[1]/label[3]");
 
     private final By stopTrainerTextField = new By.ById("stopTrainer");
     private final By startTrainerTextField = new By.ById("startTrainer");
-    private final By continueTrainerTextField = new By.ById("continueTrainee");
+    private final By continueTrainerTextField = new By.ById("continueTrainer");
 
     private final By saveButton = new By.ById("saveBtn");
     private final By submitButton = new By.ById("submitBtn");
-
-    private final By traineeButton = new By.ByXPath("/html/body/div[2]/div/div/form/div[1]/label[1]");
 
     private final By trainerDiv = new By.ById("trainer");
 
@@ -45,13 +37,13 @@ public class TrainerTrainerFeedbackFormPageImpl extends FeedbackFormPage impleme
 
     @Override
     public TrainerTrainerFeedbackFormPageImpl clickOnTrainer() {
-        driver.findElement(trainerButton).click();
+        driver.findElement(By.xpath("/html/body/div[2]/div/div/form/div[1]/label[2]")).click();
         return this;
     }
 
     @Override
     public TrainerTrainerFeedbackFormPageImpl clickOnStop() {
-        driver.findElement(trainerStopButton).click();
+        driver.findElement(By.xpath("/html/body/div[2]/div/div/form/div[3]/div[1]/label[1]")).click();
         return this;
     }
 
@@ -63,7 +55,7 @@ public class TrainerTrainerFeedbackFormPageImpl extends FeedbackFormPage impleme
 
     @Override
     public TrainerTrainerFeedbackFormPageImpl clickOnStart() {
-        driver.findElement(trainerStartButton).click();
+        driver.findElement(By.xpath("/html/body/div[2]/div/div/form/div[3]/div[1]/label[2]")).click();
         return this;
     }
 
@@ -75,7 +67,7 @@ public class TrainerTrainerFeedbackFormPageImpl extends FeedbackFormPage impleme
 
     @Override
     public TrainerTrainerFeedbackFormPageImpl clickOnCont() {
-        driver.findElement(trainerContinueButton).click();
+        driver.findElement(By.xpath("/html/body/div[2]/div/div/form/div[3]/div[1]/label[3]")).click();
         return this;
     }
 
@@ -87,7 +79,7 @@ public class TrainerTrainerFeedbackFormPageImpl extends FeedbackFormPage impleme
 
     @Override
     public TrainerTraineeFeedbackFormPageImpl clickOnTrainee() {
-        driver.findElement(traineeButton).click();
+        driver.findElement(By.xpath("/html/body/div[2]/div/div/form/div[1]/label[1]")).click();
         return new TrainerTraineeFeedbackFormPageImpl(driver, this.getClass().getSimpleName());
     }
 
@@ -121,15 +113,29 @@ public class TrainerTrainerFeedbackFormPageImpl extends FeedbackFormPage impleme
         return driver.findElement(By.id("continueTrainer")).getAttribute("value");
     }
 
-    public TrainerTrainerFeedbackFormPageImpl enterStopStartContComments(String stopComments, String startComments, String contComments){
-        return this.clickOnStop().enterTrainerStopComments(stopComments).clickOnStart().enterTrainerStartComments(startComments).clickOnCont().enterTrainerContComments(contComments);
+    public String getTrainerCommentInputValue() {
+        return driver.findElement(By.id("trainerComments")).getAttribute("value");
     }
 
-    public boolean checkAllCommentsHaveBeenInputSuccessfully(String stopComment, String startComment, String continueComment) {
-        return clickOnStop().getStopInputValue().equals(stopComment) && clickOnStart().getStartInputValue().equals(startComment) && clickOnCont().getContInputValue().equals(continueComment);
+    public TrainerTrainerFeedbackFormPageImpl enterAllComments(String stopComments, String startComments, String contComments, String trainerComment) {
+        return clickOnStop()
+                .enterTrainerStopComments(stopComments)
+                .clickOnStart()
+                .enterTrainerStartComments(startComments)
+                .clickOnCont()
+                .enterTrainerContComments(contComments)
+                .enterTrainerComments(trainerComment);
     }
 
-    public boolean isTrainerDisplayed(){
+    public boolean checkAllCommentsHaveBeenInputSuccessfully(String stopComment, String startComment, String continueComment, String trainerComment) {
+        return clickOnStop().getStopInputValue().equals(stopComment)
+                && clickOnStart().getStartInputValue().equals(startComment)
+                && clickOnCont().getContInputValue().equals(continueComment)
+                && getTrainerCommentInputValue().equals(trainerComment);
+    }
+
+
+    public boolean isTrainerDisplayed() {
         return driver.findElement(trainerDiv).isDisplayed();
     }
 

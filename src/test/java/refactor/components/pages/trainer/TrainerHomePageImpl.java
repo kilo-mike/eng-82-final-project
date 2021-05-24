@@ -7,13 +7,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import refactor.components.NavPage;
 import refactor.components.frameworkutil.ActionClicker;
-import refactor.components.pages.trainer.feedbackpages.TrainerTraineeFeedbackFormPage;
+import refactor.components.frameworkutil.PropertiesLoader;
 import refactor.components.pages.trainer.feedbackpages.TrainerTraineeFeedbackFormPageImpl;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 public class TrainerHomePageImpl extends NavPage implements TrainerHomePage {
@@ -39,22 +35,10 @@ public class TrainerHomePageImpl extends NavPage implements TrainerHomePage {
         return null;
     }
 
-
-    {
-        try {
-            InputStream input = new FileInputStream("src/test/resources/login.properties");
-            Properties properties = new Properties();
-            properties.load(input);
-            userFullName = properties.getProperty("trainer_name");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     @Override
     public ManageGroupPage manageGroupButton() {
         driver.findElement(manageGroupButton).click();
-        return new ManageGroupPageImpl(driver,user);
+        return new ManageGroupPageImpl(driver, user);
     }
 
     @Override
@@ -63,15 +47,14 @@ public class TrainerHomePageImpl extends NavPage implements TrainerHomePage {
         traineeNameFinder = new By.ByXPath("//td[\"" + traineeName + "\"]");
 
         driver.findElement(weekListName).findElement(weekName).click();
-        try{
-            ActionClicker.timedMouseClicker(driver, 500, By.xpath(".//*[@id='traineeTable2']/tbody/tr/td[contains(.,'" + traineeName + "')]"));
-        }
-        catch(NoSuchElementException e){
+        try {
+            ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, By.xpath(".//*[@id='traineeTable2']/tbody/tr/td[contains(.,'" + traineeName + "')]"));
+        } catch (NoSuchElementException e) {
             // Make sure to check for/expect this output if a trainee is not present.
             System.out.println("The trainee " + traineeName + " does not exist.");
             return new TrainerTraineeFeedbackFormPageImpl(driver, null);
         }
-        return new TrainerTraineeFeedbackFormPageImpl(driver, this.getClass().getSimpleName());
+        return new TrainerTraineeFeedbackFormPageImpl(driver, user);
     }
 
     @Override
@@ -82,7 +65,7 @@ public class TrainerHomePageImpl extends NavPage implements TrainerHomePage {
     @Override
     public boolean isUserDisplayNameCorrect() {
         String userDisplayName = driver.findElement(By.cssSelector(".pb-3:nth-child(2)")).getText().substring(6);
-        return (userFullName.equals(userDisplayName));
+        return (PropertiesLoader.getName("trainer").equals(userDisplayName));
     }
 
     @Override
@@ -98,7 +81,7 @@ public class TrainerHomePageImpl extends NavPage implements TrainerHomePage {
     @Override
     public boolean isNavigationMenuVisibilityChangingAfterClick() {
         String navBarChanging = "navbar-collapse bg-color-main collapsing";
-        ActionClicker.timedMouseClicker(driver, 400, By.cssSelector(".bi-list"));
+        ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, By.cssSelector(".bi-list"));
         String navBarStatus = driver.findElement(By.id("navbarNav")).getAttribute("class");
 
         return navBarStatus.equals(navBarChanging);
@@ -116,7 +99,7 @@ public class TrainerHomePageImpl extends NavPage implements TrainerHomePage {
 
     @Override
     public ManageGroupPage clickManageGroupButton() {
-        ActionClicker.timedMouseClicker(driver, 400, By.linkText("Manage Group"));
+        ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, By.linkText("Manage Group"));
         return new ManageGroupPageImpl(driver, user);
     }
 

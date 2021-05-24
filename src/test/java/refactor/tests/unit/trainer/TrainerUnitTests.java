@@ -221,7 +221,7 @@ public class TrainerUnitTests {
         TrainerTrainerFeedbackFormPageImpl trainerTrainerFeedbackFormPage;
 
         @BeforeEach
-        void setup(){
+        void setup() {
             trainerTrainerFeedbackFormPage = trainerHomePage.selectTraineeName(week, name).clickOnTrainer();
         }
 
@@ -243,12 +243,12 @@ public class TrainerUnitTests {
             String stopComment = "Stop being bad";
             String startComment = "Start being good";
             String contComment = "Keep being OK";
+            String trainerComment = "Not bad!";
 
-            Assertions.assertTrue(trainerHomePage
-                    .selectTraineeName(week, name)
-                    .clickOnTrainer()
-                    .enterStopStartContComments(stopComment, startComment, contComment)
-                    .checkAllCommentsHaveBeenInputSuccessfully(stopComment, startComment, contComment));
+            Assertions.assertTrue(trainerTrainerFeedbackFormPage
+                    .enterAllComments(stopComment, startComment, contComment, trainerComment)
+                    .checkAllCommentsHaveBeenInputSuccessfully(stopComment, startComment, contComment,trainerComment));
         }
+
     }
 }
