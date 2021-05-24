@@ -1,59 +1,61 @@
 package com.sparta.eng82.interfaces.pages;
 
-import com.sparta.eng82.components.pages.accesspages.LogoutPageImpl;
-import com.sparta.eng82.components.pages.navpages.CompetenciesPageImpl;
-import com.sparta.eng82.components.pages.navpages.admin.AdminHomePageImpl;
-import com.sparta.eng82.components.pages.navpages.admin.AdminProfilePageImpl;
-import com.sparta.eng82.components.pages.navpages.trainee.TraineeHomePageImpl;
-import com.sparta.eng82.components.pages.navpages.trainee.TraineeProfilePageImpl;
-import com.sparta.eng82.components.pages.navpages.trainer.TrainerHomePageImpl;
-import com.sparta.eng82.components.pages.navpages.trainer.TrainerProfilePageImpl;
+import com.sparta.eng82.components.pages.accesspages.LoginPageImpl;
+import com.sparta.eng82.frameworkutil.ActionClicker;
 import com.sparta.eng82.interfaces.Page;
-import com.sparta.eng82.interfaces.pages.accesspages.LoginPage;
-import com.sparta.eng82.interfaces.pages.navpages.CompetenciesPage;
-import com.sparta.eng82.interfaces.pages.navpages.ProfilePage;
-import com.sparta.eng82.tests.unit.utility.Utility;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public interface NavPage extends Page {
+public abstract class NavPage implements Page {
 
-    default Page goToHomePage(WebDriver driver) {
-        Utility.timedMouseClicker(driver, Utility.TIME, By.cssSelector(".bi-list"));
-        driver.findElement(By.linkText("Home")).click();
-        if (AdminHomePageImpl.class.equals(this.getClass())) {
-            return new AdminHomePageImpl(driver);
-        } else if (TrainerHomePageImpl.class.equals(this.getClass())) {
-            return new TrainerHomePageImpl(driver);
-        } else if (TraineeHomePageImpl.class.equals(this.getClass())) {
-            return new TraineeHomePageImpl(driver);
-        }
-        return null;
+    private WebDriver driver;
+    private String user;
+
+    public NavPage(WebDriver driver, String user) {
+        this.driver = driver;
+        this.user = user;
     }
 
-    default ProfilePage goToProfilePage(WebDriver driver) {
-        // TODO ? maybe ? competencies -> profile etc, extend if statement with ORs
-        Utility.timedMouseClicker(driver, Utility.TIME, By.cssSelector(".bi-list"));
-        driver.findElement(By.linkText("Profile")).click();
-        if (AdminHomePageImpl.class.equals(this.getClass())) {
-            return new AdminProfilePageImpl(driver);
-        } else if (TrainerHomePageImpl.class.equals(this.getClass())) {
-            return new TrainerProfilePageImpl(driver);
-        } else if (TraineeHomePageImpl.class.equals(this.getClass())) {
-            return new TraineeProfilePageImpl(driver);
-        }
-        return null;
+    public boolean isOnHomePage(){
+        return driver.getCurrentUrl().endsWith("/");
     }
 
-    default CompetenciesPage goToCompetenciesPage(WebDriver driver) {
-        Utility.timedMouseClicker(driver, Utility.TIME, By.cssSelector(".bi-list"));
-        driver.findElement(By.linkText("Behavioural Competencies")).click();
-        return new CompetenciesPageImpl(driver);
-    }
+//    public Page goToHomePage() {
+//        ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, By.cssSelector(".bi-list"));
+//        driver.findElement(By.linkText("Home")).click();
+//        if (AdminHomePageImpl.class.equals(this.getClass())) {
+//            return new AdminHomePageImpl(driver);
+//        } else if (TrainerHomePageImpl.class.equals(this.getClass())) {
+//            return new TrainerHomePageImpl(driver);
+//        } else if (TraineeHomePageImpl.class.equals(this.getClass())) {
+//            return new TraineeHomePageImpl(driver);
+//        }
+//        return null;
+//    }
+//
+//    public ProfilePage goToProfilePage() {
+//        // TODO ? maybe ? competencies -> profile etc, extend if statement with ORs
+//        ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, By.cssSelector(".bi-list"));
+//        driver.findElement(By.linkText("Profile")).click();
+//        if (AdminHomePageImpl.class.equals(this.getClass())) {
+//            return new AdminProfilePageImpl(driver);
+//        } else if (TrainerHomePageImpl.class.equals(this.getClass())) {
+//            return new TrainerProfilePageImpl(driver);
+//        } else if (TraineeHomePageImpl.class.equals(this.getClass())) {
+//            return new TraineeProfilePageImpl(driver);
+//        }
+//        return null;
+//    }
+//
+//    public CompetenciesPage goToCompetenciesPage() {
+//        ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, By.cssSelector(".bi-list"));
+//        driver.findElement(By.linkText("Behavioural Competencies")).click();
+//        return new CompetenciesPageImpl(driver);
+//    }
 
-    default LoginPage logOut(WebDriver driver) {
-        Utility.timedMouseClicker(driver, Utility.TIME, By.cssSelector(".bi-list"));
+    public LoginPageImpl logOut() {
+        ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, By.cssSelector(".bi-list"));
         driver.findElement(By.id("logoutBtn")).click();
-        return new LogoutPageImpl(driver);
+        return new LoginPageImpl(driver, user);
     }
 }

@@ -2,12 +2,8 @@ package com.sparta.eng82.tests.unit.other;
 
 import com.sparta.eng82.components.pages.accesspages.LoginPageImpl;
 import com.sparta.eng82.components.pages.accesspages.LogoutPageImpl;
-import com.sparta.eng82.components.pages.navpages.admin.AdminHomePageImpl;
-import com.sparta.eng82.components.pages.navpages.trainee.TraineeHomePageImpl;
-import com.sparta.eng82.components.pages.navpages.trainer.TrainerHomePageImpl;
 import com.sparta.eng82.components.webdriver.WebDriverFactory;
 import com.sparta.eng82.components.webdriver.WebDriverTypes;
-import com.sparta.eng82.tests.unit.utility.Utility;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -19,31 +15,17 @@ import java.util.Properties;
 public class LoginPageImplTests {
 
     private static WebDriverFactory webDriverFactory;
-    private static Properties properties;
     private WebDriver driver;
-    private LoginPageImpl loginPage;
     private LogoutPageImpl logoutPage;
-    private AdminHomePageImpl adminHomePage;
-    private TrainerHomePageImpl trainerHomePage;
-    private TraineeHomePageImpl traineeHomePage;
 
     @BeforeAll
     static void setupAll() {
         webDriverFactory = new WebDriverFactory();
-        properties = new Properties();
-        Utility.loadProperties(properties);
     }
 
     @BeforeEach
     void setup() {
         driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
-        loginPage = new LoginPageImpl(driver);
-        logoutPage = new LogoutPageImpl(driver);
-
-
-        adminHomePage = new AdminHomePageImpl(driver);
-        trainerHomePage = new TrainerHomePageImpl(driver);
-        traineeHomePage = new TraineeHomePageImpl(driver);
     }
 
     @ParameterizedTest
@@ -74,9 +56,9 @@ public class LoginPageImplTests {
     @ValueSource(strings = {"admin", "trainer", "trainee"})
     @DisplayName("Login test with entered email and password")
     void loginTestWithEnteredEmailAndPassword(String user) {
-        loginPage.enterEmail(driver, user + "_username", properties);
-        loginPage.enterPassword(driver, user + "_password", properties);
-        loginPage.login(driver, properties.getProperty(user + "_name"));
+        loginPage.enterEmail(driver, user, properties)
+                .enterPassword(driver, user, properties)
+                .login(driver, user);
         Assertions.assertFalse(driver.getCurrentUrl().endsWith("/login"));
     }
 
@@ -98,9 +80,14 @@ public class LoginPageImplTests {
     @ValueSource(strings = {"admin", "trainer", "trainee"})
     @DisplayName("Logout check message")
     void logoutCheckMessage(String user) {
-        loginPage.enterEmail(driver, user + "_username", properties)
-                .enterPassword(driver, user + "_password", properties)
-                .login(driver, properties.getProperty(user + "_name"));
+
+        // TODO login should take in driver and user ONCE
+        //new LoginPageImpl(driver, user).enterEmail().enterPassword()...
+
+        new LoginPageImpl(driver, user).enterEmail()
+                .enterPassword()
+                .login()
+                .logOut();
 
         switch (user) {
             case "admin":

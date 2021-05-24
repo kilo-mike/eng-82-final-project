@@ -6,7 +6,7 @@ import com.sparta.eng82.components.webdriver.WebDriverFactory;
 import com.sparta.eng82.components.webdriver.WebDriverTypes;
 import com.sparta.eng82.interfaces.pages.navpages.trainee.TraineeHomePage;
 import com.sparta.eng82.interfaces.pages.navpages.trainee.feedbackpages.TraineeTraineeFeedbackFormPage;
-import com.sparta.eng82.tests.unit.utility.Utility;
+import com.sparta.eng82.tests.unit.frameworkutil.PropertiesUtil;
 import org.junit.Ignore;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
@@ -31,7 +31,7 @@ public class TraineeTraineeFeedbackFormPageTests {
     @BeforeAll
     static void setupAll() {
         properties = new Properties();
-        Utility.loadProperties(properties);
+        PropertiesUtil.loadProperties(properties);
     }
 
     @BeforeEach
