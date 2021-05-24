@@ -1,15 +1,19 @@
-package com.sparta.eng82.tests.unit;
+package refactor.tests.unit.other;
 
-import com.sparta.eng82.components.webdriver.WebDriverFactory;
-import com.sparta.eng82.components.webdriver.WebDriverTypes;
+
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
+import refactor.components.frameworkutil.DeviceTypes;
+import refactor.components.frameworkutil.WebDriverFactory;
+import refactor.components.frameworkutil.WebDriverTypes;
 
 import java.util.EnumSet;
 
-//TODO Remove this for final release - just for testing currently
+
 
 public class WebDriverTests {
 
@@ -57,6 +61,24 @@ public class WebDriverTests {
         driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
         driver.get("http://localhost:8080");
         Assertions.assertEquals("http://localhost:8080/login", driver.getCurrentUrl());
+    }
+
+    @Test
+    @DisplayName("Testing a specific window size")
+    void testingASpecificWindowSize() {
+        driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME, 500, 1000);
+        driver.get("http://localhost:8080");
+        Assertions.assertEquals(new Dimension(500,1000), driver.manage().window().getSize());
+    }
+
+    @ParameterizedTest
+    @EnumSource(DeviceTypes.class)
+    @DisplayName("Testing all devices")
+    void testingAllDevices(DeviceTypes device) {
+        driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME, device);
+        driver.get("http://localhost:8080");
+        Assertions.assertEquals("http://localhost:8080/login", driver.getCurrentUrl());
+
     }
 
     @AfterEach
