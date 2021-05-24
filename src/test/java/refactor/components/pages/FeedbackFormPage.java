@@ -29,7 +29,6 @@ public abstract class FeedbackFormPage extends NavPage {
         return this;
     }
 
-
     public NavPage setConsultantGrade( char grade) {
         Select drpConsultantGrade = new Select(driver.findElement(new By.ByName("consultantGrade")));
         drpConsultantGrade.selectByVisibleText(String.valueOf(grade));
@@ -50,7 +49,6 @@ public abstract class FeedbackFormPage extends NavPage {
     /**
      * @param simpleName can be either "Trainer", "Trainee"
      */
-
     public NavPage submitForm( String simpleName) {
         ActionClicker.timedMouseClicker(driver, 500, new By.ById("submitBtn"));
         switch (simpleName) {
@@ -61,7 +59,6 @@ public abstract class FeedbackFormPage extends NavPage {
         }
         return null;
     }
-
     public String getName( String name) {
         String[] extractedName = driver.findElement(new By.ByXPath("//*[@id=\"feedbackText\"]/div/h1")).getText().split("/");
         return extractedName[1].trim();
@@ -69,7 +66,6 @@ public abstract class FeedbackFormPage extends NavPage {
 
     public String getWeek() {
         By textField = new By.ByXPath("//*[@id=\"feedbackText\"]/div/h1");
-
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         String[] extractedWeek = driver.findElement(textField).getText().split("/");
         return extractedWeek[1].trim();
