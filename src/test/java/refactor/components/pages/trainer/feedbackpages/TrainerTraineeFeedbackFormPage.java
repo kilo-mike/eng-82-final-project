@@ -1,7 +1,10 @@
 package refactor.components.pages.trainer.feedbackpages;
 
 
-public interface TrainerTraineeFeedbackFormPage extends TrainerFeedbackFormPage, NavPage {
+import refactor.components.NavPage;
+import refactor.components.pages.trainer.TrainerFeedbackFormPage;
+
+public interface TrainerTraineeFeedbackFormPage extends TrainerFeedbackFormPage {
 
     TrainerTraineeFeedbackFormPage clickOnStop();
 

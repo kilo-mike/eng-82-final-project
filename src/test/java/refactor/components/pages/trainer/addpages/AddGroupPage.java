@@ -1,5 +1,7 @@
 package refactor.components.pages.trainer.addpages;
 
+import refactor.components.pages.trainer.ManageGroupPage;
+
 public interface AddGroupPage {
 
     AddGroupPage selectStream(String streamName);

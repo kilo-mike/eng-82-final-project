@@ -48,21 +48,21 @@ public class ManageGroupPageImpl extends NavPage implements ManageGroupPage {
     @Override
     public AddTraineePage addTrainee() {
         driver.findElement(addTraineeButton).click();
-        return new AddTraineePageImpl(driver);
+        return new AddTraineePageImpl(driver, user);
 
     }
 
     @Override
     public AddGroupPage addGroup() {
         driver.findElement(addGroupButton).click();
-        return new AddGroupPageImpl(driver);
+        return new AddGroupPageImpl(driver,user);
 
     }
 
     @Override
     public AddStreamPage addStream() {
         driver.findElement(addStreamButton).click();
-        return new AddStreamPageImpl(driver);
+        return new AddStreamPageImpl(driver,user);
     }
 
     // TODO

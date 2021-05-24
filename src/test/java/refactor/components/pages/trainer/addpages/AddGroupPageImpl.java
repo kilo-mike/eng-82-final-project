@@ -1,10 +1,9 @@
 package refactor.components.pages.trainer.addpages;
 
-import com.sparta.eng82.components.pages.navpages.trainer.ManageGroupPageImpl;
-import com.sparta.eng82.interfaces.pages.navpages.trainer.ManageGroupPage;
-import com.sparta.eng82.interfaces.pages.navpages.trainer.addpages.AddGroupPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import refactor.components.pages.trainer.ManageGroupPage;
+import refactor.components.pages.trainer.ManageGroupPageImpl;
 
 public class AddGroupPageImpl implements AddGroupPage {
 
@@ -14,11 +13,14 @@ public class AddGroupPageImpl implements AddGroupPage {
     private final By createNewGroupButton = new By.ByLinkText("Create New Group");
     private final By groupField = new By.ById("traineeGroup");
     WebDriver driver;
+    private final String user;
 
     //private By addTraineeButton = new By.ByLinkText("Add Trainee");
 
-    public AddGroupPageImpl(WebDriver driver) {
+    public AddGroupPageImpl(WebDriver driver, String user) {
+
         this.driver = driver;
+        this.user = user;
     }
 
     //Changed the return types from AddGroupPage to void in the interface
@@ -46,7 +48,7 @@ public class AddGroupPageImpl implements AddGroupPage {
     @Override
     public ManageGroupPage createNewGroup() {
         driver.findElement(createNewGroupButton).click();
-        return new ManageGroupPageImpl(driver);
+        return new ManageGroupPageImpl(driver, user);
     }
 
     // Added String arg

@@ -2,14 +2,19 @@ package refactor.components.pages.trainer.addpages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import refactor.components.pages.trainer.ManageGroupPage;
+import refactor.components.pages.trainer.ManageGroupPageImpl;
 
 public class AddStreamPageImpl implements AddStreamPage {
 
     private final By createNewStreamButton = new By.ByLinkText("Create New Stream");
     WebDriver driver;
+    private final String user;
 
-    public AddStreamPageImpl(WebDriver driver) {
+    public AddStreamPageImpl(WebDriver driver,String user) {
+
         this.driver = driver;
+        this.user = user;
     }
 
     @Override
@@ -33,7 +38,7 @@ public class AddStreamPageImpl implements AddStreamPage {
     @Override
     public ManageGroupPage createNewStream() {
         driver.findElement(createNewStreamButton).click();
-        return new ManageGroupPageImpl(driver);
+        return new ManageGroupPageImpl(driver, user);
     }
 
     @Override

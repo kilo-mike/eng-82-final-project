@@ -1,10 +1,9 @@
 package refactor.components.pages.trainer.addpages;
 
-import com.sparta.eng82.components.pages.navpages.trainer.ManageGroupPageImpl;
-import com.sparta.eng82.interfaces.pages.navpages.trainer.ManageGroupPage;
-import com.sparta.eng82.interfaces.pages.navpages.trainer.addpages.AddTraineePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import refactor.components.pages.trainer.ManageGroupPage;
+import refactor.components.pages.trainer.ManageGroupPageImpl;
 
 public class AddTraineePageImpl implements AddTraineePage {
 
@@ -14,9 +13,12 @@ public class AddTraineePageImpl implements AddTraineePage {
     private final By createNewTraineeButton = new By.ByLinkText("Create New Trainee");
     WebDriver driver;
     private By groupNames;
+    private final String user;
 
-    public AddTraineePageImpl(WebDriver driver) {
+    public AddTraineePageImpl(WebDriver driver,String user) {
+
         this.driver = driver;
+        this.user = user;
     }
 
     @Override
@@ -45,7 +47,7 @@ public class AddTraineePageImpl implements AddTraineePage {
     @Override
     public ManageGroupPage createNewTrainee() {
         driver.findElement(createNewTraineeButton).click();
-        return new ManageGroupPageImpl(driver);
+        return new ManageGroupPageImpl(driver,user);
     }
 
     @Override

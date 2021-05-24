@@ -1,5 +1,6 @@
 package refactor.components.pages.other;
 
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import refactor.components.NavPage;
