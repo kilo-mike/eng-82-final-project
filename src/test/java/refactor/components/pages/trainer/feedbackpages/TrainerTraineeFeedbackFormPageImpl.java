@@ -2,9 +2,10 @@ package refactor.components.pages.trainer.feedbackpages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import refactor.components.NavPage;
 import refactor.components.pages.trainer.TrainerFeedbackFormPage;
 
-public class TrainerTraineeFeedbackFormPageImpl implements TrainerTraineeFeedbackFormPage {
+public class TrainerTraineeFeedbackFormPageImpl extends NavPage implements TrainerTraineeFeedbackFormPage {
 
     private final By technicalGradeField = new By.ById("techGrade");
     private final By consultantGradeField = new By.ById("consultGrade");
@@ -24,6 +25,7 @@ public class TrainerTraineeFeedbackFormPageImpl implements TrainerTraineeFeedbac
     private final String user;
 
     public TrainerTraineeFeedbackFormPageImpl(WebDriver driver, String user) {
+        super(driver, user);
         this.driver = driver;
 
         this.user = user;
