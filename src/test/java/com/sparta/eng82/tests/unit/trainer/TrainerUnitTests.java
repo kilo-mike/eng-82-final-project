@@ -108,8 +108,8 @@ public class TrainerUnitTests {
         }
 
         @Test
-        @DisplayName("Checking that the displayed trainer name is correctly displayed on the homepage")
-        void checkingThatTheDisplayedTrainerNameIsCorrectlyDisplayedOnTheHomepage() {
+        @DisplayName("Checking that the chosen trainer name is correctly displayed on the homepage")
+        void checkingThatTheChosenTrainerNameIsCorrectlyDisplayedOnTheHomepage() {
             Assertions.assertTrue(trainerHomePage.isUserDisplayNameCorrect());
         }
 
@@ -161,6 +161,13 @@ public class TrainerUnitTests {
             ManageGroupPage manageGroupPage = trainerHomePage.clickManageGroupButton();
             manageGroupPage.addStudent("Jack", "Ingham");
             Assertions.assertTrue(manageGroupPage.isStudentPresent("Jack Ingham"));
+        }
+
+        @Test
+        @DisplayName("Checking that a specified student is present in the class")
+        void checkingThatASpecifiedStudentIsPresentInTheClass() {
+            ManageGroupPage manageGroupPage = trainerHomePage.clickManageGroupButton();
+            Assertions.assertTrue(manageGroupPage.isStudentPresent("Golam Choudhury"));
         }
     }
 
