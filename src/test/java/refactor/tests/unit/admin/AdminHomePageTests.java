@@ -34,7 +34,7 @@ public class AdminHomePageTests {
     @BeforeEach
     void setup() {
         driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
-        adminHomePage = (AdminHomePageImpl) new LoginPageImpl(driver, userAdmin).driverGet().enterEmail().enterPassword().clickLogin();
+        adminHomePage = (AdminHomePageImpl) new LoginPageImpl(driver, userAdmin).login();
     }
 
     @Test
