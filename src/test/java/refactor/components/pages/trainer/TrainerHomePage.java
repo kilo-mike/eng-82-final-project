@@ -1,12 +1,13 @@
 package refactor.components.pages.trainer;
 
 import refactor.components.pages.trainer.feedbackpages.TrainerTraineeFeedbackFormPage;
+import refactor.components.pages.trainer.feedbackpages.TrainerTraineeFeedbackFormPageImpl;
 
 public interface TrainerHomePage {
 
     ManageGroupPage manageGroupButton();
 
-    TrainerTraineeFeedbackFormPage selectTraineeName(int week, String traineeName);
+    TrainerTraineeFeedbackFormPageImpl selectTraineeName(int week, String traineeName);
 
     boolean menuDropdownDisplays();
 
