@@ -29,20 +29,20 @@ public class TraineeHomePageImpl extends NavPage implements TraineeHomePage {
     }
 
     @Override
-    public TraineeFeedbackFormPage clickCurrentWeek() {
+    public TraineeTraineeFeedbackFormPageImpl clickCurrentWeek() {
         ActionClicker.timedMouseClicker(driver, 400, By.linkText(getCurrentWeek()));
         return new TraineeTraineeFeedbackFormPageImpl(driver, this.getClass().getSimpleName());
     }
 
     @Override
-    public TraineeFeedbackFormPage clickFeedbackFormForWeek(int week) {
+    public TraineeTraineeFeedbackFormPageImpl clickFeedbackFormForWeek(int week) {
         ActionClicker.timedMouseClicker(driver, 400, By.linkText(feedbackList.get(week).getText()));
         return new TraineeTraineeFeedbackFormPageImpl(driver, this.getClass().getSimpleName());
     }
 
     @Override
     public String getCurrentWeek() {
-        return feedbackList.get(0).getText();
+        return this.feedbackList.get(0).getText();
     }
 
     @Override
