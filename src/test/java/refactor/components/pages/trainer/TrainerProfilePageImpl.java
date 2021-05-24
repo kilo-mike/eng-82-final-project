@@ -3,6 +3,7 @@ package refactor.components.pages.trainer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import refactor.components.NavPage;
+import refactor.components.frameworkutil.PropertiesLoader;
 import refactor.components.pages.ProfilePage;
 import refactor.components.pages.other.ChangePasswordPage;
 import refactor.components.pages.other.ChangePasswordPageImpl;
@@ -31,21 +32,21 @@ public class TrainerProfilePageImpl extends NavPage implements ProfilePage {
 
     @Override
     public String getName() {
-        return null;
+        return driver.findElement(new By.ByXPath("//*[@id=\"main-content\"]/div/div[2]/span/table/tbody/tr[1]/td[2]")).getText();
     }
 
     @Override
     public boolean checkNameMatches() {
-        return false;
+        return PropertiesLoader.userProperties.containsValue(getName());
     }
 
     @Override
     public String getEmail() {
-        return null;
+        return driver.findElement(new By.ByXPath("//*[@id=\"main-content\"]/div/div[2]/span/table/tbody/tr[2]/td[2]")).getText();
     }
 
     @Override
     public boolean checkEmailMatches() {
-        return false;
+        return PropertiesLoader.userProperties.containsValue(getEmail());
     }
 }
