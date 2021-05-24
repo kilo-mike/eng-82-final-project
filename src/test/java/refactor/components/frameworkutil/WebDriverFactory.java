@@ -34,25 +34,7 @@ public class WebDriverFactory {
 
     public WebDriver getWebDriver(WebDriverTypes driverType, DeviceTypes device){
         WebDriver driver = selectDriver(driverType);
-        Dimension dimensions;
-        switch (device){
-            case IPHONE_X:
-                dimensions = new Dimension(375,812);
-                break;
-            case PIXEL_2_XL:
-                dimensions = new Dimension(411,823);
-                break;
-            case GALAXY_S5:
-                dimensions = new Dimension(360, 640);
-                break;
-            case IPAD:
-                dimensions = new Dimension(768,1024);
-                break;
-            default:
-                dimensions = new Dimension(500,1200);
-                break;
-        }
-        driver.manage().window().setSize(dimensions);
+        driver.manage().window().setSize(DeviceTypes.getSize(device));
         return driver;
     }
 
