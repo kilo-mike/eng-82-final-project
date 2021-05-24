@@ -57,12 +57,12 @@ public class LoginPageImpl implements LoginPage {
 
     @Override
     public NavPage login() {
-        return this.driverGet().enterEmail(user).enterPassword(user).login();
+        return this.driverGet().enterEmail(user).enterPassword(user).clickLogin();
     }
 
     @Override
     public NavPage login(String email, String password) {
-        return this.driverGet().enterEmail(email).enterPassword(password).login();
+        return this.driverGet().enterEmail(email).enterPassword(password).clickLogin();
     }
 
     @Override
