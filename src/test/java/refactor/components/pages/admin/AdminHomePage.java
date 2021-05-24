@@ -1,6 +1,5 @@
 package refactor.components.pages.admin;
 
-import com.sparta.eng82.interfaces.pages.navpages.admin.addpages.AddTrainerPage;
 
 public interface AdminHomePage {
 

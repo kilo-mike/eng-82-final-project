@@ -1,10 +1,14 @@
 package refactor.components.pages.admin;
 
-import com.sparta.eng82.interfaces.pages.navpages.admin.AdminHomePage;
-import com.sparta.eng82.interfaces.pages.navpages.admin.addpages.AddTrainerPage;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import refactor.components.NavPage;
+import refactor.components.frameworkutil.ActionClicker;
+
+import java.util.List;
+import java.util.stream.IntStream;
 
 public class AdminHomePageImpl extends NavPage implements AdminHomePage {
 
@@ -24,48 +28,31 @@ public class AdminHomePageImpl extends NavPage implements AdminHomePage {
     }
 
     @Override
-    public String getUrl() {
-        return null;
-    }
-
-    @Override
     public AddTrainerPage addTrainer() {
-        return null;
+        driver.findElement(mainContent).findElement(redButton).submit();
+        ActionClicker.timedMouseClicker(driver, 400, new By.ByXPath("//*[@id=\"main-content\"]/div/div/div/div[1]/button"));
+        return new AddTrainerPageImpl(driver,user);
     }
 
     @Override
     public boolean isTrainerAdded(String firstName, String lastName, String group) {
-        return false;
+        List<WebElement> output = driver.findElement(trainersTable).findElements(new By.ByTagName("td"));
+
+        return IntStream.range(0, output.size()).anyMatch(i -> output.get(i).getText().equals(firstName)
+                && output.get(i + 1).getText().equals(lastName)
+                && output.get(i + 2).getText().equals(group));
     }
 
     @Override
     public boolean getAllTrainersAvailable(int howManyTrainers) {
-        return false;
+
+        List<WebElement> output = driver.findElement(trainersTable).findElements(new By.ByTagName("td"));
+        return output.size() / 3 == howManyTrainers;
+
+    }
+
+    @Override
+    public String getUrl() {
+        return driver.getCurrentUrl();
     }
 }
-
-
-//    @Override
-//    public AddTrainerPage addTrainer() {
-////        driver.findElement(mainContent).findElement(redButton).submit();
-//        PropertiesUtil.timedMouseClicker(driver, 400, new By.ByXPath("//*[@id=\"main-content\"]/div/div/div/div[1]/button"));
-//        return new AddTrainerPageImpl(driver);
-//    }
-//
-//    @Override
-//    public boolean isTrainerAdded(String firstName, String lastName, String group) {
-//        List<WebElement> output = driver.findElement(trainersTable).findElements(new By.ByTagName("td"));
-//
-//        return IntStream.range(0, output.size()).anyMatch(i -> output.get(i).getText().equals(firstName)
-//                && output.get(i + 1).getText().equals(lastName)
-//                && output.get(i + 2).getText().equals(group));
-//    }
-//
-//    @Override
-//    public boolean getAllTrainersAvailable(int howManyTrainers) {
-//
-//        List<WebElement> output = driver.findElement(trainersTable).findElements(new By.ByTagName("td"));
-//        return output.size() / 3 == howManyTrainers;
-//
-//    }
-//}
