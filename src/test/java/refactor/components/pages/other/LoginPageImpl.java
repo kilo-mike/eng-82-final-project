@@ -57,7 +57,7 @@ public class LoginPageImpl implements LoginPage {
 
     @Override
     public NavPage login() {
-        return this.driverGet().enterEmail(user).enterPassword(user).clickLogin();
+        return this.driverGet().enterEmail().enterPassword().clickLogin();
     }
 
     @Override
