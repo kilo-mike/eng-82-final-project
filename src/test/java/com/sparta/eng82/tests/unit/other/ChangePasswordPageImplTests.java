@@ -4,7 +4,7 @@ import com.sparta.eng82.components.pages.accesspages.LoginPageImpl;
 import com.sparta.eng82.components.webdriver.WebDriverFactory;
 import com.sparta.eng82.components.webdriver.WebDriverTypes;
 import com.sparta.eng82.interfaces.pages.accesspages.LoginPage;
-import com.sparta.eng82.tests.unit.frameworkutil.PropertiesUtil;
+
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -42,7 +42,7 @@ public class ChangePasswordPageImplTests {
     @BeforeEach
     void setup() {
         driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
-        loginPage = new LoginPageImpl(driver);
+        loginPage = new LoginPageImpl(driver, user);
     }
 
     @ParameterizedTest
