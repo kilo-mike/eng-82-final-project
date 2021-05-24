@@ -14,7 +14,7 @@ import java.io.IOException;
 public class WebDriverFactory {
 
     static {
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver");
         System.setProperty("webdriver.edge.driver", "src/test/resources/msedgedriver.exe");
     }
     private EdgeDriverService edgeService;
@@ -46,7 +46,7 @@ public class WebDriverFactory {
     public ChromeDriverService getChromeService(){
         if (chromeService == null) {
             chromeService = new ChromeDriverService.Builder()
-                    .usingDriverExecutable(new File("src/test/resources/chromedriver.exe"))
+                    .usingDriverExecutable(new File("src/test/resources/chromedriver"))
                     .usingAnyFreePort()
                     .build();
             try {

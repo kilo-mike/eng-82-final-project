@@ -1,12 +1,12 @@
 package refactor.components.pages.trainer.feedbackpages;
 
-import com.sparta.eng82.interfaces.pages.navpages.trainer.TrainerFeedbackFormPage;
-import com.sparta.eng82.interfaces.pages.navpages.trainer.feedbackpages.TrainerTraineeFeedbackFormPage;
-import com.sparta.eng82.interfaces.pages.navpages.trainer.feedbackpages.TrainerTrainerFeedbackFormPage;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import refactor.components.NavPage;
+import refactor.components.pages.trainer.TrainerFeedbackFormPage;
 
-public class TrainerTrainerFeedbackFormPageImpl implements TrainerTrainerFeedbackFormPage {
+public class TrainerTrainerFeedbackFormPageImpl extends NavPage implements TrainerTrainerFeedbackFormPage {
 
     private final By trainerCommentsTextField = new By.ById("trainerComments");
     private final By stopButton = new By.ByLinkText("Stop");
@@ -19,9 +19,11 @@ public class TrainerTrainerFeedbackFormPageImpl implements TrainerTrainerFeedbac
 
     WebDriver driver;
 
-    public TrainerTrainerFeedbackFormPageImpl(WebDriver driver) {
+    public TrainerTrainerFeedbackFormPageImpl(WebDriver driver, String user) {
+        super(driver, user);
         this.driver = driver;
     }
+
 
     @Override
     public TrainerFeedbackFormPage enterTrainerComments(String comments) {
@@ -69,5 +71,10 @@ public class TrainerTrainerFeedbackFormPageImpl implements TrainerTrainerFeedbac
     public TrainerTraineeFeedbackFormPage clickOnTrainee() {
         driver.findElement(traineeButton).click();
         return new TrainerTraineeFeedbackFormPageImpl(driver, this.getClass().getSimpleName());
+    }
+
+    @Override
+    public String getUrl() {
+        return driver.getCurrentUrl();
     }
 }

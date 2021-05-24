@@ -2,6 +2,7 @@ package refactor.components.pages.trainer.feedbackpages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import refactor.components.pages.trainer.TrainerFeedbackFormPage;
 
 public class TrainerTraineeFeedbackFormPageImpl implements TrainerTraineeFeedbackFormPage {
 
@@ -16,14 +17,16 @@ public class TrainerTraineeFeedbackFormPageImpl implements TrainerTraineeFeedbac
     private final By startButton = new By.ByLinkText("Start");
     private final By continueButton = new By.ByLinkText("Cont.");
     private final By trainerButton = new By.ByLinkText("Trainer");
-    private final String simpleName;
+
     WebDriver driver;
     private By technicalGrades;
     private By consultantGrades;
+    private final String user;
 
-    public TrainerTraineeFeedbackFormPageImpl(WebDriver driver, String simpleName) {
+    public TrainerTraineeFeedbackFormPageImpl(WebDriver driver, String user) {
         this.driver = driver;
-        this.simpleName = simpleName;
+
+        this.user = user;
     }
 
     @Override
@@ -53,7 +56,7 @@ public class TrainerTraineeFeedbackFormPageImpl implements TrainerTraineeFeedbac
     @Override
     public TrainerTrainerFeedbackFormPage clickOnTrainer() {
         driver.findElement(trainerButton).click();
-        return new TrainerTrainerFeedbackFormPageImpl(driver);
+        return new TrainerTrainerFeedbackFormPageImpl(driver, user);
     }
 
     @Override
@@ -87,6 +90,11 @@ public class TrainerTraineeFeedbackFormPageImpl implements TrainerTraineeFeedbac
     }
 
     public String getSimpleName() {
-        return simpleName;
+        return user;
+    }
+
+    @Override
+    public String getUrl() {
+        return driver.getCurrentUrl();
     }
 }
