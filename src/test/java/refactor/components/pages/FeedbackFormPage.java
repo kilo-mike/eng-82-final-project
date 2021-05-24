@@ -36,13 +36,13 @@ public abstract class FeedbackFormPage extends NavPage {
     }
 
     public CompetenciesPage clickConsultantGrade() {
-        ActionClicker.timedMouseClicker(driver, 500, new By.ByLinkText("Consultant Grade"));
+        ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, new By.ByLinkText("Consultant Grade"));
         return new CompetenciesPageImpl(driver,user);
     }
 
 
     public NavPage saveForm() {
-        ActionClicker.timedMouseClicker(driver, 500, new By.ById("saveBtn"));
+        ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, new By.ById("saveBtn"));
         return this;
     }
 
@@ -50,7 +50,7 @@ public abstract class FeedbackFormPage extends NavPage {
      * @param simpleName can be either "Trainer", "Trainee"
      */
     public NavPage submitForm( String simpleName) {
-        ActionClicker.timedMouseClicker(driver, 500, new By.ById("submitBtn"));
+        ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, new By.ById("submitBtn"));
         switch (simpleName) {
             case "Trainee":
                 return new TraineeHomePageImpl(driver, user);
