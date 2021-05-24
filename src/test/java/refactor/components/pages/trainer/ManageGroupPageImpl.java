@@ -85,7 +85,7 @@ public class ManageGroupPageImpl extends NavPage implements ManageGroupPage {
             String name = student.getText();
             System.out.println(name);
             System.out.println(students.indexOf(student));
-            if (name.equals("Golam Choudhury")) {
+            if (name.equals(studentName)) {
                 studentPosition = students.indexOf(student) + 1;
             }
         }
@@ -119,12 +119,11 @@ public class ManageGroupPageImpl extends NavPage implements ManageGroupPage {
 
         driver.findElement(By.id("traineeLastName")).sendKeys(lastName);
 
-        driver.findElement(By.cssSelector("#addNewTrainee .btn")).click();
         ActionClicker.timedMouseClicker(driver,400,By.cssSelector("#addNewTrainee .btn"));
     }
 
     @Override
     public String getUrl() {
-        return null;
+        return driver.getCurrentUrl();
     }
 }

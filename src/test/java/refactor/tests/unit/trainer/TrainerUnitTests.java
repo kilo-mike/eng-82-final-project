@@ -13,6 +13,7 @@ import refactor.components.pages.trainee.TraineeHomePage;
 import refactor.components.pages.trainee.feedback.TraineeTraineeFeedbackFormPage;
 import refactor.components.pages.trainer.ManageGroupPage;
 import refactor.components.pages.trainer.TrainerHomePage;
+import refactor.components.pages.trainer.TrainerHomePageImpl;
 import refactor.components.pages.trainer.feedbackpages.TrainerTraineeFeedbackFormPage;
 import refactor.components.pages.trainer.feedbackpages.TrainerTraineeFeedbackFormPageImpl;
 
@@ -34,7 +35,7 @@ public class TrainerUnitTests {
     private final String traineePropertyPassword = "trainee_password";
     private final String traineePropertyName = "trainee_name";
 
-    private TrainerHomePage trainerHomePage;
+    private TrainerHomePageImpl trainerHomePage;
     private LoginPageImpl loginPage;
 
     @BeforeAll
@@ -49,7 +50,7 @@ public class TrainerUnitTests {
         driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
         driver.get("http://localhost:8080/");
         loginPage = new LoginPageImpl(driver, "trainer");
-        trainerHomePage = (TrainerHomePage) loginPage.login();
+        trainerHomePage = (TrainerHomePageImpl) loginPage.login();
     }
 
     @AfterEach
@@ -69,7 +70,30 @@ public class TrainerUnitTests {
 
         Assertions.assertEquals("http://localhost:8080/feedback?id=4", trainerTraineeFeedbackFormPage.getUrl());
     }
+    
+    @Nested
+    @DisplayName("Tests for the Trainer profile page")
+    class TrainerProfilePage {
 
+        // TODO: ProfilePage getName needs to be implemented
+        @Test
+        @DisplayName("Checking the displayed name is correct for the user")
+        void checkingTheDisplayedNameIsCorrectForTheUser() {
+            Assertions.assertTrue(trainerHomePage
+                    .goToProfilePage()
+                    .checkNameMatches());
+        }
+
+        // TODO: ProfilePage getEmail needs to be implemented
+        @Test
+        @DisplayName("Checking the displayed email is correct for the user")
+        void checkingTheDisplayedEmailIsCorrectForTheUser() {
+            Assertions.assertTrue(trainerHomePage
+                    .goToProfilePage()
+                    .checkEmailMatches());
+        }
+    }
+    
     @Nested
     @DisplayName("Tests for the Trainer Home Page")
     class TrainerHomePageTests {
@@ -125,12 +149,12 @@ public class TrainerUnitTests {
             Assertions.assertEquals("http://localhost:8080/group", driver.getCurrentUrl());
         }
 
-        //TODO: Test incomplete
+        //TODO: Test incomplete, unable to click the delete trainee button
         @Test
         @DisplayName("Checking if a selected student is successfully removed")
         void checkingIfASelectedStudentIsSuccessfullyRemoved() {
             ManageGroupPage manageGroupPage = trainerHomePage.clickManageGroupButton();
-            manageGroupPage.removeStudent("Golam Choudhury");
+            manageGroupPage.removeStudent("Alasdair Malcolm");
             Assertions.assertFalse(manageGroupPage.isTraineeRemoved("Golam Choudhury"));
         }
 
@@ -151,8 +175,6 @@ public class TrainerUnitTests {
         @Test
         @DisplayName("Check that the technical grade is set AND saved as expected")
         void checkThatTheTechnicalGradeIsSetAndSavedAsExpected() {
-
-
             TrainerTraineeFeedbackFormPageImpl trainerTraineeFeedbackFormPage = trainerHomePage.selectTraineeName(2, "Bob Smith");
             trainerTraineeFeedbackFormPage.setTechnicalGrade('D');
             trainerTraineeFeedbackFormPage.saveForm();
@@ -185,13 +207,13 @@ public class TrainerUnitTests {
             //This test will likely NOT WORK if the trainee driver (driver2) is run headless.
         void checkThatTheSubmitFormButtonWorks() {
 
-            TrainerTraineeFeedbackFormPageImpl trainerTraineeFeedbackFormPage = trainerHomePage.selectTraineeName(2, "Bob Smith");
+            TrainerTraineeFeedbackFormPageImpl trainerTraineeFeedbackFormPage = trainerHomePage.selectTraineeName(2, "Jane Doe");
             trainerTraineeFeedbackFormPage.submitForm("Trainer");
             WebDriver driver2;
             driver2 = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
             driver2.get("http://localhost:8080/");
             LoginPageImpl loginPage2 = new LoginPageImpl(driver2, "trainee");
-            TraineeHomePage traineeHomePage = (TraineeHomePage) loginPage.login(PropertiesLoader.getEmail("trainee"),PropertiesLoader.getPassword("trainee"));
+            TraineeHomePage traineeHomePage = (TraineeHomePage) loginPage2.login(PropertiesLoader.getEmail("trainee"),PropertiesLoader.getPassword("trainee"));
 
             TraineeTraineeFeedbackFormPage traineeTraineeFeedbackFormPage = (TraineeTraineeFeedbackFormPage) traineeHomePage.clickFeedbackFormForWeek(2);
             String testText = "hello, how are you?";

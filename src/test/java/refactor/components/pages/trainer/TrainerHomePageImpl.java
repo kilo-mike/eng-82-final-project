@@ -1,6 +1,7 @@
 package refactor.components.pages.trainer;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -12,7 +13,6 @@ import refactor.components.pages.trainer.feedbackpages.TrainerTraineeFeedbackFor
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.NoSuchElementException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -71,12 +71,6 @@ public class TrainerHomePageImpl extends NavPage implements TrainerHomePage {
             System.out.println("The trainee " + traineeName + " does not exist.");
             return new TrainerTraineeFeedbackFormPageImpl(driver, null);
         }
-        return new TrainerTraineeFeedbackFormPageImpl(driver, this.getClass().getSimpleName());
-    }
-
-    //TODO: Delete this
-    public TrainerTraineeFeedbackFormPage selectJaneDoe() {
-        ActionClicker.timedMouseClicker(driver, 500, new By.ByCssSelector("#traineeTable2 td:nth-child(1)"));
         return new TrainerTraineeFeedbackFormPageImpl(driver, this.getClass().getSimpleName());
     }
 
