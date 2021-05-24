@@ -28,7 +28,6 @@ public class TrainerTrainerFeedbackFormPageImpl extends FeedbackFormPage impleme
         this.user = user;
     }
 
-
     @Override
     public TrainerTrainerFeedbackFormPageImpl enterTrainerComments(String comments) {
         driver.findElement(trainerCommentsTextField).sendKeys(comments);
@@ -95,7 +94,6 @@ public class TrainerTrainerFeedbackFormPageImpl extends FeedbackFormPage impleme
         return new TrainerHomePageImpl(driver, user);
     }
 
-
     @Override
     public String getUrl() {
         return driver.getCurrentUrl();
@@ -134,16 +132,26 @@ public class TrainerTrainerFeedbackFormPageImpl extends FeedbackFormPage impleme
                 && getTrainerCommentInputValue().equals(trainerComment);
     }
 
-
     public boolean isTrainerDisplayed() {
         return driver.findElement(trainerDiv).isDisplayed();
     }
 
+    public boolean checkSaveFeatureWorks(int week, String name, String stopComment, String startComment, String continueComment, String trainerComment) {
+        return enterAllComments(stopComment, startComment, continueComment, trainerComment)
+                .clickSave()
+                .selectTraineeName(week, name)
+                .clickOnTrainer()
+                .checkAllCommentsHaveBeenInputSuccessfully(stopComment, startComment, continueComment, trainerComment);
+    }
+
     public TrainerHomePageImpl clearCommentsAndSave() {
+        clickOnStop();
         driver.findElement(stopTrainerTextField).clear();
+        clickOnStart();
         driver.findElement(startTrainerTextField).clear();
+        clickOnCont();
         driver.findElement(continueTrainerTextField).clear();
         driver.findElement(trainerCommentsTextField).clear();
-        return this.clickSave();
+        return clickSave();
     }
 }

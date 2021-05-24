@@ -15,7 +15,6 @@ import refactor.components.pages.trainer.ManageGroupPage;
 import refactor.components.pages.trainer.TrainerHomePageImpl;
 import refactor.components.pages.trainer.feedbackpages.TrainerTraineeFeedbackFormPage;
 import refactor.components.pages.trainer.feedbackpages.TrainerTraineeFeedbackFormPageImpl;
-import refactor.components.pages.trainer.feedbackpages.TrainerTrainerFeedbackFormPageImpl;
 
 public class TrainerUnitTests {
 
@@ -210,45 +209,5 @@ public class TrainerUnitTests {
             }
             Assertions.assertFalse(interactable);
         }
-    }
-
-    @Nested
-    @DisplayName("TrainerTrainer tests")
-    class TrainerTrainerTests {
-        int week = 2;
-        String name = "Jane Doe";
-
-        TrainerTrainerFeedbackFormPageImpl trainerTrainerFeedbackFormPage;
-
-        @BeforeEach
-        void setup() {
-            trainerTrainerFeedbackFormPage = trainerHomePage.selectTraineeName(week, name).clickOnTrainer();
-        }
-
-        @Test
-        @DisplayName("Check trainer section is visible")
-        void checkTrainerSectionIsVisible() {
-            Assertions.assertTrue(trainerTrainerFeedbackFormPage.isTrainerDisplayed());
-        }
-
-        @Test
-        @DisplayName("Check if clicking on trainee section works")
-        void checkIfClickingOnTraineeSectionWorks() {
-            Assertions.assertTrue(trainerTrainerFeedbackFormPage.clickOnTrainee().isTraineeDisplayed());
-        }
-
-        @Test
-        @DisplayName("Check comment inputs are working")
-        void checkCommentInputsWork() {
-            String stopComment = "Stop being bad";
-            String startComment = "Start being good";
-            String contComment = "Keep being OK";
-            String trainerComment = "Not bad!";
-
-            Assertions.assertTrue(trainerTrainerFeedbackFormPage
-                    .enterAllComments(stopComment, startComment, contComment, trainerComment)
-                    .checkAllCommentsHaveBeenInputSuccessfully(stopComment, startComment, contComment,trainerComment));
-        }
-
     }
 }
