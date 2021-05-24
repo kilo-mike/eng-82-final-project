@@ -21,6 +21,42 @@ public class WebDriverFactory {
     private ChromeDriverService chromeService;
 
     public WebDriver getWebDriver(WebDriverTypes driverType) {
+        WebDriver driver = selectDriver(driverType);
+        driver.manage().window().setSize(new Dimension(500, 1200));
+        return driver;
+    }
+
+    public WebDriver getWebDriver(WebDriverTypes driverType, int width, int height){
+        WebDriver driver = selectDriver(driverType);
+        driver.manage().window().setSize(new Dimension(width,height));
+        return driver;
+    }
+
+    public WebDriver getWebDriver(WebDriverTypes driverType, DeviceTypes device){
+        WebDriver driver = selectDriver(driverType);
+        Dimension dimensions;
+        switch (device){
+            case IPHONE_X:
+                dimensions = new Dimension(375,812);
+                break;
+            case PIXEL_2_XL:
+                dimensions = new Dimension(411,823);
+                break;
+            case GALAXY_S5:
+                dimensions = new Dimension(360, 640);
+                break;
+            case IPAD:
+                dimensions = new Dimension(768,1024);
+                break;
+            default:
+                dimensions = new Dimension(500,1200);
+                break;
+        }
+        driver.manage().window().setSize(dimensions);
+        return driver;
+    }
+
+    private WebDriver selectDriver(WebDriverTypes driverType){
         WebDriver driver;
         switch (driverType) {
             case CHROME:
@@ -39,7 +75,6 @@ public class WebDriverFactory {
                 break;
 
         }
-        driver.manage().window().setSize(new Dimension(500, 1200));
         return driver;
     }
 
