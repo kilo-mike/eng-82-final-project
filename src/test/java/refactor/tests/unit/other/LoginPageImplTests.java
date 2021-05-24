@@ -96,6 +96,16 @@ public class LoginPageImplTests {
                 .isLogoutMessageShowing());
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"admin", "trainer", "trainee"})
+    @DisplayName("Logout check message with fast login method")
+    void logoutCheckMessageWithLoginMethod(String user) {
+        Assertions.assertTrue(new LoginPageImpl(driver, user)
+                .login()
+                .logOut()
+                .isLogoutMessageShowing());
+    }
+
     @AfterEach
     void tearDown() {
         driver.quit();

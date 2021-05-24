@@ -3,6 +3,7 @@ package refactor.components.pages.other;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import refactor.components.NavPage;
+import refactor.components.Page;
 import refactor.components.frameworkutil.PropertiesLoader;
 import refactor.components.pages.admin.AdminHomePageImpl;
 import refactor.components.pages.trainee.TraineeHomePageImpl;
@@ -52,6 +53,16 @@ public class LoginPageImpl implements LoginPage {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.findElement(new By.ById("password")).sendKeys(password);
         return this;
+    }
+
+    @Override
+    public NavPage login() {
+        return this.driverGet().enterEmail(user).enterPassword(user).login();
+    }
+
+    @Override
+    public NavPage login(String email, String password) {
+        return this.driverGet().enterEmail(email).enterPassword(password).login();
     }
 
     @Override

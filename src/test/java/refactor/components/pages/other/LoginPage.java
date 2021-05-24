@@ -14,7 +14,11 @@ public interface LoginPage extends Page {
 
     LoginPageImpl enterPassword(String password);
 
-    Object clickLogin();
+    Page login();
+
+    Page login(String email, String password);
+
+    Page clickLogin();
 
     boolean loginAttempt();
 
