@@ -213,11 +213,6 @@ public class TrainerUnitTests {
         int week = 2;
         String name = "Jane Doe";
 
-        @AfterEach
-        void tearDown() {
-            trainerHomePage.selectTraineeName(week, name).clickOnTrainer().clearCommentsAndSave();
-        }
-
         @Test
         @DisplayName("Check comment inputs are working")
         void checkCommentInputsWork() {
@@ -228,11 +223,7 @@ public class TrainerUnitTests {
             Assertions.assertTrue(trainerHomePage
                     .selectTraineeName(week, name)
                     .clickOnTrainer()
-                    .enterTrainerStopComments(stopComment)
-                    .clickOnStart()
-                    .enterTrainerStartComments(startComment)
-                    .clickOnCont()
-                    .enterTrainerContComments(contComment)
+                    .enterStopStartContComments(stopComment, startComment, contComment)
                     .checkAllCommentsHaveBeenInputSuccessfully(stopComment, startComment, contComment));
         }
     }

@@ -9,13 +9,17 @@ import refactor.components.pages.trainer.TrainerHomePageImpl;
 public class TrainerTrainerFeedbackFormPageImpl extends FeedbackFormPage implements TrainerTrainerFeedbackFormPage {
 
     private final By trainerButton = new By.ByXPath("/html/body/div[2]/div/div/form/div[1]/label[2]");
+
     private final By trainerCommentsTextField = new By.ById("trainerComments");
-    private final By trainerStopButton = new By.ByXPath("/html/body/div[2]/div/div/form/div[3]/div[1]/label[1]");
-    private final By trainerStartButton = new By.ByXPath("/html/body/div[2]/div/div/form/div[3]/div[1]/label[2]");
-    private final By trainerContinueButton = new By.ByXPath("/html/body/div[2]/div/div/form/div[3]/div[1]/label[3]");
+
+    private final By trainerStopButton = new By.ByXPath("/html/body/div[2]/div/div/form/div[2]/div[1]/label[1]");
+    private final By trainerStartButton = new By.ByXPath("/html/body/div[2]/div/div/form/div[2]/div[1]/label[2]");
+    private final By trainerContinueButton = new By.ByXPath("/html/body/div[2]/div/div/form/div[2]/div[1]/label[3]");
+
     private final By stopTrainerTextField = new By.ById("stopTrainer");
     private final By startTrainerTextField = new By.ById("startTrainer");
-    private final By continueTrainerTextField = new By.ById("continueTrainer");
+    private final By continueTrainerTextField = new By.ById("continueTrainee");
+
     private final By saveButton = new By.ById("saveBtn");
     private final By submitButton = new By.ById("submitBtn");
 
@@ -116,8 +120,13 @@ public class TrainerTrainerFeedbackFormPageImpl extends FeedbackFormPage impleme
         return driver.findElement(By.id("continueTrainer")).getAttribute("value");
     }
 
+    public TrainerTrainerFeedbackFormPageImpl enterStopStartContComments(String stopComments, String startComments, String contComments){
+        enterTrainerStopComments(stopComments).clickOnStart().enterTrainerStartComments(startComments).clickOnCont().enterTrainerContComments(contComments);
+        return this;
+    }
+
     public boolean checkAllCommentsHaveBeenInputSuccessfully(String stopComment, String startComment, String continueComment) {
-        return getStopInputValue().equals(stopComment) && getStartInputValue().equals(startComment) && getContInputValue().equals(continueComment);
+        return clickOnStop().getStopInputValue().equals(stopComment) && clickOnStart().getStartInputValue().equals(startComment) && clickOnCont().getContInputValue().equals(continueComment);
     }
 
     public TrainerHomePageImpl clearCommentsAndSave() {
@@ -125,6 +134,6 @@ public class TrainerTrainerFeedbackFormPageImpl extends FeedbackFormPage impleme
         driver.findElement(startTrainerTextField).clear();
         driver.findElement(continueTrainerTextField).clear();
         driver.findElement(trainerCommentsTextField).clear();
-        return clickSave();
+        return this.clickSave();
     }
 }
