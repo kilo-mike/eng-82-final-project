@@ -2,6 +2,7 @@ package refactor.components.pages.trainer.feedbackpages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import refactor.components.frameworkutil.ActionClicker;
 import refactor.components.pages.FeedbackFormPage;
 import refactor.components.pages.trainer.TrainerFeedbackFormPage;
 
@@ -17,12 +18,13 @@ public class TrainerTraineeFeedbackFormPageImpl extends FeedbackFormPage impleme
     private final By stopButton = new By.ByLinkText("Stop");
     private final By startButton = new By.ByLinkText("Start");
     private final By continueButton = new By.ByLinkText("Cont.");
-    private final By trainerButton = new By.ByLinkText("Trainer");
+    private final By trainerButton = new By.ByXPath("/html/body/div[2]/div/div/form/div[1]/label[2]");
 
-    WebDriver driver;
+    private final WebDriver driver;
+    private final String user;
+
     private By technicalGrades;
     private By consultantGrades;
-    private final String user;
 
     public TrainerTraineeFeedbackFormPageImpl(WebDriver driver, String user) {
         super(driver, user);
@@ -57,7 +59,7 @@ public class TrainerTraineeFeedbackFormPageImpl extends FeedbackFormPage impleme
 
     @Override
     public TrainerTrainerFeedbackFormPage clickOnTrainer() {
-        driver.findElement(trainerButton).click();
+        ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, trainerButton);
         return new TrainerTrainerFeedbackFormPageImpl(driver, user);
     }
 

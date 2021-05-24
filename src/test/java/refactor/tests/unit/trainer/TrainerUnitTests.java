@@ -12,45 +12,25 @@ import refactor.components.pages.other.LoginPageImpl;
 import refactor.components.pages.trainee.TraineeHomePage;
 import refactor.components.pages.trainee.feedback.TraineeTraineeFeedbackFormPage;
 import refactor.components.pages.trainer.ManageGroupPage;
-import refactor.components.pages.trainer.TrainerHomePage;
 import refactor.components.pages.trainer.TrainerHomePageImpl;
 import refactor.components.pages.trainer.feedbackpages.TrainerTraineeFeedbackFormPage;
 import refactor.components.pages.trainer.feedbackpages.TrainerTraineeFeedbackFormPageImpl;
 
-import java.util.EnumSet;
-import java.util.Properties;
-
 public class TrainerUnitTests {
+
     static WebDriver driver;
     static WebDriverFactory webDriverFactory;
-    private static EnumSet<WebDriverTypes> normalTypes;
-    private static EnumSet<WebDriverTypes> headlessTypes;
-
-    private static Properties properties;
-    private final String trainerPropertyUsername = "trainer_username";
-    private final String trainerPropertyPassword = "trainer_password";
-    private final String trainerPropertyName = "trainer_name";
-
-    private final String traineePropertyUsername = "trainee_username";
-    private final String traineePropertyPassword = "trainee_password";
-    private final String traineePropertyName = "trainee_name";
-
     private TrainerHomePageImpl trainerHomePage;
-    private LoginPageImpl loginPage;
 
     @BeforeAll
     static void setupAll() {
         webDriverFactory = new WebDriverFactory();
-        normalTypes = EnumSet.of(WebDriverTypes.CHROME, WebDriverTypes.EDGE);
-        headlessTypes = EnumSet.of(WebDriverTypes.CHROME_HEADLESS);
     }
 
     @BeforeEach
     void setup() {
         driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
-        driver.get("http://localhost:8080/");
-        loginPage = new LoginPageImpl(driver, "trainer");
-        trainerHomePage = (TrainerHomePageImpl) loginPage.login();
+        trainerHomePage = (TrainerHomePageImpl) new LoginPageImpl(driver, "trainer").login();
     }
 
     @AfterEach
@@ -70,7 +50,7 @@ public class TrainerUnitTests {
 
         Assertions.assertEquals("http://localhost:8080/feedback?id=4", trainerTraineeFeedbackFormPage.getUrl());
     }
-    
+
     @Nested
     @DisplayName("Tests for the Trainer profile page")
     class TrainerProfilePage {
@@ -93,7 +73,7 @@ public class TrainerUnitTests {
                     .checkEmailMatches());
         }
     }
-    
+
     @Nested
     @DisplayName("Tests for the Trainer Home Page")
     class TrainerHomePageTests {
@@ -196,7 +176,7 @@ public class TrainerUnitTests {
         @DisplayName("Check that clicking the Consultant Grade title opens the Competencies Page")
         void checkThatClickingTheConsultantGradeTitleOpensTheCompetenciesPage() {
             TrainerTraineeFeedbackFormPageImpl trainerTraineeFeedbackFormPage = trainerHomePage.selectTraineeName(2, "Bob Smith");
-            if(trainerTraineeFeedbackFormPage.getSimpleName() != null){
+            if (trainerTraineeFeedbackFormPage.getSimpleName() != null) {
                 CompetenciesPage competenciesPage = trainerTraineeFeedbackFormPage.clickConsultantGrade();
             }
             Assertions.assertEquals("http://localhost:8080/competencies", driver.getCurrentUrl());
@@ -213,7 +193,7 @@ public class TrainerUnitTests {
             driver2 = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
             driver2.get("http://localhost:8080/");
             LoginPageImpl loginPage2 = new LoginPageImpl(driver2, "trainee");
-            TraineeHomePage traineeHomePage = (TraineeHomePage) loginPage2.login(PropertiesLoader.getEmail("trainee"),PropertiesLoader.getPassword("trainee"));
+            TraineeHomePage traineeHomePage = (TraineeHomePage) loginPage2.login(PropertiesLoader.getEmail("trainee"), PropertiesLoader.getPassword("trainee"));
 
             TraineeTraineeFeedbackFormPage traineeTraineeFeedbackFormPage = (TraineeTraineeFeedbackFormPage) traineeHomePage.clickFeedbackFormForWeek(2);
             String testText = "hello, how are you?";
@@ -224,6 +204,29 @@ public class TrainerUnitTests {
                 interactable = false;
             }
             Assertions.assertFalse(interactable);
+        }
+    }
+
+    @Nested
+    @DisplayName("TrainerTrainer tests")
+    class TrainerTrainerTests {
+
+        @Test
+        @DisplayName("Check comment inputs are working")
+        void checkCommentInputsWork() {
+            String stopComment = "Stop being bad";
+            String startComment = "Start being good";
+            String contComment = "Keep being OK";
+
+            Assertions.assertTrue(trainerHomePage
+                    .selectTraineeName(2, "Jane Doe")
+                    .clickOnTrainer()
+                    .enterTrainerStopComments(stopComment)
+                    .clickOnStart()
+                    .enterTrainerStartComments(startComment)
+                    .clickOnCont()
+                    .enterTrainerContComments(contComment)
+                    .checkAllCommentsHaveBeenInputSuccessfully(stopComment, startComment, contComment));
         }
     }
 }
