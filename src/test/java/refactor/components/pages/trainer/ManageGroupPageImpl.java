@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 public class ManageGroupPageImpl extends NavPage implements ManageGroupPage {
 
     private final By removeButton = new By.ByLinkText("Remove");
-    private final By deleteTrainerButton = new By.ByLinkText("Delete Trainer");
+    private final By deleteTrainerButton = new By.ByXPath("\"(//button[@type='submit'])[5]\"");
     private final By addTraineeButton = new By.ByLinkText("Add Trainee");
     private final By addGroupButton = new By.ByLinkText("Add Group");
     private final By addStreamButton = new By.ByLinkText("Add Stream");
@@ -28,21 +28,6 @@ public class ManageGroupPageImpl extends NavPage implements ManageGroupPage {
         super(driver, user);
         this.driver = driver;
         this.user = user;
-    }
-
-    @Override
-    public ManageGroupPage removeTrainee(String traineeName) {
-        int numberOfRemoveButtons = driver.findElements(removeButton).size();
-        removeButtonIdentifier = new By.ByXPath("//a[@class='list-group-item list-group-item-action' and text()='" + traineeName + "']");
-
-        if (numberOfRemoveButtons == 1) {
-            driver.findElement(removeButton).click();
-        } else {
-            driver.findElement(listClassName).findElement(removeButtonIdentifier).findElement(removeButton).click();
-            driver.findElement(deleteTrainerButton).click();
-        }
-        return this;
-
     }
 
     @Override
@@ -68,7 +53,9 @@ public class ManageGroupPageImpl extends NavPage implements ManageGroupPage {
     // TODO
     @Override
     public boolean isTraineeRemoved(String traineeName) {
-        return false;
+        removeTrainee(traineeName);
+        boolean isPresent = isStudentPresent(traineeName);
+        return !isPresent;
     }
 
     @Override
@@ -76,22 +63,23 @@ public class ManageGroupPageImpl extends NavPage implements ManageGroupPage {
         ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, By.cssSelector(".btn:nth-child(" + studentIndex + ")"));
     }
 
+
     @Override
-    public void removeStudent(String studentName) {
+    public ManageGroupPageImpl removeTrainee(String studentName) {
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         List<WebElement> students = driver.findElements(By.className("list-group-item-action"));
         int studentPosition = 0;
         for (WebElement student:students) {
             String name = student.getText();
-            System.out.println(name);
-            System.out.println(students.indexOf(student));
             if (name.equals(studentName)) {
                 studentPosition = students.indexOf(student) + 1;
+                break;
             }
         }
-        String removeButtonCss = ".btn:nth-child(" + (studentPosition*2) + ")";
-        ActionClicker.timedMouseClicker(driver, 400, By.cssSelector(".btn:nth-child(" + (studentPosition * 2) + ")"));
-        ActionClicker.timedMouseClicker(driver,400, By.linkText("Delete Trainer"));
+        ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, By.cssSelector(".btn:nth-child(" + (studentPosition * 2) + ")"));
+        ActionClicker.timedMouseClicker(driver,ActionClicker.TIME, By.xpath("(//button[@type='submit'])[5]"));
+
+        return this;
     }
 
     @Override
@@ -108,18 +96,19 @@ public class ManageGroupPageImpl extends NavPage implements ManageGroupPage {
     }
 
     @Override
-    public void addStudent(String firstName, String lastName) {
+    public ManageGroupPageImpl addStudent(String firstName, String lastName) {
         ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, By.cssSelector("form > .my-3:nth-child(2)"));
-        driver.manage().timeouts().implicitlyWait(1,TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
         Select select = new Select(driver.findElement(By.id("traineeGroup")));
-        select.selectByVisibleText("Engineering 82");
-        driver.manage().timeouts().implicitlyWait(1,TimeUnit.SECONDS);
-
+        driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
+        select.selectByVisibleText("Engineering 80");
+        driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
         driver.findElement(By.id("traineeFirstName")).sendKeys(firstName);
-
+        driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
         driver.findElement(By.id("traineeLastName")).sendKeys(lastName);
+        ActionClicker.timedMouseClicker(driver,ActionClicker.TIME,By.cssSelector("#addNewTrainee .btn"));
 
-        ActionClicker.timedMouseClicker(driver,400,By.cssSelector("#addNewTrainee .btn"));
+        return new ManageGroupPageImpl(driver, "trainer");
     }
 
     @Override

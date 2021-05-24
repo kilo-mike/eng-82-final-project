@@ -149,16 +149,20 @@ public class TrainerUnitTests {
             Assertions.assertEquals("http://localhost:8080/group", driver.getCurrentUrl());
         }
 
-        //TODO: Test incomplete, unable to click the delete trainee button
+        @Test
+        @DisplayName("Checking if specified trainee present")
+        void checkingIfSpecifiedTraineePresent() {
+            Assertions.assertTrue(trainerHomePage.clickManageGroupButton().isStudentPresent("Jane Doe"));
+        }
+
         @Test
         @DisplayName("Checking if a selected student is successfully removed")
         void checkingIfASelectedStudentIsSuccessfullyRemoved() {
             ManageGroupPage manageGroupPage = trainerHomePage.clickManageGroupButton();
-            manageGroupPage.removeStudent("Alasdair Malcolm");
-            Assertions.assertFalse(manageGroupPage.isTraineeRemoved("Golam Choudhury"));
+            manageGroupPage.removeTrainee("Alasdair Malcolm");
+            Assertions.assertFalse(manageGroupPage.isTraineeRemoved("Alasdair Malcolm"));
         }
 
-        // TODO: Not able to type the names in the fields, see method in ManageGroupPageImpl
         @Test
         @DisplayName("Checking if a new trainee is successfully added")
         void checkingIfANewTraineeIsSuccessfullyAdded() {

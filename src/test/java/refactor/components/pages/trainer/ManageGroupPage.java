@@ -6,8 +6,6 @@ import refactor.components.pages.trainer.addpages.AddTraineePage;
 
 public interface ManageGroupPage {
 
-    ManageGroupPage removeTrainee(String traineeName);
-
     AddTraineePage addTrainee();
 
     AddGroupPage addGroup();
@@ -18,9 +16,9 @@ public interface ManageGroupPage {
 
     void clickRemoveButton(int studentIndex);
 
-    void removeStudent(String studentName);
+    ManageGroupPageImpl removeTrainee(String studentName);
 
-    void addStudent(String firstName, String lastName);
+    ManageGroupPageImpl addStudent(String firstName, String lastName);
 
     boolean isStudentPresent(String studentName);
 }
