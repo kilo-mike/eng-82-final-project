@@ -32,14 +32,7 @@ public class AdminProfilePageTests {
     @BeforeEach
     void setup() {
         driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
-        adminProfilePage = (AdminProfilePageImpl) new LoginPageImpl(driver, userAdmin)
-                .driverGet()
-                .enterEmail()
-                .enterPassword()
-                .clickLogin()
-                .goToProfilePage();
-//        adminProfilePage  = (AdminProfilePageImpl) new LoginPageImpl(driver,userAdmin).driverGet().login();
-    }
+        adminProfilePage = (AdminProfilePageImpl) new LoginPageImpl(driver, userAdmin).login().goToProfilePage();    }
 
 
     @Test
