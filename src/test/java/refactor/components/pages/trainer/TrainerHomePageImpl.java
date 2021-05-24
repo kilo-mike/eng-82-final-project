@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 public class TrainerHomePageImpl extends NavPage implements TrainerHomePage {
 
     private final By manageGroupButton = new By.ByLinkText("Manage Group");
-    private final By weekListName = new By.ByXPath("//select[@class=\"form-select mt-3 mb-3\"]");
+    private final By weekListName = new By.ByXPath("/html/body/section/div/div/div/select");
     private By traineeNameTable;
     private By traineeNameFinder;
     private By weekName;

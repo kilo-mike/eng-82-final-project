@@ -1,21 +1,27 @@
 package refactor.components.pages.trainer.feedbackpages;
 
-import refactor.components.NavPage;
 import refactor.components.pages.trainer.TrainerFeedbackFormPage;
+import refactor.components.pages.trainer.TrainerHomePageImpl;
 
 public interface TrainerTrainerFeedbackFormPage extends TrainerFeedbackFormPage {
 
-    TrainerTrainerFeedbackFormPage clickOnStop();
+    TrainerTrainerFeedbackFormPageImpl clickOnTrainer();
 
-    TrainerTrainerFeedbackFormPage enterStopComments(String comments);
+    TrainerTrainerFeedbackFormPageImpl clickOnStop();
 
-    TrainerTrainerFeedbackFormPage clickOnStart();
+    TrainerTrainerFeedbackFormPageImpl enterTrainerStopComments(String comments);
 
-    TrainerTrainerFeedbackFormPage enterStartComments(String comments);
+    TrainerTrainerFeedbackFormPageImpl clickOnStart();
 
-    TrainerTrainerFeedbackFormPage clickOnCont();
+    TrainerTrainerFeedbackFormPageImpl enterTrainerStartComments(String comments);
 
-    TrainerTrainerFeedbackFormPage enterContComments(String comments);
+    TrainerTrainerFeedbackFormPageImpl clickOnCont();
 
-    TrainerTraineeFeedbackFormPage clickOnTrainee();
+    TrainerTrainerFeedbackFormPageImpl enterTrainerContComments(String comments);
+
+    TrainerTraineeFeedbackFormPageImpl clickOnTrainee();
+
+    TrainerHomePageImpl clickSave();
+
+    TrainerHomePageImpl clickSubmit();
 }
