@@ -5,7 +5,6 @@ import com.sparta.eng82.components.pages.FeedbackFormPage;
 import com.sparta.eng82.components.pages.trainee.TraineeHomePage;
 import com.sparta.eng82.components.pages.trainee.TraineeHomePageImpl;
 import org.openqa.selenium.By;
-import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.InvalidElementStateException;
 import org.openqa.selenium.WebDriver;
 
@@ -222,8 +221,6 @@ public class TraineeTraineeFeedbackFormPageImpl extends FeedbackFormPage impleme
         return driver.findElement(trainersCommentBox).getText();
     }
 
-    @Override
-
     public TraineeHomePage setTrainerCommentBox(String comments) {
         driver.findElement(trainersCommentBox).clear();
         driver.findElement(trainersCommentBox).sendKeys(comments);
@@ -231,7 +228,6 @@ public class TraineeTraineeFeedbackFormPageImpl extends FeedbackFormPage impleme
         return new TraineeHomePageImpl(driver, user);
     }
 
-    @Override
     public TraineeHomePage deleteTrainerCommentBox() {
         driver.findElement(trainersCommentBox).clear();
         this.saveForm();
