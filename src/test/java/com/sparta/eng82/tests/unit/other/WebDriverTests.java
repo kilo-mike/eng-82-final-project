@@ -68,8 +68,8 @@ public class WebDriverTests {
     void testingASpecificWindowSize() {
         driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME, 500, 1000);
         driver.get("http://localhost:8080");
-        boolean heightCheck = driver.manage().window().getSize().height >= 1000;
         boolean widthCheck = driver.manage().window().getSize().width >= 500;
+        boolean heightCheck = driver.manage().window().getSize().height >= 1000;
         Assertions.assertTrue(heightCheck && widthCheck);
     }
 
