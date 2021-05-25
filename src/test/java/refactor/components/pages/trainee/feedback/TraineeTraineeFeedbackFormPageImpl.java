@@ -6,7 +6,6 @@ import refactor.components.frameworkutil.ActionClicker;
 import refactor.components.pages.FeedbackFormPage;
 import refactor.components.pages.trainee.TraineeHomePage;
 import refactor.components.pages.trainee.TraineeHomePageImpl;
-import refactor.components.pages.trainee.feedback.TraineeTrainerFeedbackFormPage;
 
 public class TraineeTraineeFeedbackFormPageImpl extends FeedbackFormPage implements TraineeTraineeFeedbackFormPage {
     private final By traineeButton = new By.ByXPath("//label");
@@ -39,7 +38,7 @@ public class TraineeTraineeFeedbackFormPageImpl extends FeedbackFormPage impleme
 
     @Override
     public TraineeTrainerFeedbackFormPage clickOnTrainer() {
-        driver.findElement(trainerButton).click();
+        ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, trainerButton);
         return new TraineeTrainerFeedbackFormPageImpl(driver, user);
     }
 
@@ -103,7 +102,7 @@ public class TraineeTraineeFeedbackFormPageImpl extends FeedbackFormPage impleme
 
     @Override
     public TraineeTraineeFeedbackFormPage clickStartTab() {
-        driver.findElement(traineeStartButton).click();
+        ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, traineeStartButton);
         return this;
     }
 
@@ -114,23 +113,28 @@ public class TraineeTraineeFeedbackFormPageImpl extends FeedbackFormPage impleme
     }
 
     @Override
-    public TraineeTraineeFeedbackFormPage setStartCommentBox(String comments) {
-        driver.findElement(traineeStartCommentBox).sendKeys(comments);
-        return this;
-    }
-
-    @Override
-    public TraineeTraineeFeedbackFormPage editStartCommentBox(String comments) {
-        clickStartTab();
-        driver.findElement(traineeStartCommentBox).sendKeys(comments);
-        return this;
-    }
-
-    @Override
-    public TraineeTraineeFeedbackFormPage deleteStartCommentBox() {
+    public TraineeHomePage setStartCommentBox(String comments) {
         clickStartTab();
         driver.findElement(traineeStartCommentBox).clear();
-        return this;
+        driver.findElement(traineeStartCommentBox).sendKeys(comments);
+        this.saveForm();
+        return new TraineeHomePageImpl(driver, user);
+    }
+
+    @Override
+    public TraineeHomePage editStartCommentBox(String comments) {
+        clickStartTab();
+        driver.findElement(traineeStartCommentBox).sendKeys(comments);
+        this.saveForm();
+        return new TraineeHomePageImpl(driver, user);
+    }
+
+    @Override
+    public TraineeHomePage deleteStartCommentBox() {
+        clickStartTab();
+        driver.findElement(traineeStartCommentBox).clear();
+        this.saveForm();
+        return new TraineeHomePageImpl(driver, user);
     }
 
     @Override
@@ -156,7 +160,7 @@ public class TraineeTraineeFeedbackFormPageImpl extends FeedbackFormPage impleme
 
     @Override
     public TraineeTraineeFeedbackFormPage clickContinueTab() {
-        driver.findElement(traineeContinueButton).click();
+        ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, traineeContinueButton);
         return this;
     }
 
@@ -167,24 +171,27 @@ public class TraineeTraineeFeedbackFormPageImpl extends FeedbackFormPage impleme
     }
 
     @Override
-    public TraineeTraineeFeedbackFormPage setContinueCommentBox(String comments) {
-        driver.findElement(traineeContinueCommentBox).sendKeys(comments);
-        return this;
-    }
-
-    @Override
-    public TraineeTraineeFeedbackFormPage editContinueCommentBox(String comments) {
-        clickContinueTab();
-        driver.findElement(traineeContinueCommentBox).sendKeys(comments);
-        return this;
-    }
-
-    @Override
-    public TraineeTraineeFeedbackFormPage deleteContinueCommentBox() {
+    public TraineeHomePage setContinueCommentBox(String comments) {
         clickContinueTab();
         driver.findElement(traineeContinueCommentBox).clear();
-        return this;
+        driver.findElement(traineeContinueCommentBox).sendKeys(comments);
+        this.saveForm();
+        return new TraineeHomePageImpl(driver, user);
     }
+
+    @Override
+    public TraineeHomePage editContinueCommentBox(String comments) {
+        clickContinueTab();
+        driver.findElement(traineeContinueCommentBox).sendKeys(comments);
+        this.saveForm();
+        return new TraineeHomePageImpl(driver, user);    }
+
+    @Override
+    public TraineeHomePage deleteContinueCommentBox() {
+        clickContinueTab();
+        driver.findElement(traineeContinueCommentBox).clear();
+        this.saveForm();
+        return new TraineeHomePageImpl(driver, user);    }
 
     @Override
     public boolean isContinueCommentBoxEmpty() {
@@ -212,16 +219,18 @@ public class TraineeTraineeFeedbackFormPageImpl extends FeedbackFormPage impleme
     }
 
     @Override
-    public TraineeTraineeFeedbackFormPage setTrainerCommentBox(String comments) {
+    public TraineeHomePage setTrainerCommentBox(String comments) {
+        driver.findElement(trainersCommentBox).clear();
         driver.findElement(trainersCommentBox).sendKeys(comments);
-        return this;
+        this.saveForm();
+        return new TraineeHomePageImpl(driver, user);
     }
 
     @Override
-    public TraineeTraineeFeedbackFormPage deleteTrainerCommentBox() {
+    public TraineeHomePage deleteTrainerCommentBox() {
         driver.findElement(trainersCommentBox).clear();
-        return this;
-    }
+        this.saveForm();
+        return new TraineeHomePageImpl(driver, user);    }
 
     @Override
     public boolean isTrainerCommentBoxEmpty() {
