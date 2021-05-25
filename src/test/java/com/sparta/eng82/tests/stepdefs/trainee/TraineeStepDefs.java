@@ -1,14 +1,10 @@
 package com.sparta.eng82.tests.stepdefs.trainee;
 
-import com.sparta.eng82.components.Page;
-import com.sparta.eng82.components.pages.admin.AdminHomePageImpl;
 import com.sparta.eng82.components.pages.other.LoginPageImpl;
 import com.sparta.eng82.components.pages.trainee.TraineeHomePageImpl;
 import com.sparta.eng82.components.pages.trainee.TraineeProfilePageImpl;
 import com.sparta.eng82.tests.stepdefs.stepdefutil.DriverManager;
 import com.sparta.eng82.tests.stepdefs.stepdefutil.Pages;
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
