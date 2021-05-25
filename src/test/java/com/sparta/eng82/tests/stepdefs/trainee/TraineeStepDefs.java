@@ -57,4 +57,16 @@ public class TraineeStepDefs {
     public void theTraineeWillBeAbleToSeeTheirAverageGradesOverTime() {
         Assertions.assertTrue(Pages.traineeProfilePage.areBothGradesValid());
     }
+
+
+
+    @When("I click on the feedback for week {int}")
+    public void iClickOnTheFeedbackForWeek(int arg0) {
+        Pages.traineeTraineeFeedbackFormPage = Pages.traineeHomePage.clickFeedbackFormForWeek(arg0);
+    }
+
+    @Then("I will only be able to see information pertaining to week {int}")
+    public void iWillOnlyBeAbleToSeeInformationPertainingToWeek(int arg0) {
+        Assertions.assertEquals(Pages.traineeTraineeFeedbackFormPage.getWeek(), "Week "+arg0);
+    }
 }
