@@ -35,8 +35,8 @@ public class TraineeTrainerFeedbackFormPageImpl extends FeedbackFormPage impleme
 
     @Override
     public TraineeTraineeFeedbackFormPage clickOnTrainee() {
-        ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, traineeButton);
-        return new TraineeTraineeFeedbackFormPageImpl(driver, getClass().getSimpleName() );
+        driver.findElement(traineeButton).click();
+        return new TraineeTraineeFeedbackFormPageImpl(driver, user);
     }
 
     @Override

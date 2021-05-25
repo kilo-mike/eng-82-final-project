@@ -1,11 +1,13 @@
 package com.sparta.eng82.components.pages.trainee.feedback;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import com.sparta.eng82.components.frameworkutil.ActionClicker;
 import com.sparta.eng82.components.pages.FeedbackFormPage;
 import com.sparta.eng82.components.pages.trainee.TraineeHomePage;
 import com.sparta.eng82.components.pages.trainee.TraineeHomePageImpl;
+import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotInteractableException;
+import org.openqa.selenium.InvalidElementStateException;
+import org.openqa.selenium.WebDriver;
 
 public class TraineeTraineeFeedbackFormPageImpl extends FeedbackFormPage implements TraineeTraineeFeedbackFormPage {
     private final By traineeButton = new By.ByXPath("//label");
@@ -184,14 +186,16 @@ public class TraineeTraineeFeedbackFormPageImpl extends FeedbackFormPage impleme
         clickContinueTab();
         driver.findElement(traineeContinueCommentBox).sendKeys(comments);
         this.saveForm();
-        return new TraineeHomePageImpl(driver, user);    }
+        return new TraineeHomePageImpl(driver, user);
+    }
 
     @Override
     public TraineeHomePage deleteContinueCommentBox() {
         clickContinueTab();
         driver.findElement(traineeContinueCommentBox).clear();
         this.saveForm();
-        return new TraineeHomePageImpl(driver, user);    }
+        return new TraineeHomePageImpl(driver, user);
+    }
 
     @Override
     public boolean isContinueCommentBoxEmpty() {
@@ -219,6 +223,23 @@ public class TraineeTraineeFeedbackFormPageImpl extends FeedbackFormPage impleme
     }
 
     @Override
+
+    public TraineeHomePage setTrainerCommentBox(String comments) {
+        driver.findElement(trainersCommentBox).clear();
+        driver.findElement(trainersCommentBox).sendKeys(comments);
+        this.saveForm();
+        return new TraineeHomePageImpl(driver, user);
+    }
+
+    @Override
+    public TraineeHomePage deleteTrainerCommentBox() {
+        driver.findElement(trainersCommentBox).clear();
+        this.saveForm();
+        return new TraineeHomePageImpl(driver, user);
+    }
+
+    @Override
+
     public boolean isTrainerCommentBoxEmpty() {
         return driver.findElement(trainersCommentBox).getText().isEmpty();
     }
@@ -267,6 +288,41 @@ public class TraineeTraineeFeedbackFormPageImpl extends FeedbackFormPage impleme
     @Override
     public String getUrl() {
         return null;
+    }
+
+    public TraineeTraineeFeedbackFormPageImpl clickOnStopAndSetComment(String comments) {
+        clickStopTab();
+        driver.findElement(traineeStopCommentBox).clear();
+        driver.findElement(traineeStopCommentBox).sendKeys(comments);
+        return this;
+    }
+
+    public TraineeTraineeFeedbackFormPageImpl clickOnStartAndSetComment(String comments) {
+        clickStartTab();
+        driver.findElement(traineeStartCommentBox).clear();
+        driver.findElement(traineeStartCommentBox).sendKeys(comments);
+        return this;
+    }
+
+    public TraineeTraineeFeedbackFormPageImpl clickOnContAndSetComments(String comments) {
+        clickContinueTab();
+        driver.findElement(traineeContinueCommentBox).clear();
+        driver.findElement(traineeContinueCommentBox).sendKeys(comments);
+        return this;
+    }
+
+
+    private boolean checkIfDisplayed(By by) {
+        return driver.findElement(by).isDisplayed();
+    }
+
+    public boolean areTraineeCommentBoxesInteractive() {
+        try {
+            clickOnStartAndSetComment("test").clickOnContAndSetComments("test").clickOnStopAndSetComment("test");
+        } catch (InvalidElementStateException e) {
+            return false;
+        }
+        return true;
     }
 }
 

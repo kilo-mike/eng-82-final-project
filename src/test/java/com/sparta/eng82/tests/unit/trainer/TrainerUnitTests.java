@@ -1,20 +1,18 @@
 package com.sparta.eng82.tests.unit.trainer;
 
-import org.junit.jupiter.api.*;
-import org.openqa.selenium.By;
-import org.openqa.selenium.ElementNotInteractableException;
-import org.openqa.selenium.WebDriver;
 import com.sparta.eng82.components.frameworkutil.PropertiesLoader;
 import com.sparta.eng82.components.frameworkutil.WebDriverFactory;
 import com.sparta.eng82.components.frameworkutil.WebDriverTypes;
 import com.sparta.eng82.components.pages.other.CompetenciesPage;
 import com.sparta.eng82.components.pages.other.LoginPageImpl;
-import com.sparta.eng82.components.pages.trainee.TraineeHomePage;
-import com.sparta.eng82.components.pages.trainee.feedback.TraineeTraineeFeedbackFormPage;
+import com.sparta.eng82.components.pages.trainee.TraineeHomePageImpl;
 import com.sparta.eng82.components.pages.trainer.ManageGroupPage;
 import com.sparta.eng82.components.pages.trainer.TrainerHomePageImpl;
 import com.sparta.eng82.components.pages.trainer.feedbackpages.TrainerTraineeFeedbackFormPage;
 import com.sparta.eng82.components.pages.trainer.feedbackpages.TrainerTraineeFeedbackFormPageImpl;
+import org.junit.jupiter.api.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 public class TrainerUnitTests {
 
@@ -186,27 +184,19 @@ public class TrainerUnitTests {
         }
 
         @Test
-        @DisplayName("Check that the Submit Form button works for Trainers")
-            //This test will likely NOT WORK if the trainee driver (driver2) is run headless.
-        void checkThatTheSubmitFormButtonWorks() {
+        @DisplayName("Check submit works as intended")
+        void checkSubmitWorksAsIntended() {
+            new TrainerHomePageImpl(driver, "trainer")
+                    .selectTraineeName(3, "Jane Doe")
+                    .submitForm()
+                    .logOut();
 
-            TrainerTraineeFeedbackFormPageImpl trainerTraineeFeedbackFormPage = trainerHomePage.selectTraineeName(2, "Jane Doe");
-            trainerTraineeFeedbackFormPage.submitForm("Trainer");
-            WebDriver driver2;
-            driver2 = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
-            driver2.get("http://localhost:8080/");
-            LoginPageImpl loginPage2 = new LoginPageImpl(driver2, "trainee");
-            TraineeHomePage traineeHomePage = (TraineeHomePage) loginPage2.login(PropertiesLoader.getEmail("trainee"), PropertiesLoader.getPassword("trainee"));
-
-            TraineeTraineeFeedbackFormPage traineeTraineeFeedbackFormPage = (TraineeTraineeFeedbackFormPage) traineeHomePage.clickFeedbackFormForWeek(2);
-            String testText = "hello, how are you?";
-            boolean interactable = true;
-            try {
-                traineeTraineeFeedbackFormPage.editStopCommentBox(testText);
-            } catch (ElementNotInteractableException e) {
-                interactable = false;
-            }
-            Assertions.assertFalse(interactable);
+            Assertions.assertFalse(((TraineeHomePageImpl) ((TraineeHomePageImpl) new LoginPageImpl(driver, "trainee")
+                    .login(PropertiesLoader.getEmail("trainee"), PropertiesLoader.getPassword("trainee")))
+                    .clickFeedbackFormForWeek(3)
+                    .submitForm())
+                    .clickFeedbackFormForWeek(3)
+                    .areTraineeCommentBoxesInteractive());
         }
     }
 }

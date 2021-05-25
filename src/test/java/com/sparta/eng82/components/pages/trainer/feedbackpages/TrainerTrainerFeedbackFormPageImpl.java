@@ -79,7 +79,7 @@ public class TrainerTrainerFeedbackFormPageImpl extends FeedbackFormPage impleme
     @Override
     public TrainerTraineeFeedbackFormPageImpl clickOnTrainee() {
         driver.findElement(By.xpath("/html/body/div[2]/div/div/form/div[1]/label[1]")).click();
-        return new TrainerTraineeFeedbackFormPageImpl(driver, this.getClass().getSimpleName());
+        return new TrainerTraineeFeedbackFormPageImpl(driver, user);
     }
 
     @Override
