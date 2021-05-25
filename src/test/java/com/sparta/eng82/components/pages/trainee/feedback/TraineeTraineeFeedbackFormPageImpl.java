@@ -39,7 +39,7 @@ public class TraineeTraineeFeedbackFormPageImpl extends FeedbackFormPage impleme
     }
 
     @Override
-    public TraineeTrainerFeedbackFormPage clickOnTrainer() {
+    public TraineeTrainerFeedbackFormPageImpl clickOnTrainer() {
         ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, trainerButton);
         return new TraineeTrainerFeedbackFormPageImpl(driver, user);
     }
@@ -90,7 +90,7 @@ public class TraineeTraineeFeedbackFormPageImpl extends FeedbackFormPage impleme
     @Override
     public boolean isStopCommentBoxDisabled() {
         clickStopTab();
-        return !driver.findElement(traineeStopCommentBox).isEnabled();
+        return driver.findElement(traineeStopCommentBox).isEnabled();
     }
 
     @Override
@@ -223,6 +223,7 @@ public class TraineeTraineeFeedbackFormPageImpl extends FeedbackFormPage impleme
     }
 
     @Override
+
     public TraineeHomePage setTrainerCommentBox(String comments) {
         driver.findElement(trainersCommentBox).clear();
         driver.findElement(trainersCommentBox).sendKeys(comments);
@@ -238,6 +239,7 @@ public class TraineeTraineeFeedbackFormPageImpl extends FeedbackFormPage impleme
     }
 
     @Override
+
     public boolean isTrainerCommentBoxEmpty() {
         return driver.findElement(trainersCommentBox).getText().isEmpty();
     }

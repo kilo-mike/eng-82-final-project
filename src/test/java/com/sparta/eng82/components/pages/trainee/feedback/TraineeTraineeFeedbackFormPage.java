@@ -5,7 +5,7 @@ import com.sparta.eng82.components.pages.trainee.TraineeHomePage;
 
 public interface TraineeTraineeFeedbackFormPage extends TraineeFeedbackFormPage {
 
-    TraineeTrainerFeedbackFormPage clickOnTrainer();
+    TraineeTrainerFeedbackFormPageImpl clickOnTrainer();
 
     TraineeTraineeFeedbackFormPage clickStopTab();
 
@@ -56,10 +56,6 @@ public interface TraineeTraineeFeedbackFormPage extends TraineeFeedbackFormPage 
     boolean isContinueCommentBoxEnabledBeforeSubmission();
 
     String getTrainerCommentBox();
-
-    TraineeHomePage setTrainerCommentBox(String comments);
-
-    TraineeHomePage deleteTrainerCommentBox();
 
     boolean isTrainerCommentBoxEmpty();
 

@@ -1,8 +1,9 @@
 package com.sparta.eng82.components.pages.trainee.feedback;
 
+import com.sparta.eng82.components.frameworkutil.ActionClicker;
+import com.sparta.eng82.components.pages.FeedbackFormPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import com.sparta.eng82.components.pages.FeedbackFormPage;
 
 public class TraineeTrainerFeedbackFormPageImpl extends FeedbackFormPage implements TraineeTrainerFeedbackFormPage {
 
@@ -13,8 +14,8 @@ public class TraineeTrainerFeedbackFormPageImpl extends FeedbackFormPage impleme
     private final By trainerButton = new By.ByXPath("//label[2]");
 
     private final By trainerStopButton = By.xpath("//div[3]/div/label");
-    private final By trainerStartButton = By.id("//div[3]/div/label[2]");
-    private final By trainerContinueButton = By.id("//div[3]/div/label[3]");
+    private final By trainerStartButton = By.xpath("//div[3]/div/label[2]");
+    private final By trainerContinueButton = By.xpath("//div[3]/div/label[3]");
 
     private final By trainerStopCommentBox = By.id("stopTrainer");
     private final By trainerStartCommentBox = By.id("startTrainer");
@@ -40,7 +41,7 @@ public class TraineeTrainerFeedbackFormPageImpl extends FeedbackFormPage impleme
 
     @Override
     public TraineeTrainerFeedbackFormPage clickStopTab() {
-        driver.findElement(trainerStopButton);
+        ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, trainerStopButton);
         return this;
     }
 
@@ -48,28 +49,6 @@ public class TraineeTrainerFeedbackFormPageImpl extends FeedbackFormPage impleme
     public String getStopCommentBox() {
         clickStopTab();
         return driver.findElement(trainerStopCommentBox).getText();
-    }
-
-    @Override
-    public TraineeTrainerFeedbackFormPage setStopCommentBox(String comments) {
-        clickStopTab();
-        deleteStopCommentBox();
-        driver.findElement(trainerStopCommentBox).sendKeys(comments);
-        return this;
-    }
-
-    @Override
-    public TraineeTrainerFeedbackFormPage editStopCommentBox(String comments) {
-        clickStopTab();
-        driver.findElement(trainerStopCommentBox).sendKeys(comments);
-        return this;
-    }
-
-    @Override
-    public TraineeTrainerFeedbackFormPage deleteStopCommentBox() {
-        clickStopTab();
-        driver.findElement(trainerStopCommentBox).clear();
-        return this;
     }
 
     @Override
@@ -81,12 +60,12 @@ public class TraineeTrainerFeedbackFormPageImpl extends FeedbackFormPage impleme
     @Override
     public boolean isStopCommentBoxDisabled() {
         clickStopTab();
-        return !driver.findElement(trainerStopCommentBox).isEnabled();
+        return driver.findElement(trainerStopCommentBox).isEnabled();
     }
 
     @Override
     public TraineeTrainerFeedbackFormPage clickStartTab() {
-        driver.findElement(trainerStartButton).click();
+        ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, trainerStartButton);
         return this;
     }
 
@@ -94,28 +73,6 @@ public class TraineeTrainerFeedbackFormPageImpl extends FeedbackFormPage impleme
     public String getStartCommentBox() {
         clickStartTab();
         return driver.findElement(trainerStartCommentBox).getText();
-    }
-
-    @Override
-    public TraineeTrainerFeedbackFormPage setStartCommentBox(String comments) {
-        clickStartTab();
-        deleteStartCommentBox();
-        driver.findElement(trainerStartCommentBox).sendKeys(comments);
-        return this;
-    }
-
-    @Override
-    public TraineeTrainerFeedbackFormPage editStartCommentBox(String comments) {
-        clickStartTab();
-        driver.findElement(trainerStartCommentBox).sendKeys(comments);
-        return this;
-    }
-
-    @Override
-    public TraineeTrainerFeedbackFormPage deleteStartCommentBox() {
-        clickStartTab();
-        driver.findElement(trainerStartCommentBox).clear();
-        return this;
     }
 
     @Override
@@ -127,12 +84,12 @@ public class TraineeTrainerFeedbackFormPageImpl extends FeedbackFormPage impleme
     @Override
     public boolean isStartCommentBoxDisabled() {
         clickStartTab();
-        return !driver.findElement(trainerStartCommentBox).isEnabled();
+        return driver.findElement(trainerStartCommentBox).isEnabled();
     }
 
     @Override
     public TraineeTrainerFeedbackFormPage clickContinueTab() {
-        driver.findElement(trainerContinueButton).click();
+        ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, trainerContinueButton);
         return this;
     }
 
@@ -143,52 +100,18 @@ public class TraineeTrainerFeedbackFormPageImpl extends FeedbackFormPage impleme
     }
 
     @Override
-    public TraineeTrainerFeedbackFormPage setContinueCommentBox(String comments) {
-        clickContinueTab();
-        deleteContinueCommentBox();
-        driver.findElement(trainerContinueCommentBox).sendKeys(comments);
-        return this;
-    }
-
-    @Override
-    public TraineeTrainerFeedbackFormPage editContinueCommentBox(String comments) {
-        clickContinueTab();
-        driver.findElement(trainerContinueCommentBox).sendKeys(comments);
-        return this;
-    }
-
-    @Override
-    public TraineeTrainerFeedbackFormPage deleteContinueCommentBox() {
-        driver.findElement(trainerContinueCommentBox).clear();
-        return this;
-    }
-
-    @Override
     public boolean isContinueCommentBoxEmpty() {
         return driver.findElement(trainerContinueCommentBox).getText().isEmpty();
     }
 
     @Override
     public boolean isContinueCommentBoxDisabled() {
-        return !driver.findElement(trainerContinueCommentBox).isEnabled();
+        return driver.findElement(trainerContinueCommentBox).isEnabled();
     }
 
     @Override
     public String getTrainerCommentBox() {
         return driver.findElement(trainersCommentBox).getText();
-    }
-
-    @Override
-    public TraineeTrainerFeedbackFormPage setTrainerCommentBox(String comments) {
-        deleteTrainerCommentBox();
-        driver.findElement(trainersCommentBox).sendKeys(comments);
-        return this;
-    }
-
-    @Override
-    public TraineeTrainerFeedbackFormPage deleteTrainerCommentBox() {
-        driver.findElement(trainersCommentBox).clear();
-        return this;
     }
 
     @Override
@@ -198,7 +121,7 @@ public class TraineeTrainerFeedbackFormPageImpl extends FeedbackFormPage impleme
 
     @Override
     public boolean isTrainerCommentBoxDisabled() {
-        return !driver.findElement(trainersCommentBox).isEnabled();
+        return driver.findElement(trainersCommentBox).isEnabled();
     }
 
     @Override

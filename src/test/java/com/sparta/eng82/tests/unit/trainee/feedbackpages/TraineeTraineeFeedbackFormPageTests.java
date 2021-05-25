@@ -163,7 +163,7 @@ public class TraineeTraineeFeedbackFormPageTests {
     @Ignore
     @DisplayName("Is Start Comment Box Disabled Test")
     void isStartCommentBoxDisabledTest() {
-
+        Assertions.assertTrue(traineeTraineeFeedbackFormPage.isStartCommentBoxDisabled());
     }
 
     @Test
@@ -224,6 +224,9 @@ public class TraineeTraineeFeedbackFormPageTests {
     @Ignore
     @DisplayName("Is Continue Comment Box Empty Test")
     void isContinueCommentBoxEmptyTest() {
+        traineeHomePage = (TraineeHomePageImpl) traineeTraineeFeedbackFormPage.deleteContinueCommentBox();
+        traineeTraineeFeedbackFormPage = traineeHomePage.clickFeedbackFormForWeek(2);
+        Assertions.assertTrue(traineeTraineeFeedbackFormPage.isContinueCommentBoxEmpty());
 
     }
 
@@ -245,20 +248,6 @@ public class TraineeTraineeFeedbackFormPageTests {
     @Ignore
     @DisplayName("Get Comment From Trainer Comment Box Test")
     void getCommentFromTrainerCommentBoxTest() {
-
-    }
-
-    @Test
-    @Ignore
-    @DisplayName("Set Comment In Trainer Comment Box Test")
-    void setCommentInTrainerCommentBoxTest() {
-
-    }
-
-    @Test
-    @Ignore
-    @DisplayName("Delete Comment In Trainer Comment Box Test")
-    void deleteCommentInTrainerCommentBoxTest() {
 
     }
 
