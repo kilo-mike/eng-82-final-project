@@ -7,13 +7,9 @@ import org.openqa.selenium.WebDriver;
 import refactor.components.frameworkutil.WebDriverFactory;
 import refactor.components.frameworkutil.WebDriverTypes;
 import refactor.components.pages.other.LoginPageImpl;
-import refactor.components.pages.trainee.TraineeHomePage;
 import refactor.components.pages.trainee.TraineeHomePageImpl;
-import refactor.components.pages.trainee.feedback.TraineeTraineeFeedbackFormPage;
 import refactor.components.pages.trainee.feedback.TraineeTraineeFeedbackFormPageImpl;
 import refactor.components.pages.trainee.feedback.TraineeTrainerFeedbackFormPageImpl;
-
-import java.util.Properties;
 
 public class TraineeTraineeFeedbackFormPageTests {
 
@@ -32,7 +28,7 @@ public class TraineeTraineeFeedbackFormPageTests {
     @BeforeEach
     void setup() {
         webDriverFactory = new WebDriverFactory();
-        driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME_HEADLESS);
+        driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
         traineeHomePage = (TraineeHomePageImpl) new LoginPageImpl(driver, "trainee").login();
         traineeTraineeFeedbackFormPage =  traineeHomePage.clickFeedbackFormForWeek(2);
     }
@@ -53,46 +49,53 @@ public class TraineeTraineeFeedbackFormPageTests {
     @Test
     @DisplayName("Get Comment From Stop Box Test")
     void getCommentFromStopBoxTest() {
-        String testString = "Patrick";
+        String testString = "New Trainee Get Stop Comment";
+        traineeHomePage = (TraineeHomePageImpl) traineeTraineeFeedbackFormPage.setStopCommentBox(testString);
+        traineeTraineeFeedbackFormPage = traineeHomePage.clickFeedbackFormForWeek(2);
         Assertions.assertEquals(testString, traineeTraineeFeedbackFormPage.getStopCommentBox());
     }
 
     @Test
     @DisplayName("Set Comment In Stop Box Test")
     void setCommentInStopBoxTest() {
-        String testString = "New Trainee Edit Stop Comment";
-        TraineeHomePage newTraineeHomePage = traineeTraineeFeedbackFormPage.setStopCommentBox(testString);
-        TraineeTraineeFeedbackFormPage newTraineeTraineeFeedbackFormPage = (TraineeTraineeFeedbackFormPage) newTraineeHomePage.clickFeedbackFormForWeek(2);
-        Assertions.assertEquals(testString, newTraineeTraineeFeedbackFormPage.getStopCommentBox());
+        String testString = "New Trainee Set Stop Comment";
+        traineeHomePage = (TraineeHomePageImpl) traineeTraineeFeedbackFormPage.setStopCommentBox(testString);
+        traineeTraineeFeedbackFormPage = traineeHomePage.clickFeedbackFormForWeek(2);
+        Assertions.assertEquals(testString, traineeTraineeFeedbackFormPage.getStopCommentBox());
     }
 
     @Test
     @DisplayName("Edit Comment In Stop Box Test")
     void editCommentInStopBoxTest() {
         String testString = "New Trainee Edit Stop Comment";
-        TraineeHomePage newTraineeHomePage = traineeTraineeFeedbackFormPage.editStopCommentBox(testString);
-        TraineeTraineeFeedbackFormPage newTraineeTraineeFeedbackFormPage = (TraineeTraineeFeedbackFormPage) newTraineeHomePage.clickFeedbackFormForWeek(2);
-        Assertions.assertTrue(newTraineeTraineeFeedbackFormPage.getStopCommentBox().contains(testString));
+        traineeHomePage = (TraineeHomePageImpl) traineeTraineeFeedbackFormPage.editStopCommentBox(testString);
+        traineeTraineeFeedbackFormPage = traineeHomePage.clickFeedbackFormForWeek(2);
+        Assertions.assertTrue(traineeTraineeFeedbackFormPage.getStopCommentBox().contains(testString));
     }
 
     @Test
     @DisplayName("Delete Comment In Stop Box Test")
     void deleteCommentInStopBoxTest() {
-        TraineeHomePage newTraineeHomePage = traineeTraineeFeedbackFormPage.deleteStopCommentBox();
-        TraineeTraineeFeedbackFormPage newTraineeTraineeFeedbackFormPage = (TraineeTraineeFeedbackFormPage) newTraineeHomePage.clickFeedbackFormForWeek(2);
-        Assertions.assertEquals("", newTraineeTraineeFeedbackFormPage.getStopCommentBox());
+        traineeHomePage = (TraineeHomePageImpl) traineeTraineeFeedbackFormPage.deleteStopCommentBox();
+        traineeTraineeFeedbackFormPage = traineeHomePage.clickFeedbackFormForWeek(2);
+        Assertions.assertEquals("", traineeTraineeFeedbackFormPage.getStopCommentBox());
     }
 
     @Test
     @Ignore
     @DisplayName("Is Stop Comment Box Empty Test")
     void isStopCommentBoxEmptyTest() {
+        traineeTraineeFeedbackFormPage.clickStopTab();
+        traineeHomePage = (TraineeHomePageImpl) traineeTraineeFeedbackFormPage.deleteStopCommentBox();
+        traineeTraineeFeedbackFormPage = traineeHomePage.clickFeedbackFormForWeek(2);
+        Assertions.assertTrue(traineeTraineeFeedbackFormPage.isStopCommentBoxEmpty());
     }
 
     @Test
     @Ignore
     @DisplayName("Is Stop Comment Box Disabled Test")
     void isStopCommentBoxDisabledTest() {
+        Assertions.assertTrue(traineeTraineeFeedbackFormPage.isStopCommentBoxDisabled());
     }
 
     @Test
@@ -105,6 +108,8 @@ public class TraineeTraineeFeedbackFormPageTests {
     @Ignore
     @DisplayName("Click Start Tab Test")
     void clickStartTabTest() {
+        traineeTraineeFeedbackFormPage.clickStartTab();
+        Assertions.assertTrue(driver.findElement(By.id("startTrainee")).isDisplayed());
 
     }
 
@@ -112,25 +117,39 @@ public class TraineeTraineeFeedbackFormPageTests {
     @Ignore
     @DisplayName("Get Comment From Start Box Test")
     void getCommentFromStartBoxTest() {
+        String testString = "New Trainee Get Start Comment";
+        traineeHomePage = (TraineeHomePageImpl) traineeTraineeFeedbackFormPage.setStartCommentBox(testString);
+        traineeTraineeFeedbackFormPage = traineeHomePage.clickFeedbackFormForWeek(2);
+        Assertions.assertEquals(testString, traineeTraineeFeedbackFormPage.getStartCommentBox());
     }
 
     @Test
     @Ignore
     @DisplayName("Set Comment In Start Box Test")
     void setCommentInStartBoxTest() {
+        String testString = "New Trainee Set Start Comment";
+        traineeHomePage = (TraineeHomePageImpl) traineeTraineeFeedbackFormPage.setStartCommentBox(testString);
+        traineeTraineeFeedbackFormPage = traineeHomePage.clickFeedbackFormForWeek(2);
+        Assertions.assertEquals(testString, traineeTraineeFeedbackFormPage.getStartCommentBox());
     }
 
     @Test
     @Ignore
     @DisplayName("Edit Comment In Start Box Test")
     void editCommentInStartBoxTest() {
+        String testString = "New Trainee Edit Start Comment";
+        traineeHomePage = (TraineeHomePageImpl) traineeTraineeFeedbackFormPage.editStartCommentBox(testString);
+        traineeTraineeFeedbackFormPage = traineeHomePage.clickFeedbackFormForWeek(2);
+        Assertions.assertTrue(traineeTraineeFeedbackFormPage.getStartCommentBox().contains(testString));
     }
 
     @Test
     @Ignore
     @DisplayName("Delete Comment In Start Box Test")
     void deleteCommentInStartBoxTest() {
-
+        traineeHomePage = (TraineeHomePageImpl) traineeTraineeFeedbackFormPage.deleteStartCommentBox();
+        traineeTraineeFeedbackFormPage = traineeHomePage.clickFeedbackFormForWeek(2);
+        Assertions.assertEquals("", traineeTraineeFeedbackFormPage.getStopCommentBox());
     }
 
     @Test
@@ -158,35 +177,47 @@ public class TraineeTraineeFeedbackFormPageTests {
     @Ignore
     @DisplayName("Click Continue Tab Test")
     void clickContinueTabTest() {
-
+        traineeTraineeFeedbackFormPage.clickContinueTab();
+        Assertions.assertTrue(driver.findElement(By.id("continueTrainee")).isDisplayed());
     }
 
     @Test
     @Ignore
     @DisplayName("Get Comment From Continue Box Test")
     void getCommentFromContinueBoxTest() {
-
+        String testString = "New Trainee Get Continue Comment";
+        traineeHomePage = (TraineeHomePageImpl) traineeTraineeFeedbackFormPage.setContinueCommentBox(testString);
+        traineeTraineeFeedbackFormPage = traineeHomePage.clickFeedbackFormForWeek(2);
+        Assertions.assertEquals(testString, traineeTraineeFeedbackFormPage.getContinueCommentBox());
     }
 
     @Test
     @Ignore
     @DisplayName("Set Comment In Continue Box Test")
     void setCommentInContinueBoxTest() {
-
+        String testString = "New Trainee Set Continue Comment";
+        traineeHomePage = (TraineeHomePageImpl) traineeTraineeFeedbackFormPage.setContinueCommentBox(testString);
+        traineeTraineeFeedbackFormPage = traineeHomePage.clickFeedbackFormForWeek(2);
+        Assertions.assertEquals(testString, traineeTraineeFeedbackFormPage.getContinueCommentBox());
     }
 
     @Test
     @Ignore
     @DisplayName("Edit Comment In Continue Box Test")
     void editCommentInContinueBoxTest() {
-
+        String testString = "New Trainee Edit Continue Comment";
+        traineeHomePage = (TraineeHomePageImpl) traineeTraineeFeedbackFormPage.editContinueCommentBox(testString);
+        traineeTraineeFeedbackFormPage = traineeHomePage.clickFeedbackFormForWeek(2);
+        Assertions.assertTrue(traineeTraineeFeedbackFormPage.getContinueCommentBox().contains(testString));
     }
 
     @Test
     @Ignore
     @DisplayName("Delete Comment In Continue Box Test")
     void deleteCommentInContinueBoxTest() {
-
+        traineeHomePage = (TraineeHomePageImpl) traineeTraineeFeedbackFormPage.deleteContinueCommentBox();
+        traineeTraineeFeedbackFormPage = traineeHomePage.clickFeedbackFormForWeek(2);
+        Assertions.assertEquals("", traineeTraineeFeedbackFormPage.getContinueCommentBox());
     }
 
     @Test

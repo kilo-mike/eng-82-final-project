@@ -2,7 +2,6 @@ package refactor.components.pages.trainee.feedback;
 
 import refactor.components.pages.trainee.TraineeFeedbackFormPage;
 import refactor.components.pages.trainee.TraineeHomePage;
-import refactor.components.pages.trainee.feedback.TraineeTrainerFeedbackFormPage;
 
 public interface TraineeTraineeFeedbackFormPage extends TraineeFeedbackFormPage {
 
@@ -28,11 +27,11 @@ public interface TraineeTraineeFeedbackFormPage extends TraineeFeedbackFormPage 
 
     String getStartCommentBox();
 
-    TraineeTraineeFeedbackFormPage setStartCommentBox(String comments);
+    TraineeHomePage setStartCommentBox(String comments);
 
-    TraineeTraineeFeedbackFormPage editStartCommentBox(String comments);
+    TraineeHomePage editStartCommentBox(String comments);
 
-    TraineeTraineeFeedbackFormPage deleteStartCommentBox();
+    TraineeHomePage deleteStartCommentBox();
 
     boolean isStartCommentBoxEmpty();
 
@@ -44,11 +43,11 @@ public interface TraineeTraineeFeedbackFormPage extends TraineeFeedbackFormPage 
 
     String getContinueCommentBox();
 
-    TraineeTraineeFeedbackFormPage setContinueCommentBox(String comments);
+    TraineeHomePage setContinueCommentBox(String comments);
 
-    TraineeTraineeFeedbackFormPage editContinueCommentBox(String comments);
+    TraineeHomePage editContinueCommentBox(String comments);
 
-    TraineeTraineeFeedbackFormPage deleteContinueCommentBox();
+    TraineeHomePage deleteContinueCommentBox();
 
     boolean isContinueCommentBoxEmpty();
 
@@ -58,9 +57,9 @@ public interface TraineeTraineeFeedbackFormPage extends TraineeFeedbackFormPage 
 
     String getTrainerCommentBox();
 
-    TraineeTraineeFeedbackFormPage setTrainerCommentBox(String comments);
+    TraineeHomePage setTrainerCommentBox(String comments);
 
-    TraineeTraineeFeedbackFormPage deleteTrainerCommentBox();
+    TraineeHomePage deleteTrainerCommentBox();
 
     boolean isTrainerCommentBoxEmpty();
 
