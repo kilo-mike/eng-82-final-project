@@ -35,7 +35,7 @@ public class TraineeTrainerFeedbackFormPageImpl extends FeedbackFormPage impleme
     @Override
     public TraineeTraineeFeedbackFormPage clickOnTrainee() {
         driver.findElement(traineeButton).click();
-        return new TraineeTraineeFeedbackFormPageImpl(driver, getClass().getSimpleName() );
+        return new TraineeTraineeFeedbackFormPageImpl(driver, user);
     }
 
     @Override

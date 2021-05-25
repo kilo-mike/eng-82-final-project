@@ -1,14 +1,11 @@
 package com.sparta.eng82.components.pages.trainer;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
 import com.sparta.eng82.components.NavPage;
 import com.sparta.eng82.components.frameworkutil.ActionClicker;
 import com.sparta.eng82.components.frameworkutil.PropertiesLoader;
 import com.sparta.eng82.components.pages.trainer.feedbackpages.TrainerTraineeFeedbackFormPageImpl;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.concurrent.TimeUnit;
 
@@ -43,16 +40,26 @@ public class TrainerHomePageImpl extends NavPage implements TrainerHomePage {
 
     @Override
     public TrainerTraineeFeedbackFormPageImpl selectTraineeName(int week, String traineeName) {
-        weekName = new By.ByXPath("//option[@value='" + week + "']");
-        traineeNameFinder = new By.ByXPath("//td[\"" + traineeName + "\"]");
-
-        driver.findElement(weekListName).findElement(weekName).click();
-        try {
-            ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, By.xpath(".//*[@id='traineeTable2']/tbody/tr/td[contains(.,'" + traineeName + "')]"));
-        } catch (NoSuchElementException e) {
-            // Make sure to check for/expect this output if a trainee is not present.
-            System.out.println("The trainee " + traineeName + " does not exist.");
-            return new TrainerTraineeFeedbackFormPageImpl(driver, null);
+        ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, By.tagName("select"));
+        for (WebElement element : driver.findElements(By.tagName("option"))) {
+            if (element.getText().startsWith("Week " + week + " ")) {
+                try {
+                    element.sendKeys(Keys.ENTER);
+                    break;
+                } catch (ElementNotInteractableException e) {
+                    break;
+                }
+            }
+        }
+        for (WebElement element : driver.findElements(By.tagName("td"))) {
+            if (element.getText().equals(traineeName)) {
+                try {
+                    element.click();
+                    break;
+                } catch (ElementNotInteractableException e) {
+                    break;
+                }
+            }
         }
         return new TrainerTraineeFeedbackFormPageImpl(driver, user);
     }
