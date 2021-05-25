@@ -8,6 +8,7 @@ import com.sparta.eng82.components.NavPage;
 import com.sparta.eng82.components.frameworkutil.ActionClicker;
 import com.sparta.eng82.components.pages.trainer.addpages.*;
 
+import javax.swing.*;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -15,7 +16,7 @@ public class ManageGroupPageImpl extends NavPage implements ManageGroupPage {
 
     private final By removeButton = new By.ByLinkText("Remove");
     private final By deleteTrainerButton = new By.ByXPath("\"(//button[@type='submit'])[5]\"");
-    private final By addTraineeButton = new By.ByLinkText("Add Trainee");
+    private final By addTraineeButton = new By.ByXPath("//form/button");
     private final By addGroupButton = new By.ByLinkText("Add Group");
     private final By addStreamButton = new By.ByLinkText("Add Stream");
     private final By listClassName = new By.ByClassName("list-group");
@@ -32,7 +33,7 @@ public class ManageGroupPageImpl extends NavPage implements ManageGroupPage {
 
     @Override
     public AddTraineePage addTrainee() {
-        driver.findElement(addTraineeButton).click();
+        ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, addTraineeButton);
         return new AddTraineePageImpl(driver, user);
 
     }
