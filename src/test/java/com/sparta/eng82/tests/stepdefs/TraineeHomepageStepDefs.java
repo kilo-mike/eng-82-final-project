@@ -40,4 +40,10 @@ public class TraineeHomepageStepDefs {
     public void iShouldSeeTheTrainerInfo() {
         Assertions.assertEquals("Manish Gadhvi", Pages.traineeHomePage.getTrainer());
     }
+
+
+    @Then("I should see a selectable list of all the 1-1 sheets from previous weeks")
+    public void iShouldSeeASelectableListOfAllTheSheetsFromPreviousWeeks() {
+        Assertions.assertTrue(Pages.traineeHomePage.areAllPreviousWeeksShown());
+    }
 }
