@@ -25,7 +25,7 @@ public class loginStepDefs {
 
     @After
     public void tearDown() {
-        //DriverManager.tearDown();
+        DriverManager.tearDown();
     }
 
     @Given("I am on the login page as a {string}")
