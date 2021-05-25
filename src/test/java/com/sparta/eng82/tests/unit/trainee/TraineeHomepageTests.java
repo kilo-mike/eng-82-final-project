@@ -1,4 +1,4 @@
-package com.sparta.eng82.unit.trainee;
+package com.sparta.eng82.tests.unit.trainee;
 
 
 import org.junit.jupiter.api.*;

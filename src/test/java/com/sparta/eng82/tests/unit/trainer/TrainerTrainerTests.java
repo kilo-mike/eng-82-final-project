@@ -1,4 +1,4 @@
-package com.sparta.eng82.unit.trainer;
+package com.sparta.eng82.tests.unit.trainer;
 
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;

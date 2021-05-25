@@ -1,4 +1,4 @@
-package com.sparta.eng82.unit.other;
+package com.sparta.eng82.tests.unit.other;
 
 
 import org.junit.jupiter.api.*;
