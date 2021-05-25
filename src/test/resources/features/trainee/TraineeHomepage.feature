@@ -1,4 +1,4 @@
-Feature:
+Feature: Logged on to trainee and being able to view the data on the homepage
   Scenario: Viewing trainer, stream and group info
 
     Given I am logged in as a trainee
