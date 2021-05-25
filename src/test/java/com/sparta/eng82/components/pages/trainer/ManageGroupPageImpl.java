@@ -111,6 +111,7 @@ public class ManageGroupPageImpl extends NavPage implements ManageGroupPage {
         return new ManageGroupPageImpl(driver, "trainer");
     }
 
+
     @Override
     public String getUrl() {
         return driver.getCurrentUrl();
