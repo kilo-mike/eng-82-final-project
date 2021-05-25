@@ -96,6 +96,10 @@ public class LoginPageImpl implements LoginPage {
         return driver.getCurrentUrl().endsWith("login?error");
     }
 
+    public boolean isErrorMessageShowing(){
+        return driver.getCurrentUrl().endsWith("login?error");
+    }
+
     @Override
     public String getUrl() {
         return driver.getCurrentUrl();

@@ -25,7 +25,7 @@ public class loginStepDefs {
 
     @After
     public void tearDown() {
-        DriverManager.tearDown();
+        //DriverManager.tearDown();
     }
 
     @Given("I am on the login page as a {string}")
@@ -73,5 +73,27 @@ public class loginStepDefs {
     @Then("I should be directed to the trainer homepage")
     public void iShouldBeDirectedToTheTrainerHomepage() {
         Assertions.assertTrue(Pages.trainerHomePage.isOnHomePage());
+    }
+
+
+    //Wrong credentials
+    @When("I type the wrong username {string}")
+    public void iTypeTheWrongUsername(String wrongUserName) {
+        Pages.loginPage.enterEmail(wrongUserName);
+    }
+
+    @And("I type the wrong password {string}")
+    public void iTypeTheWrongPassword(String wrongPassword) {
+        Pages.loginPage.enterPassword(wrongPassword);
+    }
+
+    @Then("I should see invalid username or password message")
+    public void iShouldSeeInvalidUsernameOrPasswordMessage() {
+        Assertions.assertTrue(Pages.loginPage.isErrorMessageShowing());
+    }
+
+    @Then("I should see a please include @ message")//TODO complete at the end(todo with javascript).
+    public void iShouldSeeAPleaseIncludeMessage() {
+        Assertions.assertTrue(false);
     }
 }
