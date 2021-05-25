@@ -5,6 +5,6 @@ Feature: Being able to login
 
     When I type the admin username
     And admin password
-    And I click sign in
+    And I click sign in as an admin
 
     Then I should be directed to the admin homepage
