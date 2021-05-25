@@ -1,4 +1,4 @@
-package com.sparta.eng82.tests.stepdefs;
+package com.sparta.eng82.tests.stepdefs.other;
 
 
 import com.sparta.eng82.components.pages.admin.AdminHomePageImpl;
