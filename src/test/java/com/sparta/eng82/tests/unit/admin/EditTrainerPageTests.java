@@ -1,26 +1,22 @@
 package com.sparta.eng82.tests.unit.admin;
 
-
-import org.junit.jupiter.api.*;
-import org.openqa.selenium.WebDriver;
 import com.sparta.eng82.components.frameworkutil.WebDriverFactory;
 import com.sparta.eng82.components.frameworkutil.WebDriverTypes;
 import com.sparta.eng82.components.pages.admin.AddTrainerPageImpl;
 import com.sparta.eng82.components.pages.admin.AdminHomePageImpl;
+import com.sparta.eng82.components.pages.admin.EditTrainerPageImpl;
 import com.sparta.eng82.components.pages.other.LoginPageImpl;
+import org.junit.jupiter.api.*;
+import org.openqa.selenium.WebDriver;
 
 import java.util.Properties;
 
-public class AdminHomePageTests {
+public class EditTrainerPageTests {
 
     private WebDriver driver;
     private static WebDriverFactory webDriverFactory;
-
     private AdminHomePageImpl adminHomePage;
-
     private final String userAdmin = "admin";
-
-
 
     @BeforeAll
     static void setupAll() {
@@ -34,31 +30,6 @@ public class AdminHomePageTests {
         adminHomePage = (AdminHomePageImpl) new LoginPageImpl(driver, userAdmin).login();
     }
 
-    @Test
-    @DisplayName("Add trainer test")
-    void addTrainerTest() {
-        Assertions.assertEquals(AddTrainerPageImpl.class, adminHomePage.addTrainer().getClass());
-    }
-
-    @Test
-    @DisplayName("Is trainer added Test")
-    void isTrainerAddedTest() {
-        adminHomePage.addTrainer()
-                .enterFirstName("test2")
-                .enterSecondName("ssss")
-                .selectGroup("No Group")
-                .addNewTrainer();
-        Assertions.assertTrue(adminHomePage.isTrainerAdded("test2", "ssss", "Not Assigned"));
-
-    }
-
-    @Test
-    @DisplayName("Is the size of the return list with all the trainers right ")
-    void isTheSizeOfTheReturnListWithAllTheTrainersRight() {
-        Assertions.assertTrue(adminHomePage.getAllTrainersAvailable(6));
-    }
-
-
     @AfterEach
     void tearDown() {
         driver.quit();
@@ -68,5 +39,15 @@ public class AdminHomePageTests {
     static void tearDownAll() {
         webDriverFactory.endAllServices();
     }
+
+
+    @Test
+    @DisplayName("Check first name has entered")
+    void checkFirstNameHasEntered() {
+        Assertions.assertTrue(((EditTrainerPageImpl) adminHomePage.editTrainer("jakub", "matyjewicz"))
+                .editFirstName("Jakub")
+        .checkFirstNameInputValueCorrect());
+    }
+
 
 }
