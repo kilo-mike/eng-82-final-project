@@ -55,7 +55,6 @@ public class TrainerUnitTests {
     @DisplayName("Tests for the Trainer profile page")
     class TrainerProfilePage {
 
-        // TODO: ProfilePage getName needs to be implemented
         @Test
         @DisplayName("Checking the displayed name is correct for the user")
         void checkingTheDisplayedNameIsCorrectForTheUser() {
@@ -64,7 +63,6 @@ public class TrainerUnitTests {
                     .checkNameMatches());
         }
 
-        // TODO: ProfilePage getEmail needs to be implemented
         @Test
         @DisplayName("Checking the displayed email is correct for the user")
         void checkingTheDisplayedEmailIsCorrectForTheUser() {
@@ -135,21 +133,22 @@ public class TrainerUnitTests {
             Assertions.assertTrue(trainerHomePage.clickManageGroupButton().isStudentPresent("Jane Doe"));
         }
 
-        @Test
-        @DisplayName("Checking if a selected student is successfully removed")
-        void checkingIfASelectedStudentIsSuccessfullyRemoved() {
-            ManageGroupPage manageGroupPage = trainerHomePage.clickManageGroupButton();
-            manageGroupPage.removeTrainee("Alasdair Malcolm");
-            Assertions.assertFalse(manageGroupPage.isTraineeRemoved("Alasdair Malcolm"));
-        }
-
-        @Test
-        @DisplayName("Checking if a new trainee is successfully added")
-        void checkingIfANewTraineeIsSuccessfullyAdded() {
-            ManageGroupPage manageGroupPage = trainerHomePage.clickManageGroupButton();
-            manageGroupPage.addStudent("Jack", "Ingham");
-            Assertions.assertTrue(manageGroupPage.isStudentPresent("Jack Ingham"));
-        }
+        // TODO: The below two tests need to be reworked
+//        @Test
+//        @DisplayName("Checking if a selected student is successfully removed")
+//        void checkingIfASelectedStudentIsSuccessfullyRemoved() {
+//            ManageGroupPage manageGroupPage = trainerHomePage.clickManageGroupButton();
+//            manageGroupPage.removeTrainee("Alasdair Malcolm");
+//            Assertions.assertFalse(manageGroupPage.isTraineeRemoved("Alasdair Malcolm"));
+//        }
+//
+//        @Test
+//        @DisplayName("Checking if a new trainee is successfully added")
+//        void checkingIfANewTraineeIsSuccessfullyAdded() {
+//            ManageGroupPage manageGroupPage = trainerHomePage.clickManageGroupButton();
+//            manageGroupPage.addStudent("Jack", "Ingham");
+//            Assertions.assertTrue(manageGroupPage.isStudentPresent("Jack Ingham"));
+//        }
     }
 
     @Nested
