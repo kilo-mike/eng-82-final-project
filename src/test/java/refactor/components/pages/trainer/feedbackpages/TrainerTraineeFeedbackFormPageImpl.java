@@ -19,6 +19,7 @@ public class TrainerTraineeFeedbackFormPageImpl extends FeedbackFormPage impleme
     private final By startButton = new By.ByLinkText("Start");
     private final By continueButton = new By.ByLinkText("Cont.");
     private final By trainerButton = new By.ByXPath("/html/body/div[2]/div/div/form/div[1]/label[2]");
+    private final By traineeDiv = new By.ById("trainee");
 
     private final WebDriver driver;
     private final String user;
@@ -100,5 +101,9 @@ public class TrainerTraineeFeedbackFormPageImpl extends FeedbackFormPage impleme
     @Override
     public String getUrl() {
         return driver.getCurrentUrl();
+    }
+
+    public boolean isTraineeDisplayed(){
+        return driver.findElement(traineeDiv).isDisplayed();
     }
 }

@@ -210,25 +210,4 @@ public class TrainerUnitTests {
             Assertions.assertFalse(interactable);
         }
     }
-
-    @Nested
-    @DisplayName("TrainerTrainer tests")
-    class TrainerTrainerTests {
-        int week = 2;
-        String name = "Jane Doe";
-
-        @Test
-        @DisplayName("Check comment inputs are working")
-        void checkCommentInputsWork() {
-            String stopComment = "Stop being bad";
-            String startComment = "Start being good";
-            String contComment = "Keep being OK";
-
-            Assertions.assertTrue(trainerHomePage
-                    .selectTraineeName(week, name)
-                    .clickOnTrainer()
-                    .enterStopStartContComments(stopComment, startComment, contComment)
-                    .checkAllCommentsHaveBeenInputSuccessfully(stopComment, startComment, contComment));
-        }
-    }
 }
