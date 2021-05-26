@@ -160,4 +160,21 @@ public class TraineeStepDefs {
     public void theTrafficLightWillTurnRed() {
         Assertions.assertEquals("Red", Pages.traineeHomePage.getCurrentTrafficLight());
     }
+
+    @And("I have filled out the trainee feedback form")
+    public void iHaveFilledOutTheTraineeFeedbackForm() {
+        Pages.traineeTraineeFeedbackFormPage.clickOnContAndSetComments("test")
+                .clickOnStartAndSetComment("test")
+                .clickOnStopAndSetComment("test");
+    }
+
+    @When("I click the submit button")
+    public void iClickTheSubmitButton() {
+        Pages.traineeTraineeFeedbackFormPage.submitForm();
+    }
+
+    @Then("I should see the form successfully submitted")
+    public void iShouldSeeTheFormSuccessfullySubmitted() {
+        Assertions.assertEquals("Green", Pages.traineeHomePage.getCurrentTrafficLight());
+    }
 }
