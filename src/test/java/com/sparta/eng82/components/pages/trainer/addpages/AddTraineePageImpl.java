@@ -1,16 +1,23 @@
 package com.sparta.eng82.components.pages.trainer.addpages;
 
+import com.sparta.eng82.components.frameworkutil.ActionClicker;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotInteractableException;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import com.sparta.eng82.components.pages.trainer.ManageGroupPage;
 import com.sparta.eng82.components.pages.trainer.ManageGroupPageImpl;
+import org.openqa.selenium.support.ui.Select;
+
+import javax.swing.*;
+import java.util.concurrent.TimeUnit;
 
 public class AddTraineePageImpl implements AddTraineePage {
 
     private final By traineeGroupField = new By.ById("traineeGroup");
     private final By traineeFirstNameField = new By.ById("traineeFirstName");
     private final By traineeLastNameField = new By.ById("traineeLastName");
-    private final By createNewTraineeButton = new By.ByLinkText("Create New Trainee");
+    private final By createNewTraineeButton = new By.ById("addNewTrainee");
     WebDriver driver;
     private By groupNames;
     private final String user;
@@ -23,10 +30,11 @@ public class AddTraineePageImpl implements AddTraineePage {
 
     @Override
     public AddTraineePage assignGroup(String groupName) {
-        groupNames = new By.ByLinkText(groupName);
 
-        driver.findElement(traineeGroupField).click();
-        driver.findElement(groupNames).click();
+        Select select = new Select(driver.findElement(traineeGroupField));
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        select.selectByVisibleText(groupName);
+
         return this;
     }
 
@@ -46,7 +54,7 @@ public class AddTraineePageImpl implements AddTraineePage {
 
     @Override
     public ManageGroupPage createNewTrainee() {
-        driver.findElement(createNewTraineeButton).click();
+        ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, createNewTraineeButton);
         return new ManageGroupPageImpl(driver,user);
     }
 

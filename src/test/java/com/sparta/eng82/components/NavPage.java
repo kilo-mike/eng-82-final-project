@@ -14,6 +14,8 @@ import com.sparta.eng82.components.pages.trainee.TraineeProfilePageImpl;
 import com.sparta.eng82.components.pages.trainer.TrainerHomePageImpl;
 import com.sparta.eng82.components.pages.trainer.TrainerProfilePageImpl;
 
+import java.util.concurrent.TimeUnit;
+
 public abstract class NavPage implements Page {
 
     private WebDriver driver;
