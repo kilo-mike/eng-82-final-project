@@ -20,3 +20,9 @@ Feature: Logged on to trainee and being able to view the data on the homepage
     When I am on the homepage
     Then I will be able to see the status of my feedback form using the traffic light
 
+  Scenario: The late notifications
+
+    Given I am logged in as a trainee
+    And I have not submitted my form
+    When The end of thursday passes
+    Then The traffic light will turn red
