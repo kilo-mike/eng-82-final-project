@@ -12,5 +12,5 @@ public interface AddTraineePage {
 
     ManageGroupPage createNewTrainee();
 
-    boolean isTraineeCreated();
+    boolean isTraineeCreated(String traineeName);
 }

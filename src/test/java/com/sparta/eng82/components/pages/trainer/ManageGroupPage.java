@@ -1,16 +1,14 @@
 package com.sparta.eng82.components.pages.trainer;
 
-import com.sparta.eng82.components.pages.trainer.addpages.AddGroupPage;
-import com.sparta.eng82.components.pages.trainer.addpages.AddStreamPage;
-import com.sparta.eng82.components.pages.trainer.addpages.AddTraineePage;
+import com.sparta.eng82.components.pages.trainer.addpages.*;
 
 public interface ManageGroupPage {
 
-    AddTraineePage addTrainee();
+    AddTraineePageImpl addTrainee();
 
-    AddGroupPage addGroup();
+    AddGroupPageImpl addGroup();
 
-    AddStreamPage addStream();
+    AddStreamPageImpl addStream();
 
     boolean isTraineeRemoved(String traineeName);
 

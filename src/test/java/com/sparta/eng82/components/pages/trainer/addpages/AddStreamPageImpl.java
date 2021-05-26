@@ -18,8 +18,8 @@ public class AddStreamPageImpl implements AddStreamPage {
     }
 
     @Override
-    public AddStreamPage enterStreamName(String streamName) {
-        driver.findElement(By.name("streamName")).sendKeys(streamName);
+    public AddStreamPageImpl enterStreamName(String streamName) {
+        driver.findElement(By.cssSelector(".col-md-3 > .form-control")).sendKeys(streamName);
         return this;
     }
 
@@ -44,5 +44,9 @@ public class AddStreamPageImpl implements AddStreamPage {
     @Override
     public boolean isStreamCreated() {
         return false;
+    }
+
+    public boolean isStreamNameCorrect(String streamName) {
+        return driver.findElement(By.name("streamName")).getText().equals(streamName);
     }
 }
