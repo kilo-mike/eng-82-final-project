@@ -31,7 +31,7 @@ public class TraineeTrainerFeedbackFormPageTests {
     @BeforeEach
     void setup() {
         webDriverFactory = new WebDriverFactory();
-        driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME_HEADLESS);
+        driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
         traineeHomePage = (TraineeHomePageImpl) new LoginPageImpl(driver, "trainee").login();
         traineeTraineeFeedbackFormPage =  traineeHomePage.clickFeedbackFormForWeek(3);
         traineeTrainerFeedbackFormPage = traineeTraineeFeedbackFormPage.clickOnTrainer();
