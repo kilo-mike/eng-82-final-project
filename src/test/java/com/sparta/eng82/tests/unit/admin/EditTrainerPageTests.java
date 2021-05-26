@@ -97,4 +97,21 @@ public class EditTrainerPageTests {
                 .editLastName(originalLastName)
                 .saveChanges();
     }
+
+
+    @Test
+    @DisplayName("Check if dummy trainer is removed")
+    void checkIfDummyTrainerIsRemoved() {
+        adminHomePage.addTrainer()
+                .enterFirstName("Dummy")
+                .enterSecondName("Smith")
+                .selectGroup("Engineering 100")
+                .addNewTrainer();
+
+        ((EditTrainerPageImpl) adminHomePage.clickOnTrainer("Dummy", "Smith"))
+                .tickForRemove()
+                .removeTrainer();
+
+        Assertions.assertFalse(adminHomePage.isTrainerAdded("Dummy", "Smith", "Engineering 100"));
+    }
 }

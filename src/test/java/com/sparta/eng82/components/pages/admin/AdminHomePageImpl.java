@@ -30,7 +30,7 @@ public class AdminHomePageImpl extends NavPage implements AdminHomePage {
 
     @Override
     public AddTrainerPage addTrainer() {
-        ActionClicker.timedMouseClicker(driver, 400, new By.ByXPath("//*[@id=\"main-content\"]/div/div/div/div[1]/button"));
+        ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, new By.ByXPath("//*[@id=\"main-content\"]/div/div/div/div[1]/button"));
         return new AddTrainerPageImpl(driver, user);
     }
 
