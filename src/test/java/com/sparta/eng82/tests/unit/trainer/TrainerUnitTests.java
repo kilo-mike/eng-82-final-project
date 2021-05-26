@@ -85,7 +85,8 @@ public class TrainerUnitTests {
                     .enterFirstName("Golam")
                     .enterLastName("Choudhury")
                     .assignGroup("Engineering 80")
-                    .isTraineeCreated("Golam Choudhury"));
+                    .createNewTrainee()
+                    .isStudentPresent("Golam Choudhury"));
         }
         
         //TODO: 
