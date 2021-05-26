@@ -17,15 +17,6 @@ import org.junit.jupiter.api.Assertions;
 
 public class LoginStepDefs {
 
-    @Before
-    public void setUp() {
-        DriverManager.setUp();
-    }
-
-    @After
-    public void tearDown() {
-        DriverManager.tearDown();
-    }
 
     @Given("I am on the login page as a {string}")
     public void iAmOnTheLoginPage(String userType) {

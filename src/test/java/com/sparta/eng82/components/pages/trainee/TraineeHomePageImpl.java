@@ -45,6 +45,10 @@ public class TraineeHomePageImpl extends NavPage implements TraineeHomePage {
         return this.feedbackList.get(0).getText();
     }
 
+    public int getCurrentWeekInt(){
+        return Integer.parseInt(this.feedbackList.get(0).getText().substring(5));
+    }
+
     @Override
     public boolean areAllPreviousWeeksShown() {
         String maxWeek = feedbackList.get(0).getText();

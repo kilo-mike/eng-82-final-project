@@ -5,10 +5,13 @@ import com.sparta.eng82.components.pages.trainee.TraineeHomePageImpl;
 import com.sparta.eng82.components.pages.trainee.TraineeProfilePageImpl;
 import com.sparta.eng82.tests.stepdefs.stepdefutil.DriverManager;
 import com.sparta.eng82.tests.stepdefs.stepdefutil.Pages;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
+
+import java.util.Arrays;
 
 public class TraineeStepDefs {
 
@@ -65,4 +68,55 @@ public class TraineeStepDefs {
     public void iWillOnlyBeAbleToSeeInformationPertainingToWeek(int arg0) {
         Assertions.assertEquals(Pages.traineeTraineeFeedbackFormPage.getWeek(), "Week "+arg0);
     }
+
+    @Then("I will be able to see the status of my feedback form using the traffic light")
+    public void iWillBeAbleToSeeTheStatusOfMyFeedbackFormUsingTheTrafficLight() {
+        Assertions.assertTrue(Arrays.stream(new String[]{"Green", "Amber", "Red"}).anyMatch(s -> s.contains(Pages.traineeHomePage.getCurrentTrafficLight())));
+    }
+
+    @Then("I am able to add a comment in the stop box")
+    public void iAmAbleToAddACommentInTheStopBox() {
+        Pages.traineeHomePage = (TraineeHomePageImpl) Pages.traineeTraineeFeedbackFormPage.setStopCommentBox("this is a test");
+        Pages.traineeTraineeFeedbackFormPage = Pages.traineeHomePage.clickFeedbackFormForWeek(Pages.traineeHomePage.getCurrentWeekInt());
+        Assertions.assertEquals("this is a test", Pages.traineeTraineeFeedbackFormPage.getStopCommentBox());
+    }
+
+    @Then("I am able to add a comment in the start box")
+    public void iAmAbleToAddACommentInTheStartBox() {
+        Pages.traineeHomePage = (TraineeHomePageImpl) Pages.traineeTraineeFeedbackFormPage.setStartCommentBox("this is a test");
+        Pages.traineeTraineeFeedbackFormPage = Pages.traineeHomePage.clickFeedbackFormForWeek(Pages.traineeHomePage.getCurrentWeekInt());
+        Assertions.assertEquals("this is a test", Pages.traineeTraineeFeedbackFormPage.getStartCommentBox());
+    }
+
+    @Then("I am able to add a comment in the continue box")
+    public void iAmAbleToAddACommentInTheContinueBox() {
+        Pages.traineeHomePage = (TraineeHomePageImpl) Pages.traineeTraineeFeedbackFormPage.setContinueCommentBox("this is a test");
+        Pages.traineeTraineeFeedbackFormPage = Pages.traineeHomePage.clickFeedbackFormForWeek(Pages.traineeHomePage.getCurrentWeekInt());
+        Assertions.assertEquals("this is a test", Pages.traineeTraineeFeedbackFormPage.getContinueCommentBox());
+    }
+
+    @Given("I am logged in as an {string}")
+    public void iAmLoggedInAsAn(String arg0) {
+    }
+
+    @And("I have created a new trainee profile for {string} {string} within the group {string}")
+    public void iHaveCreatedANewTraineeProfileForWithinTheGroup(String firstName, String lastName, String groupName) {
+        Pages.trainerHomePage.clickManageGroupButton().addTrainee().assignGroup(groupName).enterFirstName(firstName).enterLastName(lastName).createNewTrainee();
+    }
+
+    @And("The trainer logs out")
+    public void theTrainerLogsOut() {
+        Pages.trainerHomePage.logOut();
+    }
+
+    @When("The trainee signs in")
+    public void theTraineeSignsIn() {
+        Pages.traineeHomePage = (TraineeHomePageImpl) new LoginPageImpl(DriverManager.driver, "trainee").login();
+    }
+
+    @Then("They are prompted to change the default Password")
+    public void theyArePromptedToChangeTheDefaultPassword() {
+        Assertions.assertTrue(Pages.loginPage.getUrl().endsWith("/change-password"));
+    }
+
 }
