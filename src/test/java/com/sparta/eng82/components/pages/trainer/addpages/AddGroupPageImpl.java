@@ -4,13 +4,17 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import com.sparta.eng82.components.pages.trainer.ManageGroupPage;
 import com.sparta.eng82.components.pages.trainer.ManageGroupPageImpl;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+
+import java.util.List;
 
 public class AddGroupPageImpl implements AddGroupPage {
 
     private final By streamNameField = new By.ById("streamName");
     private final By groupNameField = new By.ById("groupName");
     private final By groupStartDateField = new By.ById("groupStartDate");
-    private final By createNewGroupButton = new By.ByLinkText("Create New Group");
+    private final By createNewGroupButton = new By.ByCssSelector("#addNewGroup .btn");
     private final By groupField = new By.ById("traineeGroup");
     WebDriver driver;
     private final String user;
@@ -26,19 +30,20 @@ public class AddGroupPageImpl implements AddGroupPage {
     //Changed the return types from AddGroupPage to void in the interface
     @Override
     public AddGroupPageImpl selectStream(String streamName) {
-        driver.findElement(streamNameField).click();
-        driver.findElement(By.linkText(streamName)).click();
+        WebElement streamOptions = driver.findElement(By.id("streamName"));
+        Select select = new Select(streamOptions);
+
+        select.selectByVisibleText(streamName);
+
         return this;
     }
 
-    //Previously returned AddGroupPage
     @Override
     public AddGroupPageImpl enterGroupName(String groupName) {
         driver.findElement(groupNameField).sendKeys(groupName);
         return this;
     }
 
-    //Previously returned AddGroupPage
     @Override
     public AddGroupPageImpl enterGroupStartDate(String startDate) {
         driver.findElement(groupStartDateField).sendKeys(startDate);
@@ -51,12 +56,21 @@ public class AddGroupPageImpl implements AddGroupPage {
         return new ManageGroupPageImpl(driver, user);
     }
 
-    // Added String arg
-    //TODO: this
+
     @Override
     public boolean isGroupCreated(String groupName) {
+        List<WebElement> groups = driver.findElements(By.id("traineeGroup"));
 
-        return false;
+        boolean isPresent = false;
+
+        for (WebElement group: groups) {
+            if (groupName.equals(group.getText())){
+                isPresent = true;
+            }
+            break;
+        }
+        return isPresent;
+
     }
 
     @Override

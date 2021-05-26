@@ -17,8 +17,8 @@ public class ManageGroupPageImpl extends NavPage implements ManageGroupPage {
     private final By removeButton = new By.ByLinkText("Remove");
     private final By deleteTrainerButton = new By.ByXPath("\"(//button[@type='submit'])[5]\"");
     private final By addTraineeButton = new By.ByXPath("//form/button");
-    private final By addGroupButton = new By.ByLinkText("Add Group");
-    private final By addStreamButton = new By.ByLinkText("Add Stream");
+    private final By addGroupButton = new By.ByCssSelector(".my-3:nth-child(3)");
+    private final By addStreamButton = new By.ByCssSelector("form > .btn:nth-child(4)");
     private final By listClassName = new By.ByClassName("list-group");
     private By removeButtonIdentifier;
 
@@ -32,22 +32,23 @@ public class ManageGroupPageImpl extends NavPage implements ManageGroupPage {
     }
 
     @Override
-    public AddTraineePage addTrainee() {
+    public AddTraineePageImpl addTrainee() {
         ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, addTraineeButton);
         return new AddTraineePageImpl(driver, user);
 
     }
 
     @Override
-    public AddGroupPage addGroup() {
-        driver.findElement(addGroupButton).click();
+    public AddGroupPageImpl addGroup() {
+        //driver.findElement(addGroupButton).click();
+        ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, addGroupButton);
         return new AddGroupPageImpl(driver,user);
 
     }
 
     @Override
-    public AddStreamPage addStream() {
-        driver.findElement(addStreamButton).click();
+    public AddStreamPageImpl addStream() {
+        ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, addStreamButton);
         return new AddStreamPageImpl(driver,user);
     }
 

@@ -7,6 +7,7 @@ import com.sparta.eng82.components.pages.other.CompetenciesPage;
 import com.sparta.eng82.components.pages.other.LoginPageImpl;
 import com.sparta.eng82.components.pages.trainee.TraineeHomePageImpl;
 import com.sparta.eng82.components.pages.trainer.ManageGroupPage;
+import com.sparta.eng82.components.pages.trainer.ManageGroupPageImpl;
 import com.sparta.eng82.components.pages.trainer.TrainerHomePageImpl;
 import com.sparta.eng82.components.pages.trainer.feedbackpages.TrainerTraineeFeedbackFormPage;
 import com.sparta.eng82.components.pages.trainer.feedbackpages.TrainerTraineeFeedbackFormPageImpl;
@@ -41,13 +42,14 @@ public class TrainerUnitTests {
         webDriverFactory.endAllServices();
     }
 
-    @Test
-    @DisplayName("Check that the correct form is selected when specifying a student")
-    void checkThatTheCorrectFormIsSelectedWhenSpecifyingAStudent() {
-        TrainerTraineeFeedbackFormPageImpl trainerTraineeFeedbackFormPage = trainerHomePage.selectTraineeName(2, "Jane Doe");
-
-        Assertions.assertEquals("http://localhost:8080/feedback?id=4", trainerTraineeFeedbackFormPage.getUrl());
-    }
+    // TODO:
+//    @Test
+//    @DisplayName("Check that the correct form is selected when specifying a student")
+//    void checkThatTheCorrectFormIsSelectedWhenSpecifyingAStudent() {
+//        TrainerTraineeFeedbackFormPageImpl trainerTraineeFeedbackFormPage = trainerHomePage.selectTraineeName(2, "Jane Doe");
+//
+//        Assertions.assertEquals("http://localhost:8080/feedback?id=4", trainerTraineeFeedbackFormPage.getUrl());
+//    }
 
     @Nested
     @DisplayName("Tests for the Trainer profile page")
@@ -69,7 +71,49 @@ public class TrainerUnitTests {
                     .checkEmailMatches());
         }
     }
+    
+    @Nested
+    @DisplayName("Add pages tests")
+    class TrainerAddPagesTests {
 
+        @Test
+        @DisplayName("checking that new trainee is succesfully added")
+        void checkingThatNewTraineeIsSuccesfullyAdded() {
+            Assertions.assertTrue(trainerHomePage
+                    .clickManageGroupButton()
+                    .addTrainee()
+                    .enterFirstName("Golam")
+                    .enterLastName("Choudhury")
+                    .assignGroup("Engineering 80")
+                    .isTraineeCreated("Golam Choudhury"));
+        }
+        
+        //TODO: 
+        @Test
+        @DisplayName("checking that new group is successfully added")
+        void checkingThatNewGroupIsSuccessfullyAdded() {
+            trainerHomePage.clickManageGroupButton()
+                    .addGroup()
+                    .enterGroupName("Engineering 1")
+                    .enterGroupStartDate("01052021")
+                    .selectStream("Java SDET")
+                    .createNewGroup()
+                    .addTrainee()
+                    .isGroupCreated("Engineering 1");
+            
+        }
+        
+        @Test
+        @DisplayName("Is chosen stream name correct")
+        void isChosenStreamNameCorrect() {
+            Assertions.assertTrue(trainerHomePage
+                    .clickManageGroupButton()
+                    .addStream()
+                    .enterStreamName("Business Analyst")
+                    .isStreamNameCorrect("Business Analyst"));
+        }
+    }
+    
     @Nested
     @DisplayName("Tests for the Trainer Home Page")
     class TrainerHomePageTests {
@@ -81,12 +125,12 @@ public class TrainerUnitTests {
         }
 
         // TODO:
-        @Test
-        @DisplayName("Checking that the specified student is correctly selected")
-        void checkingThatTheSpecifiedStudentIsCorrectlySelected() {
-            TrainerTraineeFeedbackFormPage trainerTraineeFeedbackFormPage = trainerHomePage.selectTraineeName(2, "JaneDoe");
-            Assertions.assertEquals("Jane Doe", 1);
-        }
+//        @Test
+//        @DisplayName("Checking that the specified student is correctly selected")
+//        void checkingThatTheSpecifiedStudentIsCorrectlySelected() {
+//            TrainerTraineeFeedbackFormPage trainerTraineeFeedbackFormPage = trainerHomePage.selectTraineeName(2, "JaneDoe");
+//            Assertions.assertEquals("Jane Doe", 1);
+//        }
 
         @Test
         @DisplayName("Checking that the displayed trainer name is correctly displayed on the homepage")
