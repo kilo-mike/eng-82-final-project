@@ -24,6 +24,7 @@ public class TraineeStepDefs {
         Pages.traineeHomePage = (TraineeHomePageImpl) new LoginPageImpl(DriverManager.driver, "trainee").driverGet().login();
     }
 
+
     @When("I am on the homepage")
     public void iAmOnTheHomepage() {
     }
