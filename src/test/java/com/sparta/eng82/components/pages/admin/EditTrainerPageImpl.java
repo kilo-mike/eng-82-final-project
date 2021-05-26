@@ -2,6 +2,7 @@ package com.sparta.eng82.components.pages.admin;
 
 import com.sparta.eng82.components.frameworkutil.ActionClicker;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -12,7 +13,7 @@ public class EditTrainerPageImpl implements EditTrainerPage {
 
     private final WebDriver driver;
     private final String user;
-    private int rowCount;
+    private final int rowCount;
 
     public EditTrainerPageImpl(WebDriver driver, String user, int rowCount) {
         this.driver = driver;
@@ -25,7 +26,6 @@ public class EditTrainerPageImpl implements EditTrainerPage {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.findElement(new By.ByXPath("/html/body/section/div/div/div/div[6]/div/div/div[2]/form[1]/div[1]/div/input")).clear();
         driver.findElement(new By.ByXPath("/html/body/section/div/div/div/div[6]/div/div/div[2]/form[1]/div[1]/div/input")).sendKeys(firstName);
-
         return this;
     }
 
@@ -39,15 +39,12 @@ public class EditTrainerPageImpl implements EditTrainerPage {
 
     @Override
     public EditTrainerPageImpl editGroup(String groupName) {
-//        new Select(driver.findElement(By.id("editTrainerGroup"))).selectByVisibleText(groupName);
-//        return this;
-        // This will only work for jakub matyjewicz
-        WebElement groupOptions = driver.findElement(By.xpath("(//select[@id='editTrainerGroup'])["+rowCount+"]"));
-        driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
-        Select select = new Select(groupOptions);
-        select.selectByVisibleText("hola");
+        for (WebElement element : driver.findElements(By.id("addTrainerGroup"))) {
+            if (element.getText().equals(groupName)) {
+                new Select(element).selectByVisibleText(groupName);
+            }
+        }
         return this;
-
     }
 
     @Override
@@ -83,7 +80,6 @@ public class EditTrainerPageImpl implements EditTrainerPage {
     }
 
 
-
     public boolean checkFirstNameInputValueCorrect(String input) {
         return driver.findElement(By.xpath("/html/body/section/div/div/div/div[6]/div/div/div[2]/form[1]/div[1]/div/input")).getAttribute("value").equals(input);
     }
@@ -93,19 +89,28 @@ public class EditTrainerPageImpl implements EditTrainerPage {
     }
 
     public boolean checkGroupNameSelectValueCorrect(String input) {
-        WebElement webElement = driver.findElement(By.xpath("/html/body/section/div/div/div/div[6]/div/div/div[2]/form[1]/div[3]/div/select/option[1]"));
-        return webElement.getAttribute("selected").equals("true") && webElement.getAttribute("label").equals(input);
+        // TODO page is flawed, extremely difficult to pinpoint group for each unique
+        try {
+            if (driver.findElement(By.className("modal fade rounded show")).findElement(By.id("editTrainerGroup")).getAttribute("label").equals(input)) {
+                return true;
+            }
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+        return false;
     }
 
     public boolean checkIfTickBoxIsTicked() {
         return driver.findElement(By.xpath("/html/body/section/div/div/div/div[6]/div/div/div[2]/form[2]/div/input[2]")).isSelected();
     }
 
-    public boolean checkIfAllInputsHaveBeenEntered(String firstName, String lastName, String groupName) {
-        editFirstName(firstName).editLastName(lastName).editGroup(groupName);
-        return checkFirstNameInputValueCorrect(firstName)
-                && checkLastNameInputValueCorrect(lastName)
-               && checkGroupNameSelectValueCorrect(groupName);
+    public boolean checkIfAllInputsHaveBeenEntered(String toFirstName, String toLastName, String toGroupName) {
+        editFirstName(toFirstName);
+        editLastName(toLastName);
+        editGroup(toGroupName);
+        return checkFirstNameInputValueCorrect(toFirstName)
+                && checkLastNameInputValueCorrect(toLastName)
+                && checkGroupNameSelectValueCorrect(toGroupName);
     }
 
 }
