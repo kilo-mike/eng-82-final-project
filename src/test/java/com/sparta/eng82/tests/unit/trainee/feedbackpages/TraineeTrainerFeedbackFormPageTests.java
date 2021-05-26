@@ -15,6 +15,8 @@ public class TraineeTrainerFeedbackFormPageTests {
     static WebDriver driver;
     static WebDriverFactory webDriverFactory;
     private LoginPageImpl loginPage;
+    private int week = 3;
+
 
     private final String traineePropertyUsername = "trainee_username";
     private final String traineePropertyPassword = "trainee_password";
@@ -31,7 +33,7 @@ public class TraineeTrainerFeedbackFormPageTests {
         webDriverFactory = new WebDriverFactory();
         driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
         traineeHomePage = (TraineeHomePageImpl) new LoginPageImpl(driver, "trainee").login();
-        traineeTraineeFeedbackFormPage =  traineeHomePage.clickFeedbackFormForWeek(2);
+        traineeTraineeFeedbackFormPage =  traineeHomePage.clickFeedbackFormForWeek(3);
         traineeTrainerFeedbackFormPage = traineeTraineeFeedbackFormPage.clickOnTrainer();
 
     }
