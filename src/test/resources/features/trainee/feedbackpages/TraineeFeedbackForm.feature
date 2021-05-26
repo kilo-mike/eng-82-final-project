@@ -8,6 +8,17 @@ Then I will only be able to see information pertaining to week 1
     Given I am logged in as a trainee
     When I click on the feedback for week 3
     Then I am able to add a comment in the stop box
-    Then I am able to add a comment in the start box
-    Then I am able to add a comment in the continue box
+    And I am able to add a comment in the start box
+    And I am able to add a comment in the continue box
+
+  Scenario: The Trainee completed a feedback form and types a comment on the completed feedback form
+    Given  I am logged in as a trainee
+    And I am viewing a feedback form that is completed
+    When The Trainee types into the comment section
+    Then The Trainee will be unable to add a new comment to the stop box as the trainee is locked out of editing after completion
+    And The Trainee will be unable to add a new comment to the start box as the trainee is locked out of editing after completion
+    And The Trainee will be unable to add a new comment to the continue box as the trainee is locked out of editing after completion
+
+
+
 
