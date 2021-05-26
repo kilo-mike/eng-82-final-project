@@ -2,8 +2,10 @@ package com.sparta.eng82.components.pages.admin;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import com.sparta.eng82.components.frameworkutil.ActionClicker;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AddTrainerPageImpl implements AddTrainerPage {
 
@@ -16,12 +18,6 @@ public class AddTrainerPageImpl implements AddTrainerPage {
     public AddTrainerPageImpl(WebDriver driver, String user) {
         this.user = user;
         this.driver = driver;
-    }
-
-    @Override
-    public AddTrainerPage addTrainer() {
-        driver.findElement(addTrainerButton).click();
-        return new AddTrainerPageImpl(driver, user);
     }
 
     @Override
@@ -38,6 +34,7 @@ public class AddTrainerPageImpl implements AddTrainerPage {
 
     @Override
     public AddTrainerPage selectGroup(String groupName) {
+        new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(driver.findElement(new By.ById("addTrainerGroup"))));
         Select drpsGroup = new Select(driver.findElement(new By.ById("addTrainerGroup")));
         drpsGroup.selectByVisibleText(groupName);
         return new AddTrainerPageImpl(driver, user);
@@ -46,7 +43,7 @@ public class AddTrainerPageImpl implements AddTrainerPage {
     @Override
     public AdminHomePage addNewTrainer() {
 //        driver.findElement(addNewTrainerButton).click();
-        ActionClicker.timedMouseClicker(driver,400,new By.ByXPath("//*[@id=\"trainerModal\"]/div/div/form/div[2]/button"));
+        ActionClicker.timedSingleMouseClicker(driver,ActionClicker.TIME,new By.ByXPath("//*[@id=\"trainerModal\"]/div/div/form/div[2]/button"));
         return new AdminHomePageImpl(driver, user);
     }
 

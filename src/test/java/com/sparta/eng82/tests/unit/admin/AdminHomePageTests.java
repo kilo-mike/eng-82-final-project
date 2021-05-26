@@ -12,15 +12,12 @@ import com.sparta.eng82.components.pages.other.LoginPageImpl;
 import java.util.Properties;
 
 public class AdminHomePageTests {
-    private static Properties properties;
-    private final String adminPropertyUsername = "admin_username";
-    private final String adminPropertyPassword = "admin_password";
-    private final String adminPropertyName = "admin_name";
+
     private WebDriver driver;
     private static WebDriverFactory webDriverFactory;
-    private LoginPageImpl loginPage;
+
     private AdminHomePageImpl adminHomePage;
-    private AddTrainerPageImpl addTrainerPage;
+
     private final String userAdmin = "admin";
 
 

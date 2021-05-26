@@ -16,4 +16,21 @@ public class ActionClicker {
                 .build()
                 .perform();
     }
+
+    public static void timedMouseClicker(WebDriver driver, long timeMilli, WebElement webElement) {
+        new Actions(driver).moveToElement(webElement)
+                .click()
+                .pause(timeMilli)
+                .click()
+                .build()
+                .perform();
+    }
+
+    public static void timedSingleMouseClicker(WebDriver driver, long timeMilli, By by){
+        new Actions(driver).moveToElement(driver.findElement(by))
+                .pause(timeMilli)
+                .click()
+                .build()
+                .perform();
+    }
 }
