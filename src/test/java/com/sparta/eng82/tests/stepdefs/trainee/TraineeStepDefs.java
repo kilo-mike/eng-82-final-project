@@ -18,17 +18,20 @@ import java.util.Calendar;
 
 public class TraineeStepDefs {
 
-
-    @Given("I am logged in as a trainee")
-    public void iAmLoggedInAsATrainee() {
-        Pages.traineeHomePage = (TraineeHomePageImpl) new LoginPageImpl(DriverManager.driver, "trainee").driverGet().login();
+    @When("I am logged in as a trainee, non-submitting")
+    public void iAmLoggedInAsATraineeNonSubmitting() {
+        Pages.traineeHomePage = (TraineeHomePageImpl) new LoginPageImpl(DriverManager.driverDoNotSubmit, "trainee_DO_NOT_SUBMIT").driverGet().login();
     }
 
+    @Given("I am logged in as a trainee, submitting")
+    public void iAmLoggedInAsATraineeSubmitting() {
+        Pages.traineeHomePage = (TraineeHomePageImpl) new LoginPageImpl(DriverManager.driverSubmissionsOnly, "trainee").driverGet().login();
+    }
 
     @When("I am on the homepage")
     public void iAmOnTheHomepage() {
+        Pages.traineeHomePage.goToHomePage();
     }
-
 
     @Then("I should see the stream info")
     public void iShouldSeeTheStreamInfo() {
@@ -60,8 +63,6 @@ public class TraineeStepDefs {
     public void theTraineeWillBeAbleToSeeTheirAverageGradesOverTime() {
         Assertions.assertTrue(Pages.traineeProfilePage.areBothGradesValid());
     }
-
-
 
     @When("I click on the feedback for week {int}")
     public void iClickOnTheFeedbackForWeek(int arg0) {
@@ -111,11 +112,6 @@ public class TraineeStepDefs {
     @And("The trainer logs out")
     public void theTrainerLogsOut() {
         Pages.trainerHomePage.logOut();
-    }
-
-    @When("The trainee signs in")
-    public void theTraineeSignsIn() {
-        Pages.traineeHomePage = (TraineeHomePageImpl) new LoginPageImpl(DriverManager.driver, "trainee").login();
     }
 
     @Then("They are prompted to change the default Password")
@@ -178,4 +174,6 @@ public class TraineeStepDefs {
     public void iShouldSeeTheFormSuccessfullySubmitted() {
         Assertions.assertEquals("Green", Pages.traineeHomePage.getCurrentTrafficLight());
     }
+
+
 }

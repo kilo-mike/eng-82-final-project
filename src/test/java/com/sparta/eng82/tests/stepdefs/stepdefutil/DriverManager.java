@@ -6,15 +6,21 @@ import org.openqa.selenium.WebDriver;
 
 public class DriverManager {
     private static WebDriverFactory webDriverFactory;
-    public static WebDriver driver;
+    public static WebDriver driverDoNotSubmit;
+    public static WebDriver driverSubmissionsOnly;
+    public static WebDriver driverNotTrainee;
 
     public static void setUp() {
         webDriverFactory = new WebDriverFactory();
-        driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
+        driverDoNotSubmit = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
+        driverSubmissionsOnly = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
+        driverNotTrainee = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
     }
 
     public static void tearDown() {
-        driver.quit();
+        driverNotTrainee.quit();
+        driverDoNotSubmit.quit();
+        driverSubmissionsOnly.quit();
         webDriverFactory.endAllServices();
     }
 }

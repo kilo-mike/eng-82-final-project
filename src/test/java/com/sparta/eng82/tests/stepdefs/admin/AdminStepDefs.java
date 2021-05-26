@@ -19,7 +19,7 @@ public class AdminStepDefs {
 
     @Given("I am on the admin homepage")
     public void iAmOnTheAdminHomepage() {
-        Pages.adminHomePage = (AdminHomePageImpl) new LoginPageImpl(DriverManager.driver, "admin").login();
+        Pages.adminHomePage = (AdminHomePageImpl) new LoginPageImpl(DriverManager.driverDoNotSubmit, "admin").login();
     }
 
     @When("I click add trainer")

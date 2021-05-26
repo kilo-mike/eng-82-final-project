@@ -13,8 +13,7 @@ public class TrainerStepDefs {
 
     @Given("I am logged in as a trainer")
     public void iAmLoggedInAsATrainer() {
-        Pages.trainerHomePage = (TrainerHomePageImpl) new LoginPageImpl(DriverManager.driver, "trainer").driverGet().login();
-
+        Pages.trainerHomePage = (TrainerHomePageImpl) new LoginPageImpl(DriverManager.driverNotTrainee, "trainer").driverGet().login();
     }
 
     @When("I am on the trainer homepage")
