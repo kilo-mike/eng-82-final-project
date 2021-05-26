@@ -31,7 +31,7 @@ public class TraineeProfilePageTests {
     @BeforeEach
     void setup() {
         webDriverFactory = new WebDriverFactory();
-        driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME_HEADLESS);
+        driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
         traineeProfilePage = (TraineeProfilePageImpl) new LoginPageImpl(driver, "trainee").login().goToProfilePage();
     }
 
