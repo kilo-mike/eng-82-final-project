@@ -10,18 +10,19 @@ import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 
 import java.util.Properties;
+import java.util.function.BooleanSupplier;
 
 public class EditTrainerPageTests {
 
     private WebDriver driver;
     private static WebDriverFactory webDriverFactory;
     private AdminHomePageImpl adminHomePage;
+
     private final String userAdmin = "admin";
 
     @BeforeAll
     static void setupAll() {
         webDriverFactory = new WebDriverFactory();
-
     }
 
     @BeforeEach
@@ -30,16 +31,16 @@ public class EditTrainerPageTests {
         adminHomePage = (AdminHomePageImpl) new LoginPageImpl(driver, userAdmin).login();
     }
 
-    @AfterEach
-    void tearDown() {
-        driver.quit();
-    }
-
-    @AfterAll
-    static void tearDownAll() {
-        webDriverFactory.endAllServices();
-    }
-
+//    @AfterEach
+//    void tearDown() {
+//        new EditTrainerPageImpl(driver, userAdmin).resetTrainerInfo("jakub","matyjewicz");
+//        driver.quit();
+//    }
+//
+//    @AfterAll
+//    static void tearDownAll() {
+//        webDriverFactory.endAllServices();
+//    }
 
     @Test
     @DisplayName("Check first name has entered")
@@ -47,6 +48,22 @@ public class EditTrainerPageTests {
         Assertions.assertTrue(((EditTrainerPageImpl) adminHomePage.editTrainer("jakub", "matyjewicz"))
                 .editFirstName("Jakub")
         .checkFirstNameInputValueCorrect("Jakub"));
+    }
+    @Test
+    @DisplayName("Check last name has entered")
+    void checkLastNameHasEntered() {
+        Assertions.assertTrue(((EditTrainerPageImpl) adminHomePage.editTrainer("jakub", "matyjewicz"))
+                .editLastName("Matyjewicz")
+        .checkLastNameInputValueCorrect("Matyjewicz"));
+    }
+
+
+    @Test
+    @DisplayName("Check group has been selected")
+    void checkGroupHasBeenSelected() {
+        Assertions.assertTrue(((EditTrainerPageImpl) adminHomePage.editTrainer("jakub","matyjewicz"))
+                .editGroup("hola")
+                .checkGroupNameSelectValueCorrect("hola"));
     }
 
 
