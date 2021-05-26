@@ -110,5 +110,26 @@ public class TrainerHomePageImpl extends NavPage implements TrainerHomePage {
         return new ManageGroupPageImpl(driver, user);
     }
 
+    public boolean areTraineesVisible(){
+
+        WebElement weekDropDown = driver.findElement(By.cssSelector(".form-select"));
+        Select select = new Select(weekDropDown);
+        String weekNumber = String.valueOf(select.getFirstSelectedOption().getText());
+        String weekNumbers[] =  weekNumber.substring(5).split(" ");
+        boolean found = true;
+
+        try{
+            driver.findElement(By.id("traineeTable" + weekNumbers[0]));
+        }
+        catch(NoSuchElementException e){
+            found = false;
+        }
+
+        return found;
+    }
+
+
+
+
 
 }
