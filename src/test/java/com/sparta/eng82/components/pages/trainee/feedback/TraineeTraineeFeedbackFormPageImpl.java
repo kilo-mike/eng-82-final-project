@@ -147,7 +147,7 @@ public class TraineeTraineeFeedbackFormPageImpl extends FeedbackFormPage impleme
     @Override
     public boolean isStartCommentBoxDisabled() {
         clickStartTab();
-        return !driver.findElement(traineeStartCommentBox).isEnabled();
+        return driver.findElement(traineeStartCommentBox).isEnabled();
     }
 
     @Override
@@ -205,7 +205,7 @@ public class TraineeTraineeFeedbackFormPageImpl extends FeedbackFormPage impleme
     @Override
     public boolean isContinueCommentBoxDisabled() {
         clickContinueTab();
-        return !driver.findElement(traineeContinueCommentBox).isEnabled();
+        return driver.findElement(traineeContinueCommentBox).isEnabled();
     }
 
     @Override

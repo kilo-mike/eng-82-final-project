@@ -119,4 +119,27 @@ public class TraineeStepDefs {
         Assertions.assertTrue(Pages.loginPage.getUrl().endsWith("/change-password"));
     }
 
+    @Given("I am viewing a feedback form that is completed")
+    public void iAmViewingAFeedbackFormThatIsCompleted() {
+        Pages.traineeTraineeFeedbackFormPage = Pages.traineeHomePage.clickFeedbackFormForWeek(1);
+    }
+
+    @When("The Trainee types into the comment section")
+    public void theTraineeTypesIntoTheCommentSection() {
+    }
+
+    @Then("The Trainee will be unable to add a new comment to the stop box as the trainee is locked out of editing after completion")
+    public void theTraineeWillBeUnableToAddANewCommentToTheStopBoxAsTheTraineeIsLockedOutOfEditingAfterCompletion() {
+        Assertions.assertTrue(Pages.traineeTraineeFeedbackFormPage.isStopCommentBoxDisabled());
+    }
+
+    @Then("The Trainee will be unable to add a new comment to the start box as the trainee is locked out of editing after completion")
+    public void theTraineeWillBeUnableToAddANewCommentToTheStartBoxAsTheTraineeIsLockedOutOfEditingAfterCompletion() {
+        Assertions.assertTrue(Pages.traineeTraineeFeedbackFormPage.isStartCommentBoxDisabled());
+    }
+
+    @Then("The Trainee will be unable to add a new comment to the continue box as the trainee is locked out of editing after completion")
+    public void theTraineeWillBeUnableToAddANewCommentToTheContinueBoxAsTheTraineeIsLockedOutOfEditingAfterCompletion() {
+        Assertions.assertTrue(Pages.traineeTraineeFeedbackFormPage.isContinueCommentBoxDisabled());
+    }
 }
