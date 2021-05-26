@@ -19,6 +19,12 @@ Then I will only be able to see information pertaining to week 1
     And The Trainee will be unable to add a new comment to the start box as the trainee is locked out of editing after completion
     And The Trainee will be unable to add a new comment to the continue box as the trainee is locked out of editing after completion
 
+  Scenario: The Trainee has completed and wants to submit their feedback from
+    Given  I am logged in as a trainee
+    And I click on the feedback for week 3
+    And I have filled out the trainee feedback form
+    When I click the submit button
+    Then I should see the form successfully submitted
 
 
 

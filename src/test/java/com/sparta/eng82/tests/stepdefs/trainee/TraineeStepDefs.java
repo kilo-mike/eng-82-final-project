@@ -24,6 +24,7 @@ public class TraineeStepDefs {
         Pages.traineeHomePage = (TraineeHomePageImpl) new LoginPageImpl(DriverManager.driver, "trainee").driverGet().login();
     }
 
+
     @When("I am on the homepage")
     public void iAmOnTheHomepage() {
     }
@@ -159,5 +160,22 @@ public class TraineeStepDefs {
     @Then("The traffic light will turn red")
     public void theTrafficLightWillTurnRed() {
         Assertions.assertEquals("Red", Pages.traineeHomePage.getCurrentTrafficLight());
+    }
+
+    @And("I have filled out the trainee feedback form")
+    public void iHaveFilledOutTheTraineeFeedbackForm() {
+        Pages.traineeTraineeFeedbackFormPage.clickOnContAndSetComments("test")
+                .clickOnStartAndSetComment("test")
+                .clickOnStopAndSetComment("test");
+    }
+
+    @When("I click the submit button")
+    public void iClickTheSubmitButton() {
+        Pages.traineeTraineeFeedbackFormPage.submitForm();
+    }
+
+    @Then("I should see the form successfully submitted")
+    public void iShouldSeeTheFormSuccessfullySubmitted() {
+        Assertions.assertEquals("Green", Pages.traineeHomePage.getCurrentTrafficLight());
     }
 }
