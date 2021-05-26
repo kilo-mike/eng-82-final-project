@@ -5,13 +5,16 @@ import com.sparta.eng82.components.pages.trainee.TraineeHomePageImpl;
 import com.sparta.eng82.components.pages.trainee.TraineeProfilePageImpl;
 import com.sparta.eng82.tests.stepdefs.stepdefutil.DriverManager;
 import com.sparta.eng82.tests.stepdefs.stepdefutil.Pages;
+import io.cucumber.java.ca.Cal;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.jupiter.api.Assertions;
 
+import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Calendar;
 
 public class TraineeStepDefs {
 
@@ -141,5 +144,20 @@ public class TraineeStepDefs {
     @Then("The Trainee will be unable to add a new comment to the continue box as the trainee is locked out of editing after completion")
     public void theTraineeWillBeUnableToAddANewCommentToTheContinueBoxAsTheTraineeIsLockedOutOfEditingAfterCompletion() {
         Assertions.assertTrue(Pages.traineeTraineeFeedbackFormPage.isContinueCommentBoxDisabled());
+    }
+
+    @And("I have not submitted my form")
+    public void iHaveNotSubmittedMyForm() {
+        Assertions.assertEquals("Amber", Pages.traineeHomePage.getCurrentTrafficLight());
+    }
+
+    @When("The end of thursday passes")
+    public void theEndOfThursdayPasses() {
+        Assertions.assertEquals(5,Calendar.getInstance().get(Calendar.DAY_OF_WEEK));
+    }
+
+    @Then("The traffic light will turn red")
+    public void theTrafficLightWillTurnRed() {
+        Assertions.assertEquals("Red", Pages.traineeHomePage.getCurrentTrafficLight());
     }
 }
