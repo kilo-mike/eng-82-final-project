@@ -62,7 +62,7 @@ public class AdminHomePageImpl extends NavPage implements AdminHomePage {
 
         for (int i = 0; i < output.size(); i++) {
             if (output.get(i).getText().equals(firstName) && output.get(i + 1).getText().equals(lastName)) {
-                output.get(i).click();
+                ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, output.get(i));
                 return new EditTrainerPageImpl(driver, user);
             }
 

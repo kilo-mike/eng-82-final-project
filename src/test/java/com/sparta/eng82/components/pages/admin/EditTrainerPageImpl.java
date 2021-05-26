@@ -2,6 +2,7 @@ package com.sparta.eng82.components.pages.admin;
 
 import com.sparta.eng82.components.frameworkutil.ActionClicker;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
@@ -17,7 +18,11 @@ public class EditTrainerPageImpl implements EditTrainerPage {
 
     @Override
     public EditTrainerPageImpl editFirstName(String firstName) {
-        driver.findElement(By.id("editTrainerFirstName")).clear();
+//        driver.findElement(By.id("editTrainerFirstName")).clear();
+//        ActionClicker.timedMouseClicker(driver,ActionClicker.TIME,By.id("editTrainerFirstName"));
+
+        driver.findElement( By.id("main-content")).sendKeys(Keys.TAB);
+        driver.findElement( By.id("main-content")).sendKeys(Keys.TAB);
         driver.findElement( By.id("editTrainerFirstName")).sendKeys(firstName);
         return this;
     }
@@ -58,7 +63,7 @@ public class EditTrainerPageImpl implements EditTrainerPage {
         return driver.getCurrentUrl();
     }
 
-    public boolean checkFirstNameInputValueCorrect() {
-        driver.findElement(By.id("editTrainerFirstName")).getAttribute("value");
+    public boolean checkFirstNameInputValueCorrect(String input) {
+        return driver.findElement(By.id("editTrainerFirstName")).getAttribute("value").equals(input);
     }
 }

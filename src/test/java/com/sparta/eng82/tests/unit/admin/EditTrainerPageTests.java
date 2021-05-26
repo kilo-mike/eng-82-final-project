@@ -46,7 +46,7 @@ public class EditTrainerPageTests {
     void checkFirstNameHasEntered() {
         Assertions.assertTrue(((EditTrainerPageImpl) adminHomePage.editTrainer("jakub", "matyjewicz"))
                 .editFirstName("Jakub")
-        .checkFirstNameInputValueCorrect());
+        .checkFirstNameInputValueCorrect("Jakub"));
     }
 
 
