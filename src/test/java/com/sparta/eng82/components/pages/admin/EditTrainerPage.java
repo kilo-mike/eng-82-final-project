@@ -9,7 +9,7 @@ public interface EditTrainerPage extends Page {
 
     EditTrainerPageImpl editGroup(String groupName);
 
-    EditTrainerPageImpl tickRemove();
+    EditTrainerPageImpl tickForRemove();
 
     AdminHomePageImpl saveChanges();
 

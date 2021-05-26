@@ -59,13 +59,15 @@ public class AdminHomePageImpl extends NavPage implements AdminHomePage {
 
     public Page editTrainer(String firstName, String lastName) {
         List<WebElement> output = driver.findElement(trainersTable).findElements(new By.ByTagName("td"));
-
-        for (int i = 0; i < output.size(); i++) {
-            if (output.get(i).getText().equals(firstName) && output.get(i + 1).getText().equals(lastName)) {
-                ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, output.get(i));
-                return new EditTrainerPageImpl(driver, user);
+        int rowCount = 0;
+        for (int i = 1; i < output.size(); i++) {
+            if (i % 3 == 0 || i == 1) {
+                rowCount++;
             }
-
+            if (output.get(i - 1).getText().equals(firstName) && output.get(i).getText().equals(lastName)) {
+                ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, output.get(i - 1));
+                return new EditTrainerPageImpl(driver, user, rowCount);
+            }
         }
         return new AdminHomePageImpl(driver, user);
     }

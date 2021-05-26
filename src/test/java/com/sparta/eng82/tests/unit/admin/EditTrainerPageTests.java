@@ -20,6 +20,16 @@ public class EditTrainerPageTests {
 
     private final String userAdmin = "admin";
 
+    private final String originalFirstName = "jakub";
+    private final String originalLastName = "matyjewicz";
+    private final String originalGroupName = "hola";
+
+    private final String desiredFirstName = "Jakub";
+    private final String desiredLastName = "Matyjewicz";
+    private final String desiredGroupName = "No Group";
+
+    private final int rowCount = 4;
+
     @BeforeAll
     static void setupAll() {
         webDriverFactory = new WebDriverFactory();
@@ -31,39 +41,55 @@ public class EditTrainerPageTests {
         adminHomePage = (AdminHomePageImpl) new LoginPageImpl(driver, userAdmin).login();
     }
 
-//    @AfterEach
-//    void tearDown() {
-//        new EditTrainerPageImpl(driver, userAdmin).resetTrainerInfo("jakub","matyjewicz");
-//        driver.quit();
-//    }
-//
-//    @AfterAll
-//    static void tearDownAll() {
-//        webDriverFactory.endAllServices();
-//    }
+    @AfterEach
+    void tearDown() {
+//        new EditTrainerPageImpl(driver, userAdmin, rowCount).resetTrainerInfo("jakub","matyjewicz");
+        driver.quit();
+    }
+
+    @AfterAll
+    static void tearDownAll() {
+        webDriverFactory.endAllServices();
+    }
 
     @Test
     @DisplayName("Check first name has entered")
     void checkFirstNameHasEntered() {
-        Assertions.assertTrue(((EditTrainerPageImpl) adminHomePage.editTrainer("jakub", "matyjewicz"))
-                .editFirstName("Jakub")
-        .checkFirstNameInputValueCorrect("Jakub"));
+        Assertions.assertTrue(((EditTrainerPageImpl) adminHomePage.editTrainer(originalFirstName, originalLastName))
+                .editFirstName(desiredFirstName)
+        .checkFirstNameInputValueCorrect(desiredFirstName));
     }
     @Test
     @DisplayName("Check last name has entered")
     void checkLastNameHasEntered() {
-        Assertions.assertTrue(((EditTrainerPageImpl) adminHomePage.editTrainer("jakub", "matyjewicz"))
-                .editLastName("Matyjewicz")
-        .checkLastNameInputValueCorrect("Matyjewicz"));
+        Assertions.assertTrue(((EditTrainerPageImpl) adminHomePage.editTrainer(originalFirstName, originalLastName))
+                .editLastName(desiredLastName)
+        .checkLastNameInputValueCorrect(desiredLastName));
     }
 
 
     @Test
     @DisplayName("Check group has been selected")
     void checkGroupHasBeenSelected() {
-        Assertions.assertTrue(((EditTrainerPageImpl) adminHomePage.editTrainer("jakub","matyjewicz"))
-                .editGroup("hola")
-                .checkGroupNameSelectValueCorrect("hola"));
+        Assertions.assertTrue(((EditTrainerPageImpl) adminHomePage.editTrainer(originalFirstName, originalLastName))
+                .editGroup(originalGroupName)
+                .checkGroupNameSelectValueCorrect(originalGroupName));
+    }
+
+
+    @Test
+    @DisplayName("Check if tick box is ticked")
+    void checkIfTickBoxIsTicked() {
+        Assertions.assertTrue(((EditTrainerPageImpl) adminHomePage.editTrainer(originalFirstName, originalLastName)).tickForRemove()
+                .checkIfTickBoxIsTicked());
+    }
+
+    @Test
+    @DisplayName("Check if all edited inputs have been entered")
+    void checkIfAllEditedInputsHaveBeenEntered() {
+        Assertions.assertTrue(
+                ((EditTrainerPageImpl)  adminHomePage.editTrainer(desiredFirstName, desiredLastName))
+                .checkIfAllInputsHaveBeenEntered(desiredFirstName, desiredLastName, desiredGroupName));
     }
 
 
