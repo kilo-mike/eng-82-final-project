@@ -111,6 +111,12 @@ public class TrainerUnitTests {
         void checkingThatClickingOnASpecifiedWeekCorrectlySelectsThatWeek() {
             Assertions.assertTrue(trainerHomePage.isChosenWeekDisplayingAsCurrentlySelected(2));
         }
+
+        @Test
+        @DisplayName("Test are Trainees Visible")
+        void testAreTraineesVisible() {
+            Assertions.assertTrue(trainerHomePage.areTraineesVisible());
+        }
     }
 
     @Nested

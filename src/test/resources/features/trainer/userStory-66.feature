@@ -1,7 +1,8 @@
+Feature:
 Scenario: A trainer is viewing a list of their trainees
 
-Given that any trainer is signed into the website
+Given I am logged in as a trainer
 
-When that trainer is viewing their home screen
+When I am on the trainer homepage
 
-Then a list of trainees assigned to that trainer’s group should be visible.
+Then I should see a selectable list of my trainees
