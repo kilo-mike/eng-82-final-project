@@ -56,7 +56,7 @@ public class EditTrainerPageImpl implements EditTrainerPage {
 
     @Override
     public AdminHomePageImpl saveChanges() {
-        ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, By.xpath("//*[@id=\"adminEditTrainerModal111\"]/div/div/div[3]/input[1]"));
+        ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, By.xpath("/html/body/section/div/div/div/div["+ (rowCount + 2) + "]/div/div/div[3]/input[1]"));
         return new AdminHomePageImpl(driver, user);
     }
 
@@ -90,14 +90,16 @@ public class EditTrainerPageImpl implements EditTrainerPage {
 
     public boolean checkGroupNameSelectValueCorrect(String input) {
         // TODO page is flawed, extremely difficult to pinpoint group for each unique
-        try {
-            if (driver.findElement(By.className("modal fade rounded show")).findElement(By.id("editTrainerGroup")).getAttribute("label").equals(input)) {
-                return true;
-            }
-        } catch (NoSuchElementException e) {
-            return false;
-        }
-        return false;
+//        try {
+//            if (driver.findElement(By.className("modal fade rounded show")).findElement(By.id("editTrainerGroup")).getAttribute("label").equals(input)) {
+//                return true;
+//            }
+//        } catch (NoSuchElementException e) {
+//            return false;
+//        }
+//        return false;
+
+        return driver.findElement(By.xpath("/html/body/section/div/div/div/div["+ (rowCount + 2) +"]/div/div/div[2]/form[1]/div[3]/div/select")).getAttribute("value").equals(input);
     }
 
     public boolean checkIfTickBoxIsTicked() {

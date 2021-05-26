@@ -45,7 +45,7 @@ public class EditTrainerPageTests {
     @Test
     @DisplayName("Check first name has entered")
     void checkFirstNameHasEntered() {
-        Assertions.assertTrue(((EditTrainerPageImpl) adminHomePage.editTrainer(originalFirstName, originalLastName))
+        Assertions.assertTrue(((EditTrainerPageImpl) adminHomePage.clickOnTrainer(originalFirstName, originalLastName))
                 .editFirstName(desiredFirstName)
                 .checkFirstNameInputValueCorrect(desiredFirstName));
     }
@@ -53,7 +53,7 @@ public class EditTrainerPageTests {
     @Test
     @DisplayName("Check last name has entered")
     void checkLastNameHasEntered() {
-        Assertions.assertTrue(((EditTrainerPageImpl) adminHomePage.editTrainer(originalFirstName, originalLastName))
+        Assertions.assertTrue(((EditTrainerPageImpl) adminHomePage.clickOnTrainer(originalFirstName, originalLastName))
                 .editLastName(desiredLastName)
                 .checkLastNameInputValueCorrect(desiredLastName));
     }
@@ -62,7 +62,7 @@ public class EditTrainerPageTests {
     @Test
     @DisplayName("Check group has been selected")
     void checkGroupHasBeenSelected() {
-        Assertions.assertTrue(((EditTrainerPageImpl) adminHomePage.editTrainer(originalFirstName, originalLastName))
+        Assertions.assertTrue(((EditTrainerPageImpl) adminHomePage.clickOnTrainer(originalFirstName, originalLastName))
                 .editGroup(desiredGroupName)
                 .checkGroupNameSelectValueCorrect(desiredGroupName));
     }
@@ -71,7 +71,7 @@ public class EditTrainerPageTests {
     @Test
     @DisplayName("Check if tick box is ticked")
     void checkIfTickBoxIsTicked() {
-        Assertions.assertTrue(((EditTrainerPageImpl) adminHomePage.editTrainer(originalFirstName, originalLastName)).tickForRemove()
+        Assertions.assertTrue(((EditTrainerPageImpl) adminHomePage.clickOnTrainer(originalFirstName, originalLastName)).tickForRemove()
                 .checkIfTickBoxIsTicked());
     }
 
@@ -79,7 +79,22 @@ public class EditTrainerPageTests {
     @DisplayName("Check if all edited inputs have been entered")
     void checkIfAllEditedInputsHaveBeenEntered() {
         Assertions.assertTrue(
-                ((EditTrainerPageImpl) adminHomePage.editTrainer(originalFirstName, originalLastName))
+                ((EditTrainerPageImpl) adminHomePage.clickOnTrainer(originalFirstName, originalLastName))
                         .checkIfAllInputsHaveBeenEntered(desiredFirstName, desiredLastName, desiredGroupName));
+    }
+
+    @Test
+    @DisplayName("Check if first name and last name inputs have been entered and saved")
+    void checkIfFirstNameAndLastNameInputsHaveBeenEnteredAndSaved() {
+        Assertions.assertTrue(((EditTrainerPageImpl) adminHomePage.clickOnTrainer(originalFirstName, originalLastName))
+                .editFirstName(desiredFirstName)
+                .editLastName(desiredLastName)
+                .saveChanges()
+                .isTrainerAdded(desiredFirstName, desiredLastName, originalGroupName));
+
+        ((EditTrainerPageImpl) adminHomePage.clickOnTrainer(desiredFirstName, desiredLastName))
+                .editFirstName(originalFirstName)
+                .editLastName(originalLastName)
+                .saveChanges();
     }
 }
