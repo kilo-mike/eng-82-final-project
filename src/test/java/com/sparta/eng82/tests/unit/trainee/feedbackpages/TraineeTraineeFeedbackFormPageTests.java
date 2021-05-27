@@ -175,7 +175,7 @@ public class TraineeTraineeFeedbackFormPageTests {
     @DisplayName("Is Start Comment Box Enabled Before Submission Test")
     void isStartCommentBoxEnabledBeforeSubmissionTest() {
         traineeTraineeFeedbackFormPage = traineeHomePage.clickFeedbackFormForWeek(unsubmittedWeek);
-        Assertions.assertFalse(traineeTraineeFeedbackFormPage.isStartCommentBoxDisabled());
+        Assertions.assertTrue(traineeTraineeFeedbackFormPage.isStartCommentBoxEnabledBeforeSubmission());
     }
 
     @Test
@@ -240,14 +240,14 @@ public class TraineeTraineeFeedbackFormPageTests {
     @DisplayName("Is Continue Comment Box Disabled Test")
     void isContinueCommentBoxDisabledTest() {
         traineeTraineeFeedbackFormPage = traineeHomePage.clickFeedbackFormForWeek(submittedWeek);
-        Assertions.assertFalse(traineeTraineeFeedbackFormPage.isContinueCommentBoxDisabled());
+        Assertions.assertTrue(traineeTraineeFeedbackFormPage.isContinueCommentBoxDisabled());
     }
 
     @Test
     @DisplayName("Is Continue Comment Box Enabled Before Submission Test")
     void isContinueCommentBoxEnabledBeforeSubmissionTest() {
         traineeTraineeFeedbackFormPage = traineeHomePage.clickFeedbackFormForWeek(unsubmittedWeek);
-        Assertions.assertFalse(traineeTraineeFeedbackFormPage.isContinueCommentBoxDisabled());
+        Assertions.assertTrue(traineeTraineeFeedbackFormPage.isContinueCommentBoxEnabledBeforeSubmission());
     }
 
     @Test
@@ -302,12 +302,11 @@ public class TraineeTraineeFeedbackFormPageTests {
 
     @Test
     @DisplayName("Click on Stop and Set Comment")
-    void clickOnStopAndSetComment() {
+    void clickOnStopAndSetComment() { //TODO This method does not save the form and does not change the value.
         traineeTraineeFeedbackFormPage = traineeHomePage.clickFeedbackFormForWeek(unsubmittedWeek);
         String testString = "New Trainee Set Stop Comment";
         traineeTraineeFeedbackFormPage = traineeTraineeFeedbackFormPage.clickOnStopAndSetComment(testString);
-        Assertions.assertEquals(testString, driver.findElement(By.id("stopTrainee")).getText());
-
+        Assertions.assertEquals(testString, driver.findElement(By.id("stopTrainee")).getAttribute("value"));
     }
 
     @Test
@@ -316,9 +315,7 @@ public class TraineeTraineeFeedbackFormPageTests {
         traineeTraineeFeedbackFormPage = traineeHomePage.clickFeedbackFormForWeek(unsubmittedWeek);
         String testString = "New Trainee Set Start Comment";
         traineeTraineeFeedbackFormPage = traineeTraineeFeedbackFormPage.clickOnStartAndSetComment(testString);
-        traineeTraineeFeedbackFormPage.clickStartTab();
-        Assertions.assertEquals(testString, driver.findElement(By.id("startTrainee")).getText());
-
+        Assertions.assertEquals(testString, driver.findElement(By.id("startTrainee")).getAttribute("value"));
     }
 
     @Test
@@ -327,7 +324,7 @@ public class TraineeTraineeFeedbackFormPageTests {
         traineeTraineeFeedbackFormPage = traineeHomePage.clickFeedbackFormForWeek(unsubmittedWeek);
         String testString = "New Trainee Set Continue Comment";
         traineeTraineeFeedbackFormPage = traineeTraineeFeedbackFormPage.clickOnContAndSetComments(testString);
-        Assertions.assertEquals(testString, driver.findElement(By.id("continueTrainee")).getText());
+        Assertions.assertEquals(testString, driver.findElement(By.id("continueTrainee")).getAttribute("value"));
 
     }
 
