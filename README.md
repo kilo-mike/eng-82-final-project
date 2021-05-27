@@ -62,4 +62,12 @@ An agile Java group project completed as our final project at Sparta. The delive
 
 The project uses a page-object model (POM). Each page has an associated interface with methods that abstract common areas to test behind easy to use, human readable functions. The pages also inherit from larger interfaces for behaviour and abstract classed when state is required.
 
+## Sprints
 
+**Sprint 0** -> Planning and Interface Creation
+
+**Sprint 1** -> Implementation of Framework
+
+**Sprint 2** -> Unit Test Implementation and Refactor of Project
+
+**Sprint 3** -> Implementation of BDD layer and completion of left-over tasks from previous sprints.
