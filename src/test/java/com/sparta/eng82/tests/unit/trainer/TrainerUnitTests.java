@@ -7,9 +7,7 @@ import com.sparta.eng82.components.pages.other.CompetenciesPage;
 import com.sparta.eng82.components.pages.other.LoginPageImpl;
 import com.sparta.eng82.components.pages.trainee.TraineeHomePageImpl;
 import com.sparta.eng82.components.pages.trainer.ManageGroupPage;
-import com.sparta.eng82.components.pages.trainer.ManageGroupPageImpl;
 import com.sparta.eng82.components.pages.trainer.TrainerHomePageImpl;
-import com.sparta.eng82.components.pages.trainer.feedbackpages.TrainerTraineeFeedbackFormPage;
 import com.sparta.eng82.components.pages.trainer.feedbackpages.TrainerTraineeFeedbackFormPageImpl;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
@@ -206,31 +204,31 @@ public class TrainerUnitTests {
         @Test
         @DisplayName("Check that the technical grade is set AND saved as expected")
         void checkThatTheTechnicalGradeIsSetAndSavedAsExpected() {
-            TrainerTraineeFeedbackFormPageImpl trainerTraineeFeedbackFormPage = trainerHomePage.selectTraineeName(2, "Bob Smith");
+            TrainerTraineeFeedbackFormPageImpl trainerTraineeFeedbackFormPage = trainerHomePage.selectTraineeName(2, "Jane Doe");
             trainerTraineeFeedbackFormPage.setTechnicalGrade('D');
             trainerTraineeFeedbackFormPage.saveForm();
-            trainerHomePage.selectTraineeName(2, "Bob Smith");
+            trainerHomePage.selectTraineeName(2, "Jane Doe");
             Assertions.assertEquals("D", driver.findElement(By.name("technicalGrade")).findElement(By.xpath("//option[@selected=\"selected\"]")).getText());
         }
 
         @Test
         @DisplayName("Check that the consultant grade is set AND saved as expected")
         void checkThatTheConsultantGradeIsSetAndSavedAsExpected() {
-            TrainerTraineeFeedbackFormPageImpl trainerTraineeFeedbackFormPage = trainerHomePage.selectTraineeName(2, "Bob Smith");
+            TrainerTraineeFeedbackFormPageImpl trainerTraineeFeedbackFormPage = trainerHomePage.selectTraineeName(2, "Jane Doe");
             trainerTraineeFeedbackFormPage.setConsultantGrade('D');
             trainerTraineeFeedbackFormPage.saveForm();
-            trainerHomePage.selectTraineeName(2, "Bob Smith");
+            trainerHomePage.selectTraineeName(2, "Jane Doe");
             Assertions.assertEquals("D", driver.findElement(By.name("consultantGrade")).findElement(By.xpath("//option[@selected=\"selected\"]")).getText());
         }
 
         @Test
         @DisplayName("Check that clicking the Consultant Grade title opens the Competencies Page")
         void checkThatClickingTheConsultantGradeTitleOpensTheCompetenciesPage() {
-            TrainerTraineeFeedbackFormPageImpl trainerTraineeFeedbackFormPage = trainerHomePage.selectTraineeName(2, "Bob Smith");
+            TrainerTraineeFeedbackFormPageImpl trainerTraineeFeedbackFormPage = trainerHomePage.selectTraineeName(2, "Jane Doe");
             if (trainerTraineeFeedbackFormPage.getSimpleName() != null) {
                 CompetenciesPage competenciesPage = trainerTraineeFeedbackFormPage.clickConsultantGrade();
             }
-            Assertions.assertEquals("http://localhost:8080/competencies", driver.getCurrentUrl());
+            Assertions.assertTrue(driver.getCurrentUrl().endsWith("/competencies"));
         }
 
         @Test
