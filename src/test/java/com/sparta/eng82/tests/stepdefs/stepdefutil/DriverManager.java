@@ -8,7 +8,6 @@ public class DriverManager {
     private static WebDriverFactory webDriverFactory;
     public static WebDriver driverDoNotSubmit;
     public static WebDriver driverSubmissionsOnly;
-    public static WebDriver driverNotTrainee;
 
     public static void setUp() {
         webDriverFactory = new WebDriverFactory();
