@@ -1,6 +1,7 @@
 package com.sparta.eng82.tests.unit.admin;
 
 
+import com.sparta.eng82.components.pages.admin.EditTrainerPageImpl;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import com.sparta.eng82.components.frameworkutil.WebDriverFactory;
@@ -19,6 +20,9 @@ public class AdminHomePageTests {
     private AdminHomePageImpl adminHomePage;
 
     private final String userAdmin = "admin";
+    private final String desiredFirstName = "Dummy";
+    private final String desiredLastName = "Smith";
+    private final String desiredGroupName = "EngTest";
 
 
 
@@ -44,18 +48,21 @@ public class AdminHomePageTests {
     @DisplayName("Is trainer added Test")
     void isTrainerAddedTest() {
         adminHomePage.addTrainer()
-                .enterFirstName("test2")
-                .enterSecondName("ssss")
-                .selectGroup("No Group")
+                .enterFirstName(desiredFirstName)
+                .enterSecondName(desiredLastName)
+                .selectGroup(desiredGroupName)
                 .addNewTrainer();
-        Assertions.assertTrue(adminHomePage.isTrainerAdded("test2", "ssss", "Not Assigned"));
+        Assertions.assertTrue(adminHomePage.isTrainerAdded(desiredFirstName, desiredLastName, desiredGroupName));
+        ((EditTrainerPageImpl) adminHomePage.clickOnTrainer(desiredFirstName, desiredLastName))
+                .tickForRemove()
+                .removeTrainer();
 
     }
 
     @Test
     @DisplayName("Is the size of the return list with all the trainers right ")
     void isTheSizeOfTheReturnListWithAllTheTrainersRight() {
-        Assertions.assertTrue(adminHomePage.getAllTrainersAvailable(6));
+        Assertions.assertTrue(adminHomePage.getAllTrainersAvailable(5));
     }
 
 
