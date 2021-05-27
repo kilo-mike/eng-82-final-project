@@ -19,10 +19,7 @@ import java.util.Calendar;
 
 public class TraineeStepDefs {
 
-    @When("I am logged in as a trainee, non-submitting")
-    public void iAmLoggedInAsATraineeNonSubmitting() {
-        Pages.traineeHomePage = (TraineeHomePageImpl) new LoginPageImpl(DriverManager.driverDoNotSubmit, Users.TRAINEE_DNS).driverGet().login();
-    }
+
 
     @Given("I am logged in as a trainee, submitting")
     public void iAmLoggedInAsATraineeSubmitting() {
@@ -173,4 +170,8 @@ public class TraineeStepDefs {
     }
 
 
+    @Given("I am logged in as a trainee, non-submitting")
+    public void iAmLoggedInAsATraineeNonSubmitting() {
+        Pages.traineeHomePage = (TraineeHomePageImpl) new LoginPageImpl(DriverManager.driverDoNotSubmit, Users.TRAINEE_DNS).driverGet().login();
+    }
 }
