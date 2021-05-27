@@ -33,19 +33,19 @@ public class TraineeStepDefs {
         Pages.traineeHomePage.goToHomePage();
     }
 
-    @Then("I should see the stream info")
-    public void iShouldSeeTheStreamInfo() {
-        Assertions.assertEquals("Java SDET", Pages.traineeHomePage.getStream());
+    @Then("I should see the stream info for {string}")
+    public void iShouldSeeTheStreamInfo(String arg0) {
+        Assertions.assertEquals(arg0, Pages.traineeHomePage.getStream());
     }
 
-    @Then("I should see the group info")
-    public void iShouldSeeTheGroupInfo() {
-        Assertions.assertEquals("Engineering 80", Pages.traineeHomePage.getGroup());
+    @Then("I should see the group info for {string}")
+    public void iShouldSeeTheGroupInfo(String arg0) {
+        Assertions.assertEquals(arg0, Pages.traineeHomePage.getGroup());
     }
 
-    @Then("I should see the trainer info")
-    public void iShouldSeeTheTrainerInfo() {
-        Assertions.assertEquals("Manish Gadhvi", Pages.traineeHomePage.getTrainer());
+    @Then("I should see the trainer info for {string}")
+    public void iShouldSeeTheTrainerInfo(String arg0) {
+        Assertions.assertEquals(arg0, Pages.traineeHomePage.getTrainer());
     }
 
 
@@ -150,7 +150,7 @@ public class TraineeStepDefs {
 
     @When("The end of thursday passes")
     public void theEndOfThursdayPasses() {
-        Assertions.assertEquals(5,Calendar.getInstance().get(Calendar.DAY_OF_WEEK));
+        Assertions.assertEquals(6,Calendar.getInstance().get(Calendar.DAY_OF_WEEK));
     }
 
     @Then("The traffic light will turn red")

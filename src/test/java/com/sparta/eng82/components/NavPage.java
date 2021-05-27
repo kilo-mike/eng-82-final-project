@@ -44,6 +44,7 @@ public abstract class NavPage implements Page {
                 return new TrainerHomePageImpl(driver, user);
             case Users.TRAINEE:
                 return new TraineeHomePageImpl(driver, user);
+
         }
         return null;
     }

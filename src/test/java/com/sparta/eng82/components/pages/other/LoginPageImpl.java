@@ -70,8 +70,10 @@ public class LoginPageImpl implements LoginPage {
         switch (user) {
             case "admin":
                 return new AdminHomePageImpl(driver, user);
+
             case "trainer":
                 return new TrainerHomePageImpl(driver, user);
+            case "trainee_DO_NOT_SUBMIT":
             case "trainee":
                 return new TraineeHomePageImpl(driver, user);
         }
