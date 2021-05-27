@@ -41,16 +41,10 @@ public class TrainerHomePageImpl extends NavPage implements TrainerHomePage {
     @Override
     public TrainerTraineeFeedbackFormPageImpl selectTraineeName(int week, String traineeName) {
         ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, By.tagName("select"));
-        for (WebElement element : driver.findElements(By.tagName("option"))) {
-            if (element.getText().startsWith("Week " + week + " ")) {
-                try {
-                    element.sendKeys(Keys.ENTER);
-                    break;
-                } catch (ElementNotInteractableException e) {
-                    break;
-                }
-            }
-        }
+        WebElement weekDropDown = driver.findElement(By.xpath("/html/body/section/div/div/div/select"));
+        Select select = new Select(weekDropDown);
+        select.selectByValue(Integer.toString(week));
+
         for (WebElement element : driver.findElements(By.tagName("td"))) {
             if (element.getText().equals(traineeName)) {
                 try {
@@ -115,7 +109,7 @@ public class TrainerHomePageImpl extends NavPage implements TrainerHomePage {
         WebElement weekDropDown = driver.findElement(By.cssSelector(".form-select"));
         Select select = new Select(weekDropDown);
         String weekNumber = String.valueOf(select.getFirstSelectedOption().getText());
-        String weekNumbers[] =  weekNumber.substring(5).split(" ");
+        String[] weekNumbers =  weekNumber.substring(5).split(" ");
         boolean found = true;
 
         try{
