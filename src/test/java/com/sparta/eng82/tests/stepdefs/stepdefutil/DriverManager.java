@@ -12,9 +12,9 @@ public class DriverManager {
 
     public static void setUp() {
         webDriverFactory = new WebDriverFactory();
-        driverDoNotSubmit = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
-        driverSubmissionsOnly = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
-      //  driverNotTrainee = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
+        driverSubmissionsOnly = webDriverFactory.getWebDriver(WebDriverTypes.CHROME); //only use this for checking submitted forms and submitting the form
+        driverDoNotSubmit = webDriverFactory.getWebDriver(WebDriverTypes.CHROME); //admins and trainers should use this for all their tests, and some trainee tests
+
     }
 
     public static void tearDown() {
