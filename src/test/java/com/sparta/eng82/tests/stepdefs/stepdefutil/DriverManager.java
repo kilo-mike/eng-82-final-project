@@ -12,7 +12,7 @@ public class DriverManager {
 
     public static void setUp() {
         webDriverFactory = new WebDriverFactory();
-        driverDoNotSubmit = webDriverFactory.getWebDriver(WebDriverTypes.CHROME_HEADLESS);
+        driverDoNotSubmit = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
         driverSubmissionsOnly = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
       //  driverNotTrainee = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
     }
