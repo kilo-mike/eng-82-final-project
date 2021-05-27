@@ -113,25 +113,25 @@ public class TraineeHomepageTests {
     @Test
     @DisplayName("Check the name is shown properly")
     void checkTheNameIsShownProperly() {
-        Assertions.assertEquals("Jane Doe", traineeHomePage.getName());
+        Assertions.assertEquals("Bob Smith", traineeHomePage.getName());
     }
 
     @Test
     @DisplayName("Check the stream is shown properly")
     void checkTheStreamIsShownProperly() {
-        Assertions.assertEquals("Java SDET", traineeHomePage.getStream());
+        Assertions.assertEquals("Java Dev", traineeHomePage.getStream());
     }
 
     @Test
     @DisplayName("Check the group is shown properly")
     void checkTheGroupIsShownProperly() {
-        Assertions.assertEquals("Engineering 80", traineeHomePage.getGroup());
+        Assertions.assertEquals("Engineering 82", traineeHomePage.getGroup());
     }
 
     @Test
     @DisplayName("Check the trainer is shown properly")
     void checkTheTrainerIsShownProperly() {
-        Assertions.assertEquals("Manish Gadhvi", traineeHomePage.getTrainer());
+        Assertions.assertEquals("Astha Shaw", traineeHomePage.getTrainer());
     }
 
 
