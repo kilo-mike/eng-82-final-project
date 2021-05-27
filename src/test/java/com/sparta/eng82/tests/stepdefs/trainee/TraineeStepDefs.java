@@ -1,5 +1,6 @@
 package com.sparta.eng82.tests.stepdefs.trainee;
 
+import com.sparta.eng82.components.frameworkutil.Users;
 import com.sparta.eng82.components.pages.other.LoginPageImpl;
 import com.sparta.eng82.components.pages.trainee.TraineeHomePageImpl;
 import com.sparta.eng82.components.pages.trainee.TraineeProfilePageImpl;
@@ -20,12 +21,12 @@ public class TraineeStepDefs {
 
     @When("I am logged in as a trainee, non-submitting")
     public void iAmLoggedInAsATraineeNonSubmitting() {
-        Pages.traineeHomePage = (TraineeHomePageImpl) new LoginPageImpl(DriverManager.driverDoNotSubmit, "trainee_DO_NOT_SUBMIT").driverGet().login();
+        Pages.traineeHomePage = (TraineeHomePageImpl) new LoginPageImpl(DriverManager.driverDoNotSubmit, Users.TRAINEE_DNS).driverGet().login();
     }
 
     @Given("I am logged in as a trainee, submitting")
     public void iAmLoggedInAsATraineeSubmitting() {
-        Pages.traineeHomePage = (TraineeHomePageImpl) new LoginPageImpl(DriverManager.driverSubmissionsOnly, "trainee").driverGet().login();
+        Pages.traineeHomePage = (TraineeHomePageImpl) new LoginPageImpl(DriverManager.driverSubmissionsOnly, Users.TRAINEE).driverGet().login();
     }
 
     @When("I am on the homepage")

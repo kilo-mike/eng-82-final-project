@@ -12,15 +12,12 @@ public class DriverManager {
 
     public static void setUp() {
         webDriverFactory = new WebDriverFactory();
-        driverDoNotSubmit = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
-       // driverSubmissionsOnly = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
+        driverDoNotSubmit = webDriverFactory.getWebDriver(WebDriverTypes.CHROME_HEADLESS);
+        driverSubmissionsOnly = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
       //  driverNotTrainee = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
     }
 
     public static void tearDown() {
-        //driverNotTrainee.quit();
-        driverDoNotSubmit.quit();
-        //driverSubmissionsOnly.quit();
         webDriverFactory.endAllServices();
     }
 }

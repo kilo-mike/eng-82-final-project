@@ -98,7 +98,7 @@ public class TraineeHomepageTests {
         Assertions.assertTrue(traineeHomePage.areAllPreviousWeeksShown());
     }
 
-    @Test  //TODO This can be mocked I think
+    @Test
     @DisplayName("Check the traffic light colour for the current week")
     void checkTheTrafficLightColourForCurrentWeek() {
         Assertions.assertTrue(Arrays.stream(new String[]{"Green", "Amber", "Red"}).anyMatch(s -> s.contains(traineeHomePage.getCurrentTrafficLight())));
