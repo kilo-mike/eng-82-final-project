@@ -44,6 +44,7 @@ public abstract class NavPage implements Page {
                 return new TrainerHomePageImpl(driver, user);
             case Users.TRAINEE:
                 return new TraineeHomePageImpl(driver, user);
+
         }
         return null;
     }
@@ -56,6 +57,7 @@ public abstract class NavPage implements Page {
                 return new AdminProfilePageImpl(driver, user);
             case Users.TRAINER:
                 return new TrainerProfilePageImpl(driver, user);
+            case Users.TRAINEE_DNS:
             case Users.TRAINEE:
                 return new TraineeProfilePageImpl(driver, user);
         }

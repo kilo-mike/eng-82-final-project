@@ -37,7 +37,7 @@ public class TraineeHomepageTests {
     @BeforeEach
     void setup() {
         driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
-        traineeHomePage = (TraineeHomePageImpl) new LoginPageImpl(driver, "trainee").login();
+        traineeHomePage = (TraineeHomePageImpl) new LoginPageImpl(driver, "trainee_DO_NOT_SUBMIT").login();
 
     }
 
@@ -98,11 +98,9 @@ public class TraineeHomepageTests {
         Assertions.assertTrue(traineeHomePage.areAllPreviousWeeksShown());
     }
 
-    @Test  //TODO This can be mocked I think
+    @Test
     @DisplayName("Check the traffic light colour for the current week")
     void checkTheTrafficLightColourForCurrentWeek() {
-        // TODO
-        //traineHomePage.checkTrafficLightColourForCurrentWeek();
         Assertions.assertTrue(Arrays.stream(new String[]{"Green", "Amber", "Red"}).anyMatch(s -> s.contains(traineeHomePage.getCurrentTrafficLight())));
     }
 

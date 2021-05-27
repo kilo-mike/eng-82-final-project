@@ -20,7 +20,7 @@ public class LoginStepDefs {
 
     @Given("I am on the login page as a {string}")
     public void iAmOnTheLoginPage(String userType) {
-        Pages.loginPage = new LoginPageImpl(DriverManager.driver, userType).driverGet();
+        Pages.loginPage = new LoginPageImpl(DriverManager.driverDoNotSubmit, userType).driverGet();
     }
 
     @When("I type the username")

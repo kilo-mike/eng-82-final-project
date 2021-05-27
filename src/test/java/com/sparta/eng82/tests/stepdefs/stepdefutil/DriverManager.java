@@ -6,15 +6,17 @@ import org.openqa.selenium.WebDriver;
 
 public class DriverManager {
     private static WebDriverFactory webDriverFactory;
-    public static WebDriver driver;
+    public static WebDriver driverDoNotSubmit;
+    public static WebDriver driverSubmissionsOnly;
 
     public static void setUp() {
         webDriverFactory = new WebDriverFactory();
-        driver = webDriverFactory.getWebDriver(WebDriverTypes.CHROME);
+        driverSubmissionsOnly = webDriverFactory.getWebDriver(WebDriverTypes.CHROME); //only use this for checking submitted forms and submitting the form
+        driverDoNotSubmit = webDriverFactory.getWebDriver(WebDriverTypes.CHROME); //admins and trainers should use this for all their tests, and some trainee tests
+
     }
 
     public static void tearDown() {
-        driver.quit();
         webDriverFactory.endAllServices();
     }
 }

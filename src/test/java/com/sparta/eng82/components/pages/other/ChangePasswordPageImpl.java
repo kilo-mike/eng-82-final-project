@@ -50,7 +50,7 @@ public class ChangePasswordPageImpl implements ChangePasswordPage {
     }
 
     /**
-     * @param user can be either "admin", "trainer" or "trainee"
+     * @param user can be either "admin", "trainer", "trainee"
      */
     @Override
     public NavPage clickChange(String user) {

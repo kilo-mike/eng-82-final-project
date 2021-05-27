@@ -1,5 +1,6 @@
 package com.sparta.eng82.tests.stepdefs.trainee;
 
+import com.sparta.eng82.components.frameworkutil.Users;
 import com.sparta.eng82.components.pages.other.LoginPageImpl;
 import com.sparta.eng82.components.pages.trainee.TraineeHomePageImpl;
 import com.sparta.eng82.components.pages.trainee.TraineeProfilePageImpl;
@@ -18,31 +19,34 @@ import java.util.Calendar;
 
 public class TraineeStepDefs {
 
-
-    @Given("I am logged in as a trainee")
-    public void iAmLoggedInAsATrainee() {
-        Pages.traineeHomePage = (TraineeHomePageImpl) new LoginPageImpl(DriverManager.driver, "trainee").driverGet().login();
+    @When("I am logged in as a trainee, non-submitting")
+    public void iAmLoggedInAsATraineeNonSubmitting() {
+        Pages.traineeHomePage = (TraineeHomePageImpl) new LoginPageImpl(DriverManager.driverDoNotSubmit, Users.TRAINEE_DNS).driverGet().login();
     }
 
+    @Given("I am logged in as a trainee, submitting")
+    public void iAmLoggedInAsATraineeSubmitting() {
+        Pages.traineeHomePage = (TraineeHomePageImpl) new LoginPageImpl(DriverManager.driverSubmissionsOnly, Users.TRAINEE).driverGet().login();
+    }
 
     @When("I am on the homepage")
     public void iAmOnTheHomepage() {
+        Pages.traineeHomePage.goToHomePage();
     }
 
-
-    @Then("I should see the stream info")
-    public void iShouldSeeTheStreamInfo() {
-        Assertions.assertEquals("Java SDET", Pages.traineeHomePage.getStream());
+    @Then("I should see the stream info for {string}")
+    public void iShouldSeeTheStreamInfo(String arg0) {
+        Assertions.assertEquals(arg0, Pages.traineeHomePage.getStream());
     }
 
-    @Then("I should see the group info")
-    public void iShouldSeeTheGroupInfo() {
-        Assertions.assertEquals("Engineering 80", Pages.traineeHomePage.getGroup());
+    @Then("I should see the group info for {string}")
+    public void iShouldSeeTheGroupInfo(String arg0) {
+        Assertions.assertEquals(arg0, Pages.traineeHomePage.getGroup());
     }
 
-    @Then("I should see the trainer info")
-    public void iShouldSeeTheTrainerInfo() {
-        Assertions.assertEquals("Manish Gadhvi", Pages.traineeHomePage.getTrainer());
+    @Then("I should see the trainer info for {string}")
+    public void iShouldSeeTheTrainerInfo(String arg0) {
+        Assertions.assertEquals(arg0, Pages.traineeHomePage.getTrainer());
     }
 
 
@@ -60,8 +64,6 @@ public class TraineeStepDefs {
     public void theTraineeWillBeAbleToSeeTheirAverageGradesOverTime() {
         Assertions.assertTrue(Pages.traineeProfilePage.areBothGradesValid());
     }
-
-
 
     @When("I click on the feedback for week {int}")
     public void iClickOnTheFeedbackForWeek(int arg0) {
@@ -113,11 +115,6 @@ public class TraineeStepDefs {
         Pages.trainerHomePage.logOut();
     }
 
-    @When("The trainee signs in")
-    public void theTraineeSignsIn() {
-        Pages.traineeHomePage = (TraineeHomePageImpl) new LoginPageImpl(DriverManager.driver, "trainee").login();
-    }
-
     @Then("They are prompted to change the default Password")
     public void theyArePromptedToChangeTheDefaultPassword() {
         Assertions.assertTrue(Pages.loginPage.getUrl().endsWith("/change-password"));
@@ -154,7 +151,7 @@ public class TraineeStepDefs {
 
     @When("The end of thursday passes")
     public void theEndOfThursdayPasses() {
-        Assertions.assertEquals(5,Calendar.getInstance().get(Calendar.DAY_OF_WEEK));
+        Assertions.assertEquals(6,Calendar.getInstance().get(Calendar.DAY_OF_WEEK));
     }
 
     @Then("The traffic light will turn red")
@@ -178,4 +175,6 @@ public class TraineeStepDefs {
     public void iShouldSeeTheFormSuccessfullySubmitted() {
         Assertions.assertEquals("Green", Pages.traineeHomePage.getCurrentTrafficLight());
     }
+
+
 }

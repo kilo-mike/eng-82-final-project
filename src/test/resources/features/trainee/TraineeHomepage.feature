@@ -1,28 +1,28 @@
 Feature: Logged on to trainee and being able to view the data on the homepage
   Scenario: Viewing trainer, stream and group info
 
-    Given I am logged in as a trainee
+    Given I am logged in as a trainee, non-submitting
     When I am on the homepage
-    Then I should see the stream info
-    Then I should see the group info
-    Then I should see the trainer info
+    Then I should see the stream info for "Java Dev"
+    Then I should see the group info for "Engineering 82"
+    Then I should see the trainer info for "Astha Shaw"
 
 
   Scenario: viewing list of feedback
 
-    Given I am logged in as a trainee
+    Given I am logged in as a trainee, non-submitting
     When I am on the homepage
     Then I should see a selectable list of all the 1-1 sheets from previous weeks
 
   Scenario: The Trainee wants to see if their feedback from is in progress or late
 
-    Given I am logged in as a trainee
+    Given I am logged in as a trainee, non-submitting
     When I am on the homepage
     Then I will be able to see the status of my feedback form using the traffic light
 
   Scenario: The late notifications
 
-    Given I am logged in as a trainee
+    Given I am logged in as a trainee, non-submitting
     And I have not submitted my form
     When The end of thursday passes
     Then The traffic light will turn red

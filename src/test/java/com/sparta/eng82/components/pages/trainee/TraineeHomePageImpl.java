@@ -1,6 +1,7 @@
 package com.sparta.eng82.components.pages.trainee;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import com.sparta.eng82.components.NavPage;
@@ -51,9 +52,20 @@ public class TraineeHomePageImpl extends NavPage implements TraineeHomePage {
 
     @Override
     public boolean areAllPreviousWeeksShown() {
-        String maxWeek = feedbackList.get(0).getText();
-        int maxWeekNumber = Integer.parseInt(maxWeek.substring(5));
+        int maxWeekNumber = retryingFindCurrentWeek(feedbackBys);
         return feedbackList.size() == maxWeekNumber + 1;
+    }
+
+    public int retryingFindCurrentWeek(By by) {
+        int attempts = 0;
+        while(attempts < 5) {
+            try {
+                return Integer.parseInt(driver.findElement(by).getAttribute("value"));
+            } catch(StaleElementReferenceException e) {
+            }
+            attempts++;
+        }
+        return 0;
     }
 
     @Override
