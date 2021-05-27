@@ -19,15 +19,15 @@ An agile Java group project completed as our final project at Sparta. The delive
 
 ## Tools
 
-- JDK 11
-- Maven
-- IntelliJ
-- JUnit 5
-- Git
-- Selenium
-- SeleniumIDE
-- Cucumber
-- JIRA
+- ![JDK_11_badge](https://img.shields.io/badge/JDK%2011-ED8B00?style=for-the-badge&logo=java&logoColor=white)
+- ![maven_badge](https://img.shields.io/badge/Maven-C71A36?style=for-the-badge&logo=apache%20maven&logoColor=white)
+- ![intellij_badge](https://img.shields.io/badge/IntelliJ-000000?style=for-the-badge&logo=intellij%20idea&logoColor=white)
+- ![junit_badge](https://img.shields.io/badge/JUnit%205-25A162?style=for-the-badge&logo=junit5&logoColor=white)
+- ![github_badge](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
+- ![selenium badge](https://img.shields.io/badge/-Selenium-43B02A?style=for-the-badge&logo=selenium&logoColor=fff)
+- ![selenium badge](https://img.shields.io/badge/-Selenium%20IDE-43B02A?style=for-the-badge&logo=selenium&logoColor=fff)
+- ![cucumber_badge](https://img.shields.io/badge/-Cucumber-23D96C?style=for-the-badge&logo=cucumber&logoColor=fff)
+- ![jira_badge](https://img.shields.io/badge/-Jira-0052CC?style=for-the-badge&logo=Jira&logoColor=fff)
 
 ## Rules
 
