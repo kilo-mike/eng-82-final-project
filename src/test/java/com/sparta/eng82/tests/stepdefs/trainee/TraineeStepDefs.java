@@ -101,10 +101,6 @@ public class TraineeStepDefs {
         Assertions.assertEquals("this is a test", Pages.traineeTraineeFeedbackFormPage.getContinueCommentBox());
     }
 
-    @Given("I am logged in as an {string}")
-    public void iAmLoggedInAsAn(String arg0) {
-    }
-
     @And("I have created a new trainee profile for {string} {string} within the group {string}")
     public void iHaveCreatedANewTraineeProfileForWithinTheGroup(String firstName, String lastName, String groupName) {
         Pages.trainerHomePage.clickManageGroupButton().addTrainee().assignGroup(groupName).enterFirstName(firstName).enterLastName(lastName).createNewTrainee();
