@@ -30,11 +30,13 @@ public class AddTrainerPageTest {
         adminHomePage = (AdminHomePageImpl) new LoginPageImpl(driver, user).login();
     }
 
-    @ParameterizedTest
-    @ValueSource(strings = {"No Group"})
+    @Test
     @DisplayName("Can you select a group?")
-    void canYouSelectAGroup(String group) {
-        adminHomePage.addTrainer().enterFirstName(trainersFirstName).enterSecondName(trainersLastName).selectGroup(group);
+    void canYouSelectAGroup() {
+        adminHomePage.addTrainer()
+                .enterFirstName(trainersFirstName)
+                .enterSecondName(trainersLastName)
+                .selectGroup("No Group");
         Assertions.assertEquals("-1", driver.findElement(By.id("addTrainerGroup")).getAttribute("value"));
     }
 
