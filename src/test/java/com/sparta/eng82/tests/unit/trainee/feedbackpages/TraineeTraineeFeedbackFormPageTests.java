@@ -168,7 +168,7 @@ public class TraineeTraineeFeedbackFormPageTests {
     @DisplayName("Is Start Comment Box Disabled Test")
     void isStartCommentBoxDisabledTest() {
         traineeTraineeFeedbackFormPage = traineeHomePage.clickFeedbackFormForWeek(submittedWeek);
-        Assertions.assertFalse(traineeTraineeFeedbackFormPage.isStartCommentBoxDisabled());
+        Assertions.assertTrue(traineeTraineeFeedbackFormPage.isStartCommentBoxDisabled());
     }
 
     @Test
@@ -270,6 +270,81 @@ public class TraineeTraineeFeedbackFormPageTests {
     void isTrainerCommentCommentBoxDisabledTest() {
         traineeTraineeFeedbackFormPage = traineeHomePage.clickFeedbackFormForWeek(unsubmittedWeek);
         Assertions.assertTrue(traineeTraineeFeedbackFormPage.isTrainerCommentBoxDisabled());
+    }
+
+    @Test
+    @DisplayName("Get Technical Grade Test")
+    void getTechnicalGradeTest() {
+        traineeTraineeFeedbackFormPage = traineeHomePage.clickFeedbackFormForWeek(unsubmittedWeek);
+        Assertions.assertEquals(driver.findElement(new By.ById("techGrade")).getText(), traineeTraineeFeedbackFormPage.getTechnicalGrade());
+    }
+
+    @Test
+    @DisplayName("Get Consultant Grade Test")
+    void getConsultantGradeTest() {
+        traineeTraineeFeedbackFormPage = traineeHomePage.clickFeedbackFormForWeek(unsubmittedWeek);
+        Assertions.assertEquals(driver.findElement(new By.ById("consultGrade")).getText(), traineeTraineeFeedbackFormPage.getConsultantGrade());
+    }
+
+    @Test
+    @DisplayName("Is Technical Grade Disabled Test")
+    void isTechnicalGradeDisabledTest() {
+        traineeTraineeFeedbackFormPage = traineeHomePage.clickFeedbackFormForWeek(submittedWeek);
+        Assertions.assertTrue(traineeTraineeFeedbackFormPage.isTechnicalGradeDisabled());
+    }
+
+    @Test
+    @DisplayName("Is Consultant Grade Disabled Test")
+    void isConsultantGradeDisabledTest() {
+        traineeTraineeFeedbackFormPage = traineeHomePage.clickFeedbackFormForWeek(submittedWeek);
+        Assertions.assertTrue(traineeTraineeFeedbackFormPage.isConsultantGradeDisabled());
+    }
+
+    @Test
+    @DisplayName("Click on Stop and Set Comment")
+    void clickOnStopAndSetComment() {
+        traineeTraineeFeedbackFormPage = traineeHomePage.clickFeedbackFormForWeek(unsubmittedWeek);
+        String testString = "New Trainee Set Stop Comment";
+        traineeTraineeFeedbackFormPage = traineeTraineeFeedbackFormPage.clickOnStopAndSetComment(testString);
+        Assertions.assertEquals(testString, driver.findElement(By.id("stopTrainee")).getText());
+
+    }
+
+    @Test
+    @DisplayName("Click On Start And Set Comment")
+    void clickOnStartAndSetComment() {
+        traineeTraineeFeedbackFormPage = traineeHomePage.clickFeedbackFormForWeek(unsubmittedWeek);
+        String testString = "New Trainee Set Start Comment";
+        traineeTraineeFeedbackFormPage = traineeTraineeFeedbackFormPage.clickOnStartAndSetComment(testString);
+        traineeTraineeFeedbackFormPage.clickStartTab();
+        Assertions.assertEquals(testString, driver.findElement(By.id("startTrainee")).getText());
+
+    }
+
+    @Test
+    @DisplayName("Click onContinue and Set Comment")
+    void clickOnContinueAndSetComment() {
+        traineeTraineeFeedbackFormPage = traineeHomePage.clickFeedbackFormForWeek(unsubmittedWeek);
+        String testString = "New Trainee Set Continue Comment";
+        traineeTraineeFeedbackFormPage = traineeTraineeFeedbackFormPage.clickOnContAndSetComments(testString);
+        Assertions.assertEquals(testString, driver.findElement(By.id("continueTrainee")).getText());
+
+    }
+
+    @Test
+    @DisplayName("Check If Displayed")
+    void checkIfDisplayedTest() {
+        By saveButton = new By.ById("saveBtn");
+        traineeTraineeFeedbackFormPage = traineeHomePage.clickFeedbackFormForWeek(unsubmittedWeek);
+        Assertions.assertTrue(traineeTraineeFeedbackFormPage.checkIfDisplayed(saveButton));
+
+    }
+
+    @Test
+    @DisplayName("Are Trainee Comment Boxes Interactive")
+    void areTraineeCommentBoxesInteractive() {
+        traineeTraineeFeedbackFormPage = traineeHomePage.clickFeedbackFormForWeek(unsubmittedWeek);
+        Assertions.assertTrue(traineeTraineeFeedbackFormPage.areTraineeCommentBoxesInteractive());
     }
 
     @AfterEach

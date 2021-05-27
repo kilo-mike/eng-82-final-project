@@ -308,7 +308,7 @@ public class TraineeTraineeFeedbackFormPageImpl extends FeedbackFormPage impleme
     }
 
 
-    private boolean checkIfDisplayed(By by) {
+    public boolean checkIfDisplayed(By by) {
         return driver.findElement(by).isDisplayed();
     }
 
