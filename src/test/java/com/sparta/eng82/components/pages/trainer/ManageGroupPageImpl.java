@@ -52,13 +52,6 @@ public class ManageGroupPageImpl extends NavPage implements ManageGroupPage {
         return new AddStreamPageImpl(driver,user);
     }
 
-    // TODO
-    @Override
-    public boolean isTraineeRemoved(String traineeName) {
-        removeTrainee(traineeName);
-        boolean isPresent = isStudentPresent(traineeName);
-        return !isPresent;
-    }
 
     @Override
     public void clickRemoveButton(int studentIndex) {
@@ -79,9 +72,13 @@ public class ManageGroupPageImpl extends NavPage implements ManageGroupPage {
             }
         }
         ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, By.cssSelector(".btn:nth-child(" + (studentPosition * 2) + ")"));
+        return this;
+    }
+
+    public ManageGroupPageImpl confirmTraineeDeletion() {
         ActionClicker.timedMouseClicker(driver,ActionClicker.TIME, By.xpath("(//button[@type='submit'])[5]"));
 
-        return this;
+        return new ManageGroupPageImpl(driver, "trainer");
     }
 
     @Override

@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import com.sparta.eng82.components.pages.trainer.ManageGroupPage;
 import com.sparta.eng82.components.pages.trainer.ManageGroupPageImpl;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 public class AddStreamPageImpl implements AddStreamPage {
 
@@ -24,14 +26,16 @@ public class AddStreamPageImpl implements AddStreamPage {
     }
 
     @Override
-    public AddStreamPage enterStreamDescription(String streamDescription) {
+    public AddStreamPageImpl enterStreamDescription(String streamDescription) {
         driver.findElement(By.name("streamDescription")).sendKeys(streamDescription);
         return this;
     }
 
     @Override
-    public AddStreamPage enterStreamDuration(int numberOfWeeks) {
-        driver.findElement(By.linkText(numberOfWeeks + " weeks"));
+    public AddStreamPageImpl enterStreamDuration(int numberOfWeeks) {
+        WebElement listOfDurations = (driver.findElement(By.name("streamDuration")));
+        Select select = new Select(listOfDurations);
+        select.selectByVisibleText(numberOfWeeks + " weeks");
         return this;
     }
 
@@ -41,12 +45,7 @@ public class AddStreamPageImpl implements AddStreamPage {
         return new ManageGroupPageImpl(driver, user);
     }
 
-    @Override
-    public boolean isStreamCreated() {
-        return false;
-    }
-
     public boolean isStreamNameCorrect(String streamName) {
-        return driver.findElement(By.name("streamName")).getText().equals(streamName);
+        return driver.findElement(By.name("streamName")).getAttribute("value").equals(streamName);
     }
 }

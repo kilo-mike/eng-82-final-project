@@ -13,6 +13,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class SharedStepDefs {
+
    @Given("I am logged in as an {string}")
    public void iAmLoggedInAsAn(String user) {
        switch (user) {
@@ -40,4 +41,5 @@ public class SharedStepDefs {
    @Then("I go to the {string}home page")
    public void iGoToTheHomePage(String arg0) {
    }
+
 }

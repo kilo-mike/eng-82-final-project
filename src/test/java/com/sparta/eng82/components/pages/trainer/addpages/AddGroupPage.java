@@ -18,13 +18,4 @@ public interface AddGroupPage {
 
     boolean isGroupCreated(String groupName);
 
-    boolean isDuplicateGroupNameAllowed();
-
-    boolean isPastStartingDateAllowed();
-
-    boolean isEmptyStreamNameAllowed();
-
-    boolean isEmptyGroupNameAllowed();
-
-    boolean isGroupNameCharacterLimited();
 }
