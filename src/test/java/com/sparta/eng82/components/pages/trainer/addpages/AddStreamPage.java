@@ -6,13 +6,12 @@ public interface AddStreamPage {
 
     AddStreamPage enterStreamName(String streamName);
 
-    AddStreamPage enterStreamDescription(String streamDescription);
+    AddStreamPageImpl enterStreamDescription(String streamDescription);
 
-    AddStreamPage enterStreamDuration(int weeks);
+    AddStreamPageImpl enterStreamDuration(int weeks);
 
     ManageGroupPage createNewStream();
 
-    boolean isStreamCreated();
 }
 
 

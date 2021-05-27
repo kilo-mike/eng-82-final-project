@@ -8,6 +8,7 @@ import com.sparta.eng82.components.pages.other.LoginPageImpl;
 import com.sparta.eng82.components.pages.trainee.TraineeHomePageImpl;
 import com.sparta.eng82.components.pages.trainer.ManageGroupPage;
 import com.sparta.eng82.components.pages.trainer.TrainerHomePageImpl;
+import com.sparta.eng82.components.pages.trainer.addpages.AddStreamPageImpl;
 import com.sparta.eng82.components.pages.trainer.feedbackpages.TrainerTraineeFeedbackFormPageImpl;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
@@ -39,6 +40,13 @@ public class TrainerUnitTests {
     static void tearDown() {
         webDriverFactory.endAllServices();
     }
+
+    @Test
+    @DisplayName("Does getUrl method returns the correct url for homepage")
+    void doesGetUrlMethodReturnsTheCorrectUrl() {
+        Assertions.assertTrue(trainerHomePage.getUrl().endsWith(":8080"));
+    }
+
 
     // TODO:
 //    @Test
@@ -110,8 +118,30 @@ public class TrainerUnitTests {
                     .enterStreamName("Business Analyst")
                     .isStreamNameCorrect("Business Analyst"));
         }
+
+        @Test
+        @DisplayName("Is chosen week correct")
+        void isChosenWeekCorrect() {
+            AddStreamPageImpl addStreamPage = trainerHomePage
+                    .clickManageGroupButton()
+                    .addStream()
+                    .enterStreamDuration(10);
+            Assertions.assertFalse(driver
+                    .findElement(By.name("streamDuration"))
+                    .getAttribute("value")
+                    .equals("10 weeks"));
+        }
+
+        @Test
+        @DisplayName("Is chosen stream description correct")
+        void isChosenStreamDescriptionCorrect() {
+            AddStreamPageImpl addStreamPage = trainerHomePage
+                    .manageGroupButton()
+                    .addStream()
+                    .enterStreamDescription("Testing");
+            Assertions.assertEquals("Testing", driver.findElement(By.name("streamDescription")).getAttribute("value"));
+        }
     }
-    
     @Nested
     @DisplayName("Tests for the Trainer Home Page")
     class TrainerHomePageTests {
@@ -180,21 +210,22 @@ public class TrainerUnitTests {
         }
 
         // TODO: The below two tests need to be reworked
-//        @Test
-//        @DisplayName("Checking if a selected student is successfully removed")
-//        void checkingIfASelectedStudentIsSuccessfullyRemoved() {
-//            ManageGroupPage manageGroupPage = trainerHomePage.clickManageGroupButton();
-//            manageGroupPage.removeTrainee("Alasdair Malcolm");
-//            Assertions.assertFalse(manageGroupPage.isTraineeRemoved("Alasdair Malcolm"));
-//        }
-//
-//        @Test
-//        @DisplayName("Checking if a new trainee is successfully added")
-//        void checkingIfANewTraineeIsSuccessfullyAdded() {
-//            ManageGroupPage manageGroupPage = trainerHomePage.clickManageGroupButton();
-//            manageGroupPage.addStudent("Jack", "Ingham");
-//            Assertions.assertTrue(manageGroupPage.isStudentPresent("Jack Ingham"));
-//        }
+        @Test
+        @DisplayName("Checking if a selected student is successfully removed")
+        void checkingIfASelectedStudentIsSuccessfullyRemoved() {
+            ManageGroupPage manageGroupPage = trainerHomePage.clickManageGroupButton();
+            manageGroupPage.removeTrainee("Golam Choudhury").confirmTraineeDeletion();
+            Assertions.assertFalse(manageGroupPage.isStudentPresent("Golam Choudhury"));
+        }
+
+        @Test
+        @DisplayName("Checking if a new trainee is successfully added")
+        void checkingIfANewTraineeIsSuccessfullyAdded() {
+            ManageGroupPage manageGroupPage = trainerHomePage.clickManageGroupButton();
+            manageGroupPage.addStudent("Jack", "Ingham");
+
+            Assertions.assertTrue(trainerHomePage.clickManageGroupButton().isStudentPresent("Jack Ingham"));
+        }
     }
 
     @Nested

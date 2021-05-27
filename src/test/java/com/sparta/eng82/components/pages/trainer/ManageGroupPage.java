@@ -10,8 +10,6 @@ public interface ManageGroupPage {
 
     AddStreamPageImpl addStream();
 
-    boolean isTraineeRemoved(String traineeName);
-
     void clickRemoveButton(int studentIndex);
 
     ManageGroupPageImpl removeTrainee(String studentName);

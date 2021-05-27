@@ -73,28 +73,4 @@ public class AddGroupPageImpl implements AddGroupPage {
 
     }
 
-    @Override
-    public boolean isDuplicateGroupNameAllowed() {
-        return false;
-    }
-
-    @Override
-    public boolean isPastStartingDateAllowed() {
-        return false;
-    }
-
-    @Override
-    public boolean isEmptyStreamNameAllowed() {
-        return false;
-    }
-
-    @Override
-    public boolean isEmptyGroupNameAllowed() {
-        return false;
-    }
-
-    @Override
-    public boolean isGroupNameCharacterLimited() {
-        return false;
-    }
 }

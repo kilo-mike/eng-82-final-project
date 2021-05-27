@@ -34,7 +34,7 @@ public class TrainerHomePageImpl extends NavPage implements TrainerHomePage {
 
     @Override
     public ManageGroupPage manageGroupButton() {
-        driver.findElement(manageGroupButton).click();
+        ActionClicker.timedMouseClicker(driver, ActionClicker.TIME, manageGroupButton);
         return new ManageGroupPageImpl(driver, user);
     }
 
