@@ -29,7 +29,7 @@ public class TrainerHomePageImpl extends NavPage implements TrainerHomePage {
 
     @Override
     public String getUrl() {
-        return null;
+        return driver.getCurrentUrl();
     }
 
     @Override

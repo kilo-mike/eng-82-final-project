@@ -44,7 +44,7 @@ public class TrainerUnitTests {
     @Test
     @DisplayName("Does getUrl method returns the correct url for homepage")
     void doesGetUrlMethodReturnsTheCorrectUrl() {
-        Assertions.assertTrue(trainerHomePage.getUrl().endsWith(":8080"));
+        Assertions.assertTrue(trainerHomePage.getUrl().endsWith(":8080/"));
     }
 
 
