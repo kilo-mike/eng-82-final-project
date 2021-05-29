@@ -1,3 +1,10 @@
+src/test/resources/*.exe
+src/test/resources/chromedriver
+src/test/resources/login.properties
+target/
+.idea/
+eng-82-final-project.iml
+
 # Compiled class file
 *.class
 
